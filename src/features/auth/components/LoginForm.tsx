@@ -1,7 +1,7 @@
-import { LoginFormType } from "../../../shared/types/FormType";
-import { useForm } from "../../../shared/hooks";
 import { Button, TextField, Box, Avatar, Typography } from "@mui/material";
 import { LockOutlined } from "@mui/icons-material";
+import { LoginFormType } from "../../../shared/types/FormType";
+import { useForm } from "../../../shared/hooks";
 
 const LoginForm = () => {
   const {
@@ -12,7 +12,7 @@ const LoginForm = () => {
   return (
     <Box
       sx={{
-        my: 8,
+        mt: 8,
         mx: 4,
         display: "flex",
         flexDirection: "column",
@@ -53,11 +53,7 @@ const LoginForm = () => {
           value={password}
           onChange={handleChange}
         />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-        >
+        <Button type="submit" fullWidth variant="contained">
           Sign In
         </Button>
       </Box>
