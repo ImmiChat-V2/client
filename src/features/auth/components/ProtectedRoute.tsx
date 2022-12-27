@@ -9,7 +9,6 @@ type ProtectedRouteProps = {
 
 const ProtectedRoute = ({ isProtected, redirectPath }: ProtectedRouteProps) => {
   const user = useSelector(getCurrentUser);
-
   if ((isProtected && !user) || (!isProtected && user)) {
     return <Navigate to={redirectPath} />;
   }
