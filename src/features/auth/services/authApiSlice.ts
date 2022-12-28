@@ -1,16 +1,27 @@
-import { LoginUserModel } from "../models/User.model";
+import {
+  DisplayUserModel,
+  LoginUserModel,
+  RegisterUserModel,
+} from "../models/User.model";
 import { apiSlice } from "../../api/apiSlice";
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    login: builder.mutation({
-      query: (body: LoginUserModel) => ({
+    register: builder.mutation({
+      query: (body: RegisterUserModel) => ({
+        url: "/register",
+        method: "POST",
+        body,
+      }),
+    }),
+    login: builder.mutation<DisplayUserModel, LoginUserModel>({
+      query: (body) => ({
         url: "/login",
         method: "POST",
         body,
       }),
     }),
-    validateJwt: builder.mutation({
+    validateJwt: builder.mutation<DisplayUserModel, undefined>({
       query: () => ({
         url: "/validate-authentication",
         method: "POST",
@@ -19,4 +30,5 @@ export const authApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useLoginMutation, useValidateJwtMutation } = authApiSlice;
+export const { useRegisterMutation, useLoginMutation, useValidateJwtMutation } =
+  authApiSlice;

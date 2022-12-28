@@ -1,15 +1,28 @@
-import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
+import {
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  SelectChangeEvent,
+} from "@mui/material";
 
 type DropdownProps = {
   readonly label: string;
   readonly menuItems: string[];
   readonly value: string;
-  readonly onChange: (event: any) => void;
+  readonly onChange: (event: SelectChangeEvent) => void;
   readonly sx: Record<string, string>;
   readonly name: string;
 };
 
-const Dropdown = ({ label, menuItems, value, name, onChange, sx }: DropdownProps) => {
+const Dropdown = ({
+  label,
+  menuItems,
+  value,
+  name,
+  onChange,
+  sx,
+}: DropdownProps) => {
   return (
     <FormControl fullWidth sx={sx}>
       <InputLabel id="select-label">{label}</InputLabel>

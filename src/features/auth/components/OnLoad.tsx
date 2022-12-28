@@ -10,7 +10,8 @@ const OnLoad = () => {
   const [validateJWT, { data, isSuccess, isLoading }] =
     useValidateJwtMutation();
   const onLoad = async () => {
-    await validateJWT({});
+    // @ts-ignore
+    await validateJWT();
   };
   useEffect(() => {
     if (!mountedRef.current) {
