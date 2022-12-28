@@ -1,14 +1,32 @@
+import { useEffect, FormEvent } from "react";
+import { useDispatch } from "react-redux";
 import { Button, TextField, Box, Avatar, Typography } from "@mui/material";
 import { LockOutlined } from "@mui/icons-material";
-import { LoginFormType } from "../../../shared/types/FormType";
+import { LoginUserModel } from "../models/User.model";
 import { useForm } from "../../../shared/hooks";
+import { useLoginMutation } from "../services/authApiSlice";
+import { loginUser } from "../authSlice";
 
 const LoginForm = () => {
   const {
     form: { email, password },
     handleChange,
-  } = useForm<LoginFormType>({ email: "", password: "" });
+  } = useForm<LoginUserModel>({ email: "", password: "" });
+  const [login, { data, isSuccess }] = useLoginMutation();
+  const dispatch = useDispatch();
+  const handleLogin = async (event: FormEvent) => {
+    event.preventDefault();
+    if (email && password) {
+      await login({ email, password });
+    }
+  };
 
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(loginUser(data));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess]);
   return (
     <Box
       sx={{
@@ -25,12 +43,7 @@ const LoginForm = () => {
       <Typography component="h1" variant="h5">
         Sign in
       </Typography>
-      <Box
-        component="form"
-        noValidate
-        // onSubmit={handleSubmit}
-        sx={{ mt: 1 }}
-      >
+      <Box component="form" onSubmit={handleLogin} sx={{ mt: 1 }}>
         <TextField
           margin="normal"
           required
