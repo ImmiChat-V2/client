@@ -18,4 +18,4 @@ export type LoginUserModel = Pick<BaseUserModel, "email" | "password">;
 export type RegisterUserModel = Omit<
   BaseUserModel,
   "id" | "createdAt" | "updatedAt"
-> & { retypePassword: string };
+>;
