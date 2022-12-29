@@ -20,14 +20,17 @@ const UserProfileWithTimestamp = ({
     <Box
       display="flex"
       alignItems="center"
-      justifyContent="space-between"
       sx={{ ...boxProps }}
     >
-      <Avatar src={profilePicture} />
-      <Typography variant="subtitle1" paddingRight="11px" fontWeight="bold">
-        {firstName} {lastName}
-      </Typography>
-      <Typography variant="caption" color="#65676B">{formatTime(timestamp)}</Typography>
+      <Avatar src={profilePicture} sizes="40px"/>
+      <Box paddingLeft="11px">
+        <Typography fontSize="15px" fontWeight="bold">
+          {firstName} {lastName}
+        </Typography>
+        <Typography fontSize="12px"  color="#65676B">
+          {formatTime(timestamp)}
+        </Typography>
+      </Box>
     </Box>
   );
 };
