@@ -1,4 +1,4 @@
-import { FormEvent } from "react";
+import { FormEvent, useEffect } from "react";
 import {
   Divider,
   Box,
@@ -11,6 +11,9 @@ import { Dropdown } from "../../../shared/components";
 import { languageArray } from "../../../shared/types/Language";
 import { useForm } from "../../../shared/hooks";
 import { RegisterUserModel } from "../models/User.model";
+import { useRegisterMutation } from "../services/authApiSlice";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../authSlice";
 
 type RegistrationFormModalProps = {
   readonly isOpen: boolean;
@@ -21,22 +24,30 @@ const RegistrationFormModal = ({
   isOpen,
   setIsOpen,
 }: RegistrationFormModalProps) => {
-  const {
-    form: { firstName, lastName, email, password, language },
-    handleChange,
-  } = useForm<RegisterUserModel>({
+  const dispatch = useDispatch();
+  const [register, { data, isSuccess }] = useRegisterMutation();
+  const { form, handleChange } = useForm<RegisterUserModel>({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
     language: "",
     profilePic: "",
-    dateOfBirth: "",
+    dateOfBirth: undefined,
   });
+
+  const { firstName, lastName, email, password, language } = form;
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
+    await register(form);
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(loginUser(data));
+    }
+  }, [data, dispatch, isSuccess]);
 
   return (
     <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
@@ -95,7 +106,7 @@ const RegistrationFormModal = ({
         <Dropdown
           name="language"
           menuItems={languageArray}
-          label="Languages"
+          label="Language "
           value={language}
           onChange={handleChange}
           sx={{ mt: "16px" }}

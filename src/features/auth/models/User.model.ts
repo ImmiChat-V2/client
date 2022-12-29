@@ -5,7 +5,7 @@ export type BaseUserModel = {
   readonly lastName: string;
   readonly password: string;
   readonly profilePic?: string;
-  readonly dateOfBirth?: string;
+  readonly dateOfBirth?: Date;
   readonly language: string;
   readonly createdAt: string;
   readonly updatedAt: string;
