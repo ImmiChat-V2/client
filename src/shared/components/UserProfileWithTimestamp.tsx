@@ -23,7 +23,7 @@ const UserProfileWithTimestamp = ({
       justifyContent="space-between"
       sx={{ ...boxProps }}
     >
-      <Avatar src={profilePicture}></Avatar>
+      <Avatar src={profilePicture} />
       <Typography variant="subtitle1" paddingRight="11px" fontWeight="bold">
         {firstName} {lastName}
       </Typography>
