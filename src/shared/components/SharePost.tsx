@@ -1,9 +1,15 @@
-import { FormControl, Avatar, TextField, Divider } from "@mui/material";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import { InputBase } from "@mui/material";
-import { useForm } from "../hooks";
 import { FormEvent } from "react";
+import { SendOutlined } from "@mui/icons-material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Divider,
+  FormControl,
+  InputBase,
+  Typography,
+} from "@mui/material";
+import { useForm } from "../hooks";
 import { BaseCreatePostmodel } from "../types/SharePostTypes";
 
 type SharePostProps = {
@@ -37,14 +43,20 @@ const SharePost = ({
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
+        backgroundColor: "#ffffff",
         maxWidth: "600px",
-        border: "2px solid black",
-        padding: "20px",
-        borderRadius: "20px",
+        margin: "auto",
+        padding: "25px",
+        borderRadius: "10px",
       }}
     >
       <Box component="form" onSubmit={handleSubmit} sx={sx}>
-        <Box sx={{ display: "flex", flexDirection: "row" }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+          }}
+        >
           <Avatar
             alt="profilePic"
             src={profilePic}
@@ -57,11 +69,11 @@ const SharePost = ({
             sx={{
               color: "black",
               width: "500px",
-              border: "1px solid black",
-              padding: "10px",
-              borderRadius: "20px",
+              backgroundColor: "#ededed",
+              paddingLeft: "30px",
+              borderRadius: "30px",
             }}
-            placeholder="What's on your mind?"
+            placeholder="What's on your mind..."
           />
         </Box>
         <Divider sx={{ my: 2, color: "#555555" }}></Divider>
@@ -72,20 +84,41 @@ const SharePost = ({
             justifyContent: "space-between",
           }}
         >
-          {sharePostItems.map((item) => (
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              {item.icon}
-              {item.label}
-            </Box>
-          ))}
-          <Button type="submit" variant="contained">
-            Post
+          <Box
+            display="flex"
+            sx={{ width: "30%", justifyContent: "space-between" }}
+          >
+            {sharePostItems.map((item) => (
+              <Box
+                sx={{
+                  color: "#949494",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  pr: "15px",
+                  ":hover": {
+                    cursor: "pointer",
+                    backgroundColor: "#ededed",
+                  },
+                }}
+              >
+                {item.icon}
+                {item.label}
+              </Box>
+            ))}
+          </Box>
+          <Button
+            type="submit"
+            sx={{
+              borderRadius: "20px",
+            }}
+            variant="contained"
+            color="primary"
+          >
+            <Typography sx={{ fontSize: "12px" }} pr="6px">
+              Post
+            </Typography>
+            <SendOutlined sx={{ fontSize: "11.5px" }} />
           </Button>
         </Box>
       </Box>
