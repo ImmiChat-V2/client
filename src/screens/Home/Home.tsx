@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
+import FeedFilter from "../../shared/components/FeedFilter";
 
 const Home = () => {
   return (
     <div>
-      <Link to={"/login"}>dasd</Link>
+      <FeedFilter />
     </div>
   );
 };
