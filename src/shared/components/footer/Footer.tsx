@@ -4,28 +4,28 @@ import "./footer.css";
 
 function Footer() {
   return (
-    <div className="footer">
-      <div className="footer-logo-img">
-        <div className="footer-logo">Immichat</div>
-        <div className="about-footer">
-          <div className="about-text">About</div>
-          <div className="extra-text">Company</div>
-          <div className="extra-text">Contact</div>
-          <div className="extra-text">FAQ</div>
+    <footer>
+      <div className="footer-container">
+        <h1 className="footer-logo">Immichat</h1>
+        <div className="footer-column">
+          <h3 className="column-headings">About</h3>
+          <h5>Company</h5>
+          <h5>Contact</h5>
+          <h5>FAQ</h5>
         </div>
-        <div className="community-footer">
-          <div className="community-text">Community</div>
-          <div className="extra-text">News</div>
-          <div className="extra-text">Career</div>
+        <div className="footer-column">
+          <h3 className="column-headings">Community</h3>
+          <h5>News</h5>
+          <h5>Career</h5>
         </div>
-        <div className="support-footer">
-          <div className="support-text">Support</div>
-          <div className="extra-text">Policies</div>
-          <div className="extra-text">Terms</div>
-          <div className="extra-text">Privacy</div>
+        <div className="footer-column">
+          <h3 className="column-headings">Support</h3>
+          <h5>Policies</h5>
+          <h5>Terms</h5>
+          <h5>Privacy</h5>
         </div>
-        <div className="follow-us-footer">
-          <div className="follow-us-text">Follow Us</div>
+        <div className="footer-socials">
+          <h3 className="column-headings">Follow Us</h3>
           <div className="socials-container">
             <div className="facebook-icon">
               <FacebookIcon />
@@ -39,10 +39,10 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div className="copyright-text">
+      <h5 className="copyright-text">
         ©2022 Immichat, Inc. All rights reserved.
-      </div>
-    </div>
+      </h5>
+    </footer>
   );
 }
 
