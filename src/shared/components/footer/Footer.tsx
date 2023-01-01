@@ -1,5 +1,4 @@
-import InstagramIcon from "@mui/icons-material/Instagram";
-import FacebookIcon from "@mui/icons-material/Facebook";
+import { Instagram, Facebook } from "@mui/icons-material";
 import "./footer.css";
 
 function Footer() {
@@ -28,13 +27,13 @@ function Footer() {
           <h3 className="column-headings">Follow Us</h3>
           <div className="socials-container">
             <div className="facebook-icon">
-              <FacebookIcon />
+              <Facebook />
             </div>
             <div className="instagram-icon">
-              <InstagramIcon />
+              <Instagram />
             </div>
             <div className="tiktok-icon">
-              <InstagramIcon />
+              <Instagram />
             </div>
           </div>
         </div>
