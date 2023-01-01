@@ -7,7 +7,7 @@
   padding-left: min(50px, 5%);
 }
 
-.navbar {
+nav {
   padding-top: 11px;
   padding-bottom: 11px;
 }
@@ -16,6 +16,7 @@
   font-size: 40px;
   cursor: pointer;
   margin-right: 20px;
+  font-weight: 500;
 }
 
 .left-side-nav-container {
@@ -50,10 +51,6 @@
 .nav-icon {
   margin-right: 24px;
   cursor: pointer;
-}
-
-.hamburger {
-  display: none;
 }
 
 .nav-buttons-mobile {

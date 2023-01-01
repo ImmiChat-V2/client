@@ -1,11 +1,9 @@
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { SelectChangeEvent } from "@mui/material";
 import Button from "@mui/material/Button";
 import Fade from "@mui/material/Fade";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 type MenuOption = {
   readonly title: string;
@@ -18,8 +16,8 @@ type FadeDropdownProps = {
 };
 
 const FadeDropdown = ({ buttonName, menuItems }: FadeDropdownProps) => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const open = !!anchorEl;
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -28,7 +26,7 @@ const FadeDropdown = ({ buttonName, menuItems }: FadeDropdownProps) => {
   };
 
   return (
-    <div>
+    <>
       <Button
         id="fade-button"
         aria-controls={open ? "fade-menu" : undefined}
@@ -40,7 +38,7 @@ const FadeDropdown = ({ buttonName, menuItems }: FadeDropdownProps) => {
         endIcon={<KeyboardArrowDownIcon />}
         sx={{
           backgroundColor: "#ededed",
-          minWidth: '140px',
+          minWidth: "140px",
           color: "#2d2d2d",
           fontWeight: "600",
           textTransform: "none",
@@ -62,10 +60,12 @@ const FadeDropdown = ({ buttonName, menuItems }: FadeDropdownProps) => {
         TransitionComponent={Fade}
       >
         {menuItems.map(({ onClick, title }) => (
-          <MenuItem onClick={onClick}>{title}</MenuItem>
+          <MenuItem onClick={onClick} key={title}>
+            {title}
+          </MenuItem>
         ))}
       </Menu>
-    </div>
+    </>
   );
 };
 
