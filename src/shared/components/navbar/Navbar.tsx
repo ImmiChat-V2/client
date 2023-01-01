@@ -1,10 +1,6 @@
-import ChatIcon from "@mui/icons-material/Chat";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import HelpIcon from "@mui/icons-material/Help";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import SearchIcon from "@mui/icons-material/Search";
-import { IconButton, InputBase } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { Chat, DarkMode, Help, Notifications, Search } from "@mui/icons-material";
+import { IconButton, InputBase } from "@mui/material";
 import FadeDropdown from "../FadeDropdown";
 import "./navbar.css";
 
@@ -31,7 +27,7 @@ function Navbar() {
                 placeholder="Search..."
               />
               <IconButton>
-                <SearchIcon
+                <Search
                   sx={{ color: "#2d2d2d" }}
                   className="nav-search-icon"
                 />
@@ -42,28 +38,28 @@ function Navbar() {
         <div className="right-side-nav">
           <div className="right-side-nav-container">
             <div className="nav-buttons">
-              <DarkModeIcon
+              <DarkMode
                 sx={{
                   color: "#2d2d2d",
                   marginRight: "24px",
                   cursor: "pointer",
                 }}
               />
-              <ChatIcon
+              <Chat
                 sx={{
                   color: "#2d2d2d",
                   marginRight: "24px",
                   cursor: "pointer",
                 }}
               />
-              <NotificationsIcon
+              <Notifications
                 sx={{
                   color: "#2d2d2d",
                   marginRight: "24px",
                   cursor: "pointer",
                 }}
               />
-              <HelpIcon
+              <Help
                 sx={{
                   color: "#2d2d2d",
                   marginRight: "24px",
