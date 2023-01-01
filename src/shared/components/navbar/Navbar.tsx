@@ -17,13 +17,13 @@ function Navbar() {
   ];
 
   return (
-    <div className="navbar">
+    <nav>
       <div className="navbar-container">
         <div className="left-side-nav">
           <div className="left-side-nav-container">
-            <div className="navbar-logo" onClick={() => navigate("/")}>
+            <h1 className="navbar-logo" onClick={() => navigate("/")}>
               Immichat
-            </div>
+            </h1>
             <div className="navbar-search">
               <InputBase
                 sx={{ color: "black" }}
@@ -42,13 +42,34 @@ function Navbar() {
         <div className="right-side-nav">
           <div className="right-side-nav-container">
             <div className="nav-buttons">
-              <DarkModeIcon sx={{ color: "#2d2d2d" }} className="nav-icon" />
-              <ChatIcon sx={{ color: "#2d2d2d" }} className="nav-icon" />
-              <NotificationsIcon
-                sx={{ color: "#2d2d2d" }}
-                className="nav-icon"
+              <DarkModeIcon
+                sx={{
+                  color: "#2d2d2d",
+                  marginRight: "24px",
+                  cursor: "pointer",
+                }}
               />
-              <HelpIcon sx={{ color: "#2d2d2d" }} className="nav-icon" />
+              <ChatIcon
+                sx={{
+                  color: "#2d2d2d",
+                  marginRight: "24px",
+                  cursor: "pointer",
+                }}
+              />
+              <NotificationsIcon
+                sx={{
+                  color: "#2d2d2d",
+                  marginRight: "24px",
+                  cursor: "pointer",
+                }}
+              />
+              <HelpIcon
+                sx={{
+                  color: "#2d2d2d",
+                  marginRight: "24px",
+                  cursor: "pointer",
+                }}
+              />
             </div>
             <div className="nav-drop-down">
               <FadeDropdown buttonName="Fake User" menuItems={navMenuOptions} />
@@ -56,7 +77,7 @@ function Navbar() {
           </div>
         </div>
       </div>
-    </div>
+    </nav>
   );
 }
 
