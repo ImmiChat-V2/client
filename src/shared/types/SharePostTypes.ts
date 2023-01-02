@@ -16,14 +16,3 @@ export type PostItemType = {
   label: string;
   icon: React.ReactNode;
 };
-
-import InsertPhotoOutlinedIcon from "@mui/icons-material/InsertPhotoOutlined";
-import LabelIcon from "@mui/icons-material/Label";
-
-// const sharePostItems: PostItemType[] = [
-//   {
-//     label: "Media",
-//     icon: <InsertPhotoOutlinedIcon sx={{ color: "#45bd62" }} />,
-//   },
-//   { label: "Tag", icon: <LabelIcon sx={{ color: "#ae83f4" }} /> },
-// ];

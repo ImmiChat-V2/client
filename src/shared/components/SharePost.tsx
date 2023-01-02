@@ -1,5 +1,5 @@
 import { FormEvent } from "react";
-import { SendOutlined } from "@mui/icons-material";
+import { SendOutlined, InsertPhotoOutlined, Label } from "@mui/icons-material";
 import {
   Avatar,
   Box,
@@ -10,21 +10,24 @@ import {
   Typography,
 } from "@mui/material";
 import { useForm } from "../hooks";
-import { BaseCreatePostmodel } from "../types/SharePostTypes";
+import { BaseCreatePostmodel, PostItemType } from "../types/SharePostTypes";
+
+const sharePostItems: PostItemType[] = [
+  {
+    label: "Media",
+    icon: <InsertPhotoOutlined sx={{ color: "#45bd62" }} />,
+  },
+  { label: "Tag", icon: <Label sx={{ color: "#ae83f4" }} /> },
+];
 
 type SharePostProps = {
   readonly profilePic: string;
   readonly sx: Record<string, string>;
-  readonly sharePostItems: any[];
+  readonly isPost: boolean;
   readonly onClick: (value: any) => void;
 };
 
-const SharePost = ({
-  profilePic,
-  sx,
-  sharePostItems,
-  onClick,
-}: SharePostProps) => {
+const SharePost = ({ profilePic, sx, onClick, isPost }: SharePostProps) => {
   const { form, handleChange } = useForm<BaseCreatePostmodel>({
     media: "",
     content: "",
@@ -50,7 +53,7 @@ const SharePost = ({
         borderRadius: "10px",
       }}
     >
-      <Box component="form" onSubmit={handleSubmit} sx={sx}>
+      <Box component="form" onSubmit={handleSubmit}>
         <Box
           sx={{
             display: "flex",
@@ -73,7 +76,7 @@ const SharePost = ({
               paddingLeft: "30px",
               borderRadius: "30px",
             }}
-            placeholder="What's on your mind..."
+            placeholder={isPost ? "What's on your mind..." : "Write a comment"}
           />
         </Box>
         <Divider sx={{ my: 2, color: "#555555" }}></Divider>
@@ -88,7 +91,26 @@ const SharePost = ({
             display="flex"
             sx={{ width: "30%", justifyContent: "space-between" }}
           >
-            {sharePostItems.map((item) => (
+            {isPost ? (
+              sharePostItems.map((item) => (
+                <Box
+                  sx={{
+                    color: "#949494",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    pr: "15px",
+                    ":hover": {
+                      cursor: "pointer",
+                      backgroundColor: "#ededed",
+                    },
+                  }}
+                >
+                  {item.icon}
+                  {item.label}
+                </Box>
+              ))
+            ) : (
               <Box
                 sx={{
                   color: "#949494",
@@ -102,10 +124,9 @@ const SharePost = ({
                   },
                 }}
               >
-                {item.icon}
-                {item.label}
+                {sharePostItems[0].icon} {sharePostItems[0].label}
               </Box>
-            ))}
+            )}
           </Box>
           <Button
             type="submit"
