@@ -1,5 +1,6 @@
-import { Box, IconButton } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import { FavoriteBorder, PersonAdd, MoreHoriz } from "@mui/icons-material/";
+import UserProfileWithTimestamp from "../UserProfileWithTimestamp";
 import "./post.css";
 
 function Post() {
@@ -14,7 +15,13 @@ function Post() {
         mb: "100px",
       }}
     >
-      <Box component="div" className="post-content">
+      <Box
+        component="div"
+        sx={{
+          mr: "20px",
+          ml: "20px",
+        }}
+      >
         <Box
           component="div"
           sx={{
@@ -38,11 +45,14 @@ function Post() {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
+              width: "100%",
             }}
           >
             <Box component="span" sx={{ cursor: "pointer" }}>
-              <h4 className="post-user-name">Fake User</h4>
-              <div className="time-posted-ago">3 Hours ago</div>
+              <Typography color="#4d4d4d">Fake User</Typography>
+              <Typography color="#858585" sx={{ fontSize: "12px" }}>
+                3 Hours ago
+              </Typography>
             </Box>
             <Box component="span" sx={{ display: "flex", cursor: "pointer" }}>
               <IconButton
@@ -61,12 +71,12 @@ function Post() {
           </Box>
         </Box>
         <Box component="section" sx={{ mt: "15px" }}>
-          <p>
+          <Typography color="#4d4d4d">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
             labore deleniti expedita necessitatibus quis maiores error ad,
             pariatur empora labore deleniti expedita necessitatibus quis maiores
             error ad, pariatur
-          </p>
+          </Typography>
         </Box>
         <Box
           component="div"
@@ -100,10 +110,14 @@ function Post() {
             >
               <FavoriteBorder sx={{ cursor: "pointer" }} color="success" />
             </IconButton>
-            <h4 className="post-bottom-text">2 Likes</h4>
+            <Typography color="413f3f" sx={{ mb: "5px" }}>
+              2 Likes
+            </Typography>
           </Box>
           <Box component="span" sx={{ display: "flex", alignItems: "center" }}>
-            <h4 className="post-bottom-text">1 Comment</h4>
+            <Typography color="413f3f" sx={{ mb: "5px" }}>
+              1 Comment
+            </Typography>
             <IconButton
               aria-label="comment-post"
               sx={{
