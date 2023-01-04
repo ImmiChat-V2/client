@@ -10,15 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useForm } from "../hooks";
-import { BaseCreatePostmodel, PostItemType } from "../types/SharePostTypes";
-
-const sharePostItems: PostItemType[] = [
-  {
-    label: "Media",
-    icon: <InsertPhotoOutlined sx={{ color: "#45bd62" }} />,
-  },
-  { label: "Tag", icon: <Label sx={{ color: "#ae83f4" }} /> },
-];
+import { BaseCreatePostmodel } from "../types/SharePostTypes";
 
 type SharePostProps = {
   readonly profilePic: string;
@@ -92,7 +84,7 @@ const SharePost = ({ profilePic, sx, onClick, isPost }: SharePostProps) => {
             sx={{ width: "30%", justifyContent: "space-between" }}
           >
             {isPost ? (
-              sharePostItems.map((item) => (
+              <>
                 <Box
                   sx={{
                     color: "#949494",
@@ -106,10 +98,26 @@ const SharePost = ({ profilePic, sx, onClick, isPost }: SharePostProps) => {
                     },
                   }}
                 >
-                  {item.icon}
-                  {item.label}
+                  <InsertPhotoOutlined sx={{ color: "#45bd62" }} />
+                  Media
                 </Box>
-              ))
+                <Box
+                  sx={{
+                    color: "#949494",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    pr: "15px",
+                    ":hover": {
+                      cursor: "pointer",
+                      backgroundColor: "#ededed",
+                    },
+                  }}
+                >
+                  <Label sx={{ color: "#ae83f4" }} />
+                  Tag
+                </Box>
+              </>
             ) : (
               <Box
                 sx={{
@@ -124,7 +132,8 @@ const SharePost = ({ profilePic, sx, onClick, isPost }: SharePostProps) => {
                   },
                 }}
               >
-                {sharePostItems[0].icon} {sharePostItems[0].label}
+                <InsertPhotoOutlined sx={{ color: "#45bd62" }} />
+                Media
               </Box>
             )}
           </Box>

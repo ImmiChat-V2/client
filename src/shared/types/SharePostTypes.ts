@@ -11,8 +11,3 @@ export type BaseCreatePostmodel = {
   readonly content: string;
   readonly categoryName?: string;
 };
-
-export type PostItemType = {
-  label: string;
-  icon: React.ReactNode;
-};
