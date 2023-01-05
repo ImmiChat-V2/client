@@ -13,9 +13,10 @@ type MenuOption = {
 type FadeDropdownProps = {
   readonly menuItems: MenuOption[];
   readonly buttonName: string;
+  readonly darkMode?: boolean;
 };
 
-const FadeDropdown = ({ buttonName, menuItems }: FadeDropdownProps) => {
+const FadeDropdown = ({ buttonName, menuItems, darkMode }: FadeDropdownProps) => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const open = !!anchorEl;
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -37,13 +38,13 @@ const FadeDropdown = ({ buttonName, menuItems }: FadeDropdownProps) => {
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
         sx={{
-          backgroundColor: "#ededed",
+          backgroundColor: darkMode ? "#2d2d2d" : "#ededed",
           minWidth: "140px",
-          color: "#2d2d2d",
+          color: darkMode ? "#ededed" : "#2d2d2d",
           fontWeight: "600",
           textTransform: "none",
           "&.MuiButtonBase-root:hover": {
-            bgcolor: "#ededed",
+            bgcolor: darkMode ? "#2d2d2d" : "#ededed",
           },
         }}
       >
