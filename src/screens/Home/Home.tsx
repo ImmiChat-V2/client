@@ -1,11 +1,12 @@
+import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import "./home.css";
 
 const Home = () => {
   return (
-    <div className="home-container">
+    <Box>
       <Link to={"/login"}>dasd</Link>
-    </div>
+    </Box>
   );
 };
 
