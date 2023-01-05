@@ -11,5 +11,21 @@ const Home = () => {
     </Box>
   );
 };
+/*
+id
+userId
+top: 
+  profilePic
+  firstName 
+  lastName
+  timePosted
 
+mid: 
+  content(text)
+  post image?
+
+Bottom: 
+  like count
+  comment count
+*/
 export default Home;
