@@ -10,14 +10,3 @@ img {
   height: 100%;
   display: block;
 }
-
-.post-user-profile-img {
-  border-radius: 50px;
-  cursor: pointer;
-  height: 50px;
-  width: 50px;
-}
-
-.post-img {
-  border-radius: 10px;
-}
