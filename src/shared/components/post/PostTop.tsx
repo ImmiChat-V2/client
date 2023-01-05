@@ -27,7 +27,6 @@ function PostTop({
   const handleFriendClick = () => {
     setIsFriend(!isFriend);
   };
-
   return (
     <>
       <Box
