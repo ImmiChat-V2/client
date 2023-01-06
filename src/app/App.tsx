@@ -4,7 +4,7 @@ import { store } from "app/store";
 import { Home, LoginScreen } from "screens";
 import { ProtectedRoute, OnLoad } from "features/auth/components";
 
-function App() {
+const App = () => {
   return (
     <Provider store={store}>
       <Router>
@@ -25,6 +25,6 @@ function App() {
       </Router>
     </Provider>
   );
-}
+};
 
 export default App;
