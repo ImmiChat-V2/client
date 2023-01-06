@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <Box>
       <Link to={"/login"}>dasd</Link>
-    </div>
+    </Box>
   );
 };
 
