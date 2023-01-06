@@ -5,6 +5,7 @@ import { Navbar } from "shared/components/navbar";
 import Footer from "../../shared/components/footer/Footer";
 
 const Home = () => {
+  const { theme } = useTheme()
   return (
     <Box>
       <Navbar />
