@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Box, IconButton, Typography } from "@mui/material";
 import { PersonAdd, PersonRemoveAlt1 } from "@mui/icons-material/";
+import useTheme from "../../../features/theme/useTheme";
 
 type PostTop = {
   id: number;
@@ -19,6 +20,9 @@ function PostTop({
   lastName,
   timePosted,
 }: PostTop) {
+  const {
+    themeColor: { color },
+  } = useTheme();
   const [isFriend, setIsFriend] = useState(false);
   const handleFriendClick = () => {
     setIsFriend(!isFriend);
@@ -56,7 +60,7 @@ function PostTop({
           }}
         >
           <Box component="span" sx={{ cursor: "pointer" }}>
-            <Typography color="#4d4d4d">
+            <Typography sx={{color}}>
               {firstName} {lastName}
             </Typography>
             <Typography color="#858585" sx={{ fontSize: "12px" }}>

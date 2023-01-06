@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Box, IconButton, Typography } from "@mui/material";
 import { FavoriteBorder, MoreHoriz, Favorite } from "@mui/icons-material/";
+import useTheme from "../../../features/theme/useTheme";
 
 type PostFooter = {
   id: number;
@@ -8,6 +9,9 @@ type PostFooter = {
 };
 
 function PostFooter({ id, userId }: PostFooter) {
+  const {
+    themeColor: { color },
+  } = useTheme();
   const [likeCount, setLikeCount] = useState(1);
   const [showComment, setShowComment] = useState(false);
   const [commentCount, setCommentCount] = useState(2);
@@ -69,16 +73,16 @@ function PostFooter({ id, userId }: PostFooter) {
             )}
           </IconButton>
           {likeCount === 1 ? (
-            <Typography color="413f3f">{likeCount} Like</Typography>
+            <Typography sx={{color}}>{likeCount} Like</Typography>
           ) : (
-            <Typography color="413f3f">{likeCount} Likes</Typography>
+            <Typography sx={{color}}>{likeCount} Likes</Typography>
           )}
         </Box>
         <Box component="span" sx={{ display: "flex", alignItems: "center" }}>
           {commentCount === 1 ? (
-            <Typography color="413f3f">{commentCount} Comment</Typography>
+            <Typography sx={{color}}>{commentCount} Comment</Typography>
           ) : (
-            <Typography color="413f3f">{commentCount} Comments</Typography>
+            <Typography sx={{color}}>{commentCount} Comments</Typography>
           )}
           <IconButton
             aria-label="comment-post"
