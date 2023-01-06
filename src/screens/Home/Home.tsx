@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import Post from "../../shared/components/post/Post";
 
@@ -30,21 +31,5 @@ const Home = () => {
     </div>
   );
 };
-/*
-id
-userId
-top: 
-  profilePic
-  firstName 
-  lastName
-  timePosted
 
-mid: 
-  content(text)
-  post image?
-
-Bottom: 
-  like count
-  comment count
-*/
 export default Home;
