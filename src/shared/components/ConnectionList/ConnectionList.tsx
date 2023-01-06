@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import ChatIcon from "@mui/icons-material/Chat";
 import UserProfileWidget from "../UserProfileWidget";
 
 type ConnectionProps = {
@@ -18,11 +19,16 @@ const ConnectionList = ({ connectionList }: ConnectionListProps) => {
         Connections
       </Typography>
       {connectionList.map((connection) => (
-        <UserProfileWidget
-          {...connection}
-          key={connection.id}
-          boxProps={{ my: "10px" }}
-        />
+        <Box display="flex" justifyContent="space-between">
+          <UserProfileWidget
+            {...connection}
+            key={connection.id}
+            boxProps={{ my: "10px" }}
+          />
+          <Box alignSelf="center">
+            <ChatIcon />
+          </Box>
+        </Box>
       ))}
     </Box>
   );
