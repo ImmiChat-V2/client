@@ -23,7 +23,7 @@
     "paths": {
       "@/*" : ["*"],
       "@app": ["app"],
-      "@features": ["features"],
+      "@features/*": ["features/*"],
       "@screens": ["screens"],
       "@shared/*": ["shared/*"],
     }
