@@ -9,7 +9,7 @@ import {
 } from "@mui/icons-material";
 import { IconButton, InputBase, Typography, Box } from "@mui/material";
 import FadeDropdown from "../FadeDropdown";
-import useTheme from "../../../features/theme/useTheme";
+import useTheme from "@/features/theme/useTheme";
 import "./navbar.css";
 
 function Navbar() {
