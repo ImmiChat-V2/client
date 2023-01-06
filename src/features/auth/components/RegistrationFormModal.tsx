@@ -79,7 +79,6 @@ const RegistrationFormModal = ({
             required
             name="lastName"
             label="Last Name"
-            type="password"
             sx={{ width: "48%", mt: "16px" }}
             value={lastName}
             onChange={handleChange}
@@ -99,6 +98,7 @@ const RegistrationFormModal = ({
           fullWidth
           label="Password"
           name="password"
+          type="password"
           sx={{ mt: "16px" }}
           value={password}
           onChange={handleChange}
