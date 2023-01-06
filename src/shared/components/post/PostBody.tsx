@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import useTheme from "../../../features/theme/useTheme";
 
 type PostBody = {
   id: number;
@@ -8,10 +9,13 @@ type PostBody = {
 };
 
 function PostBody({ content, media }: PostBody) {
+  const {
+    themeColor: { color },
+  } = useTheme();
   return (
     <>
       <Box component="section" sx={{ mt: "15px" }}>
-        <Typography color="#4d4d4d" sx={{fontSize: "16px"}}>
+        <Typography sx={{fontSize: "16px", color}}>
           {content}
         </Typography>
       </Box>

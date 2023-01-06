@@ -5,7 +5,7 @@ const useTheme = () => {
   const dispatch = useDispatch();
   const theme = useSelector(getCurrentTheme);
 
-  const lightMode = "white";
+  const lightMode = "#f3f3f3";
   const darkMode = "#181818";
 
   const themeColor = {
