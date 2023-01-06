@@ -21,6 +21,9 @@ function PostTop({
   lastName,
   timeStamp,
 }: PostTop) {
+  const {
+    themeColor: { color },
+  } = useTheme();
   const [isFriend, setIsFriend] = useState(false);
   const handleFriendClick = () => {
     setIsFriend(!isFriend);

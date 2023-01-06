@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Footer from "../../shared/components/footer/Footer";
 
 const Home = () => {
+  const { theme } = useTheme()
   return (
     <Box>
       <Link to={"/login"}>dasd</Link>
