@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   toggleDarkMode,
   getCurrentTheme,
-} from "../../features/theme/darkModeSlice";
+} from "@/features/theme/darkModeSlice";
 
 const useTheme = () => {
   const dispatch = useDispatch();

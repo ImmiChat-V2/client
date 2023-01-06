@@ -3,7 +3,7 @@ import { useState } from "react";
 import {
   LoginForm,
   RegistrationFormModal,
-} from "../../features/auth/components";
+} from "@/features/auth/components";
 
 const LoginScreen = () => {
   const [isOpen, setIsOpen] = useState(false);
