@@ -1,8 +1,11 @@
 import { Instagram, Facebook } from "@mui/icons-material";
 import { Box, Typography } from "@mui/material";
+import useTheme from "../../../features/theme/useTheme";
 import "./footer.css";
 
 function Footer() {
+  const { themeColor: { color, backgroundColor } } = useTheme();
+  
   return (
     <Box
       component="footer"
@@ -10,8 +13,8 @@ function Footer() {
         p: "20px",
         height: "170px",
         width: "auto",
-        backgroundColor: "black",
-        color: "white",
+        backgroundColor,
+        color,
       }}
     >
       <Box component="div" sx={{ display: "flex", justifyContent: "center" }}>
@@ -19,7 +22,7 @@ function Footer() {
           sx={{
             display: "flex",
             flexGrow: "1",
-            color: "white",
+            color,
             fontSize: "30px",
           }}
         >
@@ -68,7 +71,7 @@ function Footer() {
       <Box>
         <Typography
           className="copyright-text"
-          sx={{ fontSize: "15px", mt: "10px" }}
+          sx={{ fontSize: "15px", mt: "10px", color }}
         >
           ©2022 Immichat, Inc. All rights reserved.
         </Typography>
