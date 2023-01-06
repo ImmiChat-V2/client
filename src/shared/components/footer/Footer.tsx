@@ -1,47 +1,79 @@
 import { Instagram, Facebook } from "@mui/icons-material";
+import { Box, Typography } from "@mui/material";
 import "./footer.css";
 
 function Footer() {
   return (
-    <footer>
-      <div className="footer-container">
-        <h1 className="footer-logo">Immichat</h1>
-        <div className="footer-column">
-          <h3 className="column-headings">About</h3>
-          <h5>Company</h5>
-          <h5>Contact</h5>
-          <h5>FAQ</h5>
-        </div>
-        <div className="footer-column">
-          <h3 className="column-headings">Community</h3>
-          <h5>News</h5>
-          <h5>Career</h5>
-        </div>
-        <div className="footer-column">
-          <h3 className="column-headings">Support</h3>
-          <h5>Policies</h5>
-          <h5>Terms</h5>
-          <h5>Privacy</h5>
-        </div>
-        <div className="footer-socials">
-          <h3 className="column-headings">Follow Us</h3>
-          <div className="socials-container">
-            <div className="facebook-icon">
+    <Box
+      component="footer"
+      sx={{
+        p: "20px",
+        height: "170px",
+        width: "auto",
+        backgroundColor: "black",
+        color: "white",
+      }}
+    >
+      <Box component="div" sx={{ display: "flex", justifyContent: "center" }}>
+        <Typography
+          sx={{
+            display: "flex",
+            flexGrow: "1",
+            color: "white",
+            fontSize: "30px",
+          }}
+        >
+          Immichat
+        </Typography>
+        <Box sx={{ mr: "40px" }} className="footer-column">
+          <Typography sx={{ mb: "2px", fontSize: "17px" }}>About</Typography>
+          <Typography sx={{ fontSize: "15px" }}>Company</Typography>
+          <Typography sx={{ fontSize: "15px" }}>Contact</Typography>
+          <Typography sx={{ fontSize: "15px" }}>FAQ</Typography>
+        </Box>
+        <Box sx={{ mr: "40px" }} className="footer-column">
+          <Typography sx={{ mb: "2px", fontSize: "17px" }}>
+            Community
+          </Typography>
+          <Typography sx={{ fontSize: "15px" }}>News</Typography>
+          <Typography sx={{ fontSize: "15px" }}>Career</Typography>
+          <Typography sx={{ fontSize: "15px" }}>FAQ</Typography>
+        </Box>
+        <Box sx={{ mr: "40px" }} className="footer-column">
+          <Typography sx={{ mb: "2px", fontSize: "17px" }}>Support</Typography>
+          <Typography sx={{ fontSize: "15px" }}>Policies</Typography>
+          <Typography sx={{ fontSize: "15px" }}>Terms</Typography>
+          <Typography sx={{ fontSize: "15px" }}>Privacy</Typography>
+        </Box>
+        <Box className="footer-socials">
+          <Typography className="column-headings" sx={{ fontSize: "17px" }}>
+            Follow Us
+          </Typography>
+          <Box
+            className="socials-container"
+            sx={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+          >
+            <Box className="facebook-icon">
               <Facebook />
-            </div>
-            <div className="instagram-icon">
+            </Box>
+            <Box className="instagram-icon">
               <Instagram />
-            </div>
-            <div className="tiktok-icon">
+            </Box>
+            <Box className="tiktok-icon">
               <Instagram />
-            </div>
-          </div>
-        </div>
-      </div>
-      <h5 className="copyright-text">
-        ©2022 Immichat, Inc. All rights reserved.
-      </h5>
-    </footer>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+      <Box>
+        <Typography
+          className="copyright-text"
+          sx={{ fontSize: "15px", mt: "10px" }}
+        >
+          ©2022 Immichat, Inc. All rights reserved.
+        </Typography>
+      </Box>
+    </Box>
   );
 }
 
