@@ -39,3 +39,26 @@ export const messageArray = [
     profilePic: userOneProfilePic,
   },
 ];
+
+const profilePic =
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfrQ0_XW-hZ9z4pwXUt8RSt_9NkxQjTSO-QjTEPLBafQ&s";
+const connections = [
+  {
+    firstName: "Ray",
+    lastName: "Lu",
+    profilePic: profilePic,
+    id: 1,
+  },
+  {
+    firstName: "Emir",
+    lastName: "A",
+    profilePic: profilePic,
+    id: 2,
+  },
+  {
+    firstName: "Derek",
+    lastName: "Deposit",
+    profilePic: profilePic,
+    id: 3,
+  },
+];
