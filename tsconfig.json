@@ -20,16 +20,9 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "baseUrl": "src",
-    "paths": {
-      "@/*" : ["*"],
-      "@app": ["app"],
-      "@features": ["features"],
-      "@screens": ["screens"],
-      "@shared/*": ["shared/*"],
-    }
   },
   "include": [
-    "src/**/*.ts","src/**/*.json", ".env"
+    "src", "src/**/*.ts","src/**/*.json", ".env"
   ],
   "exclude": ["node_modules"]
 }
