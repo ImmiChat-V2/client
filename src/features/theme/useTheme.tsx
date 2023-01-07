@@ -6,20 +6,25 @@ import {
 
 const useTheme = () => {
   const dispatch = useDispatch();
-  const theme = useSelector(getCurrentTheme);
+  const isDarkMode = useSelector(getCurrentTheme);
+  const theme = isDarkMode ? 'darkMode' : 'lightMode';
 
-  const lightMode = "#f3f3f3";
-  const darkMode = "#181818";
-
-  const themeColor = {
-    backgroundColor: theme ? darkMode : lightMode,
-    color: theme ? lightMode : darkMode,
-    navButtons: theme ? "#2d2d2d" : "#ededed",
-  };
+  const themeColorObj = {
+    lightMode: {
+      backgroundColor: "#f3f3f3",
+      color: "#181818",
+      navButtons: "#ededed",
+    },
+    darkMode: {
+      backgroundColor: "#181818",
+      color: "#f3f3f3",
+      navButtons: "#2d2d2d"
+    }
+  }
 
   return {
-    theme,
-    themeColor,
+    isDarkMode,
+    themeColor: themeColorObj[theme],
     toggleDarkMode: () => dispatch(toggleDarkMode()),
   };
 };

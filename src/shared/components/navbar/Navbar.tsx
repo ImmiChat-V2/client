@@ -14,7 +14,7 @@ import "./navbar.css";
 
 function Navbar() {
   const navigate = useNavigate();
-  const { theme, themeColor, toggleDarkMode } = useTheme();
+  const { isDarkMode, themeColor, toggleDarkMode } = useTheme();
   const { backgroundColor, color, navButtons } = themeColor;
 
   const navMenuOptions = [
@@ -90,7 +90,7 @@ function Navbar() {
           }}
         >
           <Box className="nav-buttons">
-            {theme ? (
+            {isDarkMode ? (
               <Brightness7
                 onClick={toggleDarkMode}
                 sx={{
@@ -132,7 +132,7 @@ function Navbar() {
             />
           </Box>
           <Box className="nav-drop-down">
-            {theme ? (
+            {isDarkMode ? (
               <FadeDropdown
                 buttonName="Fake User"
                 menuItems={navMenuOptions}

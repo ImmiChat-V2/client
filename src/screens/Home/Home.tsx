@@ -5,13 +5,13 @@ import Post from "../../shared/components/post/Post";
 import useTheme from "../../features/theme/useTheme";
 
 const Home = () => {
-  const { theme } = useTheme()
+  // const { theme } = useTheme()
   return (
     <>
       <Navbar />
       <Box
         sx={{
-          backgroundColor: theme ? "black" : 'white',
+          // backgroundColor: theme ? "black" : 'white',
           display: "flex",
           justifyContent: "center",
           height: '100vh',
