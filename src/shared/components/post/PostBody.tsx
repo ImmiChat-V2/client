@@ -2,10 +2,10 @@ import { Box, Typography } from "@mui/material";
 import useTheme from "../../../features/theme/useTheme";
 
 type PostBody = {
-  id: number;
-  userId: number;
-  content: string;
-  media?: string;
+  readonly id: number;
+  readonly userId: number;
+  readonly content: string;
+  readonly media?: string;
 };
 
 function PostBody({ content, media }: PostBody) {

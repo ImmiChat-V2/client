@@ -4,7 +4,7 @@ import { toggleDarkMode, getCurrentTheme } from "features/theme/darkModeSlice";
 const useTheme = () => {
   const dispatch = useDispatch();
   const isDarkMode = useSelector(getCurrentTheme);
-  const theme = isDarkMode ? 'darkMode' : 'lightMode';
+  const theme = isDarkMode ? "darkMode" : "lightMode";
 
   const themeColorObj = {
     lightMode: {
@@ -15,9 +15,9 @@ const useTheme = () => {
     darkMode: {
       backgroundColor: "#181818",
       color: "#f3f3f3",
-      navButtons: "#2d2d2d"
-    }
-  }
+      navButtons: "#2d2d2d",
+    },
+  };
 
   return {
     isDarkMode,

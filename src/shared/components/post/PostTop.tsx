@@ -4,12 +4,12 @@ import { PersonAdd, PersonRemoveAlt1 } from "@mui/icons-material/";
 import useTheme from "../../../features/theme/useTheme";
 
 type PostTop = {
-  id: number;
-  userId: number;
-  profilePic: string;
-  firstName: string;
-  lastName: string;
-  timePosted: string;
+  readonly id: number;
+  readonly userId: number;
+  readonly profilePic: string;
+  readonly firstName: string;
+  readonly lastName: string;
+  readonly timePosted?: string;
 };
 
 function PostTop({
@@ -18,8 +18,9 @@ function PostTop({
   profilePic,
   firstName,
   lastName,
-  timePosted,
-}: PostTop) {
+  // timePosted,
+}: 
+PostTop) {
   const {
     themeColor: { color },
   } = useTheme();
@@ -27,6 +28,7 @@ function PostTop({
   const handleFriendClick = () => {
     setIsFriend(!isFriend);
   };
+
   return (
     <>
       <Box
@@ -60,11 +62,11 @@ function PostTop({
           }}
         >
           <Box component="span" sx={{ cursor: "pointer" }}>
-            <Typography sx={{color}}>
+            <Typography sx={{ color }}>
               {firstName} {lastName}
             </Typography>
             <Typography color="#858585" sx={{ fontSize: "12px" }}>
-              {timePosted}
+              {/* {timePosted} */}
             </Typography>
           </Box>
           <Box component="span" sx={{ display: "flex", cursor: "pointer" }}>
