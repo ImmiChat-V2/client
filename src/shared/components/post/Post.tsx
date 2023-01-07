@@ -11,8 +11,7 @@ type BasePost = {
   readonly profilePic: string;
   readonly firstName: string;
   readonly lastName: string;
-  readonly timePosted: string;
-  //readonly  timePosted: Date,
+  readonly timePosted?: Date,
   readonly content: string;
   readonly media?: string;
 };
@@ -54,7 +53,7 @@ function Post({
           profilePic={profilePic}
           firstName={firstName}
           lastName={lastName}
-          timePosted={timePosted}
+          // timePosted={timePosted}
         />
         <PostBody id={id} userId={userId} content={content} media={media} />
         <hr style={{ marginTop: "20px" }}></hr>
