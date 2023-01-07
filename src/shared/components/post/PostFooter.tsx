@@ -57,7 +57,7 @@ function PostFooter({ id, userId }: PostFooter) {
                 onClick={handleLikeClick}
                 sx={{
                   cursor: "pointer",
-                  width: "40px",
+                  width: "30px",
                   color: "#D70040",
                 }}
               />
@@ -66,7 +66,7 @@ function PostFooter({ id, userId }: PostFooter) {
                 onClick={handleLikeClick}
                 sx={{
                   cursor: "pointer",
-                  width: "40px",
+                  width: "30px",
                   color: "#D70040",
                 }}
               />
