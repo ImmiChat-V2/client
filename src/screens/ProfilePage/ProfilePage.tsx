@@ -8,7 +8,8 @@ import { mockUserData } from "shared/utils";
 import useTheme from "features/theme/useTheme";
 
 const ProfilePage = () => {
-  const theme = useTheme();
+  const { theme, themeColor, toggleDarkMode } = useTheme();
+  const { backgroundColor, color, navButtons } = themeColor;
   return (
     <Box
       sx={{
@@ -18,10 +19,11 @@ const ProfilePage = () => {
         flexDirection: "row",
       }}
     >
-      <Box sx={{ width: "20%", bgcolor: "blue" }}>Text</Box>
-      {/* fix */}
-      <ProfileCard user={mockUserData} isCurrentUser={true} />
-      <Box sx={{ width: "20%", bgcolor: "blue" }}>Text</Box>
+      <ProfileCard
+        user={mockUserData}
+        theme={themeColor}
+        isCurrentUser={true}
+      />
     </Box>
   );
 };

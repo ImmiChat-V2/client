@@ -22,9 +22,6 @@ export const getAvatarProps = (name: string) => {
   return {
     sx: {
       bgcolor: getRandomColor(name),
-      fontSize: "10px",
-      width: "25px",
-      height: "25px",
     },
     children: getInitials(name),
   };
