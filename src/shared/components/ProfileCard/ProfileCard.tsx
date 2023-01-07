@@ -15,9 +15,10 @@ import { getAvatarProps } from "shared/utils";
 type PropType = {
   user: UserProfileType;
   isCurrentUser: boolean;
+  theme: any;
 };
 
-const ProfileCard = ({ user, isCurrentUser }: PropType) => {
+const ProfileCard = ({ user, theme, isCurrentUser }: PropType) => {
   const { id, firstName, lastName, profilePic, coverPic, friends } = user;
   const userName = firstName + " " + lastName;
   const friendCount = friends.length;
@@ -52,6 +53,7 @@ const ProfileCard = ({ user, isCurrentUser }: PropType) => {
     >
       <Card
         sx={{
+          bgcolor: theme.backgroundColor,
           ...SharedWrapperProps,
           flexDirection: "column",
           position: "relative",
@@ -60,6 +62,7 @@ const ProfileCard = ({ user, isCurrentUser }: PropType) => {
         <CardMedia
           src={coverPic}
           sx={{
+            bgcolor: theme.backgroundColor,
             ...SharedFlexAbsoluteProps,
             height: "200px",
             width: "100%",
@@ -99,6 +102,7 @@ const ProfileCard = ({ user, isCurrentUser }: PropType) => {
         </CardMedia>
         <CardContent
           sx={{
+            bgcolor: theme.backgroundColor,
             ...SharedFlexAbsoluteProps,
             width: "100%",
             top: "45%",
@@ -114,6 +118,8 @@ const ProfileCard = ({ user, isCurrentUser }: PropType) => {
             sx={{
               display: "flex",
               position: "relative",
+              maxWidth: "120px",
+              maxHeight: "120px",
               "@media (max-width:650px)": {
                 justifyContent: "center",
               },
@@ -129,24 +135,27 @@ const ProfileCard = ({ user, isCurrentUser }: PropType) => {
                 border: "2px white solid",
               }}
             />
-            <Button
-              sx={{
-                ...SharedFlexAbsoluteProps,
-                color: "#1f1e1e",
-                minWidth: "30px",
-                maxWidth: "30px",
-                height: "30px",
-                borderRadius: "50%",
-                right: 0,
-                zIndex: 4,
-                bottom: 10,
-                "&:hover": {
-                  bgcolor: "#75757580",
-                },
-              }}
-            >
-              <CameraAlt />
-            </Button>
+
+            {isCurrentUser && (
+              <Button
+                sx={{
+                  ...SharedFlexAbsoluteProps,
+                  color: "primary",
+                  minWidth: "30px",
+                  maxWidth: "30px",
+                  height: "30px",
+                  borderRadius: "50%",
+                  right: 0,
+                  zIndex: 4,
+                  bottom: 2,
+                  "&:hover": {
+                    bgcolor: "#75757580",
+                  },
+                }}
+              >
+                <CameraAlt />
+              </Button>
+            )}
           </Box>
           <Box
             sx={{
@@ -157,9 +166,9 @@ const ProfileCard = ({ user, isCurrentUser }: PropType) => {
               display: "flex",
               flexDirection: "row",
               "@media (max-width:650px)": {
+                ...FlexAndCenterProps,
                 pr: "unset",
                 minHeight: "unset",
-                ...FlexAndCenterProps,
               },
             }}
           >
@@ -181,6 +190,7 @@ const ProfileCard = ({ user, isCurrentUser }: PropType) => {
               <Typography
                 variant="h5"
                 sx={{
+                  color: theme.color,
                   display: "flex",
                   flexDirection: "row",
                   minWidth: "100%",
@@ -191,17 +201,21 @@ const ProfileCard = ({ user, isCurrentUser }: PropType) => {
                   },
                 }}
               >
-                {/* {userName} */}
-                Dingaringaringaringa Ringadingadingadinga
+                {userName}
               </Typography>
-              <Typography variant="body2">{friendCount} Friends</Typography>
+              <Typography sx={{ color: theme.color, my: 1 }} variant="body2">
+                {friendCount} Friends
+              </Typography>
               <AvatarGroup
                 sx={{
                   position: "absolute",
+                  justifyContent: "center",
+                  pt: 5,
                   bottom: 0,
-                  "& * ": {
-                    width: "20px",
-                    height: "20px",
+                  "& > div ": {
+                    width: 25,
+                    height: 25,
+                    fontSize: "10px",
                   },
                 }}
                 max={5}
