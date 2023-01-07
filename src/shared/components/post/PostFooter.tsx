@@ -4,8 +4,8 @@ import { FavoriteBorder, MoreHoriz, Favorite } from "@mui/icons-material/";
 import useTheme from "../../../features/theme/useTheme";
 
 type PostFooter = {
-  id: number;
-  userId: number;
+  readonly id: number;
+  readonly userId: number;
 };
 
 function PostFooter({ id, userId }: PostFooter) {
