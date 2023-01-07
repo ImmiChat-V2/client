@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "app/store";
-import { Home, LoginScreen } from "screens";
+import { Home, LoginScreen, ProfilePage } from "screens";
 import { ProtectedRoute, OnLoad } from "features/auth/components";
 
 function App() {
@@ -19,6 +19,11 @@ function App() {
               element={<ProtectedRoute isProtected redirectPath="/login" />}
             >
               <Route path="/" element={<Home />} />
+            </Route>
+            <Route
+              element={<ProtectedRoute isProtected redirectPath="/profile" />}
+            >
+              <Route path="/profile" element={<ProfilePage />} />
             </Route>
           </Route>
         </Routes>

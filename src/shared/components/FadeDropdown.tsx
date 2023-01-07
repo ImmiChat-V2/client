@@ -1,4 +1,4 @@
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { KeyboardArrowDown } from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import Fade from "@mui/material/Fade";
 import Menu from "@mui/material/Menu";
@@ -16,7 +16,11 @@ type FadeDropdownProps = {
   readonly darkMode?: boolean;
 };
 
-const FadeDropdown = ({ buttonName, menuItems, darkMode }: FadeDropdownProps) => {
+const FadeDropdown = ({
+  buttonName,
+  menuItems,
+  darkMode,
+}: FadeDropdownProps) => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const open = !!anchorEl;
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -36,7 +40,7 @@ const FadeDropdown = ({ buttonName, menuItems, darkMode }: FadeDropdownProps) =>
         variant="contained"
         disableElevation
         onClick={handleClick}
-        endIcon={<KeyboardArrowDownIcon />}
+        endIcon={<KeyboardArrowDown />}
         sx={{
           backgroundColor: darkMode ? "#2d2d2d" : "#ededed",
           minWidth: "140px",
