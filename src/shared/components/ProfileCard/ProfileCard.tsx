@@ -45,8 +45,8 @@ const ProfileCard = ({ user, isCurrentUser }: PropType) => {
       sx={{
         ...SharedWrapperProps,
         height: "350px",
-        "@media (max-width:600px)": {
-          minHeight: "400px",
+        "@media (max-width:650px)": {
+          minHeight: "500px",
         },
       }}
     >
@@ -67,7 +67,7 @@ const ProfileCard = ({ user, isCurrentUser }: PropType) => {
             top: 0,
             borderRadius: "0 0 5px 5px",
             zIndex: 2,
-            "@media (max-width:600px)": {
+            "@media (max-width:650px)": {
               ...FlexAndCenterProps,
             },
           }}
@@ -83,7 +83,7 @@ const ProfileCard = ({ user, isCurrentUser }: PropType) => {
                 right: 20,
                 bottom: 10,
                 zIndex: 2,
-                "@media (max-width:600px)": {
+                "@media (max-width:650px)": {
                   right: 5,
                   bottom: "unset",
                   top: 5,
@@ -93,10 +93,7 @@ const ProfileCard = ({ user, isCurrentUser }: PropType) => {
               color="success"
             >
               <CameraAlt sx={{ fontSize: "18px", mr: 1 }} />
-              <Typography sx={{ fontSize: "10px" }}>
-                {" "}
-                Add cover photo
-              </Typography>
+              <Typography sx={{ fontSize: "10px" }}>Add cover photo</Typography>
             </Button>
           )}
         </CardMedia>
@@ -104,9 +101,10 @@ const ProfileCard = ({ user, isCurrentUser }: PropType) => {
           sx={{
             ...SharedFlexAbsoluteProps,
             width: "100%",
-            bottom: 20,
-            "@media (max-width:600px)": {
+            top: "45%",
+            "@media (max-width:650px)": {
               ...FlexAndCenterProps,
+              flexDirection: "column",
               pt: "50px 0 unset",
               top: "30%",
             },
@@ -116,7 +114,7 @@ const ProfileCard = ({ user, isCurrentUser }: PropType) => {
             sx={{
               display: "flex",
               position: "relative",
-              "@media (max-width:600px)": {
+              "@media (max-width:650px)": {
                 justifyContent: "center",
               },
             }}
@@ -158,7 +156,7 @@ const ProfileCard = ({ user, isCurrentUser }: PropType) => {
               justifyContent: "space-between",
               display: "flex",
               flexDirection: "row",
-              "@media (max-width:600px)": {
+              "@media (max-width:650px)": {
                 pr: "unset",
                 minHeight: "unset",
                 ...FlexAndCenterProps,
@@ -174,7 +172,7 @@ const ProfileCard = ({ user, isCurrentUser }: PropType) => {
                 mx: 2,
                 py: 5,
                 justifyContent: "flex-start",
-                "@media (max-width:600px)": {
+                "@media (max-width:650px)": {
                   ...FlexAndCenterProps,
                   pt: 2,
                 },
@@ -184,14 +182,17 @@ const ProfileCard = ({ user, isCurrentUser }: PropType) => {
                 variant="h5"
                 sx={{
                   display: "flex",
-                  width: "100%",
-                  textAlign: "center",
-                  "@media (max-width:600px)": {
+                  flexDirection: "row",
+                  minWidth: "100%",
+                  textAlign: "left",
+                  mt: 0,
+                  "@media (max-width:650px)": {
                     ...FlexAndCenterProps,
                   },
                 }}
               >
-                {userName}
+                {/* {userName} */}
+                Dingaringaringaringa Ringadingadingadinga
               </Typography>
               <Typography variant="body2">{friendCount} Friends</Typography>
               <AvatarGroup
@@ -199,8 +200,8 @@ const ProfileCard = ({ user, isCurrentUser }: PropType) => {
                   position: "absolute",
                   bottom: 0,
                   "& * ": {
-                    width: "25px",
-                    height: "25px",
+                    width: "20px",
+                    height: "20px",
                   },
                 }}
                 max={5}
@@ -219,7 +220,6 @@ const ProfileCard = ({ user, isCurrentUser }: PropType) => {
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                minwidth: "20%",
                 justifyContent: "flex-end",
               }}
             >
@@ -236,7 +236,9 @@ const ProfileCard = ({ user, isCurrentUser }: PropType) => {
                   color="primary"
                 >
                   <Settings sx={{ fontSize: "18px", mr: 1 }} />
-                  Edit Profile
+                  <Typography sx={{ fontSize: "10px" }}>
+                    Edit Profile
+                  </Typography>
                 </Button>
               )}
             </Box>
