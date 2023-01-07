@@ -5,7 +5,6 @@ import { Navbar } from "shared/components/navbar";
 import Footer from "../../shared/components/footer/Footer";
 
 const Home = () => {
-  // const { theme } = useTheme()
   return (
     <Box>
       <Navbar />
@@ -14,21 +13,5 @@ const Home = () => {
     </Box>
   );
 };
-/*
-id
-userId
-top: 
-  profilePic
-  firstName 
-  lastName
-  timePosted
 
-mid: 
-  content(text)
-  post image?
-
-Bottom: 
-  like count
-  comment count
-*/
 export default Home;
