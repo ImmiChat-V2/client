@@ -1,15 +1,10 @@
-import { CssBaseline, Box, Grid, Button, TextField } from "@mui/material";
-import { useState } from "react";
+import { Box } from "@mui/material";
 import { ProfileCard } from "shared/components/ProfileCard";
-import { useSelector } from "react-redux";
-import { getCurrentUser } from "features/auth/authSlice";
-import { UserProfileType } from "shared/types";
 import { mockUserData } from "shared/utils";
 import useTheme from "features/theme/useTheme";
 
 const ProfilePage = () => {
-  const { theme, themeColor, toggleDarkMode } = useTheme();
-  const { backgroundColor, color, navButtons } = themeColor;
+  const { themeColor } = useTheme();
   return (
     <Box
       sx={{
