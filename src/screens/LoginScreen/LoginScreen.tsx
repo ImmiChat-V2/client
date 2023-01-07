@@ -1,9 +1,6 @@
 import { CssBaseline, Paper, Grid, Button } from "@mui/material";
 import { useState } from "react";
-import {
-  LoginForm,
-  RegistrationFormModal,
-} from "../../features/auth/components";
+import { LoginForm, RegistrationFormModal } from "features/auth/components";
 
 const LoginScreen = () => {
   const [isOpen, setIsOpen] = useState(false);

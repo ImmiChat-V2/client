@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
-import { store } from "../app/store";
-import { LoginScreen, Home } from "../screens";
-import { ProtectedRoute, OnLoad } from "../features/auth/components";
+import { store } from "app/store";
+import { Home, LoginScreen } from "screens";
+import { ProtectedRoute, OnLoad } from "features/auth/components";
 
 function App() {
   return (
