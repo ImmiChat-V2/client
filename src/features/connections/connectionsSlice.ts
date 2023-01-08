@@ -1,12 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ActiveConnectionsModel } from "./models/Connections.model";
+import { ConnectionUserInfo } from "./models/Connections.model";
 
 type initialStateType = {
-  connections: null | ActiveConnectionsModel;
+  connected: ConnectionUserInfo[];
+  incoming: ConnectionUserInfo[];
+  outgoing: ConnectionUserInfo[];
 };
 
 const initialState: initialStateType = {
-  connections: null,
+  connected: [],
+  incoming: [],
+  outgoing: [],
 };
 
 const connectionSlice = createSlice({
@@ -15,10 +19,26 @@ const connectionSlice = createSlice({
   reducers: {
     getConnections: (state, action) => {
       const { data } = action.payload;
-      return data;
+      const connected = [];
+      const incoming = [];
+      const outgoing = [];
+      for (let connection of data) {
+        if (!connection.connected && connection.status === "sender") {
+          outgoing.push(connection.connectionInfo);
+        } else if (!connection.connected && connection.status === "receiver") {
+          incoming.push(connection.connectionInfo);
+        } else connected.push(connection.connectionInfo);
+      }
+      state.connected = connected;
+      state.incoming = incoming;
+      state.outgoing = outgoing;
     },
-    removeConnections: (state, action) => {
-        
-    }
   },
 });
+
+export const { getConnections } = connectionSlice.actions;
+export default connectionSlice.reducer;
+
+export const getActiveConnections = (state: any) => state.connected;
+export const getIncomingConnections = (state: any) => state.incoming;
+export const getOutgoingConnections = (state: any) => state.outgoing;

@@ -5,7 +5,6 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
-    credentials: "include",
     mode: "cors",
   }),
   endpoints: (builder) => ({}),
