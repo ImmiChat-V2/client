@@ -84,7 +84,7 @@ const NavSidebar = ({ theme }: NavSidebarProps) => {
             >
               <>{icon}</>
               <Typography
-                sx={{ ml: "10px", color: theme.color, display: "flex", pb: 0 }}
+                sx={{ ml: "10px", color: theme.color, display: "flex" }}
               >
                 {name}
               </Typography>
