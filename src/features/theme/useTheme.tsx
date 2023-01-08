@@ -3,7 +3,7 @@ import { toggleDarkMode, getCurrentTheme } from "features/theme/darkModeSlice";
 
 const useTheme = () => {
   const dispatch = useDispatch();
-  const theme = !useSelector(getCurrentTheme);
+  const theme = useSelector(getCurrentTheme);
 
   const lightMode = "white";
   const darkMode = "#181818";

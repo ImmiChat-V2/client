@@ -109,7 +109,7 @@ const ProfileCard = ({ user, theme, isCurrentUser }: PropType) => {
             "@media (max-width:650px)": {
               ...FlexAndCenterProps,
               flexDirection: "column",
-              pt: "50px 0 unset",
+              p: "50px 0 unset",
               top: "30%",
             },
           }}
@@ -242,8 +242,7 @@ const ProfileCard = ({ user, theme, isCurrentUser }: PropType) => {
                   sx={{
                     display: "flex",
                     fontSize: "9px",
-                    py: "2px",
-                    px: "10px",
+                    p: "2px 10px",
                     mt: "10px",
                   }}
                   variant="contained"
