@@ -4,6 +4,7 @@ import {
   Card,
   Typography,
   SvgIconProps,
+  Box,
 } from "@mui/material";
 import {
   RssFeedRounded,
@@ -77,17 +78,25 @@ const NavSidebar = ({ theme }: NavSidebarProps) => {
               key={index}
               sx={{
                 width: "100%",
-                justifyContent: "center",
-                py: 1,
+                pl: "30%",
                 minHeight: "30px",
               }}
             >
-              <>{icon}</>
-              <Typography
-                sx={{ ml: "10px", color: theme.color, display: "flex" }}
+              <Box
+                sx={{
+                  justifyContent: "center",
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
               >
-                {name}
-              </Typography>
+                <>{icon}</>
+                <Typography
+                  sx={{ ml: "10px", color: theme.color, display: "flex" }}
+                >
+                  {name}
+                </Typography>
+              </Box>
             </MenuItem>
           );
         })}

@@ -14,7 +14,9 @@ const ProfilePage = () => {
         flexDirection: "row",
       }}
     >
-      <NavSidebar theme={themeColor} />
+      <Box sx={{ width: "250px" }}>
+        <NavSidebar theme={themeColor} />
+      </Box>
     </Box>
   );
 };
