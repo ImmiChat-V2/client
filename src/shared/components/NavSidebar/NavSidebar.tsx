@@ -1,9 +1,20 @@
-import { MenuList, MenuItem, Card, Typography } from "@mui/material";
-import { Mail, RssFeed, Bookmark, LiveHelp } from "@mui/icons-material";
+import {
+  MenuList,
+  MenuItem,
+  Card,
+  Typography,
+  SvgIconProps,
+} from "@mui/material";
+import {
+  RssFeedRounded,
+  MailRounded,
+  LiveHelpRounded,
+  BookmarkRounded,
+} from "@mui/icons-material";
 
 type menuItem = {
   name: string;
-  icon: any;
+  icon: SvgIconProps;
 };
 
 type NavSidebarProps = {
@@ -12,10 +23,36 @@ type NavSidebarProps = {
 
 const NavSidebar = ({ theme }: NavSidebarProps) => {
   const menuItems: menuItem[] = [
-    { name: "Feed", icon: <RssFeed sx={{ color: theme.color }} /> },
-    { name: "Chats", icon: <Mail sx={{ color: theme.color }} /> },
-    { name: "Bookmarks", icon: <Bookmark sx={{ color: theme.color }} /> },
-    { name: "Questions", icon: <LiveHelp sx={{ color: theme.color }} /> },
+    {
+      name: "Feed",
+      icon: (
+        <RssFeedRounded
+          sx={{ color: theme.color, fontSize: "18px", mb: "1px" }}
+        />
+      ),
+    },
+    {
+      name: "Chats",
+      icon: (
+        <MailRounded sx={{ color: theme.color, fontSize: "18px", mb: "0px" }} />
+      ),
+    },
+    {
+      name: "Bookmarks",
+      icon: (
+        <BookmarkRounded
+          sx={{ color: theme.color, fontSize: "16px", mb: "1px" }}
+        />
+      ),
+    },
+    {
+      name: "Questions",
+      icon: (
+        <LiveHelpRounded
+          sx={{ color: theme.color, fontSize: "14px", mb: "1px" }}
+        />
+      ),
+    },
   ];
   return (
     <Card
@@ -45,8 +82,10 @@ const NavSidebar = ({ theme }: NavSidebarProps) => {
                 minHeight: "30px",
               }}
             >
-              {icon}
-              <Typography sx={{ ml: "10px", color: theme.color }}>
+              <>{icon}</>
+              <Typography
+                sx={{ ml: "10px", color: theme.color, display: "flex", pb: 0 }}
+              >
                 {name}
               </Typography>
             </MenuItem>
