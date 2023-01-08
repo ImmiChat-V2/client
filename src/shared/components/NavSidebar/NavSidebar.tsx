@@ -1,15 +1,4 @@
-import {
-  Box,
-  AppBar,
-  CssBaseline,
-  Divider,
-  Drawer,
-  IconButton,
-  MenuList,
-  MenuItem,
-  Card,
-  Typography,
-} from "@mui/material";
+import { MenuList, MenuItem, Card, Typography } from "@mui/material";
 import { Mail, RssFeed, Bookmark, LiveHelp } from "@mui/icons-material";
 
 type menuItem = {
@@ -17,18 +6,23 @@ type menuItem = {
   icon: any;
 };
 
-const NavSidebar = () => {
+type NavSidebarProps = {
+  theme: any;
+};
+
+const NavSidebar = ({ theme }: NavSidebarProps) => {
   const menuItems: menuItem[] = [
-    { name: "Feed", icon: <RssFeed /> },
-    { name: "Chats", icon: <Mail /> },
-    { name: "Bookmarks", icon: <Bookmark /> },
-    { name: "Questions", icon: <LiveHelp /> },
+    { name: "Feed", icon: <RssFeed sx={{ color: theme.color }} /> },
+    { name: "Chats", icon: <Mail sx={{ color: theme.color }} /> },
+    { name: "Bookmarks", icon: <Bookmark sx={{ color: theme.color }} /> },
+    { name: "Questions", icon: <LiveHelp sx={{ color: theme.color }} /> },
   ];
   return (
     <Card
       sx={{
+        bgcolor: theme.backgroundColor,
         width: "98%",
-        height: "100%",
+        height: "100vh",
         justifyContent: "center",
         display: "flex",
         alignItems: "center",
@@ -37,9 +31,7 @@ const NavSidebar = () => {
       <MenuList
         sx={{
           width: "100%",
-          display: "flex",
           flexDirection: "column",
-          bgcolor: "red",
         }}
       >
         {menuItems.map(({ icon, name }, index) => {
@@ -48,13 +40,15 @@ const NavSidebar = () => {
               key={index}
               sx={{
                 width: "100%",
-                display: "flex",
                 justifyContent: "center",
-                my: 1,
+                py: 1,
+                minHeight: "30px",
               }}
             >
               {icon}
-              <Typography sx={{ ml: "10px" }}>{name}</Typography>
+              <Typography sx={{ ml: "10px", color: theme.color }}>
+                {name}
+              </Typography>
             </MenuItem>
           );
         })}
