@@ -35,7 +35,7 @@ const NavSidebar = ({ theme }: NavSidebarProps) => {
     {
       name: "Chats",
       icon: (
-        <MailRounded sx={{ color: theme.color, fontSize: "18px", mb: "0px" }} />
+        <MailRounded sx={{ color: theme.color, fontSize: "18px", mb: "1px" }} />
       ),
     },
     {
