@@ -11,18 +11,19 @@ export type ConnectionMutationResponseModel = {
   message: string;
 };
 
-type ActiveConnectionInfo = {
+export type ConnectionUserInfo = {
   id: number;
   firstName: string;
   lastName: string;
   profilePic: string;
 };
-type ActiveConnectionData = {
+type ConnectionData = {
   id: number;
   connected: boolean;
-  connectionInfo: ActiveConnectionInfo;
+  status: string;
+  connectionInfo: ConnectionUserInfo;
 };
 
-export type ActiveConnectionsModel = {
-  data: ActiveConnectionData[];
+export type ConnectionsModel = {
+  data: ConnectionData[];
 };
