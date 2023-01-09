@@ -25,7 +25,7 @@ function PostBody({ content, media }: PostBody) {
       >
         <Box
           component="img"
-          sx={{ borderRadius: "10px" }}
+          sx={{ borderRadius: "10px", width: '100%', height: '100%', display: 'block' }}
           src={media}
         ></Box>
       </Box>
