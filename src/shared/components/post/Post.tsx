@@ -3,7 +3,6 @@ import PostTop from "./PostTop";
 import PostBody from "./PostBody";
 import PostFooter from "./PostFooter";
 import useTheme from "../../../features/theme/useTheme";
-// import "./post.css";
 
 type BasePost = {
   readonly id: number;
@@ -33,7 +32,6 @@ function Post({
     <Box
       component="div"
       sx={{
-        // maxWidth: "500px",
         width: '100%',
         backgroundColor,
         borderRadius: "10px",
