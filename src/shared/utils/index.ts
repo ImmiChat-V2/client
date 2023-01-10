@@ -1,3 +1,3 @@
-// This directory will contain shared utility files
-// Remove this import when we add utility exports
-import React from "react";
+export { formatTime } from "./timeUtils";
+export { getAvatarProps, getRandomColor, getInitials } from "./profileUtils";
+export { default as mockUserData } from "./mockUserData";
