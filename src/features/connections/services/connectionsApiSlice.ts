@@ -6,39 +6,34 @@ import { apiSlice } from "../../api/apiSlice";
 
 export const connectionsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getConnections: builder.query<ConnectionsModel, number | string>({
-      query: (userId: string | number) => ({
+    getConnections: builder.query<ConnectionsModel, number>({
+      query: (userId: number) => ({
         url: `/users/${userId}/connections`,
         method: "GET",
       }),
     }),
-    sendConnection: builder.mutation<
-      ConnectionMutationResponseModel,
-      number | string
-    >({
-      query: (userId: string | number) => ({
+    sendConnection: builder.mutation<ConnectionMutationResponseModel, number>({
+      query: (userId: number) => ({
         url: `/users/${userId}/connections`,
         method: "POST",
       }),
     }),
-    acceptConnection: builder.mutation<
-      ConnectionMutationResponseModel,
-      number | string
-    >({
-      query: (userId: string | number) => ({
-        url: `/users/${userId}/connections`,
-        method: "PUT",
-      }),
-    }),
-    removeConnection: builder.mutation<
-      ConnectionMutationResponseModel,
-      number | string
-    >({
-      query: (userId: string | number) => ({
-        url: `/users/${userId}/connections`,
-        method: "DELETE",
-      }),
-    }),
+    acceptConnection: builder.mutation<ConnectionMutationResponseModel, number>(
+      {
+        query: (userId: number) => ({
+          url: `/users/${userId}/connections`,
+          method: "PUT",
+        }),
+      }
+    ),
+    removeConnection: builder.mutation<ConnectionMutationResponseModel, number>(
+      {
+        query: (userId: number) => ({
+          url: `/users/${userId}/connections`,
+          method: "DELETE",
+        }),
+      }
+    ),
   }),
 });
 
