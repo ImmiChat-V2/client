@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import useTheme from "../../../features/theme/useTheme";
+import useTheme from "features/theme/useTheme";
 
 type PostBody = {
   readonly id: number;
