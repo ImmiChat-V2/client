@@ -2,8 +2,10 @@ import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import "./home.css";
 import { Navbar } from "shared/components/navbar";
+import Footer from "../../shared/components/footer/Footer";
 
 const Home = () => {
+
   return (
     <Box>
       <Navbar />
