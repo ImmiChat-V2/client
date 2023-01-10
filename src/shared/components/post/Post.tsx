@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import PostTop from "./PostTop";
 import PostBody from "./PostBody";
 import PostFooter from "./PostFooter";
-import useTheme from "../../../features/theme/useTheme";
+import useTheme from "features/theme/useTheme";
 
 type BasePost = {
   readonly id: number;
