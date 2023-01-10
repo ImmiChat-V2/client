@@ -1,9 +1,13 @@
 import { CssBaseline, Paper, Grid, Button } from "@mui/material";
 import { useState } from "react";
 import { LoginForm, RegistrationFormModal } from "features/auth/components";
+import { getProfile } from "features/userprofile/userProfileSlice";
+import { useSelector } from "react-redux";
 
 const LoginScreen = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const curprofile = useSelector(getProfile);
+  console.log("cur", curprofile);
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
       <RegistrationFormModal isOpen={isOpen} setIsOpen={setIsOpen} />
