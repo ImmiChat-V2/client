@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { ProfileCard } from "shared/components/ProfileCard";
+import { ProfileCard } from "features/userprofile/components/ProfileCard";
 import { mockUserData } from "shared/utils";
 import useTheme from "features/theme/useTheme";
 
