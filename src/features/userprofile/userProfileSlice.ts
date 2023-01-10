@@ -1,6 +1,4 @@
-import { sliderClasses } from "@mui/material";
 import { createSlice } from "@reduxjs/toolkit";
-import { stat } from "fs";
 import { UserProfileType } from "./models/UserProfileTypes";
 
 type InitialStateType = {
