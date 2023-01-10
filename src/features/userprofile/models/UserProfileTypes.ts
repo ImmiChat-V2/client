@@ -14,3 +14,8 @@ export type ShortUserInfoType = Pick<
   UserProfileType,
   "id" | "firstName" | "lastName" | "profilePic"
 >;
+
+export type UpdateUserProfileProps = {
+  userId: string;
+  body: UserProfileType;
+};
