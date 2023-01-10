@@ -7,23 +7,23 @@ type ConnectionMutationResponseData = {
   readonly updatedAt: string;
 };
 export type ConnectionMutationResponseModel = {
-  data: ConnectionMutationResponseData;
-  message: string;
+  readonly data: ConnectionMutationResponseData;
+  readonly message: string;
 };
 
 export type ConnectionUserInfo = {
-  id: number;
-  firstName: string;
-  lastName: string;
-  profilePic: string;
+  readonly id: number;
+  readonly firstName: string;
+  readonly lastName: string;
+  readonly profilePic: string;
 };
 type ConnectionData = {
-  id: number;
-  connected: boolean;
-  status: string;
-  connectionInfo: ConnectionUserInfo;
+  readonly id: number;
+  readonly connected: boolean;
+  readonly status: string;
+  readonly connectionInfo: ConnectionUserInfo;
 };
 
 export type ConnectionsModel = {
-  data: ConnectionData[];
+  readonly data: ConnectionData[];
 };
