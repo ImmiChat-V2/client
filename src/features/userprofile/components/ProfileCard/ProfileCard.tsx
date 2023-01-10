@@ -9,7 +9,7 @@ import {
   AvatarGroup,
 } from "@mui/material";
 import { CameraAlt, Settings } from "@mui/icons-material";
-import { UserProfileType } from "shared/types/SharedUserTypes";
+import { UserProfileType } from "features/userprofile/models/UserProfileTypes";
 import { getAvatarProps } from "shared/utils";
 
 type PropType = {

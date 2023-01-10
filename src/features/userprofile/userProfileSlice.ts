@@ -1,13 +1,14 @@
 import { sliderClasses } from "@mui/material";
 import { createSlice } from "@reduxjs/toolkit";
-import { DisplayUserModel, BaseUserModel } from "../auth/models/User.model";
+import { stat } from "fs";
+import { UserProfileType } from "./models/UserProfileTypes";
 
 type InitialStateType = {
-  user: BaseUserModel | null;
+  userProfile: UserProfileType | null;
 };
 
 const initialState: InitialStateType = {
-  user: null,
+  userProfile: null,
 };
 
 const userProfileSlice = createSlice({
@@ -15,9 +16,14 @@ const userProfileSlice = createSlice({
   initialState: initialState,
   reducers: {
     getUserProfile: (state, action) => {
-      state.user = action.payload;
+      state.userProfile = action.payload;
+    },
+    updateUserProfile: (state, action) => {
+      state.userProfile = action.payload;
     },
   },
 });
+
+export const { getUserProfile, updateUserProfile } = userProfileSlice.actions;
 
 export default userProfileSlice.reducer;
