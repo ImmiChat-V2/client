@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Box, IconButton, Typography } from "@mui/material";
 import { FavoriteBorder, MoreHoriz, Favorite } from "@mui/icons-material/";
-import useTheme from "../../../features/theme/useTheme";
+import useTheme from "features/theme/useTheme";
 
 type PostFooter = {
   readonly id: number;
