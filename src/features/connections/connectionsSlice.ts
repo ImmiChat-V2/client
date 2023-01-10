@@ -19,19 +19,19 @@ const connectionSlice = createSlice({
   reducers: {
     getConnections: (state, action) => {
       const { data } = action.payload;
-      const connected = [];
-      const incoming = [];
-      const outgoing = [];
-      for (let connection of data) {
-        if (!connection.connected && connection.status === "sender") {
-          outgoing.push(connection.connectionInfo);
-        } else if (!connection.connected && connection.status === "receiver") {
-          incoming.push(connection.connectionInfo);
-        } else connected.push(connection.connectionInfo);
+      const [connectedArr, incomingArr, outgoingArr]: Array<
+        ConnectionUserInfo[]
+      > = [[], [], []];
+      for (const { connected, status, connectionInfo } of data) {
+        if (connected) {
+          connectedArr.push(connectionInfo);
+        } else if (status === "sender") {
+          outgoingArr.push(connectionInfo);
+        } else incomingArr.push(connectionInfo);
       }
-      state.connected = connected;
-      state.incoming = incoming;
-      state.outgoing = outgoing;
+      state.connected = connectedArr;
+      state.incoming = incomingArr;
+      state.outgoing = outgoingArr;
     },
   },
 });
