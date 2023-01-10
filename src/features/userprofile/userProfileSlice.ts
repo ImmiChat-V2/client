@@ -23,5 +23,6 @@ const userProfileSlice = createSlice({
 });
 
 export const { getUserProfile, updateUserProfile } = userProfileSlice.actions;
-
 export default userProfileSlice.reducer;
+
+export const getProfile = (state: any) => state.userProfile;
