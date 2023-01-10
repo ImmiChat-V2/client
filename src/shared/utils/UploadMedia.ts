@@ -6,13 +6,9 @@ const uploadMedia = async (files: FileList) => {
   formData.append("upload_preset", "ds2dkkvk");
 
   try {
-    const data = await Axios.post(
-      process.env.REACT_APP_CLOUDINARY_URL || "",
-      formData
-    );
-    const version = data.data.version;
-    const publicId = data.data.publicId;
-    const format = data.data.format;
+    const {
+      data: { version, publicId, format },
+    } = await Axios.post(process.env.REACT_APP_CLOUDINARY_URL || "", formData);
     const media = `v${version}/${publicId}.${format}`;
     return media;
   } catch (error) {
