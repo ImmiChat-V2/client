@@ -2,35 +2,38 @@ import { apiSlice } from "features/api/apiSlice";
 import {
   BaseCommentModel,
   UpdateCommentProps,
-  CreateCommentProps,
   DeleteCommentProps,
+  CreateCommentRequestModel,
 } from "../models/Comments.model";
 
 export const commentApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     updateComment: builder.mutation<BaseCommentModel, UpdateCommentProps>({
-      query: ({ comment_id, body }: UpdateCommentProps) => ({
+      query: ({ comment_id, body }) => ({
         url: `/comments/${comment_id}`,
         method: "PUT",
         body,
       }),
     }),
-    deleteComment: builder.mutation<BaseCommentModel, DeleteCommentProps>({
-      query: ({ comment_id, body }: DeleteCommentProps) => ({
+    deleteComment: builder.mutation<null, DeleteCommentProps>({
+      query: ({ comment_id, body }) => ({
         url: `/comments/${comment_id}`,
         method: "DELETE",
         body,
       }),
     }),
-    postComment: builder.mutation<BaseCommentModel, CreateCommentProps>({
-      query: ({ post_id, body }: CreateCommentProps) => ({
-        url: `/posts/${post_id}/comments`,
+    createComment: builder.mutation<
+      BaseCommentModel,
+      CreateCommentRequestModel
+    >({
+      query: (body) => ({
+        url: `/posts/${body.postId}/comments`,
         method: "POST",
         body,
       }),
     }),
-    getCommentsForPost: builder.query<any, any>({
-      query: (post_id: string) => ({
+    getCommentsForPost: builder.query<BaseCommentModel[], string>({
+      query: (post_id) => ({
         url: `/posts/${post_id}/comments`,
         method: "GET",
       }),
@@ -41,6 +44,6 @@ export const commentApiSlice = apiSlice.injectEndpoints({
 export const {
   useUpdateCommentMutation,
   useDeleteCommentMutation,
-  usePostCommentMutation,
+  useCreateCommentMutation,
   useGetCommentsForPostQuery,
 } = commentApiSlice;

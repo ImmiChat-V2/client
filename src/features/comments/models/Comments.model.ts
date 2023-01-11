@@ -23,11 +23,6 @@ export type UpdateCommentProps = {
   body: UpdateCommentRequestModel;
 };
 
-export type CreateCommentProps = {
-  post_id: string;
-  body: CreateCommentRequestModel;
-};
-
 export type DeleteCommentProps = {
   comment_id: string;
   body: DeleteCommentRequestModel;

@@ -6,6 +6,46 @@ interface CommentState {
   postCommentList: BaseCommentModel[];
 }
 
+const testCommentList: BaseCommentModel[] = [
+  {
+    id: 1,
+    postId: 1,
+    userId: 1,
+    content: "Comment 1",
+    media: "",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: 2,
+    postId: 1,
+    userId: 1,
+    content: "Comment 2",
+    media: "",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: 3,
+    postId: 1,
+    userId: 1,
+    content: "Comment 3",
+    media: "",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+];
+
+const testComment: BaseCommentModel = {
+  id: 3,
+  postId: 1,
+  userId: 1,
+  content: "Comment 3",
+  media: "",
+  createdAt: new Date(),
+  updatedAt: new Date(),
+};
+
 const initialState: CommentState = {
   currentComment: null,
   postCommentList: [],
@@ -38,5 +78,10 @@ const commentSlice = createSlice({
   },
 });
 
-export const {} = commentSlice.actions;
+export const { updateComment, deleteComment, postComment, getCommentsForPost } =
+  commentSlice.actions;
 export default commentSlice.reducer;
+
+export const getCurrentPostComments = (state: any) =>
+  state.comments.postCommentList;
+export const getCommentView = (state: any) => state.comments.currentComment;
