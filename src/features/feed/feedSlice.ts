@@ -2,16 +2,16 @@ import { createSlice } from "@reduxjs/toolkit";
 import { FeedPostResponseModel } from "./models/feed.model";
 
 type InitialStateType = {
-  feedPost: FeedPostResponseModel[] | null;
+  feedPost: FeedPostResponseModel[];
 };
 
 const initialState: InitialStateType = {
-  feedPost: null,
+  feedPost: [],
 };
 
 const feedSlice = createSlice({
   name: "feed",
-  initialState: initialState,
+  initialState,
   reducers: {
     getFeedPosts: (state, action) => {
       state.feedPost = action.payload;

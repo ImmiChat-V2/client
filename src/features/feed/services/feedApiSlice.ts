@@ -5,7 +5,7 @@ export const feedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getPosts: builder.query<FeedPostResponseModel[], null>({
       query: () => ({
-        url: "/posts",
+        url: "/feed",
         method: "GET",
       }),
     }),
