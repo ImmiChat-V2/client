@@ -13,16 +13,13 @@ const userProfileSlice = createSlice({
   name: "userprofile",
   initialState: initialState,
   reducers: {
-    getUserProfile: (state, action) => {
-      state.userProfile = action.payload;
-    },
-    updateUserProfile: (state, action) => {
+    setUserProfile: (state, action) => {
       state.userProfile = action.payload;
     },
   },
 });
 
-export const { getUserProfile, updateUserProfile } = userProfileSlice.actions;
+export const { setUserProfile } = userProfileSlice.actions;
 export default userProfileSlice.reducer;
 
 export const getProfile = (state: any) => state.userProfile;
