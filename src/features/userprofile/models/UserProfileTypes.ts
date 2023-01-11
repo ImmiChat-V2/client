@@ -7,6 +7,9 @@ export type UserProfileType = {
   readonly dateOfBirth?: Date;
   readonly language: string;
   readonly coverPic?: string;
+};
+
+export type UserProfileInfoType = UserProfileType & {
   readonly friends: ShortUserInfoType[];
 };
 
