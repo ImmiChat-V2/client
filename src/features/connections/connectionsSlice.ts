@@ -35,14 +35,14 @@ const connectionSlice = createSlice({
     },
     handleAcceptConnection: (state, action) => {
       const { senderId } = action.payload.data;
-      const acceptedConnectionInfo = state.incoming.find(
+      const [acceptedConnectionInfo] = state.incoming.filter(
         (connection) => connection.id === senderId
       );
-      if (acceptedConnectionInfo) state.connected.push(acceptedConnectionInfo);
       const newIncoming = state.incoming.filter(
         (connection) => connection.id !== senderId
       );
       state.incoming = newIncoming;
+      state.connected.push(acceptedConnectionInfo);
     },
   },
 });
