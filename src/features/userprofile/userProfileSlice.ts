@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { UserProfileType } from "./models/UserProfileTypes";
+import { UserProfileType } from "./models/UserProfileModel";
 
 type InitialStateType = {
   userProfile: UserProfileType | null;
@@ -13,13 +13,13 @@ const userProfileSlice = createSlice({
   name: "userProfile",
   initialState: initialState,
   reducers: {
-    setUserProfile: (state, action) => {
+    handleUserProfile: (state, action) => {
       state.userProfile = action.payload;
     },
   },
 });
 
-export const { setUserProfile } = userProfileSlice.actions;
+export const { handleUserProfile } = userProfileSlice.actions;
 export default userProfileSlice.reducer;
 
 export const getProfile = (state: any) => state.userProfile;
