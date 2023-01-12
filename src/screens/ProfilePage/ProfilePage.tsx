@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { ProfileCard } from "features/userprofile/components/ProfileCard";
+
 import { mockUserData } from "shared/utils";
-import useTheme from "features/theme/useTheme";
 
 const ProfilePage = () => {
   const { themeColor } = useTheme();
@@ -15,6 +15,9 @@ const ProfilePage = () => {
         flexDirection: "row",
       }}
     >
+      <Box sx={{ width: "250px" }}>
+        <NavSidebar theme={themeColor} />
+      </Box>
       <ProfileCard
         user={mockUserData}
         theme={themeColor}
