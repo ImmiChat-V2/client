@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ConnectionUserInfo } from "./models/Connections.model";
+import { removeConnectionFromList } from "./utils/connectionUtils";
 
 type initialStateType = {
   connected: ConnectionUserInfo[];
@@ -38,9 +39,7 @@ const connectionSlice = createSlice({
       const [acceptedConnectionInfo] = state.incoming.filter(
         (connection) => connection.id === senderId
       );
-      const newIncoming = state.incoming.filter(
-        (connection) => connection.id !== senderId
-      );
+      const newIncoming = removeConnectionFromList(state.incoming, senderId);
       state.incoming = newIncoming;
       state.connected.push(acceptedConnectionInfo);
     },
@@ -48,11 +47,34 @@ const connectionSlice = createSlice({
       const { data } = action.payload;
       state.outgoing.push(data);
     },
+    handleRemoveConnection: (state, action) => {
+      const { status, id } = action.payload.data;
+      switch (status) {
+        case "connected":
+          const connectedArr = removeConnectionFromList(state.connected, id);
+          state.connected = connectedArr;
+          break;
+        case "outgoing":
+          const outgoingArr = removeConnectionFromList(state.outgoing, id);
+          state.outgoing = outgoingArr;
+          break;
+        case "incoming":
+          const incomingArr = removeConnectionFromList(state.incoming, id);
+          state.incoming = incomingArr;
+          break;
+        default:
+          break;
+      }
+    },
   },
 });
 
-export const { handleGetConnections, handleAcceptConnection } =
-  connectionSlice.actions;
+export const {
+  handleGetConnections,
+  handleAcceptConnection,
+  handleSendConnection,
+  handleRemoveConnection,
+} = connectionSlice.actions;
 export default connectionSlice.reducer;
 
 export const getActiveConnections = (state: any) => state.connected;
