@@ -13,12 +13,12 @@ const feedSlice = createSlice({
   name: "feed",
   initialState,
   reducers: {
-    getPosts: (state, action) => {
+    handlePosts: (state, action) => {
       state.posts = action.payload;
     },
   },
 });
 
-export const { getPosts } = feedSlice.actions;
+export const { handlePosts } = feedSlice.actions;
 export default feedSlice.reducer;
 export const getFeed = (state: any) => state.posts;
