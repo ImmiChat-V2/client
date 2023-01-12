@@ -17,7 +17,7 @@ const connectionSlice = createSlice({
   name: "connections",
   initialState: initialState,
   reducers: {
-    getConnections: (state, action) => {
+    handleGetConnections: (state, action) => {
       const { data } = action.payload;
       const [connectedArr, incomingArr, outgoingArr]: Array<
         ConnectionUserInfo[]
@@ -33,10 +33,22 @@ const connectionSlice = createSlice({
       state.incoming = incomingArr;
       state.outgoing = outgoingArr;
     },
+    handleAcceptConnection: (state, action) => {
+      const { senderId } = action.payload.data;
+      const [acceptedConnectionInfo] = state.incoming.filter(
+        (connection) => connection.id === senderId
+      );
+      const newIncoming = state.incoming.filter(
+        (connection) => connection.id !== senderId
+      );
+      state.incoming = newIncoming;
+      state.connected.push(acceptedConnectionInfo);
+    },
   },
 });
 
-export const { getConnections } = connectionSlice.actions;
+export const { handleGetConnections, handleAcceptConnection } =
+  connectionSlice.actions;
 export default connectionSlice.reducer;
 
 export const getActiveConnections = (state: any) => state.connected;
