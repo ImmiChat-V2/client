@@ -1,24 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { FeedPostResponseModel } from "./models/feed.model";
+import { PostModel } from "./models/feed.model";
 
 type InitialStateType = {
-  feedPost: FeedPostResponseModel[];
+  posts: PostModel[];
 };
 
 const initialState: InitialStateType = {
-  feedPost: [],
+  posts: [],
 };
 
 const feedSlice = createSlice({
   name: "feed",
   initialState,
   reducers: {
-    getFeedPosts: (state, action) => {
-      state.feedPost = action.payload;
+    getPosts: (state, action) => {
+      state.posts = action.payload;
     },
   },
 });
 
-export const { getFeedPosts } = feedSlice.actions;
+export const { getPosts } = feedSlice.actions;
 export default feedSlice.reducer;
-export const getFeed = (state: any) => state.feedPost;
+export const getFeed = (state: any) => state.posts;
