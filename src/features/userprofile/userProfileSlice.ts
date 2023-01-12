@@ -10,7 +10,7 @@ const initialState: InitialStateType = {
 };
 
 const userProfileSlice = createSlice({
-  name: "userprofile",
+  name: "userProfile",
   initialState: initialState,
   reducers: {
     setUserProfile: (state, action) => {
