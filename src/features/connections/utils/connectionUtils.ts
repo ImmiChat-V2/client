@@ -4,3 +4,4 @@ export const removeConnectionFromList = (arr:ConnectionUserInfo[], id:number):Co
     const output = arr.filter(connection => connection.id !== id); 
     return output; 
 }
+
