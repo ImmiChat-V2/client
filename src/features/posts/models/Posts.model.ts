@@ -4,8 +4,8 @@ export type BasePostModel = {
   readonly userId: number;
   readonly content: string;
   readonly categoryName: string;
-  // readonly createdAt: Date;
-  // readonly updatedAt: Date;
+  readonly createdAt: Date;
+  readonly updatedAt: Date;
 };
 
 export type BasePostRequestModel = Pick<
