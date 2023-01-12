@@ -44,6 +44,10 @@ const connectionSlice = createSlice({
       state.incoming = newIncoming;
       state.connected.push(acceptedConnectionInfo);
     },
+    handleSendConnection: (state, action) => {
+      const { data } = action.payload;
+      state.outgoing.push(data);
+    },
   },
 });
 
