@@ -4,6 +4,7 @@ import authReducer from "features/auth/authSlice";
 import darkModeSlice from "features/theme/darkModeSlice";
 import connectionsSlice from "features/connections/connectionsSlice";
 import userProfileSlice from "features/userprofile/userProfileSlice";
+import commentSlice from "features/posts/commentSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     darkMode: darkModeSlice,
     connections: connectionsSlice,
     userProfile: userProfileSlice,
+    comments: commentSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
