@@ -28,21 +28,23 @@ const NavSidebar = ({ theme }: NavSidebarProps) => {
       name: "Feed",
       icon: (
         <RssFeedRounded
-          sx={{ color: theme.color, fontSize: "18px", mb: "1px" }}
+          sx={{ color: theme.color, fontSize: "18px", m: "0 7px 1px 0" }}
         />
       ),
     },
     {
       name: "Chats",
       icon: (
-        <MailRounded sx={{ color: theme.color, fontSize: "18px", mb: "1px" }} />
+        <MailRounded
+          sx={{ color: theme.color, fontSize: "18px", m: "0 7px 1px 0" }}
+        />
       ),
     },
     {
       name: "Bookmarks",
       icon: (
         <BookmarkRounded
-          sx={{ color: theme.color, fontSize: "16px", mb: "1px" }}
+          sx={{ color: theme.color, fontSize: "16px", m: "0 9px 1px 0" }}
         />
       ),
     },
@@ -50,7 +52,7 @@ const NavSidebar = ({ theme }: NavSidebarProps) => {
       name: "Questions",
       icon: (
         <LiveHelpRounded
-          sx={{ color: theme.color, fontSize: "14px", mb: "1px" }}
+          sx={{ color: theme.color, fontSize: "14px", m: "0 11px 1px 0" }}
         />
       ),
     },
@@ -78,7 +80,7 @@ const NavSidebar = ({ theme }: NavSidebarProps) => {
               key={index}
               sx={{
                 width: "100%",
-                pl: "30%",
+                pl: "20%",
                 minHeight: "30px",
               }}
             >
@@ -91,9 +93,7 @@ const NavSidebar = ({ theme }: NavSidebarProps) => {
                 }}
               >
                 <>{icon}</>
-                <Typography
-                  sx={{ ml: "10px", color: theme.color, display: "flex" }}
-                >
+                <Typography sx={{ color: theme.color, display: "flex" }}>
                   {name}
                 </Typography>
               </Box>
