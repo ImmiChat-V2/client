@@ -42,5 +42,17 @@ export const postApiSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    likePost: builder.query<null, string>({
+      query: (postId) => ({
+        url: `/posts/${postId}/likes`,
+        method: "POST",
+      }),
+    }),
+    deleteLike: builder.query<null, string>({
+      query: (postId) => ({
+        url: `/posts/${postId}/likes`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
