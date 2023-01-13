@@ -7,6 +7,8 @@ export type UserProfileType = {
   readonly dateOfBirth?: Date;
   readonly language: string;
   readonly coverPic?: string;
+  readonly updatedAt: Date;
+  readonly createdAt: Date;
 };
 
 export type UserProfileInfoType = UserProfileType & {
@@ -17,8 +19,3 @@ export type ShortUserInfoType = Pick<
   UserProfileType,
   "id" | "firstName" | "lastName" | "profilePic"
 >;
-
-export type UpdateUserProfileProps = {
-  userId: string;
-  body: UserProfileType;
-};

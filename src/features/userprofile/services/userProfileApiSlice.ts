@@ -1,7 +1,4 @@
-import {
-  UserProfileType,
-  UpdateUserProfileProps,
-} from "../models/UserProfileTypes";
+import { UserProfileType } from "../models/UserProfileModel";
 import { apiSlice } from "features/api/apiSlice";
 
 export const userProfileApiSlice = apiSlice.injectEndpoints({
@@ -12,12 +9,9 @@ export const userProfileApiSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
-    updateUserProfile: builder.mutation<
-      UserProfileType,
-      UpdateUserProfileProps
-    >({
-      query: ({ userId, body }: UpdateUserProfileProps) => ({
-        url: `/users/${userId}`,
+    updateUserProfile: builder.mutation<UserProfileType, UserProfileType>({
+      query: (body) => ({
+        url: `/users/${body.id}`,
         method: "PUT",
         body,
       }),
