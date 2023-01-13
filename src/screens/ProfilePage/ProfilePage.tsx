@@ -1,7 +1,6 @@
 import { Box } from "@mui/material";
-import useTheme from "features/theme/useTheme";
-import { NavSidebar } from "shared/components/NavSidebar";
-import { ProfileCard } from "shared/components/ProfileCard";
+import { ProfileCard } from "features/userprofile/components/ProfileCard";
+
 import { mockUserData } from "shared/utils";
 
 const ProfilePage = () => {
