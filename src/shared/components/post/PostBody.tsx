@@ -1,14 +1,8 @@
 import { Box, Typography } from "@mui/material";
 import useTheme from "features/theme/useTheme";
+import { BasePostBodyType } from "shared/types";
 
-type PostBody = {
-  readonly id: number;
-  readonly userId: number;
-  readonly content: string;
-  readonly media?: string;
-};
-
-function PostBody({ content, media }: PostBody) {
+function PostBody({ content, media }: BasePostBodyType) {
   const {
     themeColor: { color },
   } = useTheme();
