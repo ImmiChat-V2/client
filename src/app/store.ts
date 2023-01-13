@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { apiSlice } from "../features/api/apiSlice";
-import authReducer from "../features/auth/authSlice";
-import darkModeSlice from "../features/theme/darkModeSlice";
+import { apiSlice } from "features/api/apiSlice";
+import authReducer from "features/auth/authSlice";
+import darkModeSlice from "features/theme/darkModeSlice";
 import connectionsSlice from "features/connections/connectionsSlice";
 import feedSlice from "features/feed/feedSlice";
+import userProfileSlice from "features/userprofile/userProfileSlice";
+
 export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
@@ -11,6 +13,7 @@ export const store = configureStore({
     darkMode: darkModeSlice,
     connections: connectionsSlice,
     feed: feedSlice,
+    userProfile: userProfileSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
