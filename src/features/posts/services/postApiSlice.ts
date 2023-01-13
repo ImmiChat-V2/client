@@ -2,7 +2,7 @@ import { apiSlice } from "features/api/apiSlice";
 import {
   BasePostModel,
   BasePostRequestModel,
-  PostIdBodyProps,
+  UpdatePostRequestModel,
 } from "../models/Posts.model";
 
 export const postApiSlice = apiSlice.injectEndpoints({
@@ -26,7 +26,7 @@ export const postApiSlice = apiSlice.injectEndpoints({
         body,
       }),
     }),
-    updatePost: builder.mutation<BasePostModel, PostIdBodyProps>({
+    updatePost: builder.mutation<BasePostModel, UpdatePostRequestModel>({
       query: ({ postId, body }) => ({
         url: `/posts/${postId}`,
         method: "PUT",
