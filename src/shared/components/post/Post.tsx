@@ -3,17 +3,7 @@ import PostTop from "./PostTop";
 import PostBody from "./PostBody";
 import PostFooter from "./PostFooter";
 import useTheme from "features/theme/useTheme";
-
-type BasePost = {
-  readonly id: number;
-  readonly userId: number;
-  readonly profilePic?: string;
-  readonly firstName: string;
-  readonly lastName: string;
-  readonly timestamp?: Date,
-  readonly content: string;
-  readonly media?: string;
-};
+import { BasePostType } from "shared/types";
 
 function Post({
   id,
@@ -24,7 +14,7 @@ function Post({
   timestamp,
   content,
   media,
-}: BasePost) {
+}: BasePostType) {
   const {
     themeColor: { backgroundColor },
   } = useTheme();
@@ -53,7 +43,7 @@ function Post({
           profilePic={profilePic}
           firstName={firstName}
           lastName={lastName}
-          timeStamp={timestamp}
+          timestamp={timestamp}
         />
         <PostBody id={id} userId={userId} content={content} media={media} />
         <hr style={{ marginTop: "20px" }}></hr>

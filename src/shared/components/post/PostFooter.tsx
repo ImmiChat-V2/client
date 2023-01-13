@@ -2,15 +2,11 @@ import { useState } from "react";
 import { Box, IconButton, Typography } from "@mui/material";
 import { FavoriteBorder, MoreHoriz, Favorite } from "@mui/icons-material/";
 import useTheme from "features/theme/useTheme";
+import { BasePostFooterType } from "shared/types";
 
-type PostFooter = {
-  readonly id: number;
-  readonly userId: number;
-};
-
-function PostFooter({ id, userId }: PostFooter) {
+function PostFooter({ id, userId }: BasePostFooterType) {
   const {
-    themeColor: { color },
+    themeColor: { color, navButtons },
   } = useTheme();
   const [likeCount, setLikeCount] = useState(1);
   const [showComment, setShowComment] = useState(false);
@@ -41,7 +37,7 @@ function PostFooter({ id, userId }: PostFooter) {
           <IconButton
             aria-label="like-post"
             sx={{
-              backgroundColor: "#ffabab",
+              backgroundColor: navButtons,
               "&:hover": {
                 backgroundColor: "#ffabab",
               },
@@ -87,10 +83,7 @@ function PostFooter({ id, userId }: PostFooter) {
           <IconButton
             aria-label="comment-post"
             sx={{
-              backgroundColor: "#F0F0F0",
-              "&:hover": {
-                backgroundColor: "#F0F0F0",
-              },
+              backgroundColor: navButtons,
               borderRadius: "50px",
               height: "35px",
               width: "35px",
@@ -102,7 +95,7 @@ function PostFooter({ id, userId }: PostFooter) {
               className="post-comment-icon"
               sx={{
                 cursor: "pointer",
-                color: "#333333",
+                color,
                 mt: "3px",
                 width: "40px",
               }}

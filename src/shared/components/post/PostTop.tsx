@@ -1,16 +1,14 @@
 import { useState } from "react";
-import { Box, IconButton } from "@mui/material";
-import { PersonAdd, PersonRemoveAlt1 } from "@mui/icons-material/";
+import { Box, IconButton, Menu, MenuItem } from "@mui/material";
+import { MoreVert, Delete, Edit, Share } from "@mui/icons-material/";
 import { UserProfileWidget } from "shared/components";
+import { BasePostTopType } from "shared/types";
+import useTheme from "features/theme/useTheme";
 
-type PostTop = {
-  readonly id: number;
-  readonly userId: number;
-  readonly profilePic?: string;
-  readonly firstName: string;
-  readonly lastName: string;
-  readonly timeStamp?: Date;
-};
+const options = [
+  { title: "Edit", icon: Edit },
+  { title: "Share", icon: Share },
+];
 
 function PostTop({
   id,
@@ -49,31 +47,56 @@ function PostTop({
           }}
         >
           <UserProfileWidget
-            firstName="Fake"
-            lastName="User"
+            firstName={firstName}
+            lastName={lastName}
             boxProps={{ cursor: "pointer" }}
           />
           <Box component="span" sx={{ display: "flex", cursor: "pointer" }}>
+            <IconButton sx={{ backgroundColor: navButtons, mr: "7px" }}>
+              <Delete sx={{ color }} />
+            </IconButton>
             <IconButton
-              onClick={handleFriendClick}
-              aria-label="add-user"
-              sx={{
-                backgroundColor: isFriend ? "#ffabab" : "#c1ffc1",
-                "&:hover": {
-                  backgroundColor: isFriend ? "#ffabab" : "#c1ffc1",
+              aria-label="more"
+              id="long-button"
+              aria-controls={open ? "long-menu" : undefined}
+              aria-expanded={open ? "true" : undefined}
+              aria-haspopup="true"
+              onClick={handleOpen}
+              sx={{ backgroundColor: navButtons }}
+            >
+              <MoreVert sx={{ color }} />
+            </IconButton>
+
+            <Menu
+              id="long-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              PaperProps={{
+                style: {
+                  backgroundColor: navButtons,
+                  width: "14ch",
+                  color,
                 },
-                borderRadius: "50px",
-                height: "40px",
-                width: "40px",
-                pt: "5px",
               }}
             >
-              {isFriend ? (
-                <PersonRemoveAlt1 sx={{ color: "#D22B2B", ml: "2px" }} />
-              ) : (
-                <PersonAdd sx={{ color: "#228B22", mr: "2px" }} />
-              )}
-            </IconButton>
+              {options.map((option) => (
+                <MenuItem
+                  key={option.title}
+                  selected={option.title === "Pyxis"}
+                  onClick={handleClose}
+                >
+                  <Box component="div" sx={{ width: "100%" }}>
+                    <Box sx={{ display: "flex" }}>
+                      <Box sx={{ display: "flex", mr: "7px" }}>
+                        {<option.icon />}
+                      </Box>
+                      {option.title}
+                    </Box>
+                  </Box>
+                </MenuItem>
+              ))}
+            </Menu>
           </Box>
         </Box>
       </Box>
