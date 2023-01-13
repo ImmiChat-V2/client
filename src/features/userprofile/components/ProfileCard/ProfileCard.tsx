@@ -9,17 +9,17 @@ import {
   AvatarGroup,
 } from "@mui/material";
 import { CameraAlt, Settings } from "@mui/icons-material";
-import { UserProfileType } from "features/userprofile/models/UserProfileModel";
+import { UserProfileInfoType } from "features/userprofile/models/UserProfileModel";
 import { getAvatarProps } from "shared/utils";
 
 type PropType = {
-  user: UserProfileType;
+  user: UserProfileInfoType;
   isCurrentUser: boolean;
   theme: any;
 };
 
 const ProfileCard = ({ user, theme, isCurrentUser }: PropType) => {
-  const { id, firstName, lastName, profilePic, coverPic, friends } = user;
+  const { firstName, lastName, profilePic, coverPic, friends } = user;
   const userName = firstName + " " + lastName;
   const friendCount = friends.length;
 

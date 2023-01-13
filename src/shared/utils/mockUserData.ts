@@ -1,4 +1,4 @@
-import { UserProfileType } from "shared/types";
+import { UserProfileInfoType } from "features/userprofile/models/UserProfileModel";
 
 const mockFriendList = [
   {
@@ -74,7 +74,7 @@ const mockFriendList = [
     lastName: "Food",
   },
 ];
-const mockUserData: UserProfileType = {
+const mockUserData: UserProfileInfoType = {
   id: 1,
   email: "fdsjsdf@mfds.com",
   firstName: "Extam",
