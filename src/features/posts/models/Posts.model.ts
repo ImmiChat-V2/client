@@ -6,11 +6,10 @@ export type BasePostModel = {
   readonly categoryName: string;
 };
 
-export type UpdatePostRequestModel = {
-  readonly content?: string;
-  readonly media?: string;
-  readonly categoryName?: string;
-};
+export type UpdatePostRequestModel = Pick<
+  BasePostModel,
+  "content" | "media" | "categoryName"
+>;
 
 export type CreatePostRequestModel = Omit<BasePostModel, "id">;
 export type DeletePostRequestModel = Pick<BasePostModel, "id" | "userId">;
