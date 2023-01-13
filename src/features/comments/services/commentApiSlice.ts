@@ -10,15 +10,15 @@ import {
 export const commentApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     updateComment: builder.mutation<BaseCommentModel, UpdateCommentProps>({
-      query: ({ comment_id, body }) => ({
-        url: `/comments/${comment_id}`,
+      query: ({ commentId, body }) => ({
+        url: `/comments/${commentId}`,
         method: "PUT",
         body,
       }),
     }),
     deleteComment: builder.mutation<null, DeleteCommentProps>({
-      query: ({ comment_id, body }) => ({
-        url: `/comments/${comment_id}`,
+      query: ({ commentId, body }) => ({
+        url: `/comments/${commentId}`,
         method: "DELETE",
         body,
       }),
