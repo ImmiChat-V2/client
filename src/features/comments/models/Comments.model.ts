@@ -1,3 +1,5 @@
+import { BaseUserModel } from "features/auth/models/User.model";
+
 export type BaseCommentModel = {
   readonly id: number;
   readonly userId: number;
@@ -16,6 +18,11 @@ export type DeleteCommentRequestModel = Pick<BaseCommentModel, "userId">;
 export type CreateCommentRequestModel = Omit<
   BaseCommentModel,
   "id" | "createdAt" | "updatedAt"
+>;
+
+export type UsersLikedCommentModel = Pick<
+  BaseUserModel,
+  "firstName" | "lastName" | "profilePic"
 >;
 
 export type UpdateCommentProps = {
