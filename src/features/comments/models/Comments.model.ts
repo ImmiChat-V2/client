@@ -26,11 +26,11 @@ export type UsersLikedCommentModel = Pick<
 >;
 
 export type UpdateCommentProps = {
-  comment_id: string;
+  commentId: string;
   body: UpdateCommentRequestModel;
 };
 
 export type DeleteCommentProps = {
-  comment_id: string;
+  commentId: string;
   body: DeleteCommentRequestModel;
 };
