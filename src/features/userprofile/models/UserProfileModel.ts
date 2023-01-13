@@ -7,8 +7,8 @@ export type UserProfileType = {
   readonly dateOfBirth?: Date;
   readonly language: string;
   readonly coverPic?: string;
-  readonly updatedAt: Date;
-  readonly createdAt: Date;
+  readonly updatedAt?: Date;
+  readonly createdAt?: Date;
 };
 
 export type UserProfileInfoType = UserProfileType & {
