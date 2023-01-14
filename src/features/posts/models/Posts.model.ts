@@ -20,6 +20,6 @@ export type LikePostModel = Pick<BasePostModel, "id" | "userId">;
 export type DeletePostLikeModel = Pick<BasePostModel, "id" | "userId">;
 
 export type UpdatePostRequestModel = {
-  postId: string;
+  postId: number;
   body: BasePostRequestModel;
 };
