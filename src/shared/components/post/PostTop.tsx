@@ -88,7 +88,6 @@ function PostTop({
               {options.map((option) => (
                 <MenuItem
                   key={option.title}
-                  selected={option.title === "Pyxis"}
                   onClick={handleClose}
                 >
                   <Box component="div" sx={{ width: "100%" }}>

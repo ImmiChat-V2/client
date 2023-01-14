@@ -33,8 +33,7 @@ function Post({
       <Box
         component="div"
         sx={{
-          mr: "20px",
-          ml: "20px",
+          mx: '20px'
         }}
       >
         <PostTop
