@@ -19,3 +19,8 @@ export type RegisterUserModel = Omit<
   BaseUserModel,
   "id" | "createdAt" | "updatedAt"
 >;
+
+export type UsersLikedPostModel = Pick<
+  BaseUserModel,
+  "firstName" | "lastName" | "profilePic"
+>;

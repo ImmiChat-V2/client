@@ -1,8 +1,9 @@
 import { apiSlice } from "features/api/apiSlice";
+import { UsersLikedPostModel } from "features/auth/models/User.model";
 import {
   BasePostModel,
   BasePostRequestModel,
-  PostIdBodyProps,
+  UpdatePostRequestModel,
 } from "../models/Posts.model";
 
 export const postApiSlice = apiSlice.injectEndpoints({
@@ -26,7 +27,7 @@ export const postApiSlice = apiSlice.injectEndpoints({
         body,
       }),
     }),
-    updatePost: builder.mutation<BasePostModel, PostIdBodyProps>({
+    updatePost: builder.mutation<BasePostModel, UpdatePostRequestModel>({
       query: ({ postId, body }) => ({
         url: `/posts/${postId}`,
         method: "PUT",
@@ -39,7 +40,7 @@ export const postApiSlice = apiSlice.injectEndpoints({
         method: "DELETE",
       }),
     }),
-    getLikesFromPost: builder.query<any, string>({
+    getLikesFromPost: builder.query<UsersLikedPostModel, string>({
       query: (postId) => ({
         url: `/posts/${postId}/likes`,
         method: "GET",
@@ -51,7 +52,7 @@ export const postApiSlice = apiSlice.injectEndpoints({
         method: "POST",
       }),
     }),
-    deleteLike: builder.mutation<string, string>({
+    deletePostLike: builder.mutation<string, string>({
       query: (postId) => ({
         url: `/posts/${postId}/likes`,
         method: "DELETE",
@@ -68,5 +69,5 @@ export const {
   useDeletePostMutation,
   useGetLikesFromPostQuery,
   useLikePostMutation,
-  useDeleteLikeMutation,
+  useDeletePostLikeMutation,
 } = postApiSlice;
