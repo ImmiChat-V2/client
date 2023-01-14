@@ -45,13 +45,13 @@ export const commentApiSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
-    likeComment: builder.query<string, string>({
+    likeComment: builder.mutation<string, string>({
       query: (commentId) => ({
         url: `/comments/${commentId}/likes`,
         method: "POST",
       }),
     }),
-    deleteCommentLike: builder.query<string, string>({
+    deleteCommentLike: builder.mutation<string, string>({
       query: (commentId) => ({
         url: `/comments/${commentId}/likes`,
         method: "DELETE",
@@ -65,4 +65,7 @@ export const {
   useDeleteCommentMutation,
   useCreateCommentMutation,
   useGetCommentsForPostQuery,
+  useGetLikesFromCommentQuery,
+  useLikeCommentMutation,
+  useDeleteCommentLikeMutation,
 } = commentApiSlice;
