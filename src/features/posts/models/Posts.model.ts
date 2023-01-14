@@ -4,11 +4,11 @@ export type BasePostModel = {
   readonly userId: number;
   readonly content: string;
   readonly categoryName: string;
-  readonly createdAt: Date;
-  readonly updatedAt: Date;
+  // readonly createdAt: Date;
+  // readonly updatedAt: Date;
 };
 
-export type UpdatePostRequestModel = Pick<
+export type BasePostRequestModel = Pick<
   BasePostModel,
   "content" | "media" | "categoryName"
 >;
@@ -21,5 +21,5 @@ export type DeletePostLikeModel = Pick<BasePostModel, "id" | "userId">;
 
 export type PostIdBodyProps = {
   postId: string;
-  body: BasePostModel;
+  body: BasePostRequestModel;
 };

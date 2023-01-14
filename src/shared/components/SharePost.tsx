@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useForm } from "../hooks";
-import { BaseCreatePostmodel } from "../types/SharePostTypes";
+import { BasePostRequestModel } from "features/posts/models/Posts.model";
 
 type SharePostProps = {
   readonly profilePic: string;
@@ -20,7 +20,7 @@ type SharePostProps = {
 };
 
 const SharePost = ({ profilePic, sx, onClick, isPost }: SharePostProps) => {
-  const { form, handleChange } = useForm<BaseCreatePostmodel>({
+  const { form, handleChange } = useForm<BasePostRequestModel>({
     media: "",
     content: "",
     categoryName: "",
