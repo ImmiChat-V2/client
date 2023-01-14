@@ -7,16 +7,6 @@ import { useForm } from "shared/hooks";
 import { useLoginMutation } from "../services/authApiSlice";
 import { loginUser } from "../authSlice";
 import { useCreatePostMutation } from "features/posts/services/postApiSlice";
-import { CreatePostRequestModel } from "features/posts/models/Posts.model";
-
-const mockPost: CreatePostRequestModel = {
-  media: "",
-  userId: 2,
-  content: "strang",
-  categoryName: "Homes",
-  createdAt: new Date(),
-  updatedAt: new Date(),
-};
 
 const LoginForm = () => {
   const {
