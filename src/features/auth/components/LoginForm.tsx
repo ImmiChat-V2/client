@@ -6,12 +6,16 @@ import { LoginUserModel } from "../models/User.model";
 import { useForm } from "shared/hooks";
 import { useLoginMutation } from "../services/authApiSlice";
 import { loginUser } from "../authSlice";
+import { useCreatePostMutation } from "features/posts/services/postApiSlice";
 
 const LoginForm = () => {
   const {
     form: { email, password },
     handleChange,
   } = useForm<LoginUserModel>({ email: "", password: "" });
+
+  const [createPost] = useCreatePostMutation();
+  console.log(createPost);
   const [login, { data, isSuccess }] = useLoginMutation();
   const dispatch = useDispatch();
   const handleLogin = async (event: FormEvent) => {
