@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Box, IconButton, Menu, MenuItem } from "@mui/material";
 import { MoreVert, Delete, Edit, Share } from "@mui/icons-material/";
 import { UserProfileWidget } from "shared/components";
-import { BasePostTopType } from "shared/types";
+import { BasePostTopPropType } from "features/posts/models/Posts.model";
 import useTheme from "features/theme/useTheme";
 
 const options = [
@@ -17,7 +17,7 @@ function PostTop({
   firstName,
   lastName,
   timestamp,
-}: BasePostTopType) {
+}: BasePostTopPropType) {
   const {
     themeColor: { color, navButtons },
   } = useTheme();
@@ -86,10 +86,7 @@ function PostTop({
               }}
             >
               {options.map((option) => (
-                <MenuItem
-                  key={option.title}
-                  onClick={handleClose}
-                >
+                <MenuItem key={option.title} onClick={handleClose}>
                   <Box component="div" sx={{ width: "100%" }}>
                     <Box sx={{ display: "flex" }}>
                       <Box sx={{ display: "flex", mr: "7px" }}>

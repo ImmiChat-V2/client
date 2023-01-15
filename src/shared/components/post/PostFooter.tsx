@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Box, IconButton, Typography } from "@mui/material";
 import { FavoriteBorder, MoreHoriz, Favorite } from "@mui/icons-material/";
 import useTheme from "features/theme/useTheme";
-import { BasePostFooterType } from "shared/types";
+import { BasePostFooterPropType } from "features/posts/models/Posts.model";
 
-function PostFooter({ id, userId }: BasePostFooterType) {
+function PostFooter({ id, userId }: BasePostFooterPropType) {
   const {
     themeColor: { color, navButtons },
   } = useTheme();
@@ -69,16 +69,16 @@ function PostFooter({ id, userId }: BasePostFooterType) {
             )}
           </IconButton>
           {likeCount === 1 ? (
-            <Typography sx={{color}}>{likeCount} Like</Typography>
+            <Typography sx={{ color }}>{likeCount} Like</Typography>
           ) : (
-            <Typography sx={{color}}>{likeCount} Likes</Typography>
+            <Typography sx={{ color }}>{likeCount} Likes</Typography>
           )}
         </Box>
         <Box component="span" sx={{ display: "flex", alignItems: "center" }}>
           {commentCount === 1 ? (
-            <Typography sx={{color}}>{commentCount} Comment</Typography>
+            <Typography sx={{ color }}>{commentCount} Comment</Typography>
           ) : (
-            <Typography sx={{color}}>{commentCount} Comments</Typography>
+            <Typography sx={{ color }}>{commentCount} Comments</Typography>
           )}
           <IconButton
             aria-label="comment-post"
