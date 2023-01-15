@@ -6,7 +6,6 @@ import { LoginUserModel } from "../models/User.model";
 import { useForm } from "shared/hooks";
 import { useLoginMutation } from "../services/authApiSlice";
 import { loginUser } from "../authSlice";
-import { useCreatePostMutation } from "features/posts/services/postApiSlice";
 
 const LoginForm = () => {
   const {
