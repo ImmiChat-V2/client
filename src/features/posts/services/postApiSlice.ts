@@ -1,22 +1,25 @@
 import { apiSlice } from "features/api/apiSlice";
-import { BasePostModel } from "shared/types";
-import { PostIdBodyProps } from "../models/Posts.model";
+import {
+  BasePostModel,
+  BasePostRequestModel,
+  PostIdBodyProps,
+} from "../models/Posts.model";
 
 export const postApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getPosts: builder.query<BasePostModel, null>({
       query: () => ({
-        url: "/posts/",
+        url: "/posts",
         method: "GET",
       }),
     }),
     getSinglePost: builder.query<BasePostModel, string>({
       query: (postId) => ({
-        url: `/post/${postId}`,
+        url: `/posts/${postId}`,
         method: "GET",
       }),
     }),
-    createPost: builder.mutation<BasePostModel, BasePostModel>({
+    createPost: builder.mutation<BasePostModel, BasePostRequestModel>({
       query: (body) => ({
         url: "/posts",
         method: "POST",
