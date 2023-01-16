@@ -44,29 +44,19 @@ const BaseComment = () => {
   const postId = 5;
   const media = "";
   const content = "strangalanga";
-  const createdAt = Date();
+  const createdAt = new Date();
+  const month = createdAt.getMonth() + 1;
+  const year = createdAt.getFullYear();
+  const day = createdAt.getDate();
+  const hour = createdAt.getHours();
+  const minutes = createdAt.getMinutes();
+  const seconds = createdAt.getSeconds();
+  const datetime = `${hour}:${minutes}:${seconds} ${month}/${day}/${year}`;
   const updatedAt = new Date();
-  const isUser: boolean = true;
   const firstName = "john";
   const lastName = "son";
   const likes = 20;
   const { themeColor } = useTheme();
-  const isUserStylingProps = {
-    bgcolor: themeColor.backgroundColor,
-    color: themeColor.color,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    p: "10px 10px 0px 30px",
-  };
-
-  const isNotUserStylingProps = {
-    bgcolor: themeColor.backgroundColor,
-    display: "flex",
-    justifyContent: "flex-start",
-    border: "1px solid black",
-    py: "10px",
-  };
 
   return (
     <Card
