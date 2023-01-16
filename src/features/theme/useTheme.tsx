@@ -18,10 +18,20 @@ const useTheme = () => {
       navButtons: "#2d2d2d",
     },
   };
-
+  const messageStyleObj = {
+    receiver: {
+      backgroundColor: "#f3f3f3",
+      color: "#181818",
+    },
+    sender: {
+      backgroundColor: "#0084FF",
+      color: "#ffffff",
+    },
+  };
   return {
     isDarkMode,
     themeColor: themeColorObj[theme],
+    messageStyleObj,
     toggleDarkMode: () => dispatch(toggleDarkMode()),
   };
 };
