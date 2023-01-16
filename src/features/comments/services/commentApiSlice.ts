@@ -33,13 +33,13 @@ export const commentApiSlice = apiSlice.injectEndpoints({
         body,
       }),
     }),
-    getCommentsForPost: builder.query<BaseCommentModel[], string>({
+    getCommentsForPost: builder.query<BaseCommentModel[], number>({
       query: (postId) => ({
         url: `/posts/${postId}/comments`,
         method: "GET",
       }),
     }),
-    getLikesFromComment: builder.query<UsersLikedCommentModel, string>({
+    getLikesFromComment: builder.query<UsersLikedCommentModel, number>({
       query: (commentId) => ({
         url: `/comments/${commentId}/likes`,
         method: "GET",
