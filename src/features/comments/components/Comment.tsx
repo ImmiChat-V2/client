@@ -96,11 +96,13 @@ const BaseComment = (commentData: any) => {
                 sx={{
                   display: "flex",
                   flexDirection: "row",
+                  justifyContent: "space-between",
                 }}
               >
                 <IconButton
                   disableRipple
                   sx={{
+                    fontSize: "10px",
                     display: "flex",
                     justifyContent: "center",
                     p: "0 3px 0 0",
@@ -109,14 +111,8 @@ const BaseComment = (commentData: any) => {
                     },
                   }}
                 >
-                  <Favorite
-                    sx={{
-                      fontSize: "14px",
-                      color: themeColor.color,
-                      "&:hover": { color: "#E0115F" },
-                    }}
-                  />
-                </IconButton>
+                  {firstName} {lastName}
+                </Typography>
                 <Typography
                   sx={{
                     display: "flex",
