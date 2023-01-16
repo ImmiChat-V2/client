@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, ChangeEvent } from "react";
 
 const useImageInput = () => {
   const [selectedFile, setSelectedFile] = useState<Blob>();
-  const [preview, setPreview] = useState<any>();
+  const [preview, setPreview] = useState<string>();
 
   // create a preview as a side effect, whenever selected file is changed
   useEffect(() => {
@@ -18,7 +18,7 @@ const useImageInput = () => {
     return () => URL.revokeObjectURL(objectUrl);
   }, [selectedFile]);
 
-  const onSelectFile = (e: any) => {
+  const onSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || e.target.files.length === 0) {
       setSelectedFile(undefined);
       return;
