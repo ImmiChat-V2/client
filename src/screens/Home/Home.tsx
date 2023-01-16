@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Navbar } from "shared/components/navbar";
 import { Comment } from "features/comments/components";
 import Post from "shared/components/post/Post";
+import { Comment } from "features/comments/components";
 
 const Home = () => {
   return (
