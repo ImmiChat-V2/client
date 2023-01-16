@@ -12,9 +12,14 @@ const useForm = <T extends Partial<T>>(defaultState: T) => {
     }));
   };
 
+  const resetForm = () => {
+    setForm(defaultState);
+  };
+
   return {
     form,
     handleChange,
+    resetForm,
   };
 };
 
