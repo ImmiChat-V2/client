@@ -27,6 +27,4 @@ export const uploadMedia = async (file: Blob): Promise<string> => {
   }
 };
 
-export const getSecureUrl = (value: string) => {
-  return imageUrl + value;
-};
+export const getSecureUrl = (value: string) => imageUrl + value;
