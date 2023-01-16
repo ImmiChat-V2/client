@@ -4,13 +4,17 @@ import useTheme from "../../../features/theme/useTheme";
 import "./footer.css";
 
 function Footer() {
-  const { themeColor: { color, backgroundColor } } = useTheme();
-  
+  const {
+    themeColor: { color, backgroundColor },
+  } = useTheme();
+
   return (
     <Box
       component="footer"
       sx={{
-        p: "20px",
+        pl: "70px",
+        pr: "40px",
+        pt: "20px",
         height: "170px",
         width: "auto",
         backgroundColor,
