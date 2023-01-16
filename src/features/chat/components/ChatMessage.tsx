@@ -8,13 +8,13 @@ import { useState } from "react";
 type ChatMessageProps = {
   isAuthUser: boolean;
   content: string;
-  avatar: string;
+  profilePic: string;
   media?: string;
 };
 const ChatMessage = ({
   isAuthUser,
   content,
-  avatar,
+  profilePic,
   media,
 }: ChatMessageProps) => {
   const [hover, setHover] = useState(false);
@@ -27,7 +27,7 @@ const ChatMessage = ({
     : messageStyleObj["receiver"];
   const avatarComponent = (
     <Avatar
-      src={avatar}
+      src={profilePic}
       alt="user avatar"
       sx={{ margin: "3px", alignSelf: "end" }}
     />
@@ -94,7 +94,7 @@ const ChatMessage = ({
               margin: "10px 0px",
             }}
             src={media}
-          ></Box>
+          />
         </Box>
         {hover && !isAuthUser && hoverOptionsComponent}
         {isAuthUser && avatarComponent}
