@@ -9,26 +9,24 @@ import ShareComment from "../ShareComment/ShareComment";
 import axios from "axios";
 import { BaseCommentModel } from "features/comments/models/Comments.model";
 import { Comment } from "features/comments/components";
+import { useSelector } from "react-redux";
+import { getCurrentUser } from "features/auth/authSlice";
 
 type PostProps = {
   basePostProps: BasePostType;
   onDelete?: (value: any) => void;
 };
 
-function Post({ basePostProps, onDelete }: PostProps) {
-  const {
-    id,
-    userId,
-    profilePic,
-    firstName,
-    lastName,
-    timestamp,
-    content,
-    media,
-    likes,
-    comments,
-  } = basePostProps;
-
+function Post({
+  id,
+  userId,
+  profilePic,
+  firstName,
+  lastName,
+  timestamp,
+  content,
+  media,
+}: BasePostType) {
   const {
     themeColor: { backgroundColor },
   } = useTheme();
@@ -42,7 +40,7 @@ function Post({ basePostProps, onDelete }: PostProps) {
     timestamp,
   };
   const [commentList, setCommentList] = useState<BaseCommentModel[]>([]);
-
+  const data = useSelector(getCurrentUser);
   // The idea is that the Post component will handle the state of its comments
   // When the CommentUI is built out,
   // Update this handler to push the new comment to the commentstate
@@ -55,6 +53,7 @@ function Post({ basePostProps, onDelete }: PostProps) {
     const response = await axios.post(endpoint, value, {
       withCredentials: true,
     });
+    setCommentList([...commentList, response.data.data]);
   };
 
   const deletePostHandler = async (id: number) => {
