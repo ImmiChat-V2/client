@@ -83,18 +83,7 @@ const BaseComment = ({ data }: any) => {
               sx={{ maxWidth: "100px", maxHeight: "100px" }}
             />
           )}
-          <Typography fontSize={10}>
-            {content}The Theory the the thumb was a thighThe Theory the the
-            thumb was a thighThe Theory the the thumb was a thighThe Theory the
-            the thumb was a thighThe Theory the the thumb was a thighThe Theory
-            the the thumb was a thighThe Theory the the thumb was a thighThe
-            Theory the the thumb was a thighThe Theory the the thumb was a
-            thighThe Theory the the thumb was a thighThe Theory the the thumb
-            was a thighThe Theory the the thumb was a thighThe Theory the the
-            thumb was a thighThe Theory the the thumb was a thighThe Theory the
-            the thumb was a thighThe Theory the the thumb was a thighThe Theory
-            the the thumb was a thigh
-          </Typography>
+          <Typography fontSize={10}>{content}</Typography>
           <Box
             sx={{
               display: "flex",
