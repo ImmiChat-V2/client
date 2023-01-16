@@ -1,9 +1,10 @@
-import { useState } from "react";
 import { Box, IconButton, Menu, MenuItem } from "@mui/material";
 import { MoreVert, Delete, Edit, Share } from "@mui/icons-material/";
 import { UserProfileWidget } from "shared/components";
 import { BasePostTopType } from "shared/types";
 import useTheme from "features/theme/useTheme";
+import useAnchor from "shared/hooks/useAnchor";
+import UserProfileHoverCard from "../UserProfileHoverCard/UserProfileHoverCard";
 
 const options = [
   { title: "Edit", icon: Edit },
@@ -21,15 +22,13 @@ function PostTop({
   const {
     themeColor: { color, navButtons },
   } = useTheme();
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-  const open = !!anchorEl;
 
-  const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const {
+    anchorEl: menuAnchorElement,
+    open: isMenuOpen,
+    handleOpen: handleMenuOpen,
+    handleClose: handleMenuClose,
+  } = useAnchor();
 
   return (
     <>
@@ -51,11 +50,13 @@ function PostTop({
             width: "100%",
           }}
         >
-          <UserProfileWidget
-            firstName={firstName}
-            lastName={lastName}
-            boxProps={{ cursor: "pointer" }}
-          />
+          <UserProfileHoverCard>
+            <UserProfileWidget
+              firstName={firstName}
+              lastName={lastName}
+              boxProps={{ cursor: "pointer" }}
+            />
+          </UserProfileHoverCard>
           <Box component="span" sx={{ display: "flex", cursor: "pointer" }}>
             <IconButton sx={{ backgroundColor: navButtons, mr: "7px" }}>
               <Delete sx={{ color }} />
@@ -63,20 +64,20 @@ function PostTop({
             <IconButton
               aria-label="more"
               id="long-button"
-              aria-controls={open ? "long-menu" : undefined}
-              aria-expanded={open ? "true" : undefined}
+              aria-controls={isMenuOpen ? "long-menu" : undefined}
+              aria-expanded={isMenuOpen ? "true" : undefined}
               aria-haspopup="true"
-              onClick={handleOpen}
               sx={{ backgroundColor: navButtons }}
+              onClick={handleMenuOpen}
             >
               <MoreVert sx={{ color }} />
             </IconButton>
 
             <Menu
               id="long-menu"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
+              anchorEl={menuAnchorElement}
+              open={isMenuOpen}
+              onClose={handleMenuClose}
               PaperProps={{
                 style: {
                   backgroundColor: navButtons,
@@ -86,10 +87,7 @@ function PostTop({
               }}
             >
               {options.map((option) => (
-                <MenuItem
-                  key={option.title}
-                  onClick={handleClose}
-                >
+                <MenuItem key={option.title} onClick={handleMenuClose}>
                   <Box component="div" sx={{ width: "100%" }}>
                     <Box sx={{ display: "flex" }}>
                       <Box sx={{ display: "flex", mr: "7px" }}>
