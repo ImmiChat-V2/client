@@ -85,11 +85,12 @@ const SharePost = ({ profilePic, theme }: SharePostProps) => {
             {preview && (
               // eslint-disable-next-line jsx-a11y/img-redundant-alt
               <>
-                <img
+                <Box
+                  component="img"
                   src={preview}
                   alt="Preview of your uploaded image"
-                  style={{ width: "100%", paddingTop: "5px" }}
-                />
+                  sx={{ width: "100%", paddingTop: "5px" }}
+                ></Box>
                 <Button
                   color="error"
                   sx={{ fontSize: "11px", borderRadius: "50px" }}
@@ -128,7 +129,9 @@ const SharePost = ({ profilePic, theme }: SharePostProps) => {
                 }}
               >
                 <InsertPhotoOutlined sx={{ color: "#45bd62" }} />
-                Media
+                <Typography sx={{ fontSize: "12px", px: "2px" }}>
+                  Media
+                </Typography>
               </Box>
             </label>
             <Input
@@ -152,7 +155,9 @@ const SharePost = ({ profilePic, theme }: SharePostProps) => {
                 }}
               >
                 <Label sx={{ color: "#ae83f4" }} />
-                Tag
+                <Typography sx={{ fontSize: "12px", px: "2px" }}>
+                  Tag
+                </Typography>
               </Box>
             </Box>
           </Box>
@@ -164,9 +169,7 @@ const SharePost = ({ profilePic, theme }: SharePostProps) => {
             variant="contained"
             color="primary"
           >
-            <Typography sx={{ fontSize: "12px" }} pr="6px">
-              Post
-            </Typography>
+            <Typography sx={{ fontSize: "12px", px: "2px" }}>Post</Typography>
             <SendOutlined sx={{ fontSize: "11.5px" }} />
           </Button>
         </Box>
