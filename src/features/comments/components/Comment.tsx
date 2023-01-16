@@ -50,11 +50,11 @@ const BaseComment = () => {
               sx={{
                 display: "flex",
                 flexDirection: "row",
+                justifyContent: "space-between",
               }}
             >
               <IconButton
                 disableRipple
-              <Box
                 sx={{
                   display: "flex",
                   justifyContent: "center",
@@ -91,6 +91,8 @@ const BaseComment = () => {
               }}
             >
               <Button
+                sx={{
+                  display: "flex",
                   flexDirection: "row",
                   justifyContent: "space-between",
                 }}
