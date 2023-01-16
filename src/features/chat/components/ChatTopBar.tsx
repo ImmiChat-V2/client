@@ -4,12 +4,12 @@ import { Box, IconButton } from "@mui/material";
 import { Phone, Videocam, Info } from "@mui/icons-material";
 
 type ChatTopBarProps = {
-  profilePicture?: string;
+  profilePic?: string;
   firstName: string;
   lastName: string;
 };
 
-function ChatTopBar({ profilePicture, firstName, lastName }: ChatTopBarProps) {
+function ChatTopBar({ profilePic, firstName, lastName }: ChatTopBarProps) {
   const {
     themeColor: { backgroundColor },
   } = useTheme();
@@ -19,7 +19,6 @@ function ChatTopBar({ profilePicture, firstName, lastName }: ChatTopBarProps) {
       component="div"
       sx={{
         display: "flex",
-        flexDirection: "row",
         justifyContent: "space-between",
         width: "100%",
         backgroundColor,
@@ -27,7 +26,7 @@ function ChatTopBar({ profilePicture, firstName, lastName }: ChatTopBarProps) {
     >
       <Box component="div" sx={{ p: 1 }}>
         <UserProfileWidget
-          profilePicture={profilePicture}
+          profilePicture={profilePic}
           firstName={firstName}
           lastName={lastName}
         />
