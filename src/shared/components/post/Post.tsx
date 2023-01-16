@@ -24,7 +24,10 @@ function Post({
   // The idea is that the Post component will handle the state of its comments
   // When the CommentUI is built out,
   // Update this handler to push the new comment to the commentstate
-  const createCommentHandler = async (value: any) => {
+  const createCommentHandler = async (value: {
+    content: string;
+    media: string | null;
+  }) => {
     const endpoint = process.env.REACT_APP_BASE_URL + `/posts/${id}/comments`;
     const response = await axios.post(endpoint, value, {
       withCredentials: true,
