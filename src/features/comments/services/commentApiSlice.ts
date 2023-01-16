@@ -33,25 +33,25 @@ export const commentApiSlice = apiSlice.injectEndpoints({
         body,
       }),
     }),
-    getCommentsForPost: builder.query<BaseCommentModel[], string>({
+    getCommentsForPost: builder.query<BaseCommentModel[], number>({
       query: (postId) => ({
         url: `/posts/${postId}/comments`,
         method: "GET",
       }),
     }),
-    getLikesFromComment: builder.query<UsersLikedCommentModel, string>({
+    getLikesFromComment: builder.query<UsersLikedCommentModel, number>({
       query: (commentId) => ({
         url: `/comments/${commentId}/likes`,
         method: "GET",
       }),
     }),
-    likeComment: builder.query<string, string>({
+    likeComment: builder.query<string, number>({
       query: (commentId) => ({
         url: `/comments/${commentId}/likes`,
         method: "POST",
       }),
     }),
-    deleteCommentLike: builder.query<string, string>({
+    deleteCommentLike: builder.query<string, number>({
       query: (commentId) => ({
         url: `/comments/${commentId}/likes`,
         method: "DELETE",
