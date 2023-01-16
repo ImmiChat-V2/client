@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Box, Button, Modal, Typography, Divider } from "@mui/material";
+import { Box } from "@mui/material";
 import PostTop from "./PostTop";
 import PostBody from "./PostBody";
 import PostFooter from "./PostFooter";
@@ -7,6 +6,8 @@ import useTheme from "features/theme/useTheme";
 import { BasePostType } from "shared/types";
 import ShareComment from "../ShareComment/ShareComment";
 import axios from "axios";
+import { BaseCommentModel } from "features/comments/models/Comments.model";
+import { Comment } from "features/comments/components";
 
 type PostProps = {
   basePostProps: BasePostType;
@@ -31,18 +32,10 @@ function Post({ basePostProps, onDelete }: PostProps) {
     themeColor: { backgroundColor },
   } = useTheme();
 
-  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const postTopProps = {
-    userId,
-    profilePic,
-    firstName,
-    lastName,
-    timestamp,
-  };
-
   // The idea is that the Post component will handle the state of its comments
   // When the CommentUI is built out,
   // Update this handler to push the new comment to the commentstate
+
   const createCommentHandler = async (value: {
     content: string;
     media: string | null;
@@ -51,29 +44,9 @@ function Post({ basePostProps, onDelete }: PostProps) {
     const response = await axios.post(endpoint, value, {
       withCredentials: true,
     });
+    console.log(response);
   };
 
-  const deletePostHandler = async (id: number) => {
-    const endpoint = process.env.REACT_APP_BASE_URL + `/posts/${id}`;
-    const response = await axios.delete(endpoint, {
-      withCredentials: true,
-    });
-
-    onDelete?.(id);
-  };
-
-  const openDeleteModal = () => {
-    setDeleteModalOpen(true);
-  };
-
-  const closeDeleteModal = () => {
-    setDeleteModalOpen(false);
-  };
-
-  const confirmDeletePost = () => {
-    setDeleteModalOpen(false);
-    deletePostHandler(id);
-  };
 
   return (
     <>
@@ -123,25 +96,20 @@ function Post({ basePostProps, onDelete }: PostProps) {
           boxSizing: "border-box",
         }}
       >
-        <Box
-          component="div"
-          sx={{
-            mx: "20px",
-          }}
-        >
-          <PostTop basePostTopProps={postTopProps} onDelete={openDeleteModal} />
-          <PostBody content={content} media={media} />
-          <Divider sx={{ mt: "20px" }} />
-          <PostFooter
-            id={id}
-            userId={userId}
-            likes={likes}
-            comments={comments}
-          />
-          <ShareComment onSubmit={createCommentHandler} />
-        </Box>
+        <PostTop
+          id={id}
+          userId={userId}
+          profilePic={profilePic}
+          firstName={firstName}
+          lastName={lastName}
+          timestamp={timestamp}
+        />
+        <PostBody id={id} userId={userId} content={content} media={media} />
+        <hr style={{ marginTop: "20px" }}></hr>
+        <PostFooter id={id} userId={userId} />
+        <ShareComment onSubmit={createCommentHandler} />
       </Box>
-    </>
+    </Box>
   );
 }
 

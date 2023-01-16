@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   Box,
   Card,
@@ -7,43 +8,80 @@ import {
   Button,
   Avatar,
 } from "@mui/material";
-import { AddComment, Favorite } from "@mui/icons-material";
-import { BaseCommentPropType } from "../models/Comments.model";
+import { AddComment, Delete, Favorite } from "@mui/icons-material";
 import useTheme from "features/theme/useTheme";
+import { getSecureUrl } from "shared/utils/cloudinaryUtil";
+import { customTimeFormat } from "shared/utils";
 
-const BaseComment = ({ data }: any) => {
-  // const { userId, postId, media, content, createdAt, updatedAt } = data;
-  const userId = 1;
-  const postId = 5;
-  const media = "";
-  const content = "strangalanga";
-  const createdAt = new Date();
-  const updatedAt = new Date();
-  const isUser: boolean = true;
+const BaseComment = (commentData: any) => {
+  const { id, media, content, updatedAt, user } = commentData.commentData;
+  const { firstName, lastName, profilePic } = user;
+  const [likes, setLikes] = useState<any>([]);
+  const datetime: string = customTimeFormat(updatedAt);
   const { themeColor } = useTheme();
-  const isUserStylingProps = {
-    display: "flex",
-    justifyContent: "flex-start",
-    p: "10px 10px 0px 30px",
-  };
-
-  const isNotUserStylingProps = {
-    display: "flex",
-    justifyContent: "flex-start",
-    border: "1px solid black",
-    py: "10px",
-  };
 
   return (
-    <>
-      {isUser ? (
-        <Card variant="outlined" sx={isUserStylingProps}>
-          <CardContent
+    <Card
+      variant="outlined"
+      sx={{
+        bgcolor: themeColor.backgroundColor,
+        color: themeColor.color,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "flex-start",
+        p: "10px 10px 0px 10px",
+      }}
+    >
+      <Box sx={{ display: "flex" }}>
+        <Box>
+          <Avatar sx={{ width: "25px", height: "25px" }} src={profilePic} />
+        </Box>
+        <CardContent
+          sx={{
+            p: 0,
+            width: "100%",
+            "&:last-child": {
+              p: "5px 0 5px 5px",
+            },
+          }}
+        >
+          <Box
             sx={{
-              p: 0,
-              "&:last-child": {
-                pb: "5px",
-              },
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <Typography
+              sx={{
+                fontSize: "10px",
+                display: "flex",
+                mb: "10px",
+              }}
+            >
+              {firstName} {lastName}
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: "10px",
+                display: "flex",
+              }}
+            >
+              {datetime}
+            </Typography>
+          </Box>
+          {media && (
+            <Box
+              component="img"
+              src={getSecureUrl(media)}
+              sx={{ maxWidth: "100px", maxHeight: "100px" }}
+            />
+          )}
+          <Typography fontSize={10}>{content}</Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              mt: "10px",
             }}
           >
             <Box
@@ -51,146 +89,45 @@ const BaseComment = ({ data }: any) => {
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "space-between",
+                width: "100%",
               }}
             >
-              <IconButton
-                disableRipple
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  p: "0 3px 0 0",
-                  "&:hover": {
-                    bgcolor: themeColor.backgroundColor,
-                  },
-                }}
-              >
-                <Favorite
-                  sx={{
-                    fontSize: "14px",
-                    color: themeColor.color,
-                    "&:hover": { color: "#E0115F" },
-                  }}
-                />
-              </IconButton>
-              <Typography
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  fontSize: "10px",
-                  mt: "5px",
-                }}
-              >
-                {likes}
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              <Button
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Typography
-                  sx={{
-                    fontSize: "10px",
-                    display: "flex",
-                    mb: "10px",
-                  }}
-                >
-                  {firstName} {lastName}
-                </Typography>
-                <Typography
-                  sx={{
-                    fontSize: "10px",
-                    display: "flex",
-                  }}
-                >
-                  {createdAt}
-                </Typography>
-              </Box>
-              <Typography fontSize={10}>
-                {content}The Theory the the thumb was a thighThe Theory the the
-                thumb was a thighThe Theory the the thumb was a thighThe Theory
-                the the thumb was a thighThe Theory the the thumb was a thighThe
-                Theory the the thumb was a thighThe Theory the the thumb was a
-                thighThe Theory the the thumb was a thighThe Theory the the
-                thumb was a thighThe Theory the the thumb was a thighThe Theory
-                the the thumb was a thighThe Theory the the thumb was a thighThe
-                Theory the the thumb was a thighThe Theory the the thumb was a
-                thighThe Theory the the thumb was a thighThe Theory the the
-                thumb was a thighThe Theory the the thumb was a thigh
-              </Typography>
               <Box
                 sx={{
-                  py: "5px",
-                  color: themeColor.color,
-                  mx: "10px",
-                  "&:hover": { bgcolor: "transparent" },
                   display: "flex",
                   flexDirection: "row",
-                  justifyContent: "flex-start",
-                  maxWidth: "30%",
-                  mt: "10px",
                 }}
               >
-                <AddComment
-                <Box
+                <IconButton
+                  disableRipple
                   sx={{
-                    fontSize: "13px",
-                    mt: "2px",
-                    mr: "5px",
-                    color: themeColor.color,
                     display: "flex",
-                    flexDirection: "row",
+                    justifyContent: "center",
+                    p: "0 3px 0 0",
+                    "&:hover": {
+                      bgcolor: themeColor.backgroundColor,
+                    },
                   }}
-                />
-                <Typography sx={{ fontSize: "10px", textTransform: "none" }}>
-                  Reply
-                </Typography>
-              </Button>
-            </Box>
-          </Box>
-        </CardContent>
-      </Box>
-    </Card>
                 >
-                  <IconButton
-                    disableRipple
+                  <Favorite
                     sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      p: "0 3px 0 0",
-                      "&:hover": {
-                        bgcolor: themeColor.backgroundColor,
-                      },
+                      fontSize: "14px",
+                      color: themeColor.color,
+                      "&:hover": { color: "#E0115F" },
                     }}
-                  >
-                    <Favorite
-                      sx={{
-                        fontSize: "14px",
-                        color: themeColor.color,
-                        "&:hover": { color: "#E0115F" },
-                      }}
-                    />
-                  </IconButton>
-                  <Typography
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      fontSize: "10px",
-                      mt: "5px",
-                    }}
-                  >
-                    {likes}
-                  </Typography>
-                </Box>
+                  />
+                </IconButton>
+                <Typography
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    fontSize: "12px",
+                    alignItems: "center",
+                  }}
+                >
+                  {likes.length}
+                </Typography>
+
                 <Box
                   sx={{
                     display: "flex",
@@ -222,20 +159,27 @@ const BaseComment = ({ data }: any) => {
                   </Button>
                 </Box>
               </Box>
-            </CardContent>
+              <Box>
+                <IconButton
+                  disableRipple
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    color: themeColor.color,
+                    p: "0 3px 0 0",
+                    "&:hover": {
+                      color: "red",
+                    },
+                  }}
+                >
+                  <Delete />
+                </IconButton>
+              </Box>
+            </Box>
           </Box>
-        </Card>
-      ) : (
-        <Card variant="outlined" sx={isNotUserStylingProps}>
-          <Typography>
-            {firstName} {lastName}
-          </Typography>
-          <Typography fontSize={8}>
-            The Theory the the thumb was a thigh
-          </Typography>
-        </Card>
-      )}
-    </>
+        </CardContent>
+      </Box>
+    </Card>
   );
 };
 
