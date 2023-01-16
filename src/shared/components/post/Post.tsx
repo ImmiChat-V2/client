@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import PostTop from "./PostTop";
 import PostBody from "./PostBody";
@@ -32,6 +33,16 @@ function Post({ basePostProps, onDelete }: PostProps) {
     themeColor: { backgroundColor },
   } = useTheme();
 
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const postTopProps = {
+    userId,
+    profilePic,
+    firstName,
+    lastName,
+    timestamp,
+  };
+  const [commentList, setCommentList] = useState<BaseCommentModel[]>([]);
+
   // The idea is that the Post component will handle the state of its comments
   // When the CommentUI is built out,
   // Update this handler to push the new comment to the commentstate
@@ -44,9 +55,33 @@ function Post({ basePostProps, onDelete }: PostProps) {
     const response = await axios.post(endpoint, value, {
       withCredentials: true,
     });
-    console.log(response);
   };
 
+  const deletePostHandler = async (id: number) => {
+    const endpoint = process.env.REACT_APP_BASE_URL + `/posts/${id}`;
+    const response = await axios.delete(endpoint, {
+      withCredentials: true,
+    });
+
+    onDelete?.(id);
+  };
+
+  const openDeleteModal = () => {
+    setDeleteModalOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setDeleteModalOpen(false);
+  };
+
+  const confirmDeletePost = () => {
+    setDeleteModalOpen(false);
+    deletePostHandler(id);
+  };
+
+  useEffect(() => {
+    getAllComments();
+  }, []);
 
   return (
     <>
@@ -96,6 +131,23 @@ function Post({ basePostProps, onDelete }: PostProps) {
           boxSizing: "border-box",
         }}
       >
+        <Box
+          component="div"
+          sx={{
+            mx: "20px",
+          }}
+        >
+          <PostTop basePostTopProps={postTopProps} onDelete={openDeleteModal} />
+          <PostBody content={content} media={media} />
+          <Divider sx={{ mt: "20px" }} />
+          <PostFooter
+            id={id}
+            userId={userId}
+            likes={likes}
+            comments={comments}
+          />
+          <ShareComment onSubmit={createCommentHandler} />
+        </Box>
         <PostTop
           id={id}
           userId={userId}
@@ -107,9 +159,12 @@ function Post({ basePostProps, onDelete }: PostProps) {
         <PostBody id={id} userId={userId} content={content} media={media} />
         <hr style={{ marginTop: "20px" }}></hr>
         <PostFooter id={id} userId={userId} />
+        {commentList.map((value, index) => {
+          return <Comment data={value} />;
+        })}
         <ShareComment onSubmit={createCommentHandler} />
       </Box>
-    </Box>
+    </>
   );
 }
 
