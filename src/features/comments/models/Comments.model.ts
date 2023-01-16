@@ -34,3 +34,9 @@ export type DeleteCommentProps = {
   commentId: string;
   body: DeleteCommentRequestModel;
 };
+
+export type BaseCommentPropType = {
+  isPost: boolean;
+  isUser: boolean;
+  data: BaseCommentModel;
+};
