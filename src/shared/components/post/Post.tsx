@@ -79,10 +79,6 @@ function Post({ basePostProps, onDelete }: PostProps) {
     deletePostHandler(id);
   };
 
-  useEffect(() => {
-    getAllComments();
-  }, []);
-
   return (
     <>
       <Modal
