@@ -10,26 +10,21 @@ import {
 import { AddComment, Favorite } from "@mui/icons-material";
 import { BaseCommentPropType } from "../models/Comments.model";
 import useTheme from "features/theme/useTheme";
+import { getSecureUrl } from "shared/utils/cloudinaryUtil";
 
 const BaseComment = ({ data }: any) => {
-  // const { userId, postId, media, content, createdAt, updatedAt } = data;
+  const { media, content, updatedAt, user } = data;
+  const { firstName, lastName, profilePic } = user;
   // we have to use the comment userId and hit get profile endpoint to get profile pic
   // get single user from db
-  const userId = 1;
-  const postId = 5;
-  const media = "";
-  const content = "strangalanga";
-  const createdAt = new Date();
-  const month = createdAt.getMonth() + 1;
-  const year = createdAt.getFullYear();
-  const day = createdAt.getDate();
-  const hour = createdAt.getHours();
-  const minutes = createdAt.getMinutes();
-  const seconds = createdAt.getSeconds();
+  const date = new Date(updatedAt);
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  const day = date.getDate();
+  const hour = date.getHours();
+  const minutes = date.getMinutes();
+  const seconds = date.getSeconds();
   const datetime = `${hour}:${minutes}:${seconds} ${month}/${day}/${year}`;
-  const updatedAt = new Date();
-  const firstName = "john";
-  const lastName = "son";
   const likes = 20;
   const { themeColor } = useTheme();
 
@@ -47,7 +42,7 @@ const BaseComment = ({ data }: any) => {
     >
       <Box sx={{ display: "flex" }}>
         <Box>
-          <Avatar sx={{ width: "25px", height: "25px" }} src={media} />
+          <Avatar sx={{ width: "25px", height: "25px" }} src={profilePic} />
         </Box>
         <CardContent
           sx={{
@@ -81,6 +76,13 @@ const BaseComment = ({ data }: any) => {
               {datetime}
             </Typography>
           </Box>
+          {media && (
+            <Box
+              component="img"
+              src={getSecureUrl(media)}
+              sx={{ maxWidth: "100px", maxHeight: "100px" }}
+            />
+          )}
           <Typography fontSize={10}>
             {content}The Theory the the thumb was a thighThe Theory the the
             thumb was a thighThe Theory the the thumb was a thighThe Theory the
