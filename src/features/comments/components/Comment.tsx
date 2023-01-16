@@ -92,11 +92,45 @@ const BaseComment = (commentData: any) => {
                 width: "100%",
               }}
             >
-              <Box
+              {datetime}
+            </Typography>
+          </Box>
+          <Typography fontSize={10}>
+            {content}The Theory the the thumb was a thighThe Theory the the
+            thumb was a thighThe Theory the the thumb was a thighThe Theory the
+            the thumb was a thighThe Theory the the thumb was a thighThe Theory
+            the the thumb was a thighThe Theory the the thumb was a thighThe
+            Theory the the thumb was a thighThe Theory the the thumb was a
+            thighThe Theory the the thumb was a thighThe Theory the the thumb
+            was a thighThe Theory the the thumb was a thighThe Theory the the
+            thumb was a thighThe Theory the the thumb was a thighThe Theory the
+            the thumb was a thighThe Theory the the thumb was a thighThe Theory
+            the the thumb was a thigh
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              maxWidth: "30%",
+              mt: "10px",
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+              }}
+            >
+              <IconButton
+                disableRipple
                 sx={{
                   display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
+                  justifyContent: "center",
+                  p: "0 3px 0 0",
+                  "&:hover": {
+                    bgcolor: themeColor.backgroundColor,
+                  },
                 }}
               >
                 <IconButton
@@ -126,9 +160,10 @@ const BaseComment = (commentData: any) => {
 
                 <Box
                   sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
+                    fontSize: "13px",
+                    mt: "2px",
+                    mr: "5px",
+                    color: themeColor.color,
                   }}
                 >
                   <Button
