@@ -11,7 +11,7 @@ import { AddComment, Favorite } from "@mui/icons-material";
 import { BaseCommentPropType } from "../models/Comments.model";
 import useTheme from "features/theme/useTheme";
 
-const BaseComment = () => {
+const BaseComment = ({ data }: any) => {
   // const { userId, postId, media, content, createdAt, updatedAt } = data;
   // we have to use the comment userId and hit get profile endpoint to get profile pic
   // get single user from db
