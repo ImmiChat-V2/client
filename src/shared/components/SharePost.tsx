@@ -29,10 +29,11 @@ const SharePost = ({ profilePic, theme }: SharePostProps) => {
 
   const { content, categoryName } = form;
   const { onSelectFile, preview, onRemove, selectedFile } = useImageInput();
-  const endPoint = process.env.REACT_APP_BASE_URL + "/posts";
+  const { backgroundColor, navButtons, color } = theme;
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
+    const endPoint = process.env.REACT_APP_BASE_URL + "/posts";
     const media = selectedFile ? await uploadMedia(selectedFile) : null;
     const postData = { content, media, categoryName };
     const res = await axios.post(endPoint, postData, {
@@ -49,7 +50,7 @@ const SharePost = ({ profilePic, theme }: SharePostProps) => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        backgroundColor: theme.backgroundColor,
+        backgroundColor: backgroundColor,
         padding: "25px",
         borderRadius: "10px",
         mt: "3px",
@@ -79,7 +80,7 @@ const SharePost = ({ profilePic, theme }: SharePostProps) => {
                 paddingLeft: "30px",
                 borderRadius: "30px",
               }}
-              placeholder={"What's on your mind..."}
+              placeholder="What's on your mind..."
             />
             {preview && (
               // eslint-disable-next-line jsx-a11y/img-redundant-alt
@@ -115,18 +116,17 @@ const SharePost = ({ profilePic, theme }: SharePostProps) => {
             <label htmlFor="file">
               <Box
                 sx={{
-                  color: theme.color,
+                  color: color,
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
                   pr: "15px",
                   ":hover": {
                     cursor: "pointer",
-                    backgroundColor: theme.navButtons,
+                    backgroundColor: navButtons,
                   },
                 }}
               >
-                {" "}
                 <InsertPhotoOutlined sx={{ color: "#45bd62" }} />
                 Media
               </Box>
@@ -140,14 +140,14 @@ const SharePost = ({ profilePic, theme }: SharePostProps) => {
             <Box>
               <Box
                 sx={{
-                  color: theme.color,
+                  color: color,
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
                   pr: "15px",
                   ":hover": {
                     cursor: "pointer",
-                    backgroundColor: theme.navButtons,
+                    backgroundColor: navButtons,
                   },
                 }}
               >
