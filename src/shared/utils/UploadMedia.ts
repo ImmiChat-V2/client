@@ -7,10 +7,12 @@ const uploadMedia = async (files: FileList) => {
 
   try {
     const {
-      data: { version, publicId, format },
+      data: { version, public_id, format },
     } = await Axios.post(process.env.REACT_APP_CLOUDINARY_URL || "", formData);
-    const media = `v${version}/${publicId}.${format}`;
-    return media;
+    const media = `v${version}/${public_id}.${format}`;
+    const cloudName = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME;
+    const secureUrl = `https://res.cloudinary.com/${cloudName}/image/upload/${media}`;
+    return secureUrl;
   } catch (error) {
     console.error(error);
   }
