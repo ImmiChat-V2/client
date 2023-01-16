@@ -1,12 +1,9 @@
 import { Box } from "@mui/material";
-import { useGetLikesFromPostQuery } from "features/posts/services/postApiSlice";
 import { Link } from "react-router-dom";
 import { Navbar } from "shared/components/navbar";
 import Post from "shared/components/post/Post";
 
 const Home = () => {
-  const { data } = useGetLikesFromPostQuery(11);
-  console.log(data);
   return (
     <Box>
       <Navbar />
