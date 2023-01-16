@@ -42,18 +42,25 @@ const BaseComment = () => {
   const postId = 5;
   const media = "";
   const content = "strangalanga";
-  const createdAt = new Date();
+  const createdAt = Date();
   const updatedAt = new Date();
   const isUser: boolean = true;
+  const firstName = "john";
+  const lastName = "son";
+  const likes = 20;
   const { themeColor } = useTheme();
   const isUserStylingProps = {
+    bgcolor: themeColor.backgroundColor,
+    color: themeColor.color,
     display: "flex",
+    flexDirection: "column",
     justifyContent: "flex-start",
     border: "2px solid green",
-    p: "10px 10px 10px",
+    p: "10px 10px 0px 30px",
   };
 
   const isNotUserStylingProps = {
+    bgcolor: themeColor.backgroundColor,
     display: "flex",
     justifyContent: "flex-start",
     border: "1px solid black",
