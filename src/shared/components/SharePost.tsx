@@ -90,7 +90,7 @@ const SharePost = ({ profilePic, theme }: SharePostProps) => {
                   src={preview}
                   alt="Preview of your uploaded image"
                   sx={{ width: "100%", paddingTop: "5px" }}
-                ></Box>
+                />
                 <Button
                   color="error"
                   sx={{ fontSize: "11px", borderRadius: "50px" }}
