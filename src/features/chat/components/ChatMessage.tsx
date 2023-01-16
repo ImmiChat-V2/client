@@ -18,7 +18,7 @@ const ChatMessage = ({
   media,
 }: ChatMessageProps) => {
   const [hover, setHover] = useState(false);
-  const handleHover = () => {
+  const handleHover = ():void => {
     setHover(!hover);
   };
   const { messageStyleObj } = useTheme();
