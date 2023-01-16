@@ -8,27 +8,38 @@ import {
   FormControl,
   InputBase,
   Typography,
+  Input,
 } from "@mui/material";
-import { useForm } from "../hooks";
+import { useForm, useImageInput } from "../hooks";
+import { uploadMedia } from "shared/utils/cloudinaryUtil";
 import { BaseCreatePostmodel } from "../types/SharePostTypes";
+import axios from "axios";
 
 type SharePostProps = {
-  readonly profilePic: string;
-  readonly sx: Record<string, string>;
-  readonly isPost: boolean;
-  readonly onClick: (value: any) => void;
+  readonly profilePic?: string;
+  theme: any;
 };
 
-const SharePost = ({ profilePic, sx, onClick, isPost }: SharePostProps) => {
-  const { form, handleChange } = useForm<BaseCreatePostmodel>({
+const SharePost = ({ profilePic, theme }: SharePostProps) => {
+  const { form, handleChange, resetForm } = useForm<BaseCreatePostmodel>({
     media: "",
     content: "",
     categoryName: "",
   });
-  const { media, content, categoryName } = form;
+
+  const { content, categoryName } = form;
+  const { onSelectFile, preview, onRemove, selectedFile } = useImageInput();
+  const endPoint = process.env.REACT_APP_BASE_URL + "/posts";
+
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    onClick(form);
+    const media = selectedFile ? await uploadMedia(selectedFile) : null;
+    const postData = { content, media, categoryName };
+    const res = await axios.post(endPoint, postData, {
+      withCredentials: true,
+    });
+    onRemove();
+    resetForm();
   };
 
   return (
@@ -38,11 +49,10 @@ const SharePost = ({ profilePic, sx, onClick, isPost }: SharePostProps) => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        backgroundColor: "#ffffff",
-        maxWidth: "600px",
-        margin: "auto",
+        backgroundColor: theme.backgroundColor,
         padding: "25px",
         borderRadius: "10px",
+        mt: "3px",
       }}
     >
       <Box component="form" onSubmit={handleSubmit}>
@@ -57,19 +67,38 @@ const SharePost = ({ profilePic, sx, onClick, isPost }: SharePostProps) => {
             src={profilePic}
             sx={{ width: 52, height: 52, mr: 3 }}
           />
-          <InputBase
-            name="content"
-            value={content}
-            onChange={handleChange}
-            sx={{
-              color: "black",
-              width: "500px",
-              backgroundColor: "#ededed",
-              paddingLeft: "30px",
-              borderRadius: "30px",
-            }}
-            placeholder={isPost ? "What's on your mind..." : "Write a comment"}
-          />
+          <Box width={"100%"}>
+            <InputBase
+              fullWidth
+              name="content"
+              value={content}
+              onChange={handleChange}
+              sx={{
+                color: "black",
+                backgroundColor: "#ededed",
+                paddingLeft: "30px",
+                borderRadius: "30px",
+              }}
+              placeholder={"What's on your mind..."}
+            />
+            {preview && (
+              // eslint-disable-next-line jsx-a11y/img-redundant-alt
+              <>
+                <img
+                  src={preview}
+                  alt="Preview of your uploaded image"
+                  style={{ width: "100%", paddingTop: "5px" }}
+                />
+                <Button
+                  color="error"
+                  sx={{ fontSize: "11px", borderRadius: "50px" }}
+                  onClick={onRemove}
+                >
+                  Remove
+                </Button>
+              </>
+            )}
+          </Box>
         </Box>
         <Divider sx={{ my: 2, color: "#555555" }}></Divider>
         <Box
@@ -83,59 +112,49 @@ const SharePost = ({ profilePic, sx, onClick, isPost }: SharePostProps) => {
             display="flex"
             sx={{ width: "30%", justifyContent: "space-between" }}
           >
-            {isPost ? (
-              <>
-                <Box
-                  sx={{
-                    color: "#949494",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    pr: "15px",
-                    ":hover": {
-                      cursor: "pointer",
-                      backgroundColor: "#ededed",
-                    },
-                  }}
-                >
-                  <InsertPhotoOutlined sx={{ color: "#45bd62" }} />
-                  Media
-                </Box>
-                <Box
-                  sx={{
-                    color: "#949494",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    pr: "15px",
-                    ":hover": {
-                      cursor: "pointer",
-                      backgroundColor: "#ededed",
-                    },
-                  }}
-                >
-                  <Label sx={{ color: "#ae83f4" }} />
-                  Tag
-                </Box>
-              </>
-            ) : (
+            <label htmlFor="file">
               <Box
                 sx={{
-                  color: "#949494",
+                  color: theme.color,
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
                   pr: "15px",
                   ":hover": {
                     cursor: "pointer",
-                    backgroundColor: "#ededed",
+                    backgroundColor: theme.navButtons,
                   },
                 }}
               >
+                {" "}
                 <InsertPhotoOutlined sx={{ color: "#45bd62" }} />
                 Media
               </Box>
-            )}
+            </label>
+            <Input
+              id="file"
+              type="file"
+              sx={{ display: "none" }}
+              onChange={onSelectFile}
+            />
+            <Box>
+              <Box
+                sx={{
+                  color: theme.color,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  pr: "15px",
+                  ":hover": {
+                    cursor: "pointer",
+                    backgroundColor: theme.navButtons,
+                  },
+                }}
+              >
+                <Label sx={{ color: "#ae83f4" }} />
+                Tag
+              </Box>
+            </Box>
           </Box>
           <Button
             type="submit"
