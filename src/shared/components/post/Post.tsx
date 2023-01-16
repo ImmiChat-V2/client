@@ -3,7 +3,7 @@ import PostTop from "./PostTop";
 import PostBody from "./PostBody";
 import PostFooter from "./PostFooter";
 import useTheme from "features/theme/useTheme";
-import { BasePostType } from "shared/types";
+import { BasePostPropType } from "features/posts/models/Posts.model";
 
 function Post({
   id,
@@ -14,7 +14,7 @@ function Post({
   timestamp,
   content,
   media,
-}: BasePostType) {
+}: BasePostPropType) {
   const {
     themeColor: { backgroundColor },
   } = useTheme();
@@ -22,18 +22,18 @@ function Post({
     <Box
       component="div"
       sx={{
-        width: '100%',
+        width: "100%",
         backgroundColor,
         borderRadius: "10px",
-        margin: 0, 
+        margin: 0,
         padding: 0,
-        boxSizing: 'border-box'
+        boxSizing: "border-box",
       }}
     >
       <Box
         component="div"
         sx={{
-          mx: '20px'
+          mx: "20px",
         }}
       >
         <PostTop
