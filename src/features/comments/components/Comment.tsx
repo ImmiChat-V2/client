@@ -45,78 +45,33 @@ const BaseComment = () => {
   const media = "";
   const content = "strangalanga";
   const createdAt = new Date();
-  const month = createdAt.getMonth() + 1;
-  const year = createdAt.getFullYear();
-  const day = createdAt.getDate();
-  const hour = createdAt.getHours();
-  const minutes = createdAt.getMinutes();
-  const seconds = createdAt.getSeconds();
-  const datetime = `${hour}:${minutes}:${seconds} ${month}/${day}/${year}`;
   const updatedAt = new Date();
-  const firstName = "john";
-  const lastName = "son";
-  const likes = 20;
+  const isUser: boolean = true;
   const { themeColor } = useTheme();
+  const isUserStylingProps = {
+    display: "flex",
+    justifyContent: "flex-start",
+    border: "2px solid green",
+    p: "10px 10px 10px",
+  };
+
+  const isNotUserStylingProps = {
+    display: "flex",
+    justifyContent: "flex-start",
+    border: "1px solid black",
+    py: "10px",
+  };
 
   return (
-    <Card
-      variant="outlined"
-      sx={{
-        bgcolor: themeColor.backgroundColor,
-        color: themeColor.color,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "flex-start",
-        p: "10px 10px 0px 10px",
-      }}
-    >
-      <Box sx={{ display: "flex" }}>
-        <Box>
-          <Avatar sx={{ width: "25px", height: "25px" }} src={media} />
-        </Box>
-        <CardContent
-          sx={{
-            p: 0,
-            "&:last-child": {
-              p: "5px 0 5px 5px",
-            },
-          }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            <Typography
-              sx={{
-                fontSize: "10px",
-                display: "flex",
-                mb: "10px",
-              }}
-            >
-              {firstName} {lastName}
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: "10px",
-                display: "flex",
-              }}
-            >
-              {datetime}
-            </Typography>
-          </Box>
-          <Typography fontSize={10}>
-            {content}The Theory the the thumb was a thighThe Theory the the
-            thumb was a thighThe Theory the the thumb was a thighThe Theory the
-            the thumb was a thighThe Theory the the thumb was a thighThe Theory
-            the the thumb was a thighThe Theory the the thumb was a thighThe
-            Theory the the thumb was a thighThe Theory the the thumb was a
-            thighThe Theory the the thumb was a thighThe Theory the the thumb
-            was a thighThe Theory the the thumb was a thighThe Theory the the
-            thumb was a thighThe Theory the the thumb was a thighThe Theory the
-            the thumb was a thighThe Theory the the thumb was a thighThe Theory
-            the the thumb was a thigh
+    <>
+      {isUser ? (
+        <Card variant="outlined" sx={isUserStylingProps}>
+          <Typography fontSize={8}>{content}</Typography>
+        </Card>
+      ) : (
+        <Card variant="outlined" sx={isNotUserStylingProps}>
+          <Typography fontSize={8}>
+            The Theory the the thumb was a thigh
           </Typography>
           <Box
             sx={{
