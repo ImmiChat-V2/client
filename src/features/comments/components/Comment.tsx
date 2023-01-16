@@ -11,7 +11,7 @@ import { AddComment, Favorite } from "@mui/icons-material";
 import { BaseCommentPropType } from "../models/Comments.model";
 import useTheme from "features/theme/useTheme";
 
-const BaseComment = () => {
+const BaseComment = ({ data }: any) => {
   // const { userId, postId, media, content, createdAt, updatedAt } = data;
   const userId = 1;
   const postId = 5;
