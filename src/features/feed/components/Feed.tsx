@@ -4,22 +4,16 @@ import { SharePost } from "shared/components";
 
 function Feed() {
   const {
-    isDarkMode,
-    themeColor: { color, navButtons },
+    themeColor: { color, navButtons, backgroundColor },
   } = useTheme();
   return (
     <>
-     <SharePost profilePic={""} isPost={true} onClick={() => console.log('here')} sx={{bgcolor: 'red'}}/>
-    <Box
-      sx={{
-        bgcolor: navButtons,
-        height: "500px",
-        borderRadius: "10px",
-        p: "20px",
-        color,
-      }}
-    >
-    </Box>
+      <Box sx={{ width: '700px' }}>
+        <SharePost
+          profilePic=""
+          theme={{ color, navButtons, backgroundColor }}
+        />
+      </Box>
     </>
   );
 }
