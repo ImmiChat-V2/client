@@ -61,10 +61,11 @@ const ProfilePage = () => {
   useEffect(() => {
     if (isSuccess) {
       setPostList(data.data);
+      console.log("somsing", data.data);
     }
-  }, []);
+  }, [isSuccess]);
   return (
-    <Box>
+    <Box sx={{ bgcolor: themeColor.backgroundColor }}>
       <Navbar />
       <Box>
         <Grid container spacing={2} columns={24}>
