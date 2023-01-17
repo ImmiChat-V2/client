@@ -1,2 +1,3 @@
-export { default as HomePageBody } from "./HomePageBody";
-export {default as Home} from './Home'
+import Home from "./Home";
+
+export default Home;

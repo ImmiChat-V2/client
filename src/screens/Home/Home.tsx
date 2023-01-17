@@ -7,7 +7,10 @@ const Home = () => {
   return (
     <>
       <Navbar />
+      {/* <Box className="home-body" sx={{bgcolor: 'red'}}> */}
       <HomePageBody />
+
+      {/* </Box> */}
       <Box sx={{ position: "absolute", bottom: "0", width: "100%" }}>
         <Footer />
       </Box>
