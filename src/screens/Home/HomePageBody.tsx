@@ -16,8 +16,7 @@ function HomePageBody() {
           display: "flex",
           justifyContent: "space-around",
           pt: "30px",
-          pr: "30px",
-          pl: "30px",
+          px: '30px',
           maxWidth: "1650px",
           m: "auto",
         }}
