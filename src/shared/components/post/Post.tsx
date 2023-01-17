@@ -42,8 +42,8 @@ function Post({
         width: "100%",
         backgroundColor,
         borderRadius: "10px",
-        margin: 0,
-        padding: 0,
+        m: "5px 0 5px 0",
+        p: "15px 0 15px 0",
         boxSizing: "border-box",
       }}
     >

@@ -47,10 +47,11 @@ const ProfilePage = () => {
   useEffect(() => {
     if (isSuccess) {
       setPostList(data.data);
+      console.log("somsing", data.data);
     }
-  }, []);
+  }, [isSuccess]);
   return (
-    <Box>
+    <Box sx={{ bgcolor: themeColor.backgroundColor }}>
       <Navbar />
       <Grid container columns={24}>
         <Grid item display={{ xs: "none", md: "flex" }} md={4} lg={3}>
@@ -64,21 +65,20 @@ const ProfilePage = () => {
           />
           <SharePost profilePic="" theme={themeColor} />
           <>
-            {postList &&
-              postList.map((value: BasePostModel) => {
-                return (
-                  <Post
-                    id={value.id}
-                    userId={value.userId}
-                    profilePic={currentUser.profilePic}
-                    content={value.content}
-                    media={value.media}
-                    timestamp={value.updatedAt}
-                    firstName={currentUser.firstName}
-                    lastName={currentUser.lastName}
-                  />
-                );
-              })}
+            {postList.map((value: BasePostModel) => {
+              return (
+                <Post
+                  id={value.id}
+                  userId={value.userId}
+                  profilePic={currentUser.profilePic}
+                  content={value.content}
+                  media={value.media}
+                  timestamp={value.updatedAt}
+                  firstName={currentUser.firstName}
+                  lastName={currentUser.lastName}
+                />
+              );
+            })}
           </>
         </Grid>
         <Grid item display={{ xs: "none", md: "flex" }} md={5} lg={3}>

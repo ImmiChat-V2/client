@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import useTheme from "features/theme/useTheme";
 import { BasePostBodyType } from "shared/types";
+import { getSecureUrl } from "shared/utils/cloudinaryUtil";
 
 function PostBody({ content, media }: BasePostBodyType) {
   const {
@@ -9,9 +10,7 @@ function PostBody({ content, media }: BasePostBodyType) {
   return (
     <>
       <Box component="section" sx={{ mt: "15px" }}>
-        <Typography sx={{fontSize: "16px", color}}>
-          {content}
-        </Typography>
+        <Typography sx={{ fontSize: "16px", color }}>{content}</Typography>
       </Box>
       <Box
         component="div"
@@ -19,8 +18,13 @@ function PostBody({ content, media }: BasePostBodyType) {
       >
         <Box
           component="img"
-          sx={{ borderRadius: "10px", width: '100%', height: '100%', display: 'block' }}
-          src={media}
+          sx={{
+            borderRadius: "10px",
+            minWidth: "200px",
+            maxWidth: "200px",
+            display: "block",
+          }}
+          src={getSecureUrl(media!)}
         ></Box>
       </Box>
     </>
