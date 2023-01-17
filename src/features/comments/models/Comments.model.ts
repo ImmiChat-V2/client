@@ -40,9 +40,3 @@ export type DeleteCommentProps = {
   commentId: number;
   body: DeleteCommentRequestModel;
 };
-
-export type BaseCommentPropType = {
-  isPost: boolean;
-  isUser: boolean;
-  data: BaseCommentModel;
-};
