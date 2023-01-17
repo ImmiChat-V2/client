@@ -21,31 +21,46 @@ const ConnectionList = ({ theme, connectionList }: ConnectionListProps) => {
         height: "100vh",
         color: theme.color,
         bgcolor: theme.backgroundColor,
+        display: "flex",
+        justifyContent: "center",
       }}
     >
-      <Typography
-        variant="h6"
-        fontWeight="600"
+      <Box
         sx={{
-          textAlign: "center",
-          color: theme.color,
-          bgcolor: theme.backgroundColor,
+          position: "fixed",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
         }}
       >
-        Connections
-      </Typography>
-      {connectionList.map((connection) => (
-        <Box display="flex" justifyContent="space-between">
-          <UserProfileWidget
-            {...connection}
-            key={connection.id}
-            boxProps={{ my: "10px" }}
-          />
-          <Box alignSelf="center">
-            <ChatIcon />
+        <Typography
+          variant="h6"
+          fontWeight="600"
+          sx={{
+            textAlign: "center",
+            color: theme.color,
+          }}
+        >
+          Connections
+        </Typography>
+        {connectionList.map((connection) => (
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            top="0"
+            sx={{ mx: 3 }}
+          >
+            <UserProfileWidget
+              {...connection}
+              key={connection.id}
+              boxProps={{ my: "10px" }}
+            />
+            <Box alignSelf="center" sx={{ mx: 2 }}>
+              <ChatIcon />
+            </Box>
           </Box>
-        </Box>
-      ))}
+        ))}
+      </Box>
     </Box>
   );
 };
