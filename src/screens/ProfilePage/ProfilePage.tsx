@@ -61,7 +61,6 @@ const ProfilePage = () => {
   useEffect(() => {
     if (isSuccess) {
       setPostList(data.data);
-      console.log("somsing", data.data);
     }
   }, [isSuccess]);
   return (
