@@ -6,6 +6,7 @@ export type BaseFeedType = {
   readonly user: UserInfoType;
   readonly likes: { id: number }[];
   readonly comments: { userId: number }[];
+  readonly updatedAt: Date;
 };
 
 type UserInfoType = {

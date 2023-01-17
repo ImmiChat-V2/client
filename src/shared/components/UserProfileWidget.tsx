@@ -20,7 +20,6 @@ const UserProfileWidget = ({
   const {
     themeColor: { color },
   } = useTheme();
-
   return (
     <Box display="flex" alignItems="center" sx={{ ...boxProps }}>
       <Avatar src={profilePicture} sizes="40px" />

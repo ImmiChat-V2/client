@@ -55,10 +55,7 @@ function HomePageBody() {
         </Box>
         <Box className="middle-feed" sx={{ ml: "15px", mr: "15px" }}>
           <Feed />
-          <Box
-            className="feed-posts"
-            sx={{ mb: "100px", width: "700px" }}
-          >
+          <Box className="feed-posts" sx={{ mb: "100px", width: "700px" }}>
             {feed.map((post) => (
               <Box sx={{ pt: "30px" }}>
                 <Post
@@ -71,6 +68,7 @@ function HomePageBody() {
                   content={post.content}
                   likes={post.likes}
                   comments={post.comments}
+                  timestamp={new Date(post.updatedAt)}
                 />
               </Box>
             ))}
