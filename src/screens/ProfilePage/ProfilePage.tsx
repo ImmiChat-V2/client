@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Box, Grid } from "@mui/material";
 import useTheme from "features/theme/useTheme";
 import { ProfileCard } from "features/userprofile/components/ProfileCard";
@@ -52,8 +53,17 @@ export const mockFriendList = [
 ];
 
 const ProfilePage = () => {
+  const [postList, setPostList] = useState<BasePostModel[]>([]);
   const { themeColor } = useTheme();
+  const currentUser = useSelector(getCurrentUser);
+  const { data, isSuccess } = useGetPostsByUserQuery(currentUser.id);
 
+  useEffect(() => {
+    if (isSuccess) {
+      setPostList(data?.data);
+      console.log("sacavo", data);
+    }
+  }, []);
   return (
     <Box>
       <Navbar />
