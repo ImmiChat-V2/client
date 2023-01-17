@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   Box,
   Card,
@@ -8,24 +9,17 @@ import {
   Avatar,
 } from "@mui/material";
 import { AddComment, Favorite } from "@mui/icons-material";
-import { BaseCommentPropType } from "../models/Comments.model";
 import useTheme from "features/theme/useTheme";
 import { getSecureUrl } from "shared/utils/cloudinaryUtil";
+import { customTimeFormat } from "shared/utils";
 
-const BaseComment = ({ data }: any) => {
-  const { media, content, updatedAt, user } = data;
+const BaseComment = ({ commentData }: any) => {
+  const { id, media, content, updatedAt, user } = commentData;
   const { firstName, lastName, profilePic } = user;
+  const [likes, setLikes] = useState<any>([]);
   // we have to use the comment userId and hit get profile endpoint to get profile pic
   // get single user from db
-  const date = new Date(updatedAt);
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
-  const day = date.getDate();
-  const hour = date.getHours();
-  const minutes = date.getMinutes();
-  const seconds = date.getSeconds();
-  const datetime = `${hour}:${minutes}:${seconds} ${month}/${day}/${year}`;
-  const likes = 20;
+  const datetime: string = customTimeFormat(updatedAt);
   const { themeColor } = useTheme();
 
   return (
@@ -47,6 +41,7 @@ const BaseComment = ({ data }: any) => {
         <CardContent
           sx={{
             p: 0,
+            width: "100%",
             "&:last-child": {
               p: "5px 0 5px 5px",
             },
@@ -126,7 +121,7 @@ const BaseComment = ({ data }: any) => {
                   mt: "5px",
                 }}
               >
-                {likes}
+                {likes.length}
               </Typography>
             </Box>
             <Box

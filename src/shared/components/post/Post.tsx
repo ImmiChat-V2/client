@@ -28,9 +28,6 @@ function Post({
 
   const [commentList, setCommentList] = useState<BaseCommentModel[]>([]);
   const data = useSelector(getCurrentUser);
-  // The idea is that the Post component will handle the state of its comments
-  // When the CommentUI is built out,
-  // Update this handler to push the new comment to the commentstate
 
   const createCommentHandler = async (value: {
     content: string;
@@ -92,8 +89,12 @@ function Post({
         <PostBody id={id} userId={userId} content={content} media={media} />
         <hr style={{ marginTop: "20px" }}></hr>
         <PostFooter id={id} userId={userId} />
-        {commentList.map((value, index) => {
-          return <Comment data={value} />;
+        {commentList.map((value) => {
+          return (
+            <>
+              <Comment commentData={value} />
+            </>
+          );
         })}
         <ShareComment onSubmit={createCommentHandler} />
       </Box>

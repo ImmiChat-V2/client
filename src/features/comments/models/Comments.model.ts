@@ -15,6 +15,7 @@ export type UpdateCommentRequestModel = Pick<
   "media" | "content"
 >;
 export type DeleteCommentRequestModel = Pick<BaseCommentModel, "userId">;
+
 export type CreateCommentRequestModel = Omit<
   BaseCommentModel,
   "id" | "createdAt" | "updatedAt"
@@ -26,12 +27,17 @@ export type UsersLikedCommentModel = Pick<
 >;
 
 export type UpdateCommentProps = {
-  commentId: string;
+  commentId: number;
   body: UpdateCommentRequestModel;
 };
 
+export type CreateCommentProps = {
+  postId: number;
+  body: CreateCommentRequestModel;
+};
+
 export type DeleteCommentProps = {
-  commentId: string;
+  commentId: number;
   body: DeleteCommentRequestModel;
 };
 
