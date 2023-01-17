@@ -6,3 +6,4 @@ export type {
   BasePostBodyType,
   BasePostFooterType,
 } from "./Post";
+export type { BaseFeedType } from "./Feed";

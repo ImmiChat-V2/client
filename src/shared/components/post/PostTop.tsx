@@ -12,8 +12,6 @@ const options = [
 ];
 
 function PostTop({
-  id,
-  userId,
   profilePic,
   firstName,
   lastName,
@@ -54,6 +52,8 @@ function PostTop({
             <UserProfileWidget
               firstName={firstName}
               lastName={lastName}
+              profilePicture={profilePic}
+              timestamp={timestamp}
               boxProps={{ cursor: "pointer" }}
             />
           </UserProfileHoverCard>

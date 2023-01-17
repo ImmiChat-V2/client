@@ -4,17 +4,16 @@ import { FavoriteBorder, MoreHoriz, Favorite } from "@mui/icons-material/";
 import useTheme from "features/theme/useTheme";
 import { BasePostFooterType } from "shared/types";
 
-function PostFooter({ id, userId }: BasePostFooterType) {
+function PostFooter({ id, userId, likes, comments }: BasePostFooterType) {
   const {
     themeColor: { color, navButtons },
   } = useTheme();
-  const [likeCount, setLikeCount] = useState(1);
   const [showComment, setShowComment] = useState(false);
-  const [commentCount, setCommentCount] = useState(2);
+  const [displayLikeCount, setDisplayLikeCount] = useState(likes.length)
   const [isLiked, setIsLiked] = useState(false);
   const handleLikeClick = () => {
     setIsLiked(!isLiked);
-    isLiked ? setLikeCount(likeCount - 1) : setLikeCount(likeCount + 1);
+    isLiked ? setDisplayLikeCount(displayLikeCount - 1) : setDisplayLikeCount(displayLikeCount + 1);
   };
 
   const handleCommentClick = () => {
@@ -68,18 +67,20 @@ function PostFooter({ id, userId }: BasePostFooterType) {
               />
             )}
           </IconButton>
-          {likeCount === 1 ? (
-            <Typography sx={{color}}>{likeCount} Like</Typography>
+          {/* {displayLikeCount === 1 ? (
+            <Typography sx={{color}}>{displayLikeCount} Like</Typography>
           ) : (
-            <Typography sx={{color}}>{likeCount} Likes</Typography>
-          )}
+            <Typography sx={{color}}>{displayLikeCount} Likes</Typography>
+          )} */}
+          <Typography sx={{color}}>{displayLikeCount} {(displayLikeCount === 1) ? "Like" : "Likes"}</Typography>
         </Box>
         <Box component="span" sx={{ display: "flex", alignItems: "center" }}>
-          {commentCount === 1 ? (
+          {/* {comments.length === 1 ? (
             <Typography sx={{color}}>{commentCount} Comment</Typography>
           ) : (
             <Typography sx={{color}}>{commentCount} Comments</Typography>
-          )}
+          )} */}
+          <Typography sx={{color}}>{comments.length} {(comments.length === 1) ? "Comment" : "Comments"}</Typography>
           <IconButton
             aria-label="comment-post"
             sx={{

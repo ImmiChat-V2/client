@@ -1,12 +1,28 @@
-import { Box } from "@mui/material";
+import { useEffect, useState } from "react";
+import { Box, Typography } from "@mui/material";
 import { Feed } from "features/feed/components";
 import useTheme from "features/theme/useTheme";
+import Post from "shared/components/post/Post";
+import axios from "axios";
 import "./homePageBody.css";
+import { BaseFeedType } from "shared/types";
 
 function HomePageBody() {
+  const [feed, setFeed] = useState<BaseFeedType[]>([]);
+
+  useEffect(() => {
+    async function fetchFeed() {
+      const res = await axios.get("http://localhost:5000/feed", {
+        withCredentials: true,
+      });
+      setFeed(res.data.data);
+    }
+    fetchFeed();
+  }, []);
+
   const {
     isDarkMode,
-    themeColor: { color, navButtons },
+    themeColor: { color, backgroundColor },
   } = useTheme();
   return (
     <Box sx={{ bgcolor: isDarkMode ? "black" : "white" }}>
@@ -16,7 +32,7 @@ function HomePageBody() {
           display: "flex",
           justifyContent: "space-around",
           pt: "30px",
-          px: '30px',
+          px: "30px",
           maxWidth: "1650px",
           m: "auto",
         }}
@@ -24,7 +40,7 @@ function HomePageBody() {
         <Box className="left-sidebar" sx={{ maxWidth: "400px" }}>
           <Box
             sx={{
-              bgcolor: navButtons,
+              bgcolor: backgroundColor,
               height: "350px",
               borderRadius: "10px",
               p: "20px",
@@ -39,11 +55,31 @@ function HomePageBody() {
         </Box>
         <Box className="middle-feed" sx={{ ml: "15px", mr: "15px" }}>
           <Feed />
+          <Box
+            className="feed-posts"
+            sx={{ mb: "100px", width: "700px" }}
+          >
+            {feed.map((post) => (
+              <Box sx={{ pt: "30px" }}>
+                <Post
+                  key={post.id}
+                  id={post.id}
+                  userId={post.userId}
+                  firstName={post.user.firstName}
+                  lastName={post.user.lastName}
+                  media={post.media}
+                  content={post.content}
+                  likes={post.likes}
+                  comments={post.comments}
+                />
+              </Box>
+            ))}
+          </Box>
         </Box>
         <Box className="right-sidebar" sx={{ maxWidth: "400px" }}>
           <Box
             sx={{
-              bgcolor: navButtons,
+              bgcolor: backgroundColor,
               height: "500px",
               borderRadius: "10px",
               p: "20px",
