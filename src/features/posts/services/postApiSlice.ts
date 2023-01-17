@@ -57,7 +57,7 @@ export const postApiSlice = apiSlice.injectEndpoints({
         method: "DELETE",
       }),
     }),
-    getPostsByUser: builder.query<BasePostModel[], number>({
+    getPostsByUser: builder.query<{ data: BasePostModel[] }, number>({
       query: (userId) => ({
         url: `/users/${userId}/posts`,
         method: "GET",

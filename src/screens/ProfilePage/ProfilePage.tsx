@@ -60,8 +60,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      setPostList(data?.data);
-      console.log("sacavo", data);
+      setPostList(data.data);
     }
   }, []);
   return (
