@@ -66,6 +66,7 @@ const NavSidebar = ({ theme }: NavSidebarProps) => {
         justifyContent: "center",
         display: "flex",
         alignItems: "center",
+        borderRadius: "0px",
       }}
     >
       <MenuList
