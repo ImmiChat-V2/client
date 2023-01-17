@@ -3,7 +3,7 @@ import {
   BaseCommentModel,
   UpdateCommentProps,
   DeleteCommentProps,
-  CreateCommentRequestModel,
+  CreateCommentProps,
   UsersLikedCommentModel,
 } from "../models/Comments.model";
 
@@ -23,12 +23,9 @@ export const commentApiSlice = apiSlice.injectEndpoints({
         body,
       }),
     }),
-    createComment: builder.mutation<
-      BaseCommentModel,
-      CreateCommentRequestModel
-    >({
-      query: (body) => ({
-        url: `/posts/${body.postId}/comments`,
+    createComment: builder.mutation<BaseCommentModel, CreateCommentProps>({
+      query: ({ postId, body }) => ({
+        url: `/posts/${postId}/comments`,
         method: "POST",
         body,
       }),
