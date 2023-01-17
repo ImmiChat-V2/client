@@ -18,6 +18,7 @@ const ChatMessage = ({
   media,
 }: ChatMessageProps) => {
   const [hover, setHover] = useState(false);
+  const justifyContent = isAuthUser ? "flex-end" : "flex-start";
   const handleHover = (): void => {
     setHover(!hover);
   };
@@ -48,8 +49,16 @@ const ChatMessage = ({
       <MoreVertIcon />
     </Box>
   );
+
   return (
-    <Box component="div" sx={{ display: "flex", flexDirection: "column" }}>
+    <Box
+      component="div"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent,
+      }}
+    >
       <Box
         onMouseEnter={() => handleHover()}
         onMouseLeave={() => handleHover()}
@@ -66,12 +75,12 @@ const ChatMessage = ({
         {!isAuthUser && avatarComponent}
         <Box
           component="div"
-          sx={{ display: "flex", flexDirection: "column", width: "40%" }}
+          sx={{ display: "flex", flexDirection: "column", width: "100%" }}
         >
           <Box
             component="div"
             sx={{
-              width: "100%",
+              maxWidth: "40%",
               borderRadius: "10px",
               display: "flex",
               backgroundColor,
@@ -80,7 +89,14 @@ const ChatMessage = ({
               boxSizing: "border-box",
             }}
           >
-            <Typography sx={{ fontSize: "16px", color, padding: "10px" }}>
+            <Typography
+              sx={{
+                fontSize: "16px",
+                color,
+                padding: "10px",
+                wordBreak: "break-word",
+              }}
+            >
               {content}
             </Typography>
           </Box>
