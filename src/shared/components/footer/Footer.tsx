@@ -9,7 +9,7 @@ function Footer() {
   } = useTheme();
 
   return (
-    <Box sx={{ position: "absolute", bottom: "0", width: "100%" }}>
+    <Box sx={{ position: "relative", bottom: "0", width: "100%" }}>
       <Box
         component="footer"
         sx={{

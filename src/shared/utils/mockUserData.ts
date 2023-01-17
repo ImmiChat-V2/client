@@ -1,6 +1,6 @@
 import { UserProfileInfoType } from "features/userprofile/models/UserProfileModel";
 
-const mockFriendList = [
+export const mockFriendList = [
   {
     id: 1,
     email: "fdsjsdf@mfds.com",
@@ -74,7 +74,7 @@ const mockFriendList = [
     lastName: "Food",
   },
 ];
-const mockUserData: UserProfileInfoType = {
+export const mockUserData: UserProfileInfoType = {
   id: 1,
   email: "fdsjsdf@mfds.com",
   firstName: "Extam",
@@ -84,5 +84,3 @@ const mockUserData: UserProfileInfoType = {
   language: "english",
   friends: mockFriendList,
 };
-
-export default mockUserData;
