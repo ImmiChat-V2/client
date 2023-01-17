@@ -25,7 +25,7 @@ function PostBody({ content, media }: BasePostBodyType) {
             display: "block",
           }}
           src={getSecureUrl(media!)}
-        ></Box>
+        />
       </Box>
     </>
   );
