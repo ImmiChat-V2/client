@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Box, Grid } from "@mui/material";
 import useTheme from "features/theme/useTheme";
 import { ProfileCard } from "features/userprofile/components/ProfileCard";
@@ -7,6 +8,11 @@ import { SharePost } from "shared/components";
 import { Navbar } from "shared/components/navbar";
 import { Footer } from "shared/components/footer";
 import ConnectionList from "shared/components/ConnectionList";
+import { useGetPostsByUserQuery } from "features/posts/services/postApiSlice";
+import { useSelector } from "react-redux";
+import { getCurrentUser } from "features/auth/authSlice";
+import Post from "shared/components/post/Post";
+import { BasePostModel } from "features/posts/models/Posts.model";
 
 export const mockFriendList = [
   {
@@ -33,12 +39,21 @@ export const mockFriendList = [
 ];
 
 const ProfilePage = () => {
+  const [postList, setPostList] = useState<BasePostModel[]>([]);
   const { themeColor } = useTheme();
+  const currentUser = useSelector(getCurrentUser);
+  const { data, isSuccess } = useGetPostsByUserQuery(currentUser.id);
 
+  useEffect(() => {
+    if (isSuccess) {
+      setPostList(data?.data);
+      console.log("sacavo", data);
+    }
+  }, []);
   return (
     <Box>
       <Navbar />
-      <Grid container spacing={2} columns={24}>
+      <Grid container columns={24}>
         <Grid item display={{ xs: "none", md: "flex" }} md={4} lg={3}>
           <NavSidebar theme={themeColor} />
         </Grid>
@@ -49,6 +64,23 @@ const ProfilePage = () => {
             isCurrentUser={true}
           />
           <SharePost profilePic="" theme={themeColor} />
+          <>
+            {postList &&
+              postList.map((value: BasePostModel) => {
+                return (
+                  <Post
+                    id={value.id}
+                    userId={value.userId}
+                    profilePic={currentUser.profilePic}
+                    content={value.content}
+                    media={value.media}
+                    timestamp={value.updatedAt}
+                    firstName={currentUser.firstName}
+                    lastName={currentUser.lastName}
+                  />
+                );
+              })}
+          </>
         </Grid>
         <Grid item display={{ xs: "none", md: "flex" }} md={5} lg={3}>
           <ConnectionList theme={themeColor} connectionList={mockFriendList} />
