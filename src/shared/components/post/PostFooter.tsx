@@ -9,11 +9,13 @@ function PostFooter({ id, userId, likes, comments }: BasePostFooterType) {
     themeColor: { color, navButtons },
   } = useTheme();
   const [showComment, setShowComment] = useState(false);
-  const [displayLikeCount, setDisplayLikeCount] = useState(likes.length)
+  const [displayLikeCount, setDisplayLikeCount] = useState(likes.length);
   const [isLiked, setIsLiked] = useState(false);
   const handleLikeClick = () => {
     setIsLiked(!isLiked);
-    isLiked ? setDisplayLikeCount(displayLikeCount - 1) : setDisplayLikeCount(displayLikeCount + 1);
+    isLiked
+      ? setDisplayLikeCount(displayLikeCount - 1)
+      : setDisplayLikeCount(displayLikeCount + 1);
   };
 
   const handleCommentClick = () => {
@@ -72,7 +74,9 @@ function PostFooter({ id, userId, likes, comments }: BasePostFooterType) {
           ) : (
             <Typography sx={{color}}>{displayLikeCount} Likes</Typography>
           )} */}
-          <Typography sx={{color}}>{displayLikeCount} {(displayLikeCount === 1) ? "Like" : "Likes"}</Typography>
+          <Typography sx={{ color }}>
+            {displayLikeCount} {displayLikeCount === 1 ? "Like" : "Likes"}
+          </Typography>
         </Box>
         <Box component="span" sx={{ display: "flex", alignItems: "center" }}>
           {/* {comments.length === 1 ? (
@@ -80,7 +84,9 @@ function PostFooter({ id, userId, likes, comments }: BasePostFooterType) {
           ) : (
             <Typography sx={{color}}>{commentCount} Comments</Typography>
           )} */}
-          <Typography sx={{color}}>{comments.length} {(comments.length === 1) ? "Comment" : "Comments"}</Typography>
+          <Typography sx={{ color }}>
+            {comments.length} {comments.length === 1 ? "Comment" : "Comments"}
+          </Typography>
           <IconButton
             aria-label="comment-post"
             sx={{
