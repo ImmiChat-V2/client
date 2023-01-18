@@ -8,12 +8,12 @@ import { BasePostType } from "shared/types";
 import ShareComment from "../ShareComment/ShareComment";
 import axios from "axios";
 
-type PostTopProps = {
+type PostProps = {
   basePostProps: BasePostType;
   onClick?: (value: any) => void;
 };
 
-function Post({ basePostProps, onClick }: PostTopProps) {
+function Post({ basePostProps, onClick }: PostProps) {
   const {
     id,
     userId,
@@ -133,7 +133,7 @@ function Post({ basePostProps, onClick }: PostTopProps) {
         >
           <PostTop basePostTopProps={postTopProps} onClick={openDeleteModal} />
           <PostBody content={content} media={media} />
-          <hr style={{ marginTop: "20px" }}></hr>
+          <Divider sx={{ mt: "20px" }}></Divider>
           <PostFooter
             id={id}
             userId={userId}

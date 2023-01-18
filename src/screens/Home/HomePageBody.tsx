@@ -15,8 +15,7 @@ function HomePageBody() {
         sx={{
           display: "flex",
           justifyContent: "space-around",
-          pt: "30px",
-          px: "30px",
+          p: "30px 30px 0 30px",
           maxWidth: "1650px",
           m: "auto",
         }}
