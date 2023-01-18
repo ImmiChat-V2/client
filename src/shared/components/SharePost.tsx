@@ -16,14 +16,15 @@ import { BaseCreatePostmodel } from "../types/SharePostTypes";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { getCurrentUser } from "features/auth/authSlice";
+import { BaseFeedType } from "shared/types";
 
 type SharePostProps = {
   readonly profilePic?: string;
   theme: any;
-  onClick?: (value: any) => void;
+  onPost?: (value: any) => void;
 };
 
-const SharePost = ({ profilePic, theme, onClick }: SharePostProps) => {
+const SharePost = ({ profilePic, theme, onPost }: SharePostProps) => {
   const user = useSelector(getCurrentUser);
 
   const { form, handleChange, resetForm } = useForm<BaseCreatePostmodel>({
@@ -44,7 +45,7 @@ const SharePost = ({ profilePic, theme, onClick }: SharePostProps) => {
     const res = await axios.post(endPoint, postData, {
       withCredentials: true,
     });
-    const newPostInfo = {
+    const newPostInfo: BaseFeedType = {
       ...res.data.data,
       user: {
         firstName: user.firstName,
@@ -56,7 +57,7 @@ const SharePost = ({ profilePic, theme, onClick }: SharePostProps) => {
     };
     onRemove();
     resetForm();
-    onClick?.(newPostInfo);
+    onPost?.(newPostInfo);
   };
 
   return (
