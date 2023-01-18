@@ -10,10 +10,10 @@ import axios from "axios";
 
 type PostProps = {
   basePostProps: BasePostType;
-  onClick?: (value: any) => void;
+  onDelete?: (value: any) => void;
 };
 
-function Post({ basePostProps, onClick }: PostProps) {
+function Post({ basePostProps, onDelete }: PostProps) {
   const {
     id,
     userId,
@@ -51,7 +51,6 @@ function Post({ basePostProps, onClick }: PostProps) {
     const response = await axios.post(endpoint, value, {
       withCredentials: true,
     });
-    console.log(response);
   };
 
   const deletePostHandler = async (id: number) => {
@@ -60,11 +59,10 @@ function Post({ basePostProps, onClick }: PostProps) {
       withCredentials: true,
     });
 
-    onClick?.(id);
+    onDelete?.(id);
   };
 
   const openDeleteModal = () => {
-    console.log("Open modal");
     setDeleteModalOpen(true);
   };
 
@@ -133,7 +131,7 @@ function Post({ basePostProps, onClick }: PostProps) {
         >
           <PostTop basePostTopProps={postTopProps} onClick={openDeleteModal} />
           <PostBody content={content} media={media} />
-          <Divider sx={{ mt: "20px" }}></Divider>
+          <Divider sx={{ mt: "20px" }} />
           <PostFooter
             id={id}
             userId={userId}

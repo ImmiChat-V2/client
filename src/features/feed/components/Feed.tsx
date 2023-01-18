@@ -28,7 +28,7 @@ function Feed() {
         <SharePost
           profilePic=""
           theme={{ color, navButtons, backgroundColor }}
-          onClick={(data: any) => setFeed([data, ...feed])}
+          onPost={(data: any) => setFeed([data, ...feed])}
         />
         <Box className="feed-posts" sx={{ mb: "100px" }}>
           {feed.map((post) => (
@@ -46,7 +46,7 @@ function Feed() {
                   comments: post.comments,
                   timestamp: new Date(post.updatedAt),
                 }}
-                onClick={(id: any) => setFeed(feed.filter((p) => p.id !== id))}
+                onDelete={(id: any) => setFeed(feed.filter((p) => p.id !== id))}
               />
             </Box>
           ))}
