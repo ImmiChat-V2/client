@@ -35,15 +35,18 @@ function Feed() {
             <Box sx={{ pt: "30px" }}>
               <Post
                 key={post.id}
-                id={post.id}
-                userId={post.userId}
-                firstName={post.user.firstName}
-                lastName={post.user.lastName}
-                media={post.media}
-                content={post.content}
-                likes={post.likes}
-                comments={post.comments}
-                timestamp={new Date(post.updatedAt)}
+                basePostProps={{
+                  id: post.id,
+                  userId: post.userId,
+                  firstName: post.user.firstName,
+                  lastName: post.user.lastName,
+                  media: post.media,
+                  content: post.content,
+                  likes: post.likes,
+                  comments: post.comments,
+                  timestamp: new Date(post.updatedAt),
+                }}
+                onClick={(id: any) => setFeed(feed.filter((p) => p.id !== id))}
               />
             </Box>
           ))}

@@ -1,25 +1,33 @@
-import { Box, IconButton, Menu, MenuItem } from "@mui/material";
+import { Box, IconButton, Menu, MenuItem, useRadioGroup } from "@mui/material";
 import { MoreVert, Delete, Edit, Share } from "@mui/icons-material/";
 import { UserProfileWidget } from "shared/components";
 import { BasePostTopType } from "shared/types";
 import useTheme from "features/theme/useTheme";
 import useAnchor from "shared/hooks/useAnchor";
 import UserProfileHoverCard from "../UserProfileHoverCard/UserProfileHoverCard";
+import { useSelector } from "react-redux";
+import { getCurrentUser } from "features/auth/authSlice";
 
 const options = [
   { title: "Edit", icon: Edit },
   { title: "Share", icon: Share },
 ];
 
-function PostTop({
-  profilePic,
-  firstName,
-  lastName,
-  timestamp,
-}: BasePostTopType) {
+type PostTopProps = {
+  basePostTopProps: BasePostTopType;
+  onClick?: () => void;
+};
+
+function PostTop({ basePostTopProps, onClick }: PostTopProps) {
   const {
     themeColor: { color, navButtons },
   } = useTheme();
+
+  const { userId, profilePic, firstName, lastName, timestamp } =
+    basePostTopProps;
+
+  // console.log(onClick);
+  const user = useSelector(getCurrentUser);
 
   const {
     anchorEl: menuAnchorElement,
@@ -27,6 +35,8 @@ function PostTop({
     handleOpen: handleMenuOpen,
     handleClose: handleMenuClose,
   } = useAnchor();
+
+  const handleDeleteClick = () => {};
 
   return (
     <>
@@ -58,9 +68,14 @@ function PostTop({
             />
           </UserProfileHoverCard>
           <Box component="span" sx={{ display: "flex", cursor: "pointer" }}>
-            <IconButton sx={{ backgroundColor: navButtons, mr: "7px" }}>
-              <Delete sx={{ color }} />
-            </IconButton>
+            {user.id === userId && (
+              <IconButton
+                sx={{ backgroundColor: navButtons, mr: "7px" }}
+                onClick={onClick}
+              >
+                <Delete sx={{ color }} />
+              </IconButton>
+            )}
             <IconButton
               aria-label="more"
               id="long-button"
