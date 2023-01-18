@@ -10,6 +10,7 @@ import { Footer } from "shared/components/footer";
 import ConnectionList from "shared/components/ConnectionList";
 import { BaseComment } from "features/comments/components";
 import { BaseCommentModel } from "features/comments/models/Comments.model";
+import { BasePostModel } from "shared/types/SharePostTypes";
 
 const mockCommentData: BaseCommentModel = {
   id: 1,
@@ -53,44 +54,71 @@ export const mockFriendList = [
 ];
 
 const ProfilePage = () => {
+  const { id } = useParams();
+  const paramId = Number(id);
   const [postList, setPostList] = useState<BasePostModel[]>([]);
+  const userProfile = useGetUserProfileQuery(paramId);
+  console.log(userProfile);
+  const currentUserId = userProfile.data?.data.id as unknown as number;
   const { themeColor } = useTheme();
-  const currentUser = useSelector(getCurrentUser);
-  const { data, isSuccess } = useGetPostsByUserQuery(currentUser.id);
+  const { data, isSuccess } = useGetPostsByUserQuery(currentUserId);
 
   useEffect(() => {
     if (isSuccess) {
       setPostList(data.data);
+      console.log("somsing", data.data);
     }
   }, [isSuccess]);
   return (
     <Box sx={{ bgcolor: themeColor.backgroundColor }}>
       <Navbar />
-      <Box>
-        <Grid container spacing={2} columns={24}>
-          <Grid item display={{ xs: "none", md: "flex" }} md={5} lg={4} xl={3}>
-            <NavSidebar theme={themeColor} />
-          </Grid>
-          <Grid item xs={24} md={14} lg={16} xl={17}>
-            <ProfileCard
-              user={mockUserData}
-              theme={themeColor}
-              isCurrentUser={true}
-            />
-            <BaseComment commentData={mockCommentData} />
-            <SharePost profilePic="" theme={themeColor} />
-          </Grid>
-          <Grid item display={{ xs: "none", md: "flex" }} md={5} lg={4} xl={4}>
-            <ConnectionList
-              theme={themeColor}
-              connectionList={mockFriendList}
-            />
-          </Grid>
+      <Grid container columns={24}>
+        <Grid item display={{ xs: "none", md: "flex" }} md={4} lg={3}>
+          <NavSidebar theme={themeColor} />
         </Grid>
-      </Box>
+        <Grid item xs={24} md={15} lg={18}>
+          <ProfileCard
+            user={mockUserData}
+            theme={themeColor}
+            isCurrentUser={true}
+          />
+          <SharePost profilePic="" theme={themeColor} />
+          <>
+            {postList.map((value: BasePostModel) => {
+              return (
+                <Post
+                  id={value.id}
+                  userId={value.userId}
+                  profilePic={currentUser.profilePic}
+                  content={value.content}
+                  media={value.media}
+                  timestamp={value.updatedAt}
+                  firstName={currentUser.firstName}
+                  lastName={currentUser.lastName}
+                />
+              );
+            })}
+          </>
+        </Grid>
+        <Grid item display={{ xs: "none", md: "flex" }} md={5} lg={3}>
+          <ConnectionList theme={themeColor} connectionList={mockFriendList} />
+        </Grid>
+      
       <Footer />
     </Box>
   );
 };
 
 export default ProfilePage;
+function useParams(): { id: any; } {
+  throw new Error("Function not implemented.");
+}
+
+function useGetUserProfileQuery(paramId: number) {
+  throw new Error("Function not implemented.");
+}
+
+function useGetPostsByUserQuery(currentUserId: number): { data: any; isSuccess: any; } {
+  throw new Error("Function not implemented.");
+}
+
