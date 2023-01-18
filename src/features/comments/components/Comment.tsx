@@ -120,92 +120,62 @@ const BaseComment = (commentData: any) => {
               sx={{
                 display: "flex",
                 flexDirection: "row",
+                justifyContent: "space-between",
+                width: "100%",
               }}
             >
-              <IconButton
-                disableRipple
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                }}
+              >
+                <Favorite
+                  sx={{
+                    fontSize: "14px",
+                    color: themeColor.color,
+                    "&:hover": { color: "#E0115F" },
+                  }}
+                />
+              </IconButton>
+              <Typography
                 sx={{
                   display: "flex",
                   justifyContent: "center",
-                  p: "0 3px 0 0",
-                  "&:hover": {
-                    bgcolor: themeColor.backgroundColor,
-                  },
+                  fontSize: "10px",
+                  mt: "5px",
                 }}
               >
-                <IconButton
-                  disableRipple
-                  sx={{
-                    fontSize: "10px",
-                    display: "flex",
-                    justifyContent: "center",
-                    p: "0 3px 0 0",
-                    "&:hover": {
-                      bgcolor: themeColor.backgroundColor,
-                    },
-                  }}
-                >
-                  {firstName} {lastName}
-                </Typography>
-                <Typography
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    fontSize: "12px",
-                    alignItems: "center",
-                  }}
-                >
-                  {likes.length}
-                </Typography>
-
-                <Box
+                {likes.length}
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <Button
+                sx={{
+                  py: "5px",
+                  color: themeColor.color,
+                  mx: "10px",
+                  "&:hover": { bgcolor: "transparent" },
+                }}
+              >
+                <AddComment
                   sx={{
                     fontSize: "13px",
                     mt: "2px",
                     mr: "5px",
                     color: themeColor.color,
                   }}
-                >
-                  <Button
-                    sx={{
-                      py: "5px",
-                      color: themeColor.color,
-                      mx: "10px",
-                      "&:hover": { bgcolor: "transparent" },
-                    }}
-                  >
-                    <AddComment
-                      sx={{
-                        fontSize: "13px",
-                        mt: "2px",
-                        mr: "5px",
-                        color: themeColor.color,
-                      }}
-                    />
-                    <Typography
-                      sx={{ fontSize: "10px", textTransform: "none" }}
-                    >
-                      Reply
-                    </Typography>
-                  </Button>
-                </Box>
-              </Box>
-              <Box>
-                <IconButton
-                  disableRipple
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    color: themeColor.color,
-                    p: "0 3px 0 0",
-                    "&:hover": {
-                      color: "red",
-                    },
-                  }}
-                >
-                  <Delete />
-                </IconButton>
-              </Box>
+                />
+                <Typography sx={{ fontSize: "10px", textTransform: "none" }}>
+                  Reply
+                </Typography>
+              </Button>
             </Box>
           </Box>
         </CardContent>
