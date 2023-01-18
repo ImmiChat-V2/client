@@ -12,9 +12,7 @@ function Footer() {
     <Box
       component="footer"
       sx={{
-        pl: "70px",
-        pr: "40px",
-        pt: "20px",
+        p: "20px 40px 0 70px",
         height: "170px",
         width: "auto",
         backgroundColor,
