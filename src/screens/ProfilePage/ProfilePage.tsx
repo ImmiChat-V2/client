@@ -4,6 +4,32 @@ import { ProfileCard } from "features/userprofile/components/ProfileCard";
 import { NavSidebar } from "shared/components/NavSidebar";
 import { mockUserData } from "shared/utils";
 import { SharePost } from "shared/components";
+import BaseComment from "features/comments/components/Comment";
+
+const mockComment = [
+  {
+    id: 1,
+    media: null,
+    content: "strangalang",
+    updatedAt: new Date(),
+    user: {
+      firstName: "foyst",
+      lastName: "second",
+      profilePic: null,
+    },
+  },
+  {
+    id: 1,
+    media: null,
+    content: "strangalang",
+    updatedAt: new Date(),
+    user: {
+      firstName: "foyst",
+      lastName: "second",
+      profilePic: null,
+    },
+  },
+];
 
 const ProfilePage = () => {
   const { themeColor } = useTheme();
@@ -20,6 +46,9 @@ const ProfilePage = () => {
           isCurrentUser={true}
         />
         <SharePost profilePic="" theme={themeColor} />
+        {mockComment.map((value, index) => (
+          <BaseComment key={index} commentData={value} />
+        ))}
       </Grid>
     </Grid>
   );

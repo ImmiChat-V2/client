@@ -8,17 +8,15 @@ import {
   Button,
   Avatar,
 } from "@mui/material";
-import { AddComment, Favorite } from "@mui/icons-material";
+import { AddComment, Delete, Favorite } from "@mui/icons-material";
 import useTheme from "features/theme/useTheme";
 import { getSecureUrl } from "shared/utils/cloudinaryUtil";
 import { customTimeFormat } from "shared/utils";
 
-const BaseComment = ({ commentData }: any) => {
-  const { id, media, content, updatedAt, user } = commentData;
+const BaseComment = (commentData: any) => {
+  const { id, media, content, updatedAt, user } = commentData.commentData;
   const { firstName, lastName, profilePic } = user;
   const [likes, setLikes] = useState<any>([]);
-  // we have to use the comment userId and hit get profile endpoint to get profile pic
-  // get single user from db
   const datetime: string = customTimeFormat(updatedAt);
   const { themeColor } = useTheme();
 
@@ -83,8 +81,6 @@ const BaseComment = ({ commentData }: any) => {
             sx={{
               display: "flex",
               flexDirection: "row",
-              justifyContent: "flex-start",
-              maxWidth: "30%",
               mt: "10px",
             }}
           >
@@ -92,65 +88,93 @@ const BaseComment = ({ commentData }: any) => {
               sx={{
                 display: "flex",
                 flexDirection: "row",
+                justifyContent: "space-between",
+                width: "100%",
               }}
             >
-              <IconButton
-                disableRipple
+              <Box
                 sx={{
                   display: "flex",
-                  justifyContent: "center",
-                  p: "0 3px 0 0",
-                  "&:hover": {
-                    bgcolor: themeColor.backgroundColor,
-                  },
+                  flexDirection: "row",
                 }}
               >
-                <Favorite
+                <IconButton
+                  disableRipple
                   sx={{
-                    fontSize: "14px",
-                    color: themeColor.color,
-                    "&:hover": { color: "#E0115F" },
+                    display: "flex",
+                    justifyContent: "center",
+                    p: "0 3px 0 0",
+                    "&:hover": {
+                      bgcolor: themeColor.backgroundColor,
+                    },
                   }}
-                />
-              </IconButton>
-              <Typography
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  fontSize: "10px",
-                  mt: "5px",
-                }}
-              >
-                {likes.length}
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              <Button
-                sx={{
-                  py: "5px",
-                  color: themeColor.color,
-                  mx: "10px",
-                  "&:hover": { bgcolor: "transparent" },
-                }}
-              >
-                <AddComment
+                >
+                  <Favorite
+                    sx={{
+                      fontSize: "14px",
+                      color: themeColor.color,
+                      "&:hover": { color: "#E0115F" },
+                    }}
+                  />
+                </IconButton>
+                <Typography
                   sx={{
-                    fontSize: "13px",
-                    mt: "2px",
-                    mr: "5px",
-                    color: themeColor.color,
+                    display: "flex",
+                    justifyContent: "center",
+                    fontSize: "12px",
+                    alignItems: "center",
                   }}
-                />
-                <Typography sx={{ fontSize: "10px", textTransform: "none" }}>
-                  Reply
+                >
+                  {likes.length}
                 </Typography>
-              </Button>
+
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}
+                >
+                  <Button
+                    sx={{
+                      py: "5px",
+                      color: themeColor.color,
+                      mx: "10px",
+                      "&:hover": { bgcolor: "transparent" },
+                    }}
+                  >
+                    <AddComment
+                      sx={{
+                        fontSize: "13px",
+                        mt: "2px",
+                        mr: "5px",
+                        color: themeColor.color,
+                      }}
+                    />
+                    <Typography
+                      sx={{ fontSize: "10px", textTransform: "none" }}
+                    >
+                      Reply
+                    </Typography>
+                  </Button>
+                </Box>
+              </Box>
+              <Box>
+                <IconButton
+                  disableRipple
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    color: themeColor.color,
+                    p: "0 3px 0 0",
+                    "&:hover": {
+                      color: "red",
+                    },
+                  }}
+                >
+                  <Delete />
+                </IconButton>
+              </Box>
             </Box>
           </Box>
         </CardContent>
