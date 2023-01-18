@@ -57,6 +57,7 @@ const ChatMessage = ({
         display: "flex",
         flexDirection: "column",
         justifyContent,
+        m: "20px 0 0 0",
       }}
     >
       <Box
@@ -69,18 +70,18 @@ const ChatMessage = ({
           margin: 0,
           padding: 0,
           boxSizing: "border-box",
+          justifyContent,
         }}
       >
         {hover && isAuthUser && hoverOptionsComponent}
         {!isAuthUser && avatarComponent}
         <Box
           component="div"
-          sx={{ display: "flex", flexDirection: "column", width: "100%" }}
+          sx={{ display: "flex", flexDirection: "column", maxWidth: "40%" }}
         >
           <Box
             component="div"
             sx={{
-              maxWidth: "40%",
               borderRadius: "10px",
               display: "flex",
               backgroundColor,
