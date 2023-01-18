@@ -1,25 +1,9 @@
-import { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { Feed } from "features/feed/components";
 import useTheme from "features/theme/useTheme";
-import Post from "shared/components/post/Post";
-import axios from "axios";
 import "./homePageBody.css";
-import { BaseFeedType } from "shared/types";
 
 function HomePageBody() {
-  const [feed, setFeed] = useState<BaseFeedType[]>([]);
-
-  useEffect(() => {
-    async function fetchFeed() {
-      const res = await axios.get("http://localhost:5000/feed", {
-        withCredentials: true,
-      });
-      setFeed(res.data.data);
-    }
-    fetchFeed();
-  }, []);
-
   const {
     isDarkMode,
     themeColor: { color, backgroundColor },
@@ -55,24 +39,6 @@ function HomePageBody() {
         </Box>
         <Box className="middle-feed" sx={{ ml: "15px", mr: "15px" }}>
           <Feed />
-          <Box className="feed-posts" sx={{ mb: "100px", width: "700px" }}>
-            {feed.map((post) => (
-              <Box sx={{ pt: "30px" }}>
-                <Post
-                  key={post.id}
-                  id={post.id}
-                  userId={post.userId}
-                  firstName={post.user.firstName}
-                  lastName={post.user.lastName}
-                  media={post.media}
-                  content={post.content}
-                  likes={post.likes}
-                  comments={post.comments}
-                  timestamp={new Date(post.updatedAt)}
-                />
-              </Box>
-            ))}
-          </Box>
         </Box>
         <Box className="right-sidebar" sx={{ maxWidth: "400px" }}>
           <Box
