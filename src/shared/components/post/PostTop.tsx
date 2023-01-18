@@ -26,7 +26,6 @@ function PostTop({ basePostTopProps, onClick }: PostTopProps) {
   const { userId, profilePic, firstName, lastName, timestamp } =
     basePostTopProps;
 
-  // console.log(onClick);
   const user = useSelector(getCurrentUser);
 
   const {
