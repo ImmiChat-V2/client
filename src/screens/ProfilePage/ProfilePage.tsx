@@ -12,7 +12,6 @@ import { useGetPostsByUserQuery } from "features/posts/services/postApiSlice";
 import { useGetUserProfileQuery } from "features/userprofile/services/userProfileApiSlice";
 import Post from "shared/components/post/Post";
 import { BasePostModel } from "features/posts/models/Posts.model";
-import { UserProfileType } from "features/userprofile/models/UserProfileModel";
 import { useParams } from "react-router-dom";
 
 export const mockFriendList = [
@@ -43,8 +42,7 @@ const ProfilePage = () => {
   const { id } = useParams();
   const paramId = Number(id);
   const [postList, setPostList] = useState<BasePostModel[]>([]);
-  const userProfile = useGetUserProfileQuery(paramId);
-  console.log(userProfile);
+  const userProfile: any = useGetUserProfileQuery(paramId);
   const currentUserId = userProfile.data?.data.id as unknown as number;
   const { themeColor } = useTheme();
   const { data, isSuccess } = useGetPostsByUserQuery(currentUserId);
