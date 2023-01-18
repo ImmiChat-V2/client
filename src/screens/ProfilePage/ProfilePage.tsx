@@ -9,10 +9,11 @@ import { Navbar } from "shared/components/navbar";
 import { Footer } from "shared/components/footer";
 import ConnectionList from "shared/components/ConnectionList";
 import { useGetPostsByUserQuery } from "features/posts/services/postApiSlice";
-import { useSelector } from "react-redux";
-import { getCurrentUser } from "features/auth/authSlice";
+import { useGetUserProfileQuery } from "features/userprofile/services/userProfileApiSlice";
 import Post from "shared/components/post/Post";
 import { BasePostModel } from "features/posts/models/Posts.model";
+import { UserProfileType } from "features/userprofile/models/UserProfileModel";
+import { useParams } from "react-router-dom";
 
 export const mockFriendList = [
   {
@@ -39,10 +40,14 @@ export const mockFriendList = [
 ];
 
 const ProfilePage = () => {
+  const { id } = useParams();
+  const paramId = Number(id);
   const [postList, setPostList] = useState<BasePostModel[]>([]);
+  const userProfile = useGetUserProfileQuery(paramId);
+  console.log(userProfile);
+  const currentUserId = userProfile.data?.data.id as unknown as number;
   const { themeColor } = useTheme();
-  const currentUser = useSelector(getCurrentUser);
-  const { data, isSuccess } = useGetPostsByUserQuery(currentUser.id);
+  const { data, isSuccess } = useGetPostsByUserQuery(currentUserId);
 
   useEffect(() => {
     if (isSuccess) {
@@ -69,12 +74,12 @@ const ProfilePage = () => {
                 <Post
                   id={value.id}
                   userId={value.userId}
-                  profilePic={currentUser.profilePic}
+                  profilePic={userProfile.data?.data.profilePic}
                   content={value.content}
                   media={value.media}
                   timestamp={value.updatedAt}
-                  firstName={currentUser.firstName}
-                  lastName={currentUser.lastName}
+                  firstName={userProfile.data!.data.firstName}
+                  lastName={userProfile.data!.data.lastName}
                 />
               );
             })}
