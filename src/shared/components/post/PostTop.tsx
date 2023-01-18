@@ -35,8 +35,6 @@ function PostTop({ basePostTopProps, onClick }: PostTopProps) {
     handleClose: handleMenuClose,
   } = useAnchor();
 
-  const handleDeleteClick = () => {};
-
   return (
     <>
       <Box
