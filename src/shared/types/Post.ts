@@ -7,11 +7,10 @@ export type BasePostType = {
   readonly timestamp?: Date;
   readonly content: string;
   readonly media?: string;
+  readonly likes: { id: number }[],
+  readonly comments: { userId: number }[]
 };
 
-export type BasePostTopType = Omit<BasePostType, "content" | "media">;
-export type BasePostBodyType = Pick<
-  BasePostType,
-  "id" | "userId" | "content" | "media"
->;
-export type BasePostFooterType = Pick<BasePostType, "id" | "userId">;
+export type BasePostTopType = Pick<BasePostType, "profilePic" | "firstName" | 'lastName' | 'timestamp'>;
+export type BasePostBodyType = Pick<BasePostType, "content" | "media">;
+export type BasePostFooterType = Pick<BasePostType, "id" | "userId" | "likes" | "comments">;

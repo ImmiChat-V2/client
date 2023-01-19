@@ -16,6 +16,8 @@ function Post({
   timestamp,
   content,
   media,
+  likes,
+  comments,
 }: BasePostType) {
   const {
     themeColor: { backgroundColor },
@@ -54,16 +56,14 @@ function Post({
         }}
       >
         <PostTop
-          id={id}
-          userId={userId}
           profilePic={profilePic}
           firstName={firstName}
           lastName={lastName}
           timestamp={timestamp}
         />
-        <PostBody id={id} userId={userId} content={content} media={media} />
+        <PostBody content={content} media={media} />
         <hr style={{ marginTop: "20px" }}></hr>
-        <PostFooter id={id} userId={userId} />
+        <PostFooter id={id} userId={userId} likes={likes} comments={comments}/>
         <ShareComment onSubmit={createCommentHandler} />
       </Box>
     </Box>
