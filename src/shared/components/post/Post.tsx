@@ -129,7 +129,7 @@ function Post({ basePostProps, onDelete }: PostProps) {
             mx: "20px",
           }}
         >
-          <PostTop basePostTopProps={postTopProps} onClick={openDeleteModal} />
+          <PostTop basePostTopProps={postTopProps} onDelete={openDeleteModal} />
           <PostBody content={content} media={media} />
           <Divider sx={{ mt: "20px" }} />
           <PostFooter
