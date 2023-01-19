@@ -15,10 +15,10 @@ const options = [
 
 type PostTopProps = {
   basePostTopProps: BasePostTopType;
-  onClick?: () => void;
+  onDelete?: () => void;
 };
 
-function PostTop({ basePostTopProps, onClick }: PostTopProps) {
+function PostTop({ basePostTopProps, onDelete }: PostTopProps) {
   const {
     themeColor: { color, navButtons },
   } = useTheme();
@@ -68,7 +68,7 @@ function PostTop({ basePostTopProps, onClick }: PostTopProps) {
             {user.id === userId && (
               <IconButton
                 sx={{ backgroundColor: navButtons, mr: "7px" }}
-                onClick={onClick}
+                onClick={onDelete}
               >
                 <Delete sx={{ color }} />
               </IconButton>
