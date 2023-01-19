@@ -61,7 +61,7 @@ const NavSidebar = ({ theme }: NavSidebarProps) => {
     <Card
       sx={{
         bgcolor: theme.backgroundColor,
-        width: "98%",
+        width: "100%",
         height: "100vh",
         justifyContent: "center",
         display: "flex",
