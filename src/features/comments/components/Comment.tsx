@@ -12,8 +12,13 @@ import { AddComment, Delete, Favorite } from "@mui/icons-material";
 import useTheme from "features/theme/useTheme";
 import { getSecureUrl } from "shared/utils/cloudinaryUtil";
 import { customTimeFormat } from "shared/utils";
+import { BaseCommentModel } from "../models/Comments.model";
 
-const BaseComment = (commentData: any) => {
+interface CommentProps {
+  commentData: BaseCommentModel;
+}
+
+const BaseComment = (commentData: CommentProps) => {
   const { id, media, content, updatedAt, user } = commentData.commentData;
   const { firstName, lastName, profilePic } = user;
   const [likes, setLikes] = useState<any>([]);

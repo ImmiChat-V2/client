@@ -1,5 +1,5 @@
 import { BaseUserModel } from "features/auth/models/User.model";
-import { ShortUserInfoType } from "features/userprofile/models/UserProfileModel";
+import { UserInfoType } from "shared/types/Feed";
 
 export type BaseCommentModel = {
   readonly id: number;
@@ -7,9 +7,10 @@ export type BaseCommentModel = {
   readonly postId: number;
   readonly media?: string;
   readonly content: string;
+  readonly likes: { id: number }[];
   readonly createdAt: Date;
   readonly updatedAt: Date;
-  readonly user: Omit<ShortUserInfoType, "id">;
+  readonly user: UserInfoType;
 };
 
 export type UpdateCommentRequestModel = Pick<
