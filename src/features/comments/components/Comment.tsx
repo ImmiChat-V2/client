@@ -30,6 +30,7 @@ const BaseComment = (commentData: any) => {
         flexDirection: "column",
         justifyContent: "flex-start",
         p: "10px 10px 0px 10px",
+        mt: "3px",
       }}
     >
       <Box sx={{ display: "flex" }}>
