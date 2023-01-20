@@ -69,21 +69,11 @@ function PostFooter({ id, userId, likes, comments }: BasePostFooterType) {
               />
             )}
           </IconButton>
-          {/* {displayLikeCount === 1 ? (
-            <Typography sx={{color}}>{displayLikeCount} Like</Typography>
-          ) : (
-            <Typography sx={{color}}>{displayLikeCount} Likes</Typography>
-          )} */}
           <Typography sx={{ color }}>
             {displayLikeCount} {displayLikeCount === 1 ? "Like" : "Likes"}
           </Typography>
         </Box>
         <Box component="span" sx={{ display: "flex", alignItems: "center" }}>
-          {/* {comments.length === 1 ? (
-            <Typography sx={{color}}>{commentCount} Comment</Typography>
-          ) : (
-            <Typography sx={{color}}>{commentCount} Comments</Typography>
-          )} */}
           <Typography sx={{ color }}>
             {comments.length} {comments.length === 1 ? "Comment" : "Comments"}
           </Typography>

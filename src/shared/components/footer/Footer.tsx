@@ -9,7 +9,6 @@ function Footer() {
   } = useTheme();
 
   return (
-    // <Box sx={{ position: "absolute", bottom: "0", width: "100%" }}>
       <Box
         component="footer"
         sx={{
@@ -84,7 +83,6 @@ function Footer() {
           </Typography>
         </Box>
       </Box>
-    // </Box>
   );
 }
 
