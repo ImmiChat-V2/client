@@ -55,7 +55,7 @@ function Post({ basePostProps, onDelete }: PostProps) {
 
   const deletePostHandler = async (id: number) => {
     const endpoint = process.env.REACT_APP_BASE_URL + `/posts/${id}`;
-    const response = await axios.delete(endpoint, {
+    await axios.delete(endpoint, {
       withCredentials: true,
     });
 
@@ -132,12 +132,7 @@ function Post({ basePostProps, onDelete }: PostProps) {
           <PostTop basePostTopProps={postTopProps} onDelete={openDeleteModal} />
           <PostBody content={content} media={media} />
           <Divider sx={{ mt: "20px" }} />
-          <PostFooter
-            id={id}
-            userId={userId}
-            likes={likes}
-            comments={comments}
-          />
+          <PostFooter id={id} likes={likes} comments={comments} />
           <ShareComment onSubmit={createCommentHandler} />
         </Box>
       </Box>
