@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Box } from "@mui/material";
+import { useState } from "react";
+import { Box, Button, Modal, Typography, Divider } from "@mui/material";
 import PostTop from "./PostTop";
 import PostBody from "./PostBody";
 import PostFooter from "./PostFooter";
@@ -7,26 +7,26 @@ import useTheme from "features/theme/useTheme";
 import { BasePostType } from "shared/types";
 import ShareComment from "../ShareComment/ShareComment";
 import axios from "axios";
-import { BaseCommentModel } from "features/comments/models/Comments.model";
-import { Comment } from "features/comments/components";
-import { useSelector } from "react-redux";
-import { getCurrentUser } from "features/auth/authSlice";
 
 type PostProps = {
   basePostProps: BasePostType;
   onDelete?: (value: any) => void;
 };
 
-function Post({
-  id,
-  userId,
-  profilePic,
-  firstName,
-  lastName,
-  timestamp,
-  content,
-  media,
-}: BasePostType) {
+function Post({ basePostProps, onDelete }: PostProps) {
+  const {
+    id,
+    userId,
+    profilePic,
+    firstName,
+    lastName,
+    timestamp,
+    content,
+    media,
+    likes,
+    comments,
+  } = basePostProps;
+
   const {
     themeColor: { backgroundColor },
   } = useTheme();
@@ -39,9 +39,10 @@ function Post({
     lastName,
     timestamp,
   };
-  const [commentList, setCommentList] = useState<BaseCommentModel[]>([]);
-  const data = useSelector(getCurrentUser);
 
+  // The idea is that the Post component will handle the state of its comments
+  // When the CommentUI is built out,
+  // Update this handler to push the new comment to the commentstate
   const createCommentHandler = async (value: {
     content: string;
     media: string | null;
@@ -50,7 +51,6 @@ function Post({
     const response = await axios.post(endpoint, value, {
       withCredentials: true,
     });
-    setCommentList([...commentList, response.data.data]);
   };
 
   const deletePostHandler = async (id: number) => {
@@ -74,18 +74,6 @@ function Post({
     setDeleteModalOpen(false);
     deletePostHandler(id);
   };
-
-  const getAllComments = async () => {
-    const endpoint = process.env.REACT_APP_BASE_URL + `/posts/${id}/comments`;
-    const response = await axios.get(endpoint, {
-      withCredentials: true,
-    });
-    setCommentList(response.data.data);
-  };
-
-  useEffect(() => {
-    getAllComments();
-  }, []);
 
   return (
     <>
@@ -152,25 +140,6 @@ function Post({
           />
           <ShareComment onSubmit={createCommentHandler} />
         </Box>
-        <PostTop
-          id={id}
-          userId={userId}
-          profilePic={profilePic}
-          firstName={firstName}
-          lastName={lastName}
-          timestamp={timestamp}
-        />
-        <PostBody id={id} userId={userId} content={content} media={media} />
-        <hr style={{ marginTop: "20px" }}></hr>
-        <PostFooter id={id} userId={userId} />
-        {commentList.map((value) => {
-          return (
-            <>
-              <Comment commentData={value} />
-            </>
-          );
-        })}
-        <ShareComment onSubmit={createCommentHandler} />
       </Box>
     </>
   );
