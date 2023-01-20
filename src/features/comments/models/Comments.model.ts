@@ -1,4 +1,5 @@
 import { BaseUserModel } from "features/auth/models/User.model";
+import { ShortUserInfoType } from "features/userprofile/models/UserProfileModel";
 
 export type BaseCommentModel = {
   readonly id: number;
@@ -8,6 +9,7 @@ export type BaseCommentModel = {
   readonly content: string;
   readonly createdAt: Date;
   readonly updatedAt: Date;
+  readonly user: Omit<ShortUserInfoType, "id">;
 };
 
 export type UpdateCommentRequestModel = Pick<
@@ -15,7 +17,6 @@ export type UpdateCommentRequestModel = Pick<
   "media" | "content"
 >;
 export type DeleteCommentRequestModel = Pick<BaseCommentModel, "userId">;
-
 export type CreateCommentRequestModel = Omit<
   BaseCommentModel,
   "id" | "createdAt" | "updatedAt"
