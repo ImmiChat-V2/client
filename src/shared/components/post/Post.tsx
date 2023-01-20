@@ -75,6 +75,18 @@ function Post({
     deletePostHandler(id);
   };
 
+  const getAllComments = async () => {
+    const endpoint = process.env.REACT_APP_BASE_URL + `/posts/${id}/comments`;
+    const response = await axios.get(endpoint, {
+      withCredentials: true,
+    });
+    setCommentList(response.data.data);
+  };
+
+  useEffect(() => {
+    getAllComments();
+  }, []);
+
   return (
     <>
       <Modal
