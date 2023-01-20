@@ -14,7 +14,7 @@ import { getSecureUrl } from "shared/utils/cloudinaryUtil";
 import { customTimeFormat } from "shared/utils";
 import { BaseCommentModel } from "../models/Comments.model";
 
-interface CommentProps {
+type CommentProps {
   commentData: BaseCommentModel;
 }
 
