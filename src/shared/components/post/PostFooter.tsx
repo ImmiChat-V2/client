@@ -1,27 +1,42 @@
 import { useState } from "react";
-import {
-  Box,
-  IconButton,
-  Typography,
-} from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import { FavoriteBorder, MoreHoriz, Favorite } from "@mui/icons-material/";
 import useTheme from "features/theme/useTheme";
 import { BasePostFooterType } from "shared/types";
-import CommentSection from "../CommentSection";
+import { useSelector } from "react-redux";
+import { getCurrentUser } from "features/auth/authSlice";
+import axios from "axios";
 
-function PostFooter({ id, userId, likes, comments }: BasePostFooterType) {
+axios.defaults.withCredentials = true;
+
+function PostFooter({ id, likes, comments }: BasePostFooterType) {
   const {
     themeColor: { color, navButtons },
   } = useTheme();
+  const user = useSelector(getCurrentUser);
   const [showComment, setShowComment] = useState(false);
   const [displayLikeCount, setDisplayLikeCount] = useState(likes.length);
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(
+    likes.find((like) => like.id === user.id) !== undefined
+  );
+
+  const handleLike = async () => {
+    const endpoint = process.env.REACT_APP_BASE_URL + `/posts/${id}/likes`;
+    await axios.post(endpoint);
+
+    setDisplayLikeCount(displayLikeCount + 1);
+  };
+
+  const handleDislike = async () => {
+    const endpoint = process.env.REACT_APP_BASE_URL + `/posts/${id}/likes`;
+    await axios.delete(endpoint);
+
+    setDisplayLikeCount(displayLikeCount - 1);
+  };
 
   const handleLikeClick = () => {
     setIsLiked(!isLiked);
-    isLiked
-      ? setDisplayLikeCount(displayLikeCount - 1)
-      : setDisplayLikeCount(displayLikeCount + 1);
+    isLiked ? handleDislike() : handleLike();
   };
 
   const handleCommentClick = () => {
@@ -107,7 +122,7 @@ function PostFooter({ id, userId, likes, comments }: BasePostFooterType) {
           </IconButton>
         </Box>
       </Box>
-      {showComment && <CommentSection id={id}/>}
+      {showComment && <CommentSection id={id} />}
     </>
   );
 }
