@@ -6,7 +6,7 @@ type ModalProps = {
   readonly handleClose: () => void;
   readonly handleConfirm?: () => void;
   readonly modalName: string;
-  readonly innerComponent: any;
+  readonly innerComponent?: any;
 };
 
 function SimpleModal({ handleClose, modalName, innerComponent: Component, handleConfirm }: ModalProps) {
