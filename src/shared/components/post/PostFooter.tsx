@@ -9,33 +9,34 @@ import axios from "axios";
 
 axios.defaults.withCredentials = true;
 
-function PostFooter({ id, likes, comments }: BasePostFooterType) {
+type PostFooterProps = {
+  basePostFooterProps: BasePostFooterType;
+  onLike?: (id: any, userId: any, flag: any) => void;
+};
+
+function PostFooter({ basePostFooterProps, onLike }: PostFooterProps) {
+  const { id, likes, comments } = basePostFooterProps;
+  const user = useSelector(getCurrentUser);
   const {
     themeColor: { color, navButtons },
   } = useTheme();
-  const user = useSelector(getCurrentUser);
   const [showComment, setShowComment] = useState(false);
-  const [displayLikeCount, setDisplayLikeCount] = useState(likes.length);
-  const [isLiked, setIsLiked] = useState(
-    likes.find((like) => like.id === user.id) !== undefined
-  );
+  const displayLikeCount = likes.length;
+  const isLiked = likes.find((like) => like.id === user.id);
 
   const handleLike = async () => {
     const endpoint = process.env.REACT_APP_BASE_URL + `/posts/${id}/likes`;
     await axios.post(endpoint);
-
-    setDisplayLikeCount(displayLikeCount + 1);
+    onLike?.(id, user.id, 1);
   };
 
   const handleDislike = async () => {
     const endpoint = process.env.REACT_APP_BASE_URL + `/posts/${id}/likes`;
     await axios.delete(endpoint);
-
-    setDisplayLikeCount(displayLikeCount - 1);
+    onLike?.(id, user.id, -1);
   };
 
   const handleLikeClick = () => {
-    setIsLiked(!isLiked);
     isLiked ? handleDislike() : handleLike();
   };
 
