@@ -121,7 +121,6 @@ function PostTop({ basePostTopProps, onDelete }: PostTopProps) {
                   <SimpleModal
                     handleClose={handleClose}
                     modalName={"Edit Post"}
-                    innerComponent={""}
                   />
                 )}
               </Box>
