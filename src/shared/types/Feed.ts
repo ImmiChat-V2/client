@@ -9,7 +9,7 @@ export type BaseFeedType = {
   readonly updatedAt: Date;
 };
 
-type UserInfoType = {
+export type UserInfoType = {
   readonly firstName: string;
   readonly lastName: string;
   readonly profilePic?: string;

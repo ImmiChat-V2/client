@@ -7,6 +7,25 @@ import { SharePost } from "shared/components";
 import { Navbar } from "shared/components/navbar";
 import { Footer } from "shared/components/footer";
 import ConnectionList from "shared/components/ConnectionList";
+import { BaseComment } from "features/comments/components";
+import { BaseCommentModel } from "features/comments/models/Comments.model";
+
+const mockCommentData: BaseCommentModel = {
+  id: 1,
+  media:
+    "https://www.akc.org/wp-content/themes/akc/component-library/assets/img/welcome.jpg",
+  content: "fdsafsdfasfsfsadf content string",
+  updatedAt: new Date(),
+  userId: 0,
+  postId: 0,
+  likes: [],
+  createdAt: new Date(),
+  user: {
+    firstName: "dfasfdsafsaf",
+    lastName: "cvxzxvzv",
+    profilePic: undefined,
+  },
+};
 
 export const mockFriendList = [
   {
@@ -49,6 +68,7 @@ const ProfilePage = () => {
               theme={themeColor}
               isCurrentUser={true}
             />
+            <BaseComment commentData={mockCommentData} />
             <SharePost profilePic="" theme={themeColor} />
           </Grid>
           <Grid item display={{ xs: "none", md: "flex" }} md={5} lg={4} xl={4}>
