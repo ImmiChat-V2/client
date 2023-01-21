@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Feed } from "features/feed/components";
 import useTheme from "features/theme/useTheme";
 import "./homePageBody.css";
@@ -6,7 +6,7 @@ import "./homePageBody.css";
 function HomePageBody() {
   const {
     isDarkMode,
-    themeColor: { color, navButtons },
+    themeColor: { color, backgroundColor },
   } = useTheme();
   return (
     <Box sx={{ bgcolor: isDarkMode ? "black" : "white" }}>
@@ -15,8 +15,7 @@ function HomePageBody() {
         sx={{
           display: "flex",
           justifyContent: "space-around",
-          pt: "30px",
-          px: '30px',
+          p: "30px 30px 0 30px",
           maxWidth: "1650px",
           m: "auto",
         }}
@@ -24,7 +23,7 @@ function HomePageBody() {
         <Box className="left-sidebar" sx={{ maxWidth: "400px" }}>
           <Box
             sx={{
-              bgcolor: navButtons,
+              bgcolor: backgroundColor,
               height: "350px",
               borderRadius: "10px",
               p: "20px",
@@ -43,7 +42,7 @@ function HomePageBody() {
         <Box className="right-sidebar" sx={{ maxWidth: "400px" }}>
           <Box
             sx={{
-              bgcolor: navButtons,
+              bgcolor: backgroundColor,
               height: "500px",
               borderRadius: "10px",
               p: "20px",

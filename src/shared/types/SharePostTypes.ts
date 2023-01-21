@@ -1,4 +1,5 @@
 export type BasePostModel = {
+  updatedAt: any;
   readonly id: number;
   readonly media?: string;
   readonly userId: number;

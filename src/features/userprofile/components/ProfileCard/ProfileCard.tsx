@@ -57,6 +57,7 @@ const ProfileCard = ({ user, theme, isCurrentUser }: PropType) => {
           ...SharedWrapperProps,
           flexDirection: "column",
           position: "relative",
+          borderRadius: "0px 0px 5px 5px",
         }}
       >
         <CardMedia

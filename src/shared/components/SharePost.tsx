@@ -14,13 +14,19 @@ import { useForm, useImageInput } from "../hooks";
 import { uploadMedia } from "shared/utils/cloudinaryUtil";
 import { BaseCreatePostmodel } from "../types/SharePostTypes";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { getCurrentUser } from "features/auth/authSlice";
+import { BaseFeedType } from "shared/types";
 
 type SharePostProps = {
   readonly profilePic?: string;
   theme: any;
+  onPost?: (value: any) => void;
 };
 
-const SharePost = ({ profilePic, theme }: SharePostProps) => {
+const SharePost = ({ profilePic, theme, onPost }: SharePostProps) => {
+  const user = useSelector(getCurrentUser);
+
   const { form, handleChange, resetForm } = useForm<BaseCreatePostmodel>({
     media: "",
     content: "",
@@ -39,8 +45,19 @@ const SharePost = ({ profilePic, theme }: SharePostProps) => {
     const res = await axios.post(endPoint, postData, {
       withCredentials: true,
     });
+    const newPostInfo: BaseFeedType = {
+      ...res.data.data,
+      user: {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        profilePic: user.profilePic,
+      },
+      likes: [],
+      comments: [],
+    };
     onRemove();
     resetForm();
+    onPost?.(newPostInfo);
   };
 
   return (
@@ -168,6 +185,7 @@ const SharePost = ({ profilePic, theme }: SharePostProps) => {
             }}
             variant="contained"
             color="primary"
+            disabled={!content && !preview}
           >
             <Typography sx={{ fontSize: "12px", px: "2px" }}>Post</Typography>
             <SendOutlined sx={{ fontSize: "11.5px" }} />

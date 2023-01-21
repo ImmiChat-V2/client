@@ -16,16 +16,18 @@ function PostBody({ content, media }: BasePostBodyType) {
         component="div"
         sx={{ display: "flex", mt: "20px", justifyContent: "center" }}
       >
-        <Box
-          component="img"
-          sx={{
-            borderRadius: "10px",
-            minWidth: "200px",
-            maxWidth: "200px",
-            display: "block",
-          }}
-          src={getSecureUrl(media!)}
-        />
+        {media && (
+          <Box
+            component="img"
+            sx={{
+              borderRadius: "10px",
+              width: "100%",
+              height: "100%",
+              display: "block",
+            }}
+            src={getSecureUrl(media)}
+          />
+        )}
       </Box>
     </>
   );

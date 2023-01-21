@@ -13,25 +13,14 @@ type ConnectionListProps = {
   theme: any;
   connectionList: ConnectionProps[];
 };
-const ConnectionList = ({ theme, connectionList }: ConnectionListProps) => {
+const ConnectionList = ({
+  theme,
+  theme,
+  connectionList,
+}: ConnectionListProps) => {
   return (
-    <Box
-      sx={{
-        width: "100%",
-        height: "100vh",
-        color: theme.color,
-        bgcolor: theme.backgroundColor,
-      }}
-    >
-      <Typography
-        variant="h6"
-        fontWeight="600"
-        sx={{
-          textAlign: "center",
-          color: theme.color,
-          bgcolor: theme.backgroundColor,
-        }}
-      >
+    <Box maxWidth="200px">
+      <Typography variant="h6" fontWeight="600" sx={{ textAlign: "center" }}>
         Connections
       </Typography>
       {connectionList.map((connection) => (

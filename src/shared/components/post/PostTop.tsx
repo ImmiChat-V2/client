@@ -5,23 +5,28 @@ import { BasePostTopType } from "shared/types";
 import useTheme from "features/theme/useTheme";
 import useAnchor from "shared/hooks/useAnchor";
 import UserProfileHoverCard from "../UserProfileHoverCard/UserProfileHoverCard";
+import { useSelector } from "react-redux";
+import { getCurrentUser } from "features/auth/authSlice";
 
 const options = [
   { title: "Edit", icon: Edit },
   { title: "Share", icon: Share },
 ];
 
-function PostTop({
-  id,
-  userId,
-  profilePic,
-  firstName,
-  lastName,
-  timestamp,
-}: BasePostTopType) {
+type PostTopProps = {
+  basePostTopProps: BasePostTopType;
+  onDelete?: () => void;
+};
+
+function PostTop({ basePostTopProps, onDelete }: PostTopProps) {
   const {
     themeColor: { color, navButtons },
   } = useTheme();
+
+  const { userId, profilePic, firstName, lastName, timestamp } =
+    basePostTopProps;
+
+  const user = useSelector(getCurrentUser);
 
   const {
     anchorEl: menuAnchorElement,
@@ -54,13 +59,20 @@ function PostTop({
             <UserProfileWidget
               firstName={firstName}
               lastName={lastName}
+              profilePicture={profilePic}
+              timestamp={timestamp}
               boxProps={{ cursor: "pointer" }}
             />
           </UserProfileHoverCard>
           <Box component="span" sx={{ display: "flex", cursor: "pointer" }}>
-            <IconButton sx={{ backgroundColor: navButtons, mr: "7px" }}>
-              <Delete sx={{ color }} />
-            </IconButton>
+            {user.id === userId && (
+              <IconButton
+                sx={{ backgroundColor: navButtons, mr: "7px" }}
+                onClick={onDelete}
+              >
+                <Delete sx={{ color }} />
+              </IconButton>
+            )}
             <IconButton
               aria-label="more"
               id="long-button"
