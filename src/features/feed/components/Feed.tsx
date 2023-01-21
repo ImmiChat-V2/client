@@ -33,7 +33,7 @@ function Feed() {
 
   return (
     <>
-      <Box sx={{ maxWidth: "800px", m: 'auto' }}>
+      <Box sx={{ maxWidth: "800px", m: "auto" }}>
         <SharePost
           profilePic=""
           onPost={(data: any) => setFeed([data, ...feed])}

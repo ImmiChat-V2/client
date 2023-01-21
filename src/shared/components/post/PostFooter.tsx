@@ -20,7 +20,6 @@ function PostFooter({ basePostFooterProps, onLike }: PostFooterProps) {
   const {
     themeColor: { color, navButtons },
   } = useTheme();
-  const user = useSelector(getCurrentUser);
   const [showComment, setShowComment] = useState(false);
   const displayLikeCount = likes.length;
   const isLiked = likes.find((like) => like.id === user.id);
