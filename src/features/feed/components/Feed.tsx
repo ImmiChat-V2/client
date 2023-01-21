@@ -25,12 +25,9 @@ function Feed() {
 
   const handleLikeDislike = (id: any, userId: any, flag: any) => {
     var postLikes = [...feed[feed.findIndex((p) => p.id === id)].likes];
-    if (flag > 0) {
-      postLikes.push({ id: userId });
-    } else {
-      postLikes = postLikes.filter((like) => like.id !== userId);
-    }
-
+    flag > 0
+      ? postLikes.push({ id: userId })
+      : (postLikes = postLikes.filter((like) => like.id !== userId));
     setFeed(feed.map((p) => (p.id === id ? { ...p, likes: postLikes } : p)));
   };
 
