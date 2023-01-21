@@ -4,7 +4,7 @@ import { apiSlice } from "features/api/apiSlice";
 export const userProfileApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getUserProfile: builder.query<{ data: UserProfileType }, number>({
-      query: (userId: any) => ({
+      query: (userId) => ({
         url: `/users/${userId}`,
         method: "GET",
       }),
