@@ -13,7 +13,7 @@ export type BasePostType = {
 
 export type BasePostTopType = Pick<
   BasePostType,
-  "userId" | "profilePic" | "firstName" | "lastName" | "timestamp"
+  "userId" | "profilePic" | "firstName" | "lastName" | "timestamp" | "content" | "media"
 >;
 export type BasePostBodyType = Pick<BasePostType, "content" | "media">;
 export type BasePostFooterType = Pick<
