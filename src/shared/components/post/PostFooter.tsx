@@ -11,7 +11,7 @@ axios.defaults.withCredentials = true;
 
 type PostFooterProps = {
   basePostFooterProps: BasePostFooterType;
-  onLike?: (id: any, userId: any, flag: any) => void;
+  onLike?: (id: any, userId: any, isLike: any) => void;
 };
 
 function PostFooter({ basePostFooterProps, onLike }: PostFooterProps) {
@@ -27,13 +27,13 @@ function PostFooter({ basePostFooterProps, onLike }: PostFooterProps) {
   const handleLike = async () => {
     const endpoint = process.env.REACT_APP_BASE_URL + `/posts/${id}/likes`;
     await axios.post(endpoint);
-    onLike?.(id, user.id, 1);
+    onLike?.(id, user.id, true);
   };
 
   const handleDislike = async () => {
     const endpoint = process.env.REACT_APP_BASE_URL + `/posts/${id}/likes`;
     await axios.delete(endpoint);
-    onLike?.(id, user.id, -1);
+    onLike?.(id, user.id, false);
   };
 
   const handleLikeClick = () => {
