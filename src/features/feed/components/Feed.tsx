@@ -23,9 +23,9 @@ function Feed() {
     themeColor: { color, navButtons, backgroundColor },
   } = useTheme();
 
-  const handleLikeDislike = (id: any, userId: any, flag: any) => {
+  const handleLikeDislike = (id: any, userId: any, isLike: any) => {
     var postLikes = [...feed[feed.findIndex((p) => p.id === id)].likes];
-    flag > 0
+    isLike
       ? postLikes.push({ id: userId })
       : (postLikes = postLikes.filter((like) => like.id !== userId));
     setFeed(feed.map((p) => (p.id === id ? { ...p, likes: postLikes } : p)));
