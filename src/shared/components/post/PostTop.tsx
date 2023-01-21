@@ -24,8 +24,7 @@ function PostTop({ basePostTopProps, onDelete }: PostTopProps) {
   const {
     themeColor: { color, navButtons },
   } = useTheme();
-
-  const { userId, profilePic, firstName, lastName, timestamp } =
+  const { userId, profilePic, firstName, lastName, timestamp, content, media } =
     basePostTopProps;
 
   const user = useSelector(getCurrentUser);
@@ -121,6 +120,9 @@ function PostTop({ basePostTopProps, onDelete }: PostTopProps) {
                   <SimpleModal
                     handleClose={handleClose}
                     modalName={"Edit Post"}
+                    type={"Edit"}
+                    content={content}
+                    media={media}
                   />
                 )}
               </Box>

@@ -38,6 +38,8 @@ function Post({ basePostProps, onDelete }: PostProps) {
     firstName,
     lastName,
     timestamp,
+    content,
+    media
   };
 
   // The idea is that the Post component will handle the state of its comments
