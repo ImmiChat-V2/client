@@ -8,6 +8,7 @@ function HomePageBody() {
     isDarkMode,
     themeColor: { color, backgroundColor },
   } = useTheme();
+
   return (
     <Box sx={{ bgcolor: isDarkMode ? "black" : "white" }}>
       <Box

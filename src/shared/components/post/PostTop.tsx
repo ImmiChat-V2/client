@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Box, IconButton, Menu, MenuItem } from "@mui/material";
 import { MoreVert, Delete, Edit, Share } from "@mui/icons-material/";
 import { UserProfileWidget } from "shared/components";
@@ -7,16 +8,17 @@ import useAnchor from "shared/hooks/useAnchor";
 import UserProfileHoverCard from "../UserProfileHoverCard/UserProfileHoverCard";
 import { useSelector } from "react-redux";
 import { getCurrentUser } from "features/auth/authSlice";
-
-const options = [
-  { title: "Edit", icon: Edit },
-  { title: "Share", icon: Share },
-];
+import SimpleModal from "../Modal";
 
 type PostTopProps = {
   basePostTopProps: BasePostTopType;
   onDelete?: () => void;
 };
+
+const postOptions = [
+  { title: "Edit", icon: Edit },
+  { title: "Share", icon: Share },
+];
 
 function PostTop({ basePostTopProps, onDelete }: PostTopProps) {
   const {
@@ -34,6 +36,10 @@ function PostTop({ basePostTopProps, onDelete }: PostTopProps) {
     handleOpen: handleMenuOpen,
     handleClose: handleMenuClose,
   } = useAnchor();
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <>
@@ -98,18 +104,27 @@ function PostTop({ basePostTopProps, onDelete }: PostTopProps) {
                 },
               }}
             >
-              {options.map((option) => (
-                <MenuItem key={option.title} onClick={handleMenuClose}>
+              {postOptions.map((option) => (
+                <MenuItem key={option.title} onClick={handleOpen}>
                   <Box component="div" sx={{ width: "100%" }}>
                     <Box sx={{ display: "flex" }}>
                       <Box sx={{ display: "flex", mr: "7px" }}>
                         {<option.icon />}
                       </Box>
-                      {option.title}
+                      <Box>{option.title}</Box>
                     </Box>
                   </Box>
                 </MenuItem>
               ))}
+              <Box>
+                {open && (
+                  <SimpleModal
+                    handleClose={handleClose}
+                    modalName={"Edit Post"}
+                    innerComponent={""}
+                  />
+                )}
+              </Box>
             </Menu>
           </Box>
         </Box>
