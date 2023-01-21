@@ -41,9 +41,6 @@ const BaseComment = (commentData: CommentProps) => {
       }}
     >
       <Box sx={{ display: "flex" }}>
-        {/* <Box>
-          <Avatar sx={{ width: "25px", height: "25px" }} src={profilePic} />
-        </Box> */}
         <CardContent
           sx={{
             p: 0,
