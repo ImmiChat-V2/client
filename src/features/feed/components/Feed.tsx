@@ -22,6 +22,18 @@ function Feed() {
   const {
     themeColor: { color, navButtons, backgroundColor },
   } = useTheme();
+
+  const handleLikeDislike = (id: any, userId: any, flag: any) => {
+    var postLikes = [...feed[feed.findIndex((p) => p.id === id)].likes];
+    if (flag > 0) {
+      postLikes.push({ id: userId });
+    } else {
+      postLikes = postLikes.filter((like) => like.id !== userId);
+    }
+
+    setFeed(feed.map((p) => (p.id === id ? { ...p, likes: postLikes } : p)));
+  };
+
   return (
     <>
       <Box sx={{ width: "700px" }}>
@@ -47,6 +59,7 @@ function Feed() {
                   timestamp: new Date(post.updatedAt),
                 }}
                 onDelete={(id: any) => setFeed(feed.filter((p) => p.id !== id))}
+                onLike={handleLikeDislike}
               />
             </Box>
           ))}

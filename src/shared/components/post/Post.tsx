@@ -11,9 +11,10 @@ import axios from "axios";
 type PostProps = {
   basePostProps: BasePostType;
   onDelete?: (value: any) => void;
+  onLike?: (id: any, userId: any, flag: any) => void;
 };
 
-function Post({ basePostProps, onDelete }: PostProps) {
+function Post({ basePostProps, onDelete, onLike }: PostProps) {
   const {
     id,
     userId,
@@ -38,6 +39,12 @@ function Post({ basePostProps, onDelete }: PostProps) {
     firstName,
     lastName,
     timestamp,
+  };
+
+  const postFooterProps = {
+    id,
+    likes,
+    comments,
   };
 
   // The idea is that the Post component will handle the state of its comments
@@ -132,7 +139,7 @@ function Post({ basePostProps, onDelete }: PostProps) {
           <PostTop basePostTopProps={postTopProps} onDelete={openDeleteModal} />
           <PostBody content={content} media={media} />
           <Divider sx={{ mt: "20px" }} />
-          <PostFooter id={id} likes={likes} comments={comments} />
+          <PostFooter basePostFooterProps={postFooterProps} onLike={onLike} />
           <ShareComment onSubmit={createCommentHandler} />
         </Box>
       </Box>
