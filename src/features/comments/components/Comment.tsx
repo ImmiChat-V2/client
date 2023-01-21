@@ -13,10 +13,12 @@ import useTheme from "features/theme/useTheme";
 import { getSecureUrl } from "shared/utils/cloudinaryUtil";
 import { customTimeFormat } from "shared/utils";
 import { BaseCommentModel } from "../models/Comments.model";
+import UserProfileHoverCard from "shared/components/UserProfileHoverCard/UserProfileHoverCard";
+import { UserProfileWidget } from "shared/components";
 
-type CommentProps {
+type CommentProps = {
   commentData: BaseCommentModel;
-}
+};
 
 const BaseComment = (commentData: CommentProps) => {
   const { id, media, content, updatedAt, user } = commentData.commentData;
@@ -39,9 +41,9 @@ const BaseComment = (commentData: CommentProps) => {
       }}
     >
       <Box sx={{ display: "flex" }}>
-        <Box>
+        {/* <Box>
           <Avatar sx={{ width: "25px", height: "25px" }} src={profilePic} />
-        </Box>
+        </Box> */}
         <CardContent
           sx={{
             p: 0,
@@ -57,15 +59,15 @@ const BaseComment = (commentData: CommentProps) => {
               justifyContent: "space-between",
             }}
           >
-            <Typography
-              sx={{
-                fontSize: "10px",
-                display: "flex",
-                mb: "10px",
-              }}
-            >
-              {firstName} {lastName}
-            </Typography>
+            <UserProfileHoverCard>
+              <UserProfileWidget
+                firstName={firstName}
+                lastName={lastName}
+                profilePicture={profilePic}
+                timestamp={updatedAt}
+                boxProps={{ cursor: "pointer" }}
+              />
+            </UserProfileHoverCard>
             <Typography
               sx={{
                 fontSize: "10px",
@@ -79,7 +81,11 @@ const BaseComment = (commentData: CommentProps) => {
             <Box
               component="img"
               src={getSecureUrl(media)}
-              sx={{ maxWidth: "100px", maxHeight: "100px" }}
+              sx={{
+                my: "20px",
+                maxWidth: "100px",
+                maxHeight: "100px",
+              }}
             />
           )}
           <Typography fontSize={10}>{content}</Typography>
