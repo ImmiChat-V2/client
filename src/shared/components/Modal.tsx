@@ -114,6 +114,7 @@ function SimpleModal({
             {modalName}
           </Typography>
           <Box className="modal-content">
+            <Box component="form" onSubmit={handleSubmit}></Box>
             {type === "Edit" && (
               <Box>
                 <Box
@@ -171,6 +172,24 @@ function SimpleModal({
                     >
                       Remove Image
                     </Button>
+                    {preview && (
+                      // eslint-disable-next-line jsx-a11y/img-redundant-alt
+                      <>
+                        <Box
+                          component="img"
+                          src={preview}
+                          alt="Preview of your uploaded image"
+                          sx={{ width: "100%", paddingTop: "5px" }}
+                        />
+                        <Button
+                          color="error"
+                          sx={{ fontSize: "11px", borderRadius: "50px" }}
+                          onClick={onRemove}
+                        >
+                          Remove
+                        </Button>
+                      </>
+                    )}
                   </Box>
                 ) : (
                   <Box>
