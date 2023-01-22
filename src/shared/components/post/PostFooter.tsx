@@ -11,7 +11,7 @@ axios.defaults.withCredentials = true;
 
 type PostFooterProps = {
   basePostFooterProps: BasePostFooterType;
-  onLike?: (id: any, userId: any, isLike: any) => void;
+  onLike?: (id: number, userId: number, isLike: boolean) => void;
 };
 
 function PostFooter({ basePostFooterProps, onLike }: PostFooterProps) {

@@ -10,8 +10,8 @@ import axios from "axios";
 
 type PostProps = {
   basePostProps: BasePostType;
-  onDelete?: (value: any) => void;
-  onLike?: (id: any, userId: any, flag: any) => void;
+  onDelete?: (id: number) => void;
+  onLike?: (id: number, userId: number, onLike: boolean) => void;
 };
 
 function Post({ basePostProps, onDelete, onLike }: PostProps) {
