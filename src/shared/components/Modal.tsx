@@ -1,3 +1,4 @@
+import { FormEvent, Fragment } from "react";
 import {
   Box,
   Button,
@@ -9,7 +10,8 @@ import {
 import useTheme from "features/theme/useTheme";
 import { Close, Check, InsertPhotoOutlined, Label } from "@mui/icons-material";
 import { getSecureUrl } from "shared/utils/cloudinaryUtil";
-import { useImageInput } from "shared/hooks";
+import { useForm, useImageInput } from "shared/hooks";
+import { BaseCreatePostmodel } from "shared/types";
 
 type ModalProps = {
   readonly handleClose: () => void;
@@ -34,7 +36,7 @@ function SimpleModal({
   } = useTheme();
 
   const style = {
-    position: "absolute" as "absolute",
+    position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
@@ -44,6 +46,17 @@ function SimpleModal({
     boxShadow: 24,
     color,
     p: 4,
+  };
+
+  const { form, handleChange, resetForm } = useForm<BaseCreatePostmodel>({
+    media: "",
+    content: "",
+  });
+
+  const { content: FormContent, categoryName } = form;
+
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault();
   };
 
   const { onSelectFile, preview, onRemove, selectedFile } = useImageInput();
@@ -66,6 +79,7 @@ function SimpleModal({
             {modalName}
           </Typography>
           <Box className="modal-content">
+            <Box component="form" onSubmit={handleSubmit}></Box>
             {type === "Edit" && (
               <Box>
                 <Box
@@ -83,8 +97,9 @@ function SimpleModal({
                   <InputBase
                     sx={{ color, width: "99%" }}
                     className="nav-search-input"
-                    placeholder="Add a description"
+                    placeholder="Add a description..."
                     defaultValue={content}
+                    onChange={handleChange}
                   />
                 </Box>
                 {media ? (
@@ -111,9 +126,28 @@ function SimpleModal({
                         mt: "10px",
                         fontSize: "18px",
                       }}
+                      onClick={onRemove}
                     >
                       Remove Image
                     </Button>
+                    {preview && (
+                      // eslint-disable-next-line jsx-a11y/img-redundant-alt
+                      <>
+                        <Box
+                          component="img"
+                          src={preview}
+                          alt="Preview of your uploaded image"
+                          sx={{ width: "100%", paddingTop: "5px" }}
+                        />
+                        <Button
+                          color="error"
+                          sx={{ fontSize: "11px", borderRadius: "50px" }}
+                          onClick={onRemove}
+                        >
+                          Remove
+                        </Button>
+                      </>
+                    )}
                   </Box>
                 ) : (
                   <Box>
@@ -134,11 +168,11 @@ function SimpleModal({
                               cursor: "pointer",
                               backgroundColor: navButtons,
                             },
-                             mt: '20px'
+                            mt: "20px",
                           }}
                         >
                           <InsertPhotoOutlined sx={{ color }} />
-                          <Typography sx={{ fontSize: "12px", px: "2px", }}>
+                          <Typography sx={{ fontSize: "12px", px: "2px" }}>
                             Media
                           </Typography>
                         </Box>
