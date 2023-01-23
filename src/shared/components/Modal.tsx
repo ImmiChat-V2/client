@@ -1,4 +1,4 @@
-import { FormEvent, Fragment } from "react";
+import { FormEvent, Fragment, useState } from "react";
 import {
   Box,
   Button,
@@ -10,7 +10,7 @@ import {
 import useTheme from "features/theme/useTheme";
 import { Close, Check, InsertPhotoOutlined, Label } from "@mui/icons-material";
 import { getSecureUrl } from "shared/utils/cloudinaryUtil";
-import { useForm, useImageInput } from "shared/hooks";
+import { useImageInput, useForm } from "shared/hooks";
 import { BaseCreatePostmodel } from "shared/types";
 
 type ModalProps = {
@@ -53,10 +53,18 @@ function SimpleModal({
     content: "",
   });
 
-  const { content: FormContent, categoryName } = form;
+  const { content: FormContent, media: FormMedia } = form;
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
+    if (type === 'Edit') {
+      
+    }
+    const endPoint = process.env.REACT_APP_BASE_URL + "/posts";
+    // user selects image for the first time
+    // user has doesn't change image 
+    // user changes image 
+    // user removes image 
   };
 
   const { onSelectFile, preview, onRemove, selectedFile } = useImageInput();
@@ -102,6 +110,24 @@ function SimpleModal({
                     onChange={handleChange}
                   />
                 </Box>
+                {preview && (
+                  // eslint-disable-next-line jsx-a11y/img-redundant-alt
+                  <>
+                    <Box
+                      component="img"
+                      src={preview}
+                      alt="Preview of your uploaded image"
+                      sx={{ width: "100%", paddingTop: "5px" }}
+                    />
+                    <Button
+                      color="error"
+                      sx={{ fontSize: "11px", borderRadius: "50px" }}
+                      onClick={onRemove}
+                    >
+                      Remove
+                    </Button>
+                  </>
+                )}
                 {media ? (
                   <Box
                     sx={{
@@ -130,24 +156,6 @@ function SimpleModal({
                     >
                       Remove Image
                     </Button>
-                    {preview && (
-                      // eslint-disable-next-line jsx-a11y/img-redundant-alt
-                      <>
-                        <Box
-                          component="img"
-                          src={preview}
-                          alt="Preview of your uploaded image"
-                          sx={{ width: "100%", paddingTop: "5px" }}
-                        />
-                        <Button
-                          color="error"
-                          sx={{ fontSize: "11px", borderRadius: "50px" }}
-                          onClick={onRemove}
-                        >
-                          Remove
-                        </Button>
-                      </>
-                    )}
                   </Box>
                 ) : (
                   <Box>
