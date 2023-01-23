@@ -27,7 +27,6 @@ function Feed() {
       <Box sx={{ width: "700px" }}>
         <SharePost
           profilePic=""
-          theme={{ color, navButtons, backgroundColor }}
           onPost={(data: any) => setFeed([data, ...feed])}
         />
         <Box className="feed-posts" sx={{ mb: "100px" }}>

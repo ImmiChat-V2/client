@@ -9,6 +9,8 @@ import {
   InputBase,
   Typography,
   Input,
+  Tooltip,
+  Zoom,
 } from "@mui/material";
 import { useForm, useImageInput } from "../hooks";
 import { uploadMedia } from "shared/utils/cloudinaryUtil";
@@ -17,15 +19,18 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { getCurrentUser } from "features/auth/authSlice";
 import { BaseFeedType } from "shared/types";
+import useTheme from "features/theme/useTheme";
 
 type SharePostProps = {
   readonly profilePic?: string;
-  theme: any;
   onPost?: (value: any) => void;
 };
 
-const SharePost = ({ profilePic, theme, onPost }: SharePostProps) => {
+const SharePost = ({ profilePic, onPost }: SharePostProps) => {
   const user = useSelector(getCurrentUser);
+  const {
+    themeColor: { color, navButtons, backgroundColor },
+  } = useTheme();
 
   const { form, handleChange, resetForm } = useForm<BaseCreatePostmodel>({
     media: "",
@@ -35,7 +40,6 @@ const SharePost = ({ profilePic, theme, onPost }: SharePostProps) => {
 
   const { content, categoryName } = form;
   const { onSelectFile, preview, onRemove, selectedFile } = useImageInput();
-  const { backgroundColor, navButtons, color } = theme;
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -83,7 +87,7 @@ const SharePost = ({ profilePic, theme, onPost }: SharePostProps) => {
           <Avatar
             alt="profilePic"
             src={profilePic}
-            sx={{ width: 52, height: 52, mr: 3 }}
+            sx={{ width: 52, height: 52, mr: 2 }}
           />
           <Box width={"100%"}>
             <InputBase
@@ -92,34 +96,41 @@ const SharePost = ({ profilePic, theme, onPost }: SharePostProps) => {
               value={content}
               onChange={handleChange}
               sx={{
-                color: "black",
-                backgroundColor: "#ededed",
-                paddingLeft: "30px",
-                borderRadius: "30px",
+                color,
+                backgroundColor: navButtons,
+                borderRadius: "20px",
+                p: "5px",
+                paddingLeft: "20px",
               }}
               placeholder="What's on your mind..."
             />
             {preview && (
               // eslint-disable-next-line jsx-a11y/img-redundant-alt
-              <>
+              <Box component="div" sx={{ m: "auto", mt: "20px" }}>
                 <Box
                   component="img"
                   src={preview}
                   alt="Preview of your uploaded image"
-                  sx={{ width: "100%", paddingTop: "5px" }}
+                  sx={{ width: "100%", height: "100%" }}
                 />
                 <Button
                   color="error"
-                  sx={{ fontSize: "11px", borderRadius: "50px" }}
+                  sx={{
+                    fontSize: "12px",
+                    borderRadius: "50px",
+                    mt: "10px",
+                    width: "80px",
+                    height: "50px",
+                  }}
                   onClick={onRemove}
                 >
                   Remove
                 </Button>
-              </>
+              </Box>
             )}
           </Box>
         </Box>
-        <Divider sx={{ my: 2, color: "#555555" }}></Divider>
+        <Divider sx={{ my: 2, mt: "20px", bgcolor: navButtons }}></Divider>
         <Box
           sx={{
             display: "flex",
@@ -129,26 +140,33 @@ const SharePost = ({ profilePic, theme, onPost }: SharePostProps) => {
         >
           <Box
             display="flex"
-            sx={{ width: "30%", justifyContent: "space-between" }}
+            sx={{ width: "170px", justifyContent: "space-between" }}
           >
             <label htmlFor="file">
               <Box
                 sx={{
-                  color: color,
+                  color,
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  pr: "15px",
                   ":hover": {
                     cursor: "pointer",
                     backgroundColor: navButtons,
                   },
+                  p: "10px",
                 }}
               >
-                <InsertPhotoOutlined sx={{ color: "#45bd62" }} />
-                <Typography sx={{ fontSize: "12px", px: "2px" }}>
-                  Media
-                </Typography>
+                <InsertPhotoOutlined sx={{ color }} />
+                <Tooltip
+                  title="Upload an item"
+                  TransitionComponent={Zoom}
+                  arrow
+                  sx={{ color, bgcolor: navButtons }}
+                >
+                  <Typography sx={{ fontSize: "15px", px: "2px", color }}>
+                    Media
+                  </Typography>
+                </Tooltip>
               </Box>
             </label>
             <Input
@@ -164,17 +182,24 @@ const SharePost = ({ profilePic, theme, onPost }: SharePostProps) => {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  pr: "15px",
                   ":hover": {
                     cursor: "pointer",
                     backgroundColor: navButtons,
                   },
+                  p: "10px",
                 }}
               >
-                <Label sx={{ color: "#ae83f4" }} />
-                <Typography sx={{ fontSize: "12px", px: "2px" }}>
-                  Tag
-                </Typography>
+                <Label sx={{ color }} />
+                <Tooltip
+                  title="Add a category"
+                  TransitionComponent={Zoom}
+                  arrow
+                  sx={{ color, bgcolor: navButtons }}
+                >
+                  <Typography sx={{ fontSize: "15px", px: "2px", color }}>
+                    Tag
+                  </Typography>
+                </Tooltip>
               </Box>
             </Box>
           </Box>
@@ -182,13 +207,20 @@ const SharePost = ({ profilePic, theme, onPost }: SharePostProps) => {
             type="submit"
             sx={{
               borderRadius: "20px",
+              p: "15px",
+              height: "35px",
+              mt: "5px",
             }}
             variant="contained"
             color="primary"
             disabled={!content && !preview}
           >
-            <Typography sx={{ fontSize: "12px", px: "2px" }}>Post</Typography>
-            <SendOutlined sx={{ fontSize: "11.5px" }} />
+            <Typography
+              sx={{ fontSize: "15px", px: "4px", textTransform: "none" }}
+            >
+              Post
+            </Typography>
+            <SendOutlined sx={{ fontSize: "15px" }} />
           </Button>
         </Box>
       </Box>
