@@ -7,10 +7,9 @@ import {
   Brightness4,
   Brightness7,
 } from "@mui/icons-material";
-import { IconButton, InputBase, Typography, Box } from "@mui/material";
+import { IconButton, InputBase, Typography, Box, Grid } from "@mui/material";
 import FadeDropdown from "../FadeDropdown";
 import useTheme from "features/theme/useTheme";
-import "./navbar.css";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -83,6 +82,72 @@ function Navbar() {
         </Box>
       </Box>
       <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Grid
+          container
+          spacing={3}
+          sx={{ display: { sm: "none", md: "flex" }, alignItems: "center" }}
+        >
+          <Grid item>
+            {isDarkMode ? (
+              <Brightness7
+                onClick={toggleDarkMode}
+                sx={{
+                  color,
+                  cursor: "pointer",
+                }}
+              />
+            ) : (
+              <Brightness4
+                onClick={toggleDarkMode}
+                sx={{
+                  color,
+                  cursor: "pointer",
+                }}
+              />
+            )}
+          </Grid>
+          <Grid item>
+            <Chat
+              sx={{
+                color,
+                cursor: "pointer",
+              }}
+            />
+          </Grid>
+          <Grid item>
+            <Notifications
+              sx={{
+                color,
+                cursor: "pointer",
+              }}
+            />
+          </Grid>
+          <Grid item sx={{mr: '20px'}}>
+            <Help
+              sx={{
+                color,
+                cursor: "pointer",
+              }}
+            />
+          </Grid>
+        </Grid>
+        <Box>
+          {isDarkMode ? (
+            <FadeDropdown
+              buttonName="Fake User"
+              menuItems={navMenuOptions}
+              darkMode={true}
+            />
+          ) : (
+            <FadeDropdown
+              buttonName="Fake User"
+              menuItems={navMenuOptions}
+              darkMode={false}
+            />
+          )}
+        </Box>
+      </Box>
+      {/* <Box sx={{ display: "flex", alignItems: "center" }}>
         <Box
           sx={{
             display: "flex",
@@ -147,7 +212,7 @@ function Navbar() {
             )}
           </Box>
         </Box>
-      </Box>
+      </Box> */}
     </Box>
   );
 }
