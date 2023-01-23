@@ -24,7 +24,7 @@ function Feed() {
   } = useTheme();
   return (
     <>
-      <Box sx={{ width: "700px" }}>
+      <Box sx={{ maxWidth: "1000px", m: 'auto' }}>
         <SharePost
           profilePic=""
           theme={{ color, navButtons, backgroundColor }}
