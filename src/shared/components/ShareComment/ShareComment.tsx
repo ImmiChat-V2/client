@@ -1,8 +1,18 @@
 import { FormEvent } from "react";
-import { Avatar, Box, Button, TextareaAutosize, Input } from "@mui/material";
-import { CameraAltOutlined } from "@mui/icons-material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Input,
+  InputBase,
+  Tooltip,
+  Typography,
+  Zoom,
+} from "@mui/material";
+import { InsertPhotoOutlined, SendOutlined } from "@mui/icons-material";
 import { uploadMedia } from "shared/utils/cloudinaryUtil";
 import { useForm, useImageInput } from "shared/hooks";
+import useTheme from "features/theme/useTheme";
 
 type ShareCommentProps = {
   onSubmit: (value: { content: string; media: string | null }) => void;
@@ -10,6 +20,9 @@ type ShareCommentProps = {
 };
 
 const ShareComment = ({ onSubmit, avatarUrl }: ShareCommentProps) => {
+  const {
+    themeColor: { color, navButtons },
+  } = useTheme();
   const { form, handleChange, resetForm } = useForm<{ content: string }>({
     content: "",
   });
@@ -30,7 +43,6 @@ const ShareComment = ({ onSubmit, avatarUrl }: ShareCommentProps) => {
         display="flex"
         component="form"
         sx={{
-          border: "1px solid black",
           borderRadius: "5px",
           width: "100%",
           ml: "6px",
@@ -46,20 +58,19 @@ const ShareComment = ({ onSubmit, avatarUrl }: ShareCommentProps) => {
               style={{ width: "100%" }}
             />
           )}
-          <TextareaAutosize
-            minRows={6}
-            value={content}
+          <InputBase
+            fullWidth
             name="content"
+            value={content}
             onChange={handleChange}
-            style={{
-              width: "100%",
-              padding: 5,
-              borderTopRightRadius: "5px",
-              borderTopLeftRadius: "5px",
-              border: "none",
-              resize: "none",
-              boxSizing: "border-box",
+            sx={{
+              color,
+              backgroundColor: navButtons,
+              borderRadius: "20px",
+              p: "5px",
+              paddingLeft: "20px",
             }}
+            placeholder="Drop a comment..."
           />
           <Box
             display="flex"
@@ -67,16 +78,39 @@ const ShareComment = ({ onSubmit, avatarUrl }: ShareCommentProps) => {
             alignItems="center"
             px="6px"
           >
-            <Box display="flex" alignItems="center">
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              width="100%"
+            >
               <label htmlFor="file">
-                <CameraAltOutlined
+                <Box
                   sx={{
+                    color,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                     ":hover": {
                       cursor: "pointer",
-                      caretColor: "black",
+                      backgroundColor: navButtons,
                     },
+                    my: "10px",
+                    p: "5px",
                   }}
-                />
+                >
+                  <InsertPhotoOutlined sx={{ color }} />
+                  <Tooltip
+                    title="Upload an item"
+                    TransitionComponent={Zoom}
+                    arrow
+                    sx={{ color, bgcolor: navButtons }}
+                  >
+                    <Typography sx={{ fontSize: "15px", px: "2px", color }}>
+                      Media
+                    </Typography>
+                  </Tooltip>
+                </Box>
               </label>
               <Input
                 id="file"
@@ -87,20 +121,38 @@ const ShareComment = ({ onSubmit, avatarUrl }: ShareCommentProps) => {
               {preview && (
                 <Button
                   color="error"
-                  sx={{ fontSize: "11px", borderRadius: "50px" }}
+                  sx={{
+                    fontSize: "12px",
+                    borderRadius: "50px",
+                    mt: "10px",
+                    width: "80px",
+                    height: "50px",
+                  }}
                   onClick={onRemove}
                 >
                   Remove
                 </Button>
               )}
+              <Button
+                type="submit"
+                sx={{
+                  borderRadius: "20px",
+                  p: "5px",
+                  height: "25px",
+                  mt: "5px",
+                }}
+                variant="contained"
+                color="primary"
+                disabled={!content && !preview}
+              >
+                <Typography
+                  sx={{ fontSize: "15px", px: "4px", textTransform: "none" }}
+                >
+                  Post
+                </Typography>
+                <SendOutlined sx={{ fontSize: "15px" }} />
+              </Button>
             </Box>
-            <Button
-              sx={{ fontSize: "11px", borderRadius: "50px" }}
-              type="submit"
-              disabled={content.trim() === "" && !preview}
-            >
-              Reply
-            </Button>
           </Box>
         </Box>
       </Box>
