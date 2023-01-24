@@ -3,7 +3,6 @@ import { Feed } from "features/feed/components";
 import useTheme from "features/theme/useTheme";
 import ConnectionList from "shared/components/ConnectionList";
 import { NavSidebar } from "shared/components/NavSidebar";
-import "./homePageBody.css";
 
 export const mockFriendList = [
   {
