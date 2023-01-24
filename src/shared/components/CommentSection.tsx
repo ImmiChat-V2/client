@@ -32,7 +32,7 @@ function CommentSection({ id }: any) {
     <>
       {commentData.length > 0 ? (
         <Box sx={{ bgcolor: navButtons, height: "200px", overflow: "auto" }}>
-          <List sx={{ width: "100%", mt: "-9px", pr: "2px", pl: "2px" }}>
+          <List sx={{ width: "100%", mt: "-9px", px: '2px' }}>
             {commentData.map((comment: BaseCommentModel) => (
               <Box sx={{ width: "100%" }}>
                 <BaseComment
