@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Box,
   Card,
@@ -6,12 +6,10 @@ import {
   Typography,
   IconButton,
   Button,
-  Avatar,
 } from "@mui/material";
 import { AddComment, Delete, Favorite } from "@mui/icons-material";
 import useTheme from "features/theme/useTheme";
 import { getSecureUrl } from "shared/utils/cloudinaryUtil";
-import { customTimeFormat } from "shared/utils";
 import { BaseCommentModel } from "../models/Comments.model";
 import UserProfileHoverCard from "shared/components/UserProfileHoverCard/UserProfileHoverCard";
 import { UserProfileWidget } from "shared/components";
@@ -24,7 +22,6 @@ const BaseComment = (commentData: CommentProps) => {
   const { id, media, content, updatedAt, user } = commentData.commentData;
   const { firstName, lastName, profilePic } = user;
   const [likes, setLikes] = useState<any>([]);
-  const datetime: string = customTimeFormat(updatedAt);
   const { themeColor } = useTheme();
 
   return (
@@ -70,9 +67,7 @@ const BaseComment = (commentData: CommentProps) => {
                 fontSize: "10px",
                 display: "flex",
               }}
-            >
-              {datetime}
-            </Typography>
+            ></Typography>
           </Box>
           {media && (
             <Box

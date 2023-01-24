@@ -107,7 +107,7 @@ function PostFooter({ id, userId, likes, comments }: BasePostFooterType) {
           </IconButton>
         </Box>
       </Box>
-      {showComment && <CommentSection />}
+      {showComment && <CommentSection id={id}/>}
     </>
   );
 }
