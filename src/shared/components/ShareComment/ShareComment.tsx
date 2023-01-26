@@ -68,7 +68,7 @@ const ShareComment = ({ onSubmit, avatarUrl }: ShareCommentProps) => {
             px="6px"
           >
             <Box display="flex" alignItems="center">
-              <label htmlFor="file">
+              <label htmlFor="file-upload-comment">
                 <CameraAltOutlined
                   sx={{
                     ":hover": {
@@ -79,7 +79,7 @@ const ShareComment = ({ onSubmit, avatarUrl }: ShareCommentProps) => {
                 />
               </label>
               <Input
-                id="file"
+                id="file-upload-comment"
                 type="file"
                 sx={{ display: "none" }}
                 onChange={onSelectFile}
