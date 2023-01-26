@@ -1,4 +1,4 @@
-import { FormEvent, Fragment, useState } from "react";
+import { FormEvent, useState } from "react";
 import {
   Box,
   Button,
@@ -10,7 +10,7 @@ import {
 import useTheme from "features/theme/useTheme";
 import { Close, Check, InsertPhotoOutlined, Label } from "@mui/icons-material";
 import { getSecureUrl } from "shared/utils/cloudinaryUtil";
-import { useImageInput, useForm } from "shared/hooks";
+import { useForm, useImageInput } from "shared/hooks";
 import { BaseCreatePostmodel } from "shared/types";
 
 type ModalProps = {
@@ -30,6 +30,7 @@ function SimpleModal({
   content,
   media,
 }: ModalProps) {
+  const [modalMedia, setModalMedia] = useState(media ? media : null);
   const {
     isDarkMode,
     themeColor: { backgroundColor, color, navButtons },
@@ -57,14 +58,14 @@ function SimpleModal({
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    if (type === 'Edit') {
-      
+    if (type === "Edit") {
     }
     const endPoint = process.env.REACT_APP_BASE_URL + "/posts";
+
     // user selects image for the first time
-    // user has doesn't change image 
-    // user changes image 
-    // user removes image 
+    // user has doesn't change image
+    // user changes image
+    // user removes image
   };
 
   const { onSelectFile, preview, onRemove, selectedFile } = useImageInput();
@@ -104,31 +105,13 @@ function SimpleModal({
                 >
                   <InputBase
                     sx={{ color, width: "99%" }}
-                    className="nav-search-input"
+                    className="edit-modal-content"
                     placeholder="Add a description..."
                     defaultValue={content}
                     onChange={handleChange}
                   />
                 </Box>
-                {preview && (
-                  // eslint-disable-next-line jsx-a11y/img-redundant-alt
-                  <>
-                    <Box
-                      component="img"
-                      src={preview}
-                      alt="Preview of your uploaded image"
-                      sx={{ width: "100%", paddingTop: "5px" }}
-                    />
-                    <Button
-                      color="error"
-                      sx={{ fontSize: "11px", borderRadius: "50px" }}
-                      onClick={onRemove}
-                    >
-                      Remove
-                    </Button>
-                  </>
-                )}
-                {media ? (
+                {modalMedia || preview ? (
                   <Box
                     sx={{
                       mt: "20px",
@@ -139,8 +122,12 @@ function SimpleModal({
                   >
                     <Box
                       component="img"
-                      src={getSecureUrl(media)}
-                      sx={{ height: "200px", width: "200px", m: "auto" }}
+                      src={modalMedia ? getSecureUrl(modalMedia) : preview}
+                      sx={{
+                        width: "100%",
+                        paddingTop: "5px",
+                        m: "auto",
+                      }}
                     />
                     <Button
                       sx={{
@@ -152,19 +139,20 @@ function SimpleModal({
                         mt: "10px",
                         fontSize: "18px",
                       }}
-                      onClick={onRemove}
+                      onClick={() => {
+                        modalMedia ? setModalMedia(null) : onRemove();
+                      }}
                     >
                       Remove Image
                     </Button>
                   </Box>
                 ) : (
                   <Box>
-                    {" "}
                     <Box
                       display="flex"
                       sx={{ width: "30%", justifyContent: "space-between" }}
                     >
-                      <label htmlFor="file">
+                      <label htmlFor="file-upload-modal">
                         <Box
                           sx={{
                             color: color,
@@ -186,7 +174,7 @@ function SimpleModal({
                         </Box>
                       </label>
                       <Input
-                        id="file"
+                        id="file-upload-modal"
                         type="file"
                         sx={{ display: "none" }}
                         onChange={onSelectFile}

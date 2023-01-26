@@ -32,9 +32,8 @@ function Feed() {
         />
         <Box className="feed-posts" sx={{ mb: "100px" }}>
           {feed.map((post) => (
-            <Box sx={{ pt: "30px" }}>
+            <Box key={post.id} sx={{ pt: "30px" }}>
               <Post
-                key={post.id}
                 basePostProps={{
                   id: post.id,
                   userId: post.userId,
