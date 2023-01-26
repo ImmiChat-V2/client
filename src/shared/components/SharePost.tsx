@@ -142,7 +142,7 @@ const SharePost = ({ profilePic, onPost }: SharePostProps) => {
             display="flex"
             sx={{ width: "170px", justifyContent: "space-between" }}
           >
-            <label htmlFor="file">
+            <label htmlFor="file-upload-post">
               <Box
                 sx={{
                   color,
@@ -170,7 +170,7 @@ const SharePost = ({ profilePic, onPost }: SharePostProps) => {
               </Box>
             </label>
             <Input
-              id="file"
+              id="file-upload-post"
               type="file"
               sx={{ display: "none" }}
               onChange={onSelectFile}

@@ -84,7 +84,7 @@ const ShareComment = ({ onSubmit, avatarUrl }: ShareCommentProps) => {
               alignItems="center"
               width="100%"
             >
-              <label htmlFor="file">
+              <label htmlFor="file-upload-comment">
                 <Box
                   sx={{
                     color,
@@ -113,7 +113,7 @@ const ShareComment = ({ onSubmit, avatarUrl }: ShareCommentProps) => {
                 </Box>
               </label>
               <Input
-                id="file"
+                id="file-upload-comment"
                 type="file"
                 sx={{ display: "none" }}
                 onChange={onSelectFile}
