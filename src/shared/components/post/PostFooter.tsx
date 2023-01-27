@@ -1,8 +1,13 @@
 import { useState } from "react";
-import { Box, IconButton, Typography } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  Typography,
+} from "@mui/material";
 import { FavoriteBorder, MoreHoriz, Favorite } from "@mui/icons-material/";
 import useTheme from "features/theme/useTheme";
 import { BasePostFooterType } from "shared/types";
+import CommentSection from "../CommentSection";
 
 function PostFooter({ id, userId, likes, comments }: BasePostFooterType) {
   const {
@@ -11,6 +16,7 @@ function PostFooter({ id, userId, likes, comments }: BasePostFooterType) {
   const [showComment, setShowComment] = useState(false);
   const [displayLikeCount, setDisplayLikeCount] = useState(likes.length);
   const [isLiked, setIsLiked] = useState(false);
+
   const handleLikeClick = () => {
     setIsLiked(!isLiked);
     isLiked
@@ -96,10 +102,12 @@ function PostFooter({ id, userId, likes, comments }: BasePostFooterType) {
                 mt: "3px",
                 width: "40px",
               }}
+              onClick={() => setShowComment(!showComment)}
             />
           </IconButton>
         </Box>
       </Box>
+      {showComment && <CommentSection id={id}/>}
     </>
   );
 }
