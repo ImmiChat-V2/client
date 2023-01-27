@@ -5,6 +5,7 @@ import useTheme from "features/theme/useTheme";
 import { BasePostFooterType } from "shared/types";
 import { useSelector } from "react-redux";
 import { getCurrentUser } from "features/auth/authSlice";
+import CommentSection from "../CommentSection";
 import axios from "axios";
 
 axios.defaults.withCredentials = true;
@@ -118,7 +119,7 @@ function PostFooter({ basePostFooterProps, onLike }: PostFooterProps) {
                 mt: "3px",
                 width: "40px",
               }}
-              onClick={() => setShowComment(!showComment)}
+              onClick={handleCommentClick}
             />
           </IconButton>
         </Box>
