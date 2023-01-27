@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import {
-  Box,
-  List,
-  Typography,
-} from "@mui/material";
+import { Box, List, Typography } from "@mui/material";
 import useTheme from "features/theme/useTheme";
 import axios from "axios";
 import BaseComment from "features/comments/components/Comment";
 import { BaseCommentModel } from "features/comments/models/Comments.model";
 
-function CommentSection({ id }: any) {
+type CommentSectionProps = {
+  id: number;
+};
+
+function CommentSection({ id }: CommentSectionProps) {
   const {
     themeColor: { color, navButtons },
   } = useTheme();
@@ -32,7 +32,7 @@ function CommentSection({ id }: any) {
     <>
       {commentData.length > 0 ? (
         <Box sx={{ bgcolor: navButtons, height: "200px", overflow: "auto" }}>
-          <List sx={{ width: "100%", mt: "-9px", px: '2px' }}>
+          <List sx={{ width: "100%", mt: "-9px", px: "2px" }}>
             {commentData.map((comment: BaseCommentModel) => (
               <Box sx={{ width: "100%" }}>
                 <BaseComment
