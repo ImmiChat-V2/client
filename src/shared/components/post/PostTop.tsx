@@ -12,7 +12,7 @@ import SimpleModal from "../Modal";
 
 type PostTopProps = {
   basePostTopProps: BasePostType;
-  onDelete?: () => void;
+  onDelete: (value: any) => void;
   onEdit: (value: any) => void;
 };
 
@@ -47,9 +47,13 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
     handleClose: handleMenuClose,
   } = useAnchor();
 
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [openEdit, setOpenEdit] = useState(false);
+  const handleOpenEdit = () => setOpenEdit(true);
+  const handleCloseEdit = () => setOpenEdit(false);
+
+  const [openDelete, setOpenDelete] = useState(false);
+  const handleOpenDelete = () => setOpenDelete(true);
+  const handleCloseDelete = () => setOpenDelete(false);
 
   return (
     <>
@@ -84,11 +88,26 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
             {user.id === userId && (
               <IconButton
                 sx={{ backgroundColor: navButtons, mr: "7px" }}
-                onClick={onDelete}
+                onClick={handleOpenDelete}
               >
                 <Delete sx={{ color }} />
               </IconButton>
             )}
+            <Box>
+              {openDelete && (
+                <SimpleModal
+                  modalName={"Delete Post"}
+                  id={id}
+                  type={"Delete"}
+                  content={content}
+                  media={media}
+                  likes={likes}
+                  comments={comments}
+                  handleClose={handleCloseDelete}
+                  handleConfirm={onDelete}
+                />
+              )}
+            </Box>
             <IconButton
               aria-label="more"
               id="long-button"
@@ -115,7 +134,7 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
               }}
             >
               {postOptions.map((option) => (
-                <MenuItem key={option.title} onClick={handleOpen}>
+                <MenuItem key={option.title} onClick={handleOpenEdit}>
                   <Box component="div" sx={{ width: "100%" }}>
                     <Box sx={{ display: "flex" }}>
                       <Box sx={{ display: "flex", mr: "7px" }}>
@@ -127,7 +146,7 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
                 </MenuItem>
               ))}
               <Box>
-                {open && (
+                {openEdit && (
                   <SimpleModal
                     modalName={"Edit Post"}
                     id={id}
@@ -136,7 +155,7 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
                     media={media}
                     likes={likes}
                     comments={comments}
-                    handleClose={handleClose}
+                    handleClose={handleCloseEdit}
                     handleConfirm={onEdit}
                   />
                 )}
