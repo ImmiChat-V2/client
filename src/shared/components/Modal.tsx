@@ -89,6 +89,13 @@ function SimpleModal({
       };
 
       handleConfirm(updatedPost);
+    } else if (type === "Delete") {
+      const endpoint = process.env.REACT_APP_BASE_URL + `/posts/${id}`;
+      await axios.delete(endpoint, {
+        withCredentials: true,
+      });
+
+      handleConfirm(id);
     }
 
     handleClose();
@@ -214,6 +221,18 @@ function SimpleModal({
                   </Box>
                 )}
               </Box>
+            )}
+            {type === "Delete" && (
+              <Typography
+                sx={{
+                  fontSize: "16px",
+                  padding: "10px",
+                  wordBreak: "break-word",
+                  mt: "15px",
+                }}
+              >
+                Are you sure you want to delete this post?
+              </Typography>
             )}
           </Box>
           <Box className="modal-footer" sx={{ mt: "10px" }}>

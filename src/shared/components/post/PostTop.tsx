@@ -12,7 +12,7 @@ import SimpleModal from "../Modal";
 
 type PostTopProps = {
   basePostTopProps: BasePostType;
-  onDelete?: () => void;
+  onDelete: (value: any) => void;
   onEdit: (value: any) => void;
 };
 
@@ -53,6 +53,10 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
     setOpenEdit(false);
   };
 
+  const [openDelete, setOpenDelete] = useState(false);
+  const handleOpenDelete = () => setOpenDelete(true);
+  const handleCloseDelete = () => setOpenDelete(false);
+
   return (
     <>
       <Box
@@ -86,11 +90,26 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
             {user.id === userId && (
               <IconButton
                 sx={{ backgroundColor: navButtons, mr: "7px" }}
-                onClick={onDelete}
+                onClick={handleOpenDelete}
               >
                 <Delete sx={{ color }} />
               </IconButton>
             )}
+            <Box>
+              {openDelete && (
+                <SimpleModal
+                  modalName={"Delete Post"}
+                  id={id}
+                  type={"Delete"}
+                  content={content}
+                  media={media}
+                  likes={likes}
+                  comments={comments}
+                  handleClose={handleCloseDelete}
+                  handleConfirm={onDelete}
+                />
+              )}
+            </Box>
             <IconButton
               aria-label="more"
               id="long-button"
