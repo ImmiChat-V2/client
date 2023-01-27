@@ -47,9 +47,6 @@ function Post({ basePostProps, onDelete, onLike }: PostProps) {
     comments,
   };
 
-  // The idea is that the Post component will handle the state of its comments
-  // When the CommentUI is built out,
-  // Update this handler to push the new comment to the commentstate
   const createCommentHandler = async (value: {
     content: string;
     media: string | null;
