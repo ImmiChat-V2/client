@@ -69,7 +69,7 @@ const ProfilePage = () => {
               isCurrentUser={true}
             />
             <BaseComment commentData={mockCommentData} />
-            <SharePost profilePic="" theme={themeColor} />
+            <SharePost profilePic="" />
           </Grid>
           <Grid item display={{ xs: "none", md: "flex" }} md={5} lg={4} xl={4}>
             <ConnectionList

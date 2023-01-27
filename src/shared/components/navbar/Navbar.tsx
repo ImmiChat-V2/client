@@ -16,9 +16,14 @@ function Navbar() {
   const { isDarkMode, themeColor, toggleDarkMode } = useTheme();
   const { backgroundColor, color, navButtons } = themeColor;
 
+  const dispatch = useDispatch()
   const navMenuOptions = [
     { title: "Profile", onClick: () => navigate(`/`) },
-    { title: "Login", onClick: () => navigate(`/`) },
+    { title: "Logout", onClick: () => {
+      // dispatch(logoutUser)
+      // logoutUser
+      navigate(`/login`)
+    } },
   ];
 
   return (
