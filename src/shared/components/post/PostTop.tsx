@@ -134,7 +134,12 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
               {postOptions.map(
                 (option) =>
                   option.title && (
-                    <MenuItem key={option.title} onClick={handleOpenEdit}>
+                    <MenuItem
+                      key={option.title}
+                      onClick={
+                        option.title === "Edit" ? handleOpenEdit : () => {}
+                      }
+                    >
                       <Box component="div" sx={{ width: "100%" }}>
                         <Box sx={{ display: "flex" }}>
                           <Box sx={{ display: "flex", mr: "7px" }}>
