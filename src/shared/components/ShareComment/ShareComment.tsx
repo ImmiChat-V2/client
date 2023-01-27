@@ -17,9 +17,10 @@ import useTheme from "features/theme/useTheme";
 type ShareCommentProps = {
   onSubmit: (value: { content: string; media: string | null }) => void;
   avatarUrl?: string;
+  id: number;
 };
 
-const ShareComment = ({ onSubmit, avatarUrl }: ShareCommentProps) => {
+const ShareComment = ({ onSubmit, avatarUrl, id }: ShareCommentProps) => {
   const {
     themeColor: { color, navButtons },
   } = useTheme();
@@ -84,7 +85,7 @@ const ShareComment = ({ onSubmit, avatarUrl }: ShareCommentProps) => {
               alignItems="center"
               width="100%"
             >
-              <label htmlFor="file-upload-comment">
+              <label htmlFor={"file-upload-comment-" + id}>
                 <Box
                   sx={{
                     color,
@@ -113,7 +114,7 @@ const ShareComment = ({ onSubmit, avatarUrl }: ShareCommentProps) => {
                 </Box>
               </label>
               <Input
-                id="file-upload-comment"
+                id={"file-upload-comment-" + id}
                 type="file"
                 sx={{ display: "none" }}
                 onChange={onSelectFile}

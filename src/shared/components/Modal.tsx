@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, ChangeEvent } from "react";
 import {
   Box,
   Button,
@@ -9,28 +9,38 @@ import {
 } from "@mui/material";
 import useTheme from "features/theme/useTheme";
 import { Close, Check, InsertPhotoOutlined, Label } from "@mui/icons-material";
-import { getSecureUrl } from "shared/utils/cloudinaryUtil";
+import { getSecureUrl, uploadMedia } from "shared/utils/cloudinaryUtil";
 import { useForm, useImageInput } from "shared/hooks";
-import { BaseCreatePostmodel } from "shared/types";
+import { BaseCreatePostModel, BaseFeedType } from "shared/types";
+import { useSelector } from "react-redux";
+import { getCurrentUser } from "features/auth/authSlice";
+import axios from "axios";
 
 type ModalProps = {
-  readonly handleClose: () => void;
-  readonly handleConfirm?: () => void;
   readonly modalName: string;
+  readonly id: number;
   readonly type: string;
   readonly content?: string;
   readonly media?: string;
+  readonly likes: { id: number }[];
+  readonly comments: { userId: number }[];
+  readonly handleClose: () => void;
+  readonly handleConfirm: (value: any) => void;
 };
 
 function SimpleModal({
-  handleClose,
   modalName,
+  id,
   type,
-  handleConfirm,
   content,
   media,
+  likes,
+  comments,
+  handleClose,
+  handleConfirm,
 }: ModalProps) {
-  const [modalMedia, setModalMedia] = useState(media ? media : null);
+  const [modalMedia, setModalMedia] = useState(media || null);
+  const user = useSelector(getCurrentUser);
   const {
     isDarkMode,
     themeColor: { backgroundColor, color, navButtons },
@@ -49,23 +59,39 @@ function SimpleModal({
     p: 4,
   };
 
-  const { form, handleChange, resetForm } = useForm<BaseCreatePostmodel>({
-    media: "",
-    content: "",
+  const { form, handleChange } = useForm<BaseCreatePostModel>({
+    media: modalMedia || "",
+    content: content || "",
   });
 
-  const { content: FormContent, media: FormMedia } = form;
+  const { content: FormContent } = form;
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     if (type === "Edit") {
-    }
-    const endPoint = process.env.REACT_APP_BASE_URL + "/posts";
+      const endPoint = process.env.REACT_APP_BASE_URL + `/posts/${id}`;
+      const media = selectedFile ? await uploadMedia(selectedFile) : modalMedia;
 
-    // user selects image for the first time
-    // user has doesn't change image
-    // user changes image
-    // user removes image
+      const updateBody = { content: FormContent, media };
+      const res = await axios.put(endPoint, updateBody, {
+        withCredentials: true,
+      });
+
+      const updatedPost: BaseFeedType = {
+        ...res.data.data,
+        user: {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          profilePic: user.profilePic,
+        },
+        likes,
+        comments,
+      };
+
+      handleConfirm(updatedPost);
+    }
+
+    handleClose();
   };
 
   const { onSelectFile, preview, onRemove, selectedFile } = useImageInput();
@@ -88,7 +114,6 @@ function SimpleModal({
             {modalName}
           </Typography>
           <Box className="modal-content">
-            <Box component="form" onSubmit={handleSubmit}></Box>
             {type === "Edit" && (
               <Box>
                 <Box
@@ -107,7 +132,8 @@ function SimpleModal({
                     sx={{ color, width: "99%" }}
                     className="edit-modal-content"
                     placeholder="Add a description..."
-                    defaultValue={content}
+                    name="content"
+                    value={FormContent}
                     onChange={handleChange}
                   />
                 </Box>
@@ -175,9 +201,13 @@ function SimpleModal({
                       </label>
                       <Input
                         id="file-upload-modal"
+                        name="media"
                         type="file"
                         sx={{ display: "none" }}
-                        onChange={onSelectFile}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                          onSelectFile(e);
+                          handleChange(e);
+                        }}
                       />
                     </Box>
                   </Box>
@@ -207,7 +237,7 @@ function SimpleModal({
                   fontSize: "18px",
                   "&:hover": { backgroundColor: navButtons },
                 }}
-                onClick={handleClose}
+                onClick={handleSubmit}
               >
                 Confirm
                 <Check sx={{ ml: "3px" }} />

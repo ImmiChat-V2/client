@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { useForm, useImageInput } from "../hooks";
 import { uploadMedia } from "shared/utils/cloudinaryUtil";
-import { BaseCreatePostmodel } from "../types/SharePostTypes";
+import { BaseCreatePostModel } from "../types/SharePostTypes";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { getCurrentUser } from "features/auth/authSlice";
@@ -27,7 +27,7 @@ type SharePostProps = {
 const SharePost = ({ profilePic, theme, onPost }: SharePostProps) => {
   const user = useSelector(getCurrentUser);
 
-  const { form, handleChange, resetForm } = useForm<BaseCreatePostmodel>({
+  const { form, handleChange, resetForm } = useForm<BaseCreatePostModel>({
     media: "",
     content: "",
     categoryName: "",

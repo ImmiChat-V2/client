@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Box, IconButton, Menu, MenuItem } from "@mui/material";
 import { MoreVert, Delete, Edit, Share } from "@mui/icons-material/";
 import { UserProfileWidget } from "shared/components";
-import { BasePostTopType } from "shared/types";
+import { BasePostType } from "shared/types";
 import useTheme from "features/theme/useTheme";
 import useAnchor from "shared/hooks/useAnchor";
 import UserProfileHoverCard from "../UserProfileHoverCard/UserProfileHoverCard";
@@ -11,8 +11,9 @@ import { getCurrentUser } from "features/auth/authSlice";
 import SimpleModal from "../Modal";
 
 type PostTopProps = {
-  basePostTopProps: BasePostTopType;
+  basePostTopProps: BasePostType;
   onDelete?: () => void;
+  onEdit: (value: any) => void;
 };
 
 const postOptions = [
@@ -20,12 +21,22 @@ const postOptions = [
   { title: "Share", icon: Share },
 ];
 
-function PostTop({ basePostTopProps, onDelete }: PostTopProps) {
+function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
   const {
     themeColor: { color, navButtons },
   } = useTheme();
-  const { userId, profilePic, firstName, lastName, timestamp, content, media } =
-    basePostTopProps;
+  const {
+    id,
+    userId,
+    profilePic,
+    firstName,
+    lastName,
+    timestamp,
+    content,
+    media,
+    likes,
+    comments,
+  } = basePostTopProps;
 
   const user = useSelector(getCurrentUser);
 
@@ -118,11 +129,15 @@ function PostTop({ basePostTopProps, onDelete }: PostTopProps) {
               <Box>
                 {open && (
                   <SimpleModal
-                    handleClose={handleClose}
                     modalName={"Edit Post"}
+                    id={id}
                     type={"Edit"}
                     content={content}
                     media={media}
+                    likes={likes}
+                    comments={comments}
+                    handleClose={handleClose}
+                    handleConfirm={onEdit}
                   />
                 )}
               </Box>
