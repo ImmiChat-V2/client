@@ -22,8 +22,8 @@ type ModalProps = {
   readonly type: string;
   readonly content?: string;
   readonly media?: string;
-  readonly likes: { id: number }[];
-  readonly comments: { userId: number }[];
+  readonly likes?: { id: number }[];
+  readonly comments?: { userId: number }[];
   readonly handleClose: () => void;
   readonly handleConfirm: (value: any) => void;
 };

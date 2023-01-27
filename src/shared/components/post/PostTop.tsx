@@ -99,10 +99,6 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
                   modalName={"Delete Post"}
                   id={id}
                   type={"Delete"}
-                  content={content}
-                  media={media}
-                  likes={likes}
-                  comments={comments}
                   handleClose={handleCloseDelete}
                   handleConfirm={onDelete}
                 />
