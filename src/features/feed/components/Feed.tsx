@@ -24,7 +24,7 @@ function Feed() {
   } = useTheme();
   return (
     <>
-      <Box sx={{ width: "700px" }}>
+      <Box sx={{ maxWidth: "800px", m: 'auto' }}>
         <SharePost
           profilePic=""
           onPost={(data: any) => setFeed([data, ...feed])}

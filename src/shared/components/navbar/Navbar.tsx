@@ -90,7 +90,10 @@ function Navbar() {
         <Grid
           container
           spacing={3}
-          sx={{ display: { sm: "none", md: "flex" }, alignItems: "center" }}
+          sx={{
+            display: { xs: "none", sm: "none", md: "flex" },
+            alignItems: "center",
+          }}
         >
           <Grid item>
             {isDarkMode ? (
@@ -127,7 +130,7 @@ function Navbar() {
               }}
             />
           </Grid>
-          <Grid item sx={{mr: '20px'}}>
+          <Grid item sx={{ mr: "20px" }}>
             <Help
               sx={{
                 color,
