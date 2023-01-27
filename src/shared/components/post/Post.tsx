@@ -11,9 +11,10 @@ import axios from "axios";
 type PostProps = {
   basePostProps: BasePostType;
   onDelete?: (value: any) => void;
+  onEdit: (value: any) => void;
 };
 
-function Post({ basePostProps, onDelete }: PostProps) {
+function Post({ basePostProps, onDelete, onEdit }: PostProps) {
   const {
     id,
     userId,
@@ -33,6 +34,7 @@ function Post({ basePostProps, onDelete }: PostProps) {
 
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const postTopProps = {
+    id,
     userId,
     profilePic,
     firstName,
@@ -131,7 +133,11 @@ function Post({ basePostProps, onDelete }: PostProps) {
             mx: "20px",
           }}
         >
-          <PostTop basePostTopProps={postTopProps} onDelete={openDeleteModal} />
+          <PostTop
+            basePostTopProps={basePostProps}
+            onDelete={openDeleteModal}
+            onEdit={onEdit}
+          />
           <PostBody content={content} media={media} />
           <Divider sx={{ mt: "20px" }} />
           <PostFooter
@@ -140,7 +146,7 @@ function Post({ basePostProps, onDelete }: PostProps) {
             likes={likes}
             comments={comments}
           />
-          <ShareComment onSubmit={createCommentHandler} />
+          <ShareComment onSubmit={createCommentHandler} id={id} />
         </Box>
       </Box>
     </>

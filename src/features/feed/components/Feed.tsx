@@ -19,6 +19,13 @@ function Feed() {
     fetchFeed();
   }, []);
 
+  async function updatePost(updatedPost: BaseFeedType) {
+    const index = feed.findIndex((p) => p.id === updatedPost.id);
+    const updatedFeed = [...feed];
+    updatedFeed.splice(index, 1);
+    setFeed([updatedPost, ...updatedFeed]);
+  }
+
   const {
     themeColor: { color, navButtons, backgroundColor },
   } = useTheme();
@@ -45,6 +52,7 @@ function Feed() {
                   timestamp: new Date(post.updatedAt),
                 }}
                 onDelete={(id: any) => setFeed(feed.filter((p) => p.id !== id))}
+                onEdit={updatePost}
               />
             </Box>
           ))}
