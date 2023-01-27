@@ -16,11 +16,6 @@ type PostTopProps = {
   onEdit: (value: any) => void;
 };
 
-const postOptions = [
-  { title: "Edit", icon: Edit },
-  { title: "Share", icon: Share },
-];
-
 function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
   const {
     themeColor: { color, navButtons },
@@ -40,6 +35,11 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
 
   const user = useSelector(getCurrentUser);
 
+  const postOptions = [
+    user.id === userId ? { title: "Edit", icon: Edit } : {},
+    { title: "Share", icon: Share },
+  ];
+
   const {
     anchorEl: menuAnchorElement,
     open: isMenuOpen,
@@ -49,7 +49,10 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
 
   const [openEdit, setOpenEdit] = useState(false);
   const handleOpenEdit = () => setOpenEdit(true);
-  const handleCloseEdit = () => setOpenEdit(false);
+  const handleCloseEdit = () => {
+    setOpenEdit(false);
+    handleMenuClose();
+  };
 
   const [openDelete, setOpenDelete] = useState(false);
   const handleOpenDelete = () => setOpenDelete(true);
@@ -129,18 +132,26 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
                 },
               }}
             >
-              {postOptions.map((option) => (
-                <MenuItem key={option.title} onClick={handleOpenEdit}>
-                  <Box component="div" sx={{ width: "100%" }}>
-                    <Box sx={{ display: "flex" }}>
-                      <Box sx={{ display: "flex", mr: "7px" }}>
-                        {<option.icon />}
+              {postOptions.map(
+                (option) =>
+                  option.title && (
+                    <MenuItem
+                      key={option.title}
+                      onClick={
+                        option.title === "Edit" ? handleOpenEdit : () => {}
+                      }
+                    >
+                      <Box component="div" sx={{ width: "100%" }}>
+                        <Box sx={{ display: "flex" }}>
+                          <Box sx={{ display: "flex", mr: "7px" }}>
+                            {<option.icon />}
+                          </Box>
+                          <Box>{option.title}</Box>
+                        </Box>
                       </Box>
-                      <Box>{option.title}</Box>
-                    </Box>
-                  </Box>
-                </MenuItem>
-              ))}
+                    </MenuItem>
+                  )
+              )}
               <Box>
                 {openEdit && (
                   <SimpleModal
