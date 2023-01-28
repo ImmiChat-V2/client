@@ -1,9 +1,5 @@
 import { useState } from "react";
-import {
-  Box,
-  IconButton,
-  Typography,
-} from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import { FavoriteBorder, MoreHoriz, Favorite } from "@mui/icons-material/";
 import useTheme from "features/theme/useTheme";
 import { BasePostFooterType } from "shared/types";
@@ -13,6 +9,7 @@ function PostFooter({ id, userId, likes, comments }: BasePostFooterType) {
   const {
     themeColor: { color, navButtons },
   } = useTheme();
+  const [commentOffset, setCommentOffset] = useState(0);
   const [showComment, setShowComment] = useState(false);
   const [displayLikeCount, setDisplayLikeCount] = useState(likes.length);
   const [isLiked, setIsLiked] = useState(false);
@@ -81,7 +78,8 @@ function PostFooter({ id, userId, likes, comments }: BasePostFooterType) {
         </Box>
         <Box component="span" sx={{ display: "flex", alignItems: "center" }}>
           <Typography sx={{ color }}>
-            {comments.length} {comments.length === 1 ? "Comment" : "Comments"}
+            {comments.length - commentOffset}{" "}
+            {comments.length === 1 ? "Comment" : "Comments"}
           </Typography>
           <IconButton
             aria-label="comment-post"
@@ -107,7 +105,13 @@ function PostFooter({ id, userId, likes, comments }: BasePostFooterType) {
           </IconButton>
         </Box>
       </Box>
-      {showComment && <CommentSection id={id}/>}
+      {showComment && (
+        <CommentSection
+          commentOffset={commentOffset}
+          setCommentOffset={setCommentOffset}
+          id={id}
+        />
+      )}
     </>
   );
 }

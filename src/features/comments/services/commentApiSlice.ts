@@ -2,7 +2,6 @@ import { apiSlice } from "features/api/apiSlice";
 import {
   BaseCommentModel,
   UpdateCommentProps,
-  DeleteCommentProps,
   CreateCommentProps,
   UsersLikedCommentModel,
 } from "../models/Comments.model";
@@ -16,11 +15,10 @@ export const commentApiSlice = apiSlice.injectEndpoints({
         body,
       }),
     }),
-    deleteComment: builder.mutation<null, DeleteCommentProps>({
-      query: ({ commentId, body }) => ({
+    deleteComment: builder.mutation<null, number>({
+      query: (commentId) => ({
         url: `/comments/${commentId}`,
         method: "DELETE",
-        body,
       }),
     }),
     createComment: builder.mutation<BaseCommentModel, CreateCommentProps>({
