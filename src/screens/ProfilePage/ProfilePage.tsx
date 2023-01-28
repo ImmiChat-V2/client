@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Box, Grid } from "@mui/material";
 import useTheme from "features/theme/useTheme";
 import { ProfileCard } from "features/userprofile/components/ProfileCard";
@@ -53,6 +54,7 @@ export const mockFriendList = [
 
 const ProfilePage = () => {
   const { themeColor } = useTheme();
+  const [commentData, setCommentData] = useState<BaseCommentModel[]>([]);
 
   return (
     <Box>
@@ -68,7 +70,13 @@ const ProfilePage = () => {
               theme={themeColor}
               isCurrentUser={true}
             />
-            <BaseComment commentData={mockCommentData} />
+            <BaseComment
+              comments={commentData}
+              setComments={setCommentData}
+              commentData={mockCommentData}
+              commentOffset={0}
+              setCommentOffset={() => {}}
+            />
             <SharePost profilePic="" />
           </Grid>
           <Grid item display={{ xs: "none", md: "flex" }} md={5} lg={4} xl={4}>

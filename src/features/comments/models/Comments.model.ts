@@ -37,8 +37,3 @@ export type CreateCommentProps = {
   postId: number;
   body: CreateCommentRequestModel;
 };
-
-export type DeleteCommentProps = {
-  commentId: number;
-  body: DeleteCommentRequestModel;
-};

@@ -12,17 +12,41 @@ import useTheme from "features/theme/useTheme";
 import { getSecureUrl } from "shared/utils/cloudinaryUtil";
 import { BaseCommentModel } from "../models/Comments.model";
 import UserProfileHoverCard from "shared/components/UserProfileHoverCard/UserProfileHoverCard";
+import { useDeleteCommentMutation } from "../services/commentApiSlice";
 import { UserProfileWidget } from "shared/components";
 
 type CommentProps = {
   commentData: BaseCommentModel;
+  comments: BaseCommentModel[];
+  setComments: React.Dispatch<React.SetStateAction<BaseCommentModel[]>>;
+  commentOffset: number;
+  setCommentOffset: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const BaseComment = (commentData: CommentProps) => {
-  const { id, media, content, updatedAt, user } = commentData.commentData;
+const BaseComment = ({
+  commentData,
+  comments,
+  setComments,
+  commentOffset,
+  setCommentOffset,
+}: CommentProps) => {
+  const { id, media, content, updatedAt, user } = commentData;
   const { firstName, lastName, profilePic } = user;
   const [likes, setLikes] = useState<any>([]);
   const { themeColor } = useTheme();
+
+  const [deleteComment] = useDeleteCommentMutation();
+
+  const handleCommentCountUpdate = () => {
+    setCommentOffset(commentOffset + 1);
+  };
+  const handleDeleteComment = async () => {
+    await deleteComment(id);
+    const newComments = comments.filter((comment) => comment.id !== id);
+    setComments(newComments);
+    handleCommentCountUpdate();
+    return;
+  };
 
   return (
     <Card
@@ -176,7 +200,7 @@ const BaseComment = (commentData: CommentProps) => {
                     },
                   }}
                 >
-                  <Delete />
+                  <Delete onClick={handleDeleteComment} />
                 </IconButton>
               </Box>
             </Box>

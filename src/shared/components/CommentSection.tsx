@@ -7,9 +7,15 @@ import { BaseCommentModel } from "features/comments/models/Comments.model";
 
 type CommentSectionProps = {
   id: number;
+  commentOffset: number;
+  setCommentOffset: React.Dispatch<React.SetStateAction<number>>;
 };
 
-function CommentSection({ id }: CommentSectionProps) {
+function CommentSection({
+  id,
+  commentOffset,
+  setCommentOffset,
+}: CommentSectionProps) {
   const {
     themeColor: { color, navButtons },
   } = useTheme();
@@ -37,6 +43,10 @@ function CommentSection({ id }: CommentSectionProps) {
               <Box sx={{ width: "100%" }}>
                 <BaseComment
                   key={comment.id}
+                  comments={commentData}
+                  setComments={setCommentData}
+                  commentOffset={commentOffset}
+                  setCommentOffset={setCommentOffset}
                   commentData={{
                     ...comment,
                     likes: [],
