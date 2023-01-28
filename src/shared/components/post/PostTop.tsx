@@ -16,11 +16,6 @@ type PostTopProps = {
   onEdit: (value: any) => void;
 };
 
-const postOptions = [
-  { title: "Edit", icon: Edit },
-  { title: "Share", icon: Share },
-];
-
 function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
   const {
     themeColor: { color, navButtons },
@@ -39,6 +34,10 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
   } = basePostTopProps;
 
   const user = useSelector(getCurrentUser);
+  const postOptions = [
+    user.id === userId ? { title: "Edit", icon: Edit } : {},
+    { title: "Share", icon: Share },
+  ];
 
   const {
     anchorEl: menuAnchorElement,
@@ -47,9 +46,12 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
     handleClose: handleMenuClose,
   } = useAnchor();
 
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [openEdit, setOpenEdit] = useState(false);
+  const handleOpenEdit = () => setOpenEdit(true);
+  const handleCloseEdit = () => {
+    handleMenuClose();
+    setOpenEdit(false);
+  };
 
   return (
     <>
@@ -114,20 +116,23 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
                 },
               }}
             >
-              {postOptions.map((option) => (
-                <MenuItem key={option.title} onClick={handleOpen}>
-                  <Box component="div" sx={{ width: "100%" }}>
-                    <Box sx={{ display: "flex" }}>
-                      <Box sx={{ display: "flex", mr: "7px" }}>
-                        {<option.icon />}
+              {postOptions.map(
+                (option) =>
+                  option.title && (
+                    <MenuItem key={option.title} onClick={handleOpenEdit}>
+                      <Box component="div" sx={{ width: "100%" }}>
+                        <Box sx={{ display: "flex" }}>
+                          <Box sx={{ display: "flex", mr: "7px" }}>
+                            {<option.icon />}
+                          </Box>
+                          <Box>{option.title}</Box>
+                        </Box>
                       </Box>
-                      <Box>{option.title}</Box>
-                    </Box>
-                  </Box>
-                </MenuItem>
-              ))}
+                    </MenuItem>
+                  )
+              )}
               <Box>
-                {open && (
+                {openEdit && (
                   <SimpleModal
                     modalName={"Edit Post"}
                     id={id}
@@ -136,7 +141,7 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
                     media={media}
                     likes={likes}
                     comments={comments}
-                    handleClose={handleClose}
+                    handleClose={handleCloseEdit}
                     handleConfirm={onEdit}
                   />
                 )}

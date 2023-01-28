@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import useTheme from "features/theme/useTheme";
-import { Close, Check, InsertPhotoOutlined, Label } from "@mui/icons-material";
+import { Close, Check, InsertPhotoOutlined } from "@mui/icons-material";
 import { getSecureUrl, uploadMedia } from "shared/utils/cloudinaryUtil";
 import { useForm, useImageInput } from "shared/hooks";
 import { BaseCreatePostModel, BaseFeedType } from "shared/types";
