@@ -19,10 +19,8 @@ function Feed() {
     fetchFeed();
   }, []);
 
-  async function updatePost(updatedPost: BaseFeedType) {
-    const index = feed.findIndex((p) => p.id === updatedPost.id);
-    const updatedFeed = [...feed];
-    updatedFeed.splice(index, 1);
+  async function updateFeed(updatedPost: BaseFeedType) {
+    const updatedFeed = feed.filter((post) => post.id !== updatedPost.id);
     setFeed([updatedPost, ...updatedFeed]);
   }
 
@@ -52,7 +50,7 @@ function Feed() {
                   timestamp: new Date(post.updatedAt),
                 }}
                 onDelete={(id: any) => setFeed(feed.filter((p) => p.id !== id))}
-                onEdit={updatePost}
+                onEdit={updateFeed}
               />
             </Box>
           ))}
