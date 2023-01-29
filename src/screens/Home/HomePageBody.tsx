@@ -41,7 +41,7 @@ function HomePageBody() {
           xl={4}
           sx={{ display: { xs: "none", sm: "flex" } }}
         >
-          <NavSidebar theme={themeColor} />
+          <NavSidebar />
         </Grid>
         <Grid
           item

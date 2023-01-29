@@ -12,31 +12,36 @@ import {
   LiveHelpRounded,
   BookmarkRounded,
 } from "@mui/icons-material";
+import UserProfileHoverCard from "../UserProfileHoverCard/UserProfileHoverCard";
+import UserProfileWidget from "../UserProfileWidget";
+import { useSelector } from "react-redux";
+import { getCurrentUser } from "features/auth/authSlice";
+import useTheme from "features/theme/useTheme";
 
 type menuItem = {
   name: string;
   icon: SvgIconProps;
 };
 
-type NavSidebarProps = {
-  theme: any;
-};
-
-const NavSidebar = ({ theme }: NavSidebarProps) => {
+const NavSidebar = () => {
+  const {
+    themeColor: { navButtons, backgroundColor, color },
+  } = useTheme();
+  const user = useSelector(getCurrentUser);
   const menuItems: menuItem[] = [
     {
       name: "Feed",
       icon: (
         <RssFeedRounded
-          sx={{ color: theme.color, fontSize: "18px", m: "0 7px 1px 0" }}
+          sx={{ color, fontSize: "18px", m: "0 7px 1px 0" }}
         />
       ),
     },
     {
-      name: "Chats",
+      name: "Chat",
       icon: (
         <MailRounded
-          sx={{ color: theme.color, fontSize: "18px", m: "0 7px 1px 0" }}
+          sx={{ color, fontSize: "18px", m: "0 7px 1px 0" }}
         />
       ),
     },
@@ -44,7 +49,7 @@ const NavSidebar = ({ theme }: NavSidebarProps) => {
       name: "Bookmarks",
       icon: (
         <BookmarkRounded
-          sx={{ color: theme.color, fontSize: "16px", m: "0 9px 1px 0" }}
+          sx={{ color, fontSize: "16px", m: "0 9px 1px 0" }}
         />
       ),
     },
@@ -52,57 +57,77 @@ const NavSidebar = ({ theme }: NavSidebarProps) => {
       name: "Questions",
       icon: (
         <LiveHelpRounded
-          sx={{ color: theme.color, fontSize: "14px", m: "0 11px 1px 0" }}
+          sx={{ color, fontSize: "14px", m: "0 11px 1px 0" }}
         />
       ),
     },
   ];
   return (
-    <Card
-      sx={{
-        bgcolor: theme.backgroundColor,
-        width: "100%",
-        height: "100vh",
-        justifyContent: "center",
-        display: "flex",
-        alignItems: "center",
-        borderRadius: "0px",
-      }}
+    <Box
+      component="div"
+      sx={{ display: "flex", bgcolor: backgroundColor, width: "100%" }}
     >
-      <MenuList
+      <Card
         sx={{
+          position: "sticky",
+          top: 0,
+          bgcolor: navButtons,
           width: "100%",
-          flexDirection: "column",
+          height: "260px",
+          justifyContent: "flex-start",
+          display: "flex",
+          alignItems: "start",
+          borderRadius: "0px",
+          flexDirection: "row",
+          pt: "20px",
         }}
       >
-        {menuItems.map(({ icon, name }, index) => {
-          return (
-            <MenuItem
-              key={index}
-              sx={{
-                width: "100%",
-                pl: "20%",
-                minHeight: "30px",
-              }}
-            >
-              <Box
-                sx={{
-                  justifyContent: "center",
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                }}
-              >
-                <>{icon}</>
-                <Typography sx={{ color: theme.color, display: "flex" }}>
-                  {name}
-                </Typography>
-              </Box>
-            </MenuItem>
-          );
-        })}
-      </MenuList>
-    </Card>
+        <Box component="div" sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
+          <UserProfileHoverCard>
+            <UserProfileWidget
+              firstName={"Fake"}
+              lastName={user.lastName}
+              profilePicture={user.profilePic}
+              boxProps={{ cursor: "pointer", ml: "20px" }}
+            />
+          </UserProfileHoverCard>
+          <MenuList
+            sx={{
+              mt: "10px",
+            }}
+          >
+            {menuItems.map(({ icon, name }, index) => {
+              return (
+                <MenuItem
+                  key={index}
+                  sx={{
+                    bgcolor: navButtons,
+                    width: "100%",
+                    minHeight: "30px",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      pl: { xs: "0", md: "5px", xl: '50px' },
+                    }}
+                  >
+                    <>{icon}</>
+                    <Typography
+                      sx={{ color, display: "flex", fontSize: "18px" }}
+                    >
+                      {name}
+                    </Typography>
+                  </Box>
+                </MenuItem>
+              );
+            })}
+          </MenuList>
+        </Box>
+      </Card>
+    </Box>
   );
 };
 

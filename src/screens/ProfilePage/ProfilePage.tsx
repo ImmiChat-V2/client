@@ -60,7 +60,7 @@ const ProfilePage = () => {
       <Box>
         <Grid container spacing={2} columns={24}>
           <Grid item display={{ xs: "none", md: "flex" }} md={5} lg={4} xl={3}>
-            <NavSidebar theme={themeColor} />
+            <NavSidebar />
           </Grid>
           <Grid item xs={24} md={14} lg={16} xl={17}>
             <ProfileCard
