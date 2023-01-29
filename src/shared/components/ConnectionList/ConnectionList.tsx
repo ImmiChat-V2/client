@@ -21,20 +21,21 @@ const ConnectionList = ({ connectionList }: ConnectionListProps) => {
   return (
     <Box
       sx={{
-        width: "100%",
-        height: "100vh",
-        color: color,
         bgcolor: backgroundColor,
-        display: "flex",
-        justifyContent: "center",
+        width: "100%",
       }}
     >
       <Box
         sx={{
-          position: "fixed",
+          position: "sticky",
+          top: 0,
+          width: "100%",
+          height: "250px",
+          color: color,
+          bgcolor: navButtons,
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <Typography
@@ -43,27 +44,31 @@ const ConnectionList = ({ connectionList }: ConnectionListProps) => {
           sx={{
             textAlign: "center",
             color: color,
+            mt: "20px",
+            width: "100%",
           }}
         >
           Connections
         </Typography>
-        {connectionList.map((connection) => (
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            top="0"
-            sx={{ mx: 3 }}
-          >
-            <UserProfileWidget
-              {...connection}
-              key={connection.id}
-              boxProps={{ my: "10px" }}
-            />
-            <Box alignSelf="center" sx={{ mx: 2 }}>
-              <ChatIcon />
+        <Box component="div" sx={{ overflow: "auto", mt: "5px" }}>
+          {connectionList.map((connection) => (
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              top="0"
+              sx={{ mx: 3 }}
+            >
+              <UserProfileWidget
+                {...connection}
+                key={connection.id}
+                boxProps={{ my: "10px" }}
+              />
+              <Box alignSelf="center" sx={{ mx: 2 }}>
+                <ChatIcon />
+              </Box>
             </Box>
-          </Box>
-        ))}
+          ))}
+        </Box>
       </Box>
     </Box>
   );
