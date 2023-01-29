@@ -5,7 +5,7 @@ import UserProfileWidget from "../UserProfileWidget";
 type ConnectionProps = {
   firstName: string;
   lastName: string;
-  profilePic: string;
+  profilePic?: string;
   id: number;
 };
 
@@ -43,23 +43,35 @@ const ConnectionList = ({ theme, connectionList }: ConnectionListProps) => {
         >
           Connections
         </Typography>
-        {connectionList.map((connection) => (
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            top="0"
-            sx={{ mx: 3 }}
-          >
-            <UserProfileWidget
-              {...connection}
-              key={connection.id}
-              boxProps={{ my: "10px" }}
-            />
-            <Box alignSelf="center" sx={{ mx: 2 }}>
-              <ChatIcon />
+        {connectionList.length > 0 ? (
+          connectionList.map((connection) => (
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              top="0"
+              sx={{ mx: 3 }}
+            >
+              <UserProfileWidget
+                {...connection}
+                key={connection.id}
+                boxProps={{ my: "10px" }}
+              />
+              <Box alignSelf="center" sx={{ mx: 2 }}>
+                <ChatIcon />
+              </Box>
             </Box>
-          </Box>
-        ))}
+          ))
+        ) : (
+          <Typography
+            sx={{
+              pt: "5px",
+              textAlign: "center",
+              color: theme.color,
+            }}
+          >
+            There are currently no connections
+          </Typography>
+        )}
       </Box>
     </Box>
   );
