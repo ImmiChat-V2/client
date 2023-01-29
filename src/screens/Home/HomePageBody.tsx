@@ -61,7 +61,7 @@ function HomePageBody() {
           xl={4}
           sx={{ display: { xs: "none", sm: "none", md: "flex" } }}
         >
-          <ConnectionList theme={themeColor} connectionList={mockFriendList} />
+          <ConnectionList connectionList={mockFriendList} />
         </Grid>
       </Grid>
     </Box>
