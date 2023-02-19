@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import ChatIcon from "@mui/icons-material/Chat";
 import UserProfileWidget from "../UserProfileWidget";
+import useTheme from "features/theme/useTheme";
 
 type ConnectionProps = {
   firstName: string;
@@ -10,17 +11,20 @@ type ConnectionProps = {
 };
 
 type ConnectionListProps = {
-  theme: any;
   connectionList: ConnectionProps[];
 };
-const ConnectionList = ({ theme, connectionList }: ConnectionListProps) => {
+
+const ConnectionList = ({ connectionList }: ConnectionListProps) => {
+  const {
+    themeColor: { color, backgroundColor, navButtons },
+  } = useTheme();
   return (
     <Box
       sx={{
         width: "100%",
         height: "100vh",
-        color: theme.color,
-        bgcolor: theme.backgroundColor,
+        color: color,
+        bgcolor: backgroundColor,
         display: "flex",
         justifyContent: "center",
       }}
@@ -38,7 +42,7 @@ const ConnectionList = ({ theme, connectionList }: ConnectionListProps) => {
           fontWeight="600"
           sx={{
             textAlign: "center",
-            color: theme.color,
+            color: color,
           }}
         >
           Connections
