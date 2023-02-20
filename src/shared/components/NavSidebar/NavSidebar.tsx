@@ -78,14 +78,13 @@ const NavSidebar = () => {
           display: "flex",
           alignItems: "start",
           borderRadius: "0px",
-          flexDirection: "row",
           pt: "20px",
         }}
       >
         <Box component="div" sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
           <UserProfileHoverCard>
             <UserProfileWidget
-              firstName={"Fake"}
+              firstName={user.firstName}
               lastName={user.lastName}
               profilePicture={user.profilePic}
               boxProps={{ cursor: "pointer", ml: "20px" }}
