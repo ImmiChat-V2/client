@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Box } from "@mui/material";
-import useTheme from "features/theme/useTheme";
 import { SharePost } from "shared/components";
 import { BaseFeedType } from "shared/types";
 import Post from "shared/components/post/Post";
@@ -24,12 +23,9 @@ function Feed() {
     setFeed([updatedPost, ...updatedFeed]);
   }
 
-  const {
-    themeColor: { color, navButtons, backgroundColor },
-  } = useTheme();
   return (
     <>
-      <Box sx={{ maxWidth: "800px", m: 'auto' }}>
+      <Box sx={{ maxWidth: "800px", m: "auto" }}>
         <SharePost
           profilePic=""
           onPost={(data: any) => setFeed([data, ...feed])}

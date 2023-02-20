@@ -8,11 +8,14 @@ import useAnchor from "shared/hooks/useAnchor";
 import UserProfileHoverCard from "../UserProfileHoverCard/UserProfileHoverCard";
 import { useSelector } from "react-redux";
 import { getCurrentUser } from "features/auth/authSlice";
-import SimpleModal from "../Modal";
+import SimpleModal from "../EditPostModal";
+import ConfirmationModal from "../ConfirmationModal";
+import axios from "axios";
+import EditPostModal from "../EditPostModal";
 
 type PostTopProps = {
   basePostTopProps: BasePostType;
-  onDelete?: () => void;
+  onDelete?: (id: any) => void;
   onEdit: (value: any) => void;
 };
 
@@ -53,6 +56,21 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
     setOpenEdit(false);
   };
 
+  const deletePostHandler = async (id: number) => {
+    const endpoint = process.env.REACT_APP_BASE_URL + `/posts/${id}`;
+    const response = await axios.delete(endpoint, {
+      withCredentials: true,
+    });
+
+    onDelete?.(id);
+  };
+
+  const confirmDeletePost = () => {
+    setOpenEdit(false);
+    deletePostHandler(id);
+  };
+
+  const [modalClicked, setModalClicked] = useState(false);
   return (
     <>
       <Box
@@ -86,8 +104,14 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
             {user.id === userId && (
               <IconButton
                 sx={{ backgroundColor: navButtons, mr: "7px" }}
-                onClick={onDelete}
+                onClick={() => setModalClicked(!modalClicked)}
               >
+                {modalClicked && (
+                  <ConfirmationModal
+                    handleClose={handleCloseEdit}
+                    handleConfirm={confirmDeletePost}
+                  />
+                )}
                 <Delete sx={{ color }} />
               </IconButton>
             )}
@@ -133,10 +157,9 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
               )}
               <Box>
                 {openEdit && (
-                  <SimpleModal
+                  <EditPostModal
                     modalName={"Edit Post"}
                     id={id}
-                    type={"Edit"}
                     content={content}
                     media={media}
                     likes={likes}

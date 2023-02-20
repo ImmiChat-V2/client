@@ -1,8 +1,11 @@
 import { Box, Grid } from "@mui/material";
 import { Feed } from "features/feed/components";
 import useTheme from "features/theme/useTheme";
+import { useState } from "react";
+import ConfirmationModal from "shared/components/ConfirmationModal";
 import ConnectionList from "shared/components/ConnectionList";
 import { NavSidebar } from "shared/components/NavSidebar";
+import useAnchor from "shared/hooks/useAnchor";
 
 export const mockFriendList = [
   {
@@ -30,6 +33,20 @@ export const mockFriendList = [
 
 function HomePageBody() {
   const { isDarkMode, themeColor } = useTheme();
+
+  const {
+    anchorEl: menuAnchorElement,
+    open: isMenuOpen,
+    handleOpen: handleMenuOpen,
+    handleClose: handleMenuClose,
+  } = useAnchor();
+
+  const [openEdit, setOpenEdit] = useState(false);
+  const handleOpenEdit = () => setOpenEdit(true);
+  const handleCloseEdit = () => {
+    handleMenuClose();
+    setOpenEdit(false);
+  };
   return (
     <Box sx={{ bgcolor: isDarkMode ? "black" : "white" }}>
       <Grid container columns={24}>
