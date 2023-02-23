@@ -158,7 +158,6 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
               <Box>
                 {openEdit && (
                   <EditPostModal
-                    modalName={"Edit Post"}
                     id={id}
                     content={content}
                     media={media}

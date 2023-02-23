@@ -17,7 +17,6 @@ import { getCurrentUser } from "features/auth/authSlice";
 import axios from "axios";
 
 type ModalProps = {
-  readonly modalName: string;
   readonly id: number;
   readonly content?: string;
   readonly media?: string;
@@ -28,7 +27,6 @@ type ModalProps = {
 };
 
 function EditPostModal({
-  modalName,
   id,
   content,
   media,
@@ -62,7 +60,7 @@ function EditPostModal({
     content: content || "",
   });
 
-  const { content: FormContent } = form;
+  const { content: FormContent, media: FormMedia } = form;
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -89,7 +87,6 @@ function EditPostModal({
 
     handleClose();
   };
-
   const { onSelectFile, preview, onRemove, selectedFile } = useImageInput();
 
   return (
@@ -107,7 +104,7 @@ function EditPostModal({
             component="h2"
             sx={{ textAlign: "center" }}
           >
-            {modalName}
+            Edit Post
           </Typography>
           <Box className="modal-content">
             <Box component="form" onSubmit={handleSubmit}></Box>
@@ -152,6 +149,7 @@ function EditPostModal({
                     }}
                   />
                   <Button
+                    component="button"
                     sx={{
                       m: "auto",
                       width: "200px",
@@ -170,9 +168,14 @@ function EditPostModal({
                 </Box>
               ) : (
                 <Box>
-                  <Box display="flex" sx={{ justifyContent: "center" }}>
+                  <Box
+                    component="div"
+                    display="flex"
+                    sx={{ justifyContent: "center" }}
+                  >
                     <label htmlFor="file-upload-modal">
                       <Box
+                        component="div"
                         sx={{
                           color: color,
                           display: "flex",
@@ -208,8 +211,11 @@ function EditPostModal({
               )}
             </Box>
           </Box>
-          <Box className="modal-footer" sx={{ mt: "10px" }}>
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Box component="div" className="modal-footer" sx={{ mt: "10px" }}>
+            <Box
+              component="span"
+              sx={{ display: "flex", justifyContent: "space-between" }}
+            >
               <Button
                 sx={{
                   p: "10px",
@@ -222,12 +228,13 @@ function EditPostModal({
               >
                 <Close /> Go Back
               </Button>
-              {content === FormContent && media === modalMedia ? (
-                <Box sx={{ pt: "13px" }}>
-                  <Typography>Currently no changes</Typography>
+              {content === FormContent && modalMedia === FormMedia ? (
+                <Box component="span" sx={{ pt: "13px" }}>
+                  <Typography>No changes</Typography>
                 </Box>
               ) : (
                 <Button
+                  component="button"
                   sx={{
                     p: "10px",
                     textTransform: "none",

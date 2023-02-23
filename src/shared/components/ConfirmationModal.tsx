@@ -37,7 +37,7 @@ function ConfirmationModal({
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box component="header" sx={style}>
           <Typography
             className="Main-text"
             variant="h6"
@@ -46,8 +46,8 @@ function ConfirmationModal({
           >
             Are you sure?
           </Typography>
-          <Box className="modal-footer" sx={{ mt: "10px" }}>
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Box component="footer" className="modal-footer" sx={{ mt: "10px" }}>
+            <Box component="span" sx={{ display: "flex", justifyContent: "space-between" }}>
               <Button
                 sx={{
                   p: "10px",

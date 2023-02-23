@@ -46,7 +46,7 @@ function Feed() {
                   timestamp: new Date(post.updatedAt),
                 }}
                 onDelete={(id: any) => setFeed(feed.filter((p) => p.id !== id))}
-                onEdit={updateFeed}
+                 onEdit={updateFeed}
               />
             </Box>
           ))}
