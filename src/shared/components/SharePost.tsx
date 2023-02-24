@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { useForm, useImageInput } from "../hooks";
 import { uploadMedia } from "shared/utils/cloudinaryUtil";
-import { BaseCreatePostmodel } from "../types/SharePostTypes";
+import { BaseCreatePostModel } from "../types/SharePostTypes";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { getCurrentUser } from "features/auth/authSlice";
@@ -32,7 +32,7 @@ const SharePost = ({ profilePic, onPost }: SharePostProps) => {
     themeColor: { color, navButtons, backgroundColor },
   } = useTheme();
 
-  const { form, handleChange, resetForm } = useForm<BaseCreatePostmodel>({
+  const { form, handleChange, resetForm } = useForm<BaseCreatePostModel>({
     media: "",
     content: "",
     categoryName: "",
@@ -142,7 +142,7 @@ const SharePost = ({ profilePic, onPost }: SharePostProps) => {
             display="flex"
             sx={{ width: "170px", justifyContent: "space-between" }}
           >
-            <label htmlFor="file">
+            <label htmlFor="file-upload-post">
               <Box
                 sx={{
                   color,
@@ -170,7 +170,7 @@ const SharePost = ({ profilePic, onPost }: SharePostProps) => {
               </Box>
             </label>
             <Input
-              id="file"
+              id="file-upload-post"
               type="file"
               sx={{ display: "none" }}
               onChange={onSelectFile}
