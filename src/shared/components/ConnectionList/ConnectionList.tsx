@@ -57,7 +57,7 @@ const ConnectionList = ({ connectionList }: ConnectionListProps) => {
             <UserProfileWidget
               {...connection}
               key={connection.id}
-              boxProps={{ my: "10px" }}
+              boxProps={{ my: "10px"}}
             />
             <Box alignSelf="center" sx={{ mx: 2 }}>
               <ChatIcon />

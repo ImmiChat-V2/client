@@ -20,9 +20,17 @@ const UserProfileWidget = ({
   const {
     themeColor: { color },
   } = useTheme();
+
   return (
     <Box display="flex" alignItems="center" sx={{ ...boxProps }}>
-      <Avatar src={profilePicture} sizes="40px" />
+      <Box
+        component="div"
+        sx={{ bgcolor: "#2E67A0", height: "50px", width: "50px", display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: '50%' }}
+      >
+        <Typography fontSize="20px" color="black">
+          {firstName[0].toUpperCase()}.{lastName[0].toUpperCase()}
+        </Typography>
+      </Box>
       <Box paddingLeft="11px">
         <Typography fontSize="15px" fontWeight="bold" color={color}>
           {firstName} {lastName}
