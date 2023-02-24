@@ -8,14 +8,13 @@ import useAnchor from "shared/hooks/useAnchor";
 import UserProfileHoverCard from "../UserProfileHoverCard/UserProfileHoverCard";
 import { useSelector } from "react-redux";
 import { getCurrentUser } from "features/auth/authSlice";
-import SimpleModal from "../EditPostModal";
 import ConfirmationModal from "../ConfirmationModal";
 import axios from "axios";
 import EditPostModal from "../EditPostModal";
 
 type PostTopProps = {
   basePostTopProps: BasePostType;
-  onDelete?: (id: any) => void;
+  onDelete: (id: any) => void;
   onEdit: (value: any) => void;
 };
 
@@ -49,6 +48,8 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
     handleClose: handleMenuClose,
   } = useAnchor();
 
+  const [modalClicked, setModalClicked] = useState(false);
+
   const [openEdit, setOpenEdit] = useState(false);
   const handleOpenEdit = () => setOpenEdit(true);
   const handleCloseEdit = () => {
@@ -58,7 +59,7 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
 
   const deletePostHandler = async (id: number) => {
     const endpoint = process.env.REACT_APP_BASE_URL + `/posts/${id}`;
-    const response = await axios.delete(endpoint, {
+    await axios.delete(endpoint, {
       withCredentials: true,
     });
 
@@ -70,7 +71,6 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
     deletePostHandler(id);
   };
 
-  const [modalClicked, setModalClicked] = useState(false);
   return (
     <>
       <Box

@@ -10,7 +10,7 @@ import axios from "axios";
 
 type PostProps = {
   basePostProps: BasePostType;
-  onDelete?: (value: any) => void;
+  onDelete: (value: any) => void;
   onEdit: (value: any) => void;
 };
 
@@ -31,10 +31,6 @@ function Post({ basePostProps, onDelete, onEdit }: PostProps) {
     await axios.post(endpoint, value, {
       withCredentials: true,
     });
-  };
-
-  const openDeleteModal = () => {
-    setDeleteModalOpen(true);
   };
 
   return (
@@ -58,7 +54,7 @@ function Post({ basePostProps, onDelete, onEdit }: PostProps) {
         >
           <PostTop
             basePostTopProps={basePostProps}
-            onDelete={openDeleteModal}
+            onDelete={onDelete}
             onEdit={onEdit}
           />
           <PostBody content={content} media={media} />

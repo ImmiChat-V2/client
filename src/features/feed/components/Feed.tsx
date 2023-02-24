@@ -23,6 +23,11 @@ function Feed() {
     setFeed([updatedPost, ...updatedFeed]);
   }
 
+  async function deleteFeed(id: number) {
+    const updatedFeed = feed.filter((post) => post.id !== id);
+    setFeed(updatedFeed);
+  }
+
   return (
     <>
       <Box sx={{ maxWidth: "800px", m: "auto" }}>
@@ -45,8 +50,8 @@ function Feed() {
                   comments: post.comments,
                   timestamp: new Date(post.updatedAt),
                 }}
-                onDelete={(id: any) => setFeed(feed.filter((p) => p.id !== id))}
-                 onEdit={updateFeed}
+                onDelete={deleteFeed}
+                onEdit={updateFeed}
               />
             </Box>
           ))}
