@@ -28,6 +28,14 @@ function Feed() {
     setFeed(updatedFeed);
   }
 
+  const handleLikeDislike = (id: number, userId: number, isLiked: boolean) => {
+    let postLikes = [...feed[feed.findIndex((p) => p.id === id)].likes];
+    isLiked
+      ? postLikes.push({ id: userId })
+      : (postLikes = postLikes.filter((like) => like.id !== userId));
+    setFeed(feed.map((p) => (p.id === id ? { ...p, likes: postLikes } : p)));
+  };
+
   return (
     <>
       <Box sx={{ maxWidth: "800px", m: "auto" }}>
@@ -52,6 +60,7 @@ function Feed() {
                 }}
                 onDelete={deleteFeed}
                 onEdit={updateFeed}
+                onLike={handleLikeDislike}
               />
             </Box>
           ))}

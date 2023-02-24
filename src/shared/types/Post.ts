@@ -15,5 +15,5 @@ export type BasePostTopType = Omit<BasePostType, "likes" | "comments">;
 export type BasePostBodyType = Pick<BasePostType, "content" | "media">;
 export type BasePostFooterType = Pick<
   BasePostType,
-  "id" | "userId" | "likes" | "comments"
+  "id" | "likes" | "comments"
 >;

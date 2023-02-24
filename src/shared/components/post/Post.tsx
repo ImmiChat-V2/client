@@ -12,16 +12,20 @@ type PostProps = {
   basePostProps: BasePostType;
   onDelete: (value: any) => void;
   onEdit: (value: any) => void;
+  onLike: (id: number, userId: number, isLiked: boolean) => void;
 };
 
-function Post({ basePostProps, onDelete, onEdit }: PostProps) {
-  const { id, userId, content, media, likes, comments } = basePostProps;
+function Post({ basePostProps, onDelete, onEdit, onLike }: PostProps) {
+  const { id, content, media, likes, comments } = basePostProps;
 
+  const basePostFooterProps = {
+    id,
+    comments,
+    likes,
+  };
   const {
     themeColor: { backgroundColor },
   } = useTheme();
-
-  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
   const createCommentHandler = async (value: {
     content: string;
@@ -60,10 +64,8 @@ function Post({ basePostProps, onDelete, onEdit }: PostProps) {
           <PostBody content={content} media={media} />
           <Divider sx={{ mt: "20px" }} />
           <PostFooter
-            id={id}
-            userId={userId}
-            likes={likes}
-            comments={comments}
+            basePostFooterProps={basePostFooterProps}
+            onLike={onLike}
           />
           <ShareComment onSubmit={createCommentHandler} id={id} />
         </Box>
