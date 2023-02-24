@@ -8,8 +8,6 @@ import { useSelector } from "react-redux";
 import { getCurrentUser } from "features/auth/authSlice";
 import axios from "axios";
 
-axios.defaults.withCredentials = true;
-
 type PostFooterProps = {
   basePostFooterProps: BasePostFooterType;
   onLike: (id: number, userId: number, isLike: boolean) => void;
@@ -27,13 +25,13 @@ function PostFooter({ basePostFooterProps, onLike }: PostFooterProps) {
 
   const handleLike = async () => {
     const endpoint = process.env.REACT_APP_BASE_URL + `/posts/${id}/likes`;
-    await axios.post(endpoint);
+    await axios.post(endpoint)
     onLike(id, user.id, true);
   };
 
   const handleDislike = async () => {
     const endpoint = process.env.REACT_APP_BASE_URL + `/posts/${id}/likes`;
-    await axios.delete(endpoint);
+    await axios.delete(endpoint)
     onLike(id, user.id, false);
   };
 

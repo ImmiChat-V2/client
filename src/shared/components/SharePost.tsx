@@ -44,11 +44,13 @@ const SharePost = ({ profilePic, onPost }: SharePostProps) => {
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     const endPoint = process.env.REACT_APP_BASE_URL + "/posts";
-    const media = selectedFile ? await uploadMedia(selectedFile) : null;
+    const media = selectedFile ? await uploadMedia(selectedFile) : null; 
+       
     const postData = { content, media, categoryName };
     const res = await axios.post(endPoint, postData, {
       withCredentials: true,
     });
+
     const newPostInfo: BaseFeedType = {
       ...res.data.data,
       user: {
