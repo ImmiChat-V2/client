@@ -100,7 +100,10 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
               boxProps={{ cursor: "pointer" }}
             />
           </UserProfileHoverCard>
-          <Box component="span" sx={{ display: "flex", cursor: "pointer" }}>
+          <Box
+            component="span"
+            sx={{ display: "flex", cursor: "pointer", alignItems: "center" }}
+          >
             {user.id === userId && (
               <IconButton
                 sx={{ backgroundColor: navButtons, mr: "7px" }}
@@ -126,7 +129,6 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
             >
               <MoreVert sx={{ color }} />
             </IconButton>
-
             <Menu
               id="long-menu"
               anchorEl={menuAnchorElement}

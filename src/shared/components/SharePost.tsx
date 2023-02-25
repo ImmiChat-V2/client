@@ -102,7 +102,7 @@ const SharePost = ({ profilePic, onPost }: SharePostProps) => {
                 p: "5px",
                 paddingLeft: "20px",
               }}
-              placeholder="What's on your mind..."
+              placeholder={`What's on your mind ${user.firstName}...`}
             />
             {preview && (
               // eslint-disable-next-line jsx-a11y/img-redundant-alt

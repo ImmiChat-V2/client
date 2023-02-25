@@ -16,23 +16,24 @@ type ConnectionListProps = {
 
 const ConnectionList = ({ connectionList }: ConnectionListProps) => {
   const {
+    isDarkMode,
     themeColor: { color, backgroundColor, navButtons },
   } = useTheme();
   return (
     <Box
       sx={{
-        bgcolor: backgroundColor,
+        bgcolor: isDarkMode ? "#18191a" : "white",
         width: "100%",
       }}
     >
       <Box
         sx={{
           position: "sticky",
-          top: 0,
+          top: 72,
           width: "100%",
           height: "250px",
-          color: color,
-          bgcolor: navButtons,
+          color,
+          bgcolor: isDarkMode ? "#18191a" : "white",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -41,9 +42,10 @@ const ConnectionList = ({ connectionList }: ConnectionListProps) => {
         <Typography
           variant="h6"
           fontWeight="600"
+          fontSize="18px"
           sx={{
             textAlign: "center",
-            color: color,
+            color,
             mt: "20px",
             width: "100%",
           }}

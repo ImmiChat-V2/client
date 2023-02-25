@@ -43,7 +43,6 @@ const FadeDropdown = ({
         endIcon={<KeyboardArrowDown />}
         sx={{
           backgroundColor: darkMode ? "#2d2d2d" : "#ededed",
-          minWidth: "140px",
           color: darkMode ? "#ededed" : "#2d2d2d",
           fontWeight: "600",
           textTransform: "none",

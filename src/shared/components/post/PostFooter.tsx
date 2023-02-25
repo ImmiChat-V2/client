@@ -79,6 +79,7 @@ function PostFooter({ basePostFooterProps, onLike }: PostFooterProps) {
                   cursor: "pointer",
                   width: "30px",
                   color: "#D70040",
+                  ml: '2px'
                 }}
               />
             ) : (
@@ -88,6 +89,7 @@ function PostFooter({ basePostFooterProps, onLike }: PostFooterProps) {
                   cursor: "pointer",
                   width: "30px",
                   color: "#D70040",
+                  ml: '2px'
                 }}
               />
             )}
