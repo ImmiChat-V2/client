@@ -35,7 +35,7 @@ function HomePageBody() {
   const { isDarkMode } = useTheme();
 
   return (
-    <Box sx={{ bgcolor: isDarkMode ? "black" : "white" }}>
+    <Box sx={{ bgcolor: isDarkMode ? "#18191a" : "white" }}>
       <Grid container columns={24}>
         <Grid
           item

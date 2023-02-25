@@ -67,7 +67,7 @@ const NavSidebar = () => {
   return (
     <Box
       component="div"
-      sx={{ display: "flex", bgcolor: backgroundColor, width: "100%" }}
+      sx={{ display: "flex", width: "100%" }}
     >
       <Card
         sx={{
