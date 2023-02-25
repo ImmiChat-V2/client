@@ -32,21 +32,8 @@ export const mockFriendList = [
 ];
 
 function HomePageBody() {
-  const { isDarkMode, themeColor } = useTheme();
+  const { isDarkMode } = useTheme();
 
-  const {
-    anchorEl: menuAnchorElement,
-    open: isMenuOpen,
-    handleOpen: handleMenuOpen,
-    handleClose: handleMenuClose,
-  } = useAnchor();
-
-  const [openEdit, setOpenEdit] = useState(false);
-  const handleOpenEdit = () => setOpenEdit(true);
-  const handleCloseEdit = () => {
-    handleMenuClose();
-    setOpenEdit(false);
-  };
   return (
     <Box sx={{ bgcolor: isDarkMode ? "black" : "white" }}>
       <Grid container columns={24}>

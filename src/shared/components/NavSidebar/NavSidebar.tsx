@@ -28,6 +28,7 @@ const NavSidebar = () => {
     themeColor: { navButtons, backgroundColor, color },
   } = useTheme();
   const user = useSelector(getCurrentUser);
+  
   const menuItems: menuItem[] = [
     {
       name: "Feed",
@@ -62,6 +63,7 @@ const NavSidebar = () => {
       ),
     },
   ];
+
   return (
     <Box
       component="div"
