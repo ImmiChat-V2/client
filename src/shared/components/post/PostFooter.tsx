@@ -6,9 +6,7 @@ import { BasePostFooterType } from "shared/types";
 import CommentSection from "../CommentSection";
 import { useSelector } from "react-redux";
 import { getCurrentUser } from "features/auth/authSlice";
-import axios from "axios";
-
-axios.defaults.withCredentials = true;
+import axios from "shared/utils/axios";
 
 type PostFooterProps = {
   basePostFooterProps: BasePostFooterType;
