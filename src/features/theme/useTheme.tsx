@@ -13,7 +13,7 @@ const useTheme = () => {
       navButtons: "#ededed",
     },
     darkMode: {
-      backgroundColor: "#181818",
+      backgroundColor: "#242526",
       color: "#f3f3f3",
       navButtons: "#2d2d2d",
     },

@@ -6,12 +6,7 @@ import {
   SvgIconProps,
   Box,
 } from "@mui/material";
-import {
-  RssFeedRounded,
-  MailRounded,
-  LiveHelpRounded,
-  BookmarkRounded,
-} from "@mui/icons-material";
+import { Feed, Work, MapsHomeWork, Medication } from "@mui/icons-material";
 import UserProfileHoverCard from "../UserProfileHoverCard/UserProfileHoverCard";
 import UserProfileWidget from "../UserProfileWidget";
 import { useSelector } from "react-redux";
@@ -25,53 +20,39 @@ type menuItem = {
 
 const NavSidebar = () => {
   const {
+    isDarkMode,
     themeColor: { navButtons, backgroundColor, color },
   } = useTheme();
   const user = useSelector(getCurrentUser);
+
   const menuItems: menuItem[] = [
     {
       name: "Feed",
-      icon: (
-        <RssFeedRounded
-          sx={{ color, fontSize: "18px", m: "0 7px 1px 0" }}
-        />
-      ),
+      icon: <Feed sx={{ color, fontSize: "30px", m: "0 7px 1px 0" }} />,
     },
     {
-      name: "Chat",
-      icon: (
-        <MailRounded
-          sx={{ color, fontSize: "18px", m: "0 7px 1px 0" }}
-        />
-      ),
+      name: "Jobs",
+      icon: <Work sx={{ color, fontSize: "28px", m: "0 7px 1px 0" }} />,
     },
     {
-      name: "Bookmarks",
-      icon: (
-        <BookmarkRounded
-          sx={{ color, fontSize: "16px", m: "0 9px 1px 0" }}
-        />
-      ),
+      name: "Housing",
+      icon: <MapsHomeWork sx={{ color, fontSize: "27px", m: "0 8px 1px 0" }} />,
     },
     {
-      name: "Questions",
+      name: "Health",
       icon: (
-        <LiveHelpRounded
-          sx={{ color, fontSize: "14px", m: "0 11px 1px 0" }}
-        />
+        <Medication sx={{ color, fontSize: "35px", m: "0 4px 1px -3px" }} />
       ),
     },
   ];
+
   return (
-    <Box
-      component="div"
-      sx={{ display: "flex", bgcolor: backgroundColor, width: "100%" }}
-    >
+    <Box component="div" sx={{ display: "flex", width: "100%" }}>
       <Card
         sx={{
           position: "sticky",
-          top: 0,
-          bgcolor: navButtons,
+          top: 72,
+          bgcolor: isDarkMode ? "#18191a" : "white",
           width: "100%",
           height: "260px",
           justifyContent: "flex-start",
@@ -79,9 +60,13 @@ const NavSidebar = () => {
           alignItems: "start",
           borderRadius: "0px",
           pt: "20px",
+          boxShadow: "none",
         }}
       >
-        <Box component="div" sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
+        <Box
+          component="div"
+          sx={{ display: "flex", flexDirection: "column", width: "100%" }}
+        >
           <UserProfileHoverCard>
             <UserProfileWidget
               firstName={user.firstName}
@@ -100,7 +85,7 @@ const NavSidebar = () => {
                 <MenuItem
                   key={index}
                   sx={{
-                    bgcolor: navButtons,
+                    bgcolor: isDarkMode ? "#18191a" : "white",
                     width: "100%",
                     minHeight: "30px",
                   }}
@@ -110,12 +95,12 @@ const NavSidebar = () => {
                       display: "flex",
                       flexDirection: "row",
                       alignItems: "center",
-                      pl: { xs: "0", md: "5px", xl: '50px' },
+                      pl: "5px",
                     }}
                   >
                     <>{icon}</>
                     <Typography
-                      sx={{ color, display: "flex", fontSize: "18px" }}
+                      sx={{ color, display: "flex", fontSize: "16px" }}
                     >
                       {name}
                     </Typography>

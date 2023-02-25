@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Box, Divider } from "@mui/material";
 import PostTop from "./PostTop";
 import PostBody from "./PostBody";

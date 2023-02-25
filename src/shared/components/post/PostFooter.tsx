@@ -68,6 +68,8 @@ function PostFooter({ basePostFooterProps, onLike }: PostFooterProps) {
               width: "35px",
               pt: "9px",
               mr: "5px",
+              display: 'flex',
+              justifyContent: 'center'
             }}
           >
             {isLiked ? (
@@ -77,6 +79,7 @@ function PostFooter({ basePostFooterProps, onLike }: PostFooterProps) {
                   cursor: "pointer",
                   width: "30px",
                   color: "#D70040",
+                  ml: '1px'
                 }}
               />
             ) : (
@@ -86,6 +89,7 @@ function PostFooter({ basePostFooterProps, onLike }: PostFooterProps) {
                   cursor: "pointer",
                   width: "30px",
                   color: "#D70040",
+                  ml: '1px'
                 }}
               />
             )}
