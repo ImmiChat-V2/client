@@ -45,7 +45,7 @@ const ConnectionList = ({ connectionList }: ConnectionListProps) => {
           fontWeight="600"
           sx={{
             textAlign: "center",
-            color: theme.color,
+            color: color,
           }}
         >
           Connections
@@ -54,7 +54,7 @@ const ConnectionList = ({ connectionList }: ConnectionListProps) => {
           connectionList.map((connection) => (
             <Box
               key={connection.id}
-              sx={{ 
+              sx={{
                 mx: 3,
                 display: "flex",
                 flexDirection: "row",
@@ -68,7 +68,10 @@ const ConnectionList = ({ connectionList }: ConnectionListProps) => {
                 key={connection.id}
                 boxProps={{ my: "10px" }}
               />
-              <Box alignSelf="center" sx={{ mx: 2, display: { md: "none", lg: "flex" } }}>
+              <Box
+                alignSelf="center"
+                sx={{ mx: 2, display: { md: "none", lg: "flex" } }}
+              >
                 <ChatIcon sx={{ mr: "10px" }} />
               </Box>
             </Box>
@@ -78,7 +81,7 @@ const ConnectionList = ({ connectionList }: ConnectionListProps) => {
             sx={{
               pt: "5px",
               textAlign: "center",
-              color: theme.color,
+              color: color,
             }}
           >
             There are currently no connections

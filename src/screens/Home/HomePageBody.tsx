@@ -25,7 +25,7 @@ function HomePageBody() {
   }, [isSuccess]);
 
   const friendList = useSelector(getActiveConnections);
-  
+
   return (
     <Box sx={{ bgcolor: isDarkMode ? "#18191a" : "white" }}>
       <Box sx={{ mx: "20px" }}>
@@ -60,7 +60,6 @@ function HomePageBody() {
           >
             <ConnectionList connectionList={friendList} />
           </Grid>
-
         </Grid>
       </Box>
     </Box>
