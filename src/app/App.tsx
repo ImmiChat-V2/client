@@ -3,9 +3,7 @@ import { Provider } from "react-redux";
 import { store } from "app/store";
 import { Home, LoginScreen, ProfilePage } from "screens";
 import { ProtectedRoute, OnLoad } from "features/auth/components";
-import axios from "axios";
-
-axios.defaults.withCredentials = true;
+import axios from "../shared/utils/axios";
 
 const App = () => {
   return (

@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 import { SharePost } from "shared/components";
 import { BaseFeedType } from "shared/types";
 import Post from "shared/components/post/Post";
-import axios from "axios";
+import axios from "shared/utils/axios";
 
 function Feed() {
   const [feed, setFeed] = useState<BaseFeedType[]>([]);

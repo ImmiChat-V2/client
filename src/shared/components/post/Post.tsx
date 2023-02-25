@@ -6,7 +6,7 @@ import PostFooter from "./PostFooter";
 import useTheme from "features/theme/useTheme";
 import { BasePostType } from "shared/types";
 import ShareComment from "../ShareComment/ShareComment";
-import axios from "axios";
+import axios from "shared/utils/axios";
 
 type PostProps = {
   basePostProps: BasePostType;

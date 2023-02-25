@@ -15,7 +15,7 @@ import {
 import { useForm, useImageInput } from "../hooks";
 import { uploadMedia } from "shared/utils/cloudinaryUtil";
 import { BaseCreatePostModel } from "../types/SharePostTypes";
-import axios from "axios";
+import axios from "shared/utils/axios";
 import { useSelector } from "react-redux";
 import { getCurrentUser } from "features/auth/authSlice";
 import { BaseFeedType } from "shared/types";
