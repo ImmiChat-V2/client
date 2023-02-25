@@ -14,7 +14,7 @@ import { useForm, useImageInput } from "shared/hooks";
 import { BaseCreatePostModel, BaseFeedType } from "shared/types";
 import { useSelector } from "react-redux";
 import { getCurrentUser } from "features/auth/authSlice";
-import axios from "axios";
+import axios from "shared/utils/axios";
 
 type ModalProps = {
   readonly id: number;

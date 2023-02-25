@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Box, List, Typography } from "@mui/material";
 import useTheme from "features/theme/useTheme";
-import axios from "axios";
+import axios from "shared/utils/axios";
 import BaseComment from "features/comments/components/Comment";
 import { BaseCommentModel } from "features/comments/models/Comments.model";
 

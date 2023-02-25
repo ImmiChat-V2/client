@@ -9,7 +9,7 @@ import UserProfileHoverCard from "../UserProfileHoverCard/UserProfileHoverCard";
 import { useSelector } from "react-redux";
 import { getCurrentUser } from "features/auth/authSlice";
 import ConfirmationModal from "../ConfirmationModal";
-import axios from "axios";
+import axios from "shared/utils/axios";
 import EditPostModal from "../EditPostModal";
 
 type PostTopProps = {
