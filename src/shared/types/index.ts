@@ -6,3 +6,4 @@ export type {
   BasePostFooterType,
 } from "./Post";
 export type { BaseFeedType } from "./Feed";
+export type { BasePostModel, BaseCreatePostModel } from "./SharePostTypes";

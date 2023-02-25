@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import ChatIcon from "@mui/icons-material/Chat";
 import UserProfileWidget from "../UserProfileWidget";
+import useTheme from "features/theme/useTheme";
 
 type ConnectionProps = {
   firstName: string;
@@ -10,27 +11,33 @@ type ConnectionProps = {
 };
 
 type ConnectionListProps = {
-  theme: any;
   connectionList: ConnectionProps[];
 };
-const ConnectionList = ({ theme, connectionList }: ConnectionListProps) => {
+
+const ConnectionList = ({ connectionList }: ConnectionListProps) => {
+  const {
+    isDarkMode,
+    themeColor: { color },
+  } = useTheme();
   return (
     <Box
       sx={{
-        width: "100%",
-        height: "100vh",
-        color: theme.color,
-        bgcolor: theme.backgroundColor,
+        bgcolor: isDarkMode ? "#18191a" : "white",
         display: "flex",
-        justifyContent: "center",
+        justifyContent: "flex-end",
+        width: "100%",
       }}
     >
       <Box
         sx={{
-          position: "fixed",
+          position: "sticky",
+          top: 72,
+          width: "100%",
+          height: "250px",
+          color,
+          bgcolor: isDarkMode ? "#18191a" : "white",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
         }}
       >
         <Typography
@@ -46,18 +53,23 @@ const ConnectionList = ({ theme, connectionList }: ConnectionListProps) => {
         {connectionList.length > 0 ? (
           connectionList.map((connection) => (
             <Box
-              display="flex"
-              justifyContent="space-between"
-              top="0"
-              sx={{ mx: 3 }}
+              key={connection.id}
+              sx={{ 
+                mx: 3,
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                mr: "10px",
+                width: "100%",
+              }}
             >
               <UserProfileWidget
                 {...connection}
                 key={connection.id}
                 boxProps={{ my: "10px" }}
               />
-              <Box alignSelf="center" sx={{ mx: 2 }}>
-                <ChatIcon />
+              <Box alignSelf="center" sx={{ mx: 2, display: { md: "none", lg: "flex" } }}>
+                <ChatIcon sx={{ mr: "10px" }} />
               </Box>
             </Box>
           ))

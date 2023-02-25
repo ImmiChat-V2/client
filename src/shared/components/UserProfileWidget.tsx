@@ -24,9 +24,24 @@ const UserProfileWidget = ({
     <Box display="flex" alignItems="center" sx={{ ...boxProps }}>
       <Avatar src={profilePicture} sizes="40px" />
       <Box paddingLeft="11px">
-        <Typography fontSize="15px" fontWeight="bold" color={color}>
-          {firstName} {lastName}
-        </Typography>
+        <Box component="div" sx={{ display: "flex" }}>
+          <Typography
+            fontSize="15px"
+            fontWeight="bold"
+            color={color}
+            sx={{ mr: "5px" }}
+          >
+            {firstName}
+          </Typography>
+          <Typography
+            fontSize="15px"
+            fontWeight="bold"
+            color={color}
+            sx={{ display: { xs: "none", sm: "none", md: "flex" } }}
+          >
+            {lastName}
+          </Typography>
+        </Box>
         {timestamp && (
           <Typography fontSize="12px" color="#65676B">
             {formatTime(timestamp)}

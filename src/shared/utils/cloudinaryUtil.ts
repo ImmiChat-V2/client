@@ -18,7 +18,9 @@ export const uploadMedia = async (file: Blob): Promise<string> => {
   try {
     const {
       data: { version, public_id, format },
-    } = await Axios.post(cloudinaryUrl, formData);
+    } = await Axios.post(cloudinaryUrl, formData, {
+      withCredentials: false
+    });
     const media = `v${version}/${public_id}.${format}`;
     return media;
   } catch (error) {

@@ -14,8 +14,8 @@ import {
 } from "@mui/material";
 import { useForm, useImageInput } from "../hooks";
 import { uploadMedia } from "shared/utils/cloudinaryUtil";
-import { BaseCreatePostmodel } from "../types/SharePostTypes";
-import axios from "axios";
+import { BaseCreatePostModel } from "../types/SharePostTypes";
+import axios from "shared/utils/axios";
 import { useSelector } from "react-redux";
 import { getCurrentUser } from "features/auth/authSlice";
 import { BaseFeedType } from "shared/types";
@@ -32,7 +32,7 @@ const SharePost = ({ profilePic, onPost }: SharePostProps) => {
     themeColor: { color, navButtons, backgroundColor },
   } = useTheme();
 
-  const { form, handleChange, resetForm } = useForm<BaseCreatePostmodel>({
+  const { form, handleChange, resetForm } = useForm<BaseCreatePostModel>({
     media: "",
     content: "",
     categoryName: "",
@@ -44,11 +44,13 @@ const SharePost = ({ profilePic, onPost }: SharePostProps) => {
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     const endPoint = process.env.REACT_APP_BASE_URL + "/posts";
-    const media = selectedFile ? await uploadMedia(selectedFile) : null;
+    const media = selectedFile ? await uploadMedia(selectedFile) : null; 
+       
     const postData = { content, media, categoryName };
     const res = await axios.post(endPoint, postData, {
       withCredentials: true,
     });
+
     const newPostInfo: BaseFeedType = {
       ...res.data.data,
       user: {
@@ -102,7 +104,7 @@ const SharePost = ({ profilePic, onPost }: SharePostProps) => {
                 p: "5px",
                 paddingLeft: "20px",
               }}
-              placeholder="What's on your mind..."
+              placeholder={`What's on your mind ${user.firstName}...`}
             />
             {preview && (
               // eslint-disable-next-line jsx-a11y/img-redundant-alt
@@ -130,7 +132,7 @@ const SharePost = ({ profilePic, onPost }: SharePostProps) => {
             )}
           </Box>
         </Box>
-        <Divider sx={{ my: 2, mt: "20px", bgcolor: navButtons }}></Divider>
+        <Divider sx={{ my: 2, mt: "20px" }} />
         <Box
           sx={{
             display: "flex",
@@ -142,7 +144,7 @@ const SharePost = ({ profilePic, onPost }: SharePostProps) => {
             display="flex"
             sx={{ width: "170px", justifyContent: "space-between" }}
           >
-            <label htmlFor="file">
+            <label htmlFor="file-upload-post">
               <Box
                 sx={{
                   color,
@@ -170,7 +172,7 @@ const SharePost = ({ profilePic, onPost }: SharePostProps) => {
               </Box>
             </label>
             <Input
-              id="file"
+              id="file-upload-post"
               type="file"
               sx={{ display: "none" }}
               onChange={onSelectFile}

@@ -10,21 +10,26 @@ import {
 import { IconButton, InputBase, Typography, Box, Grid } from "@mui/material";
 import FadeDropdown from "../FadeDropdown";
 import useTheme from "features/theme/useTheme";
+import { getCurrentUser } from "features/auth/authSlice";
+import { useSelector } from "react-redux";
 
 function Navbar() {
   const navigate = useNavigate();
+  const user = useSelector(getCurrentUser);
   const { isDarkMode, themeColor, toggleDarkMode } = useTheme();
   const { backgroundColor, color, navButtons } = themeColor;
 
   const navMenuOptions = [
     { title: "Profile", onClick: () => navigate(`/`) },
-    { title: "Logout", onClick: () => navigate(`/login`)},
+    { title: "Logout", onClick: () => navigate(`/`) },
   ];
 
   return (
     <Box
       component="nav"
       sx={{
+        position: "sticky",
+        top: 0,
         display: "flex",
         justifyContent: "space-between",
         margin: "auto",
@@ -33,6 +38,7 @@ function Navbar() {
         pt: "11px",
         pb: "11px",
         backgroundColor,
+        zIndex: 1,
       }}
     >
       <Box className="left-side-nav">
@@ -67,7 +73,7 @@ function Navbar() {
               backgroundColor: navButtons,
               pl: "11px",
               borderRadius: "10px",
-              maxWidth: "300px",
+              maxWidth: "150px",
             }}
           >
             <InputBase
@@ -137,13 +143,13 @@ function Navbar() {
         <Box>
           {isDarkMode ? (
             <FadeDropdown
-              buttonName="Fake User"
+              buttonName={user.firstName}
               menuItems={navMenuOptions}
               darkMode={true}
             />
           ) : (
             <FadeDropdown
-              buttonName="Fake User"
+              buttonName={user.firstName}
               menuItems={navMenuOptions}
               darkMode={false}
             />

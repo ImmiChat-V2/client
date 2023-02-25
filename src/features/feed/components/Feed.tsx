@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import { Box } from "@mui/material";
-import useTheme from "features/theme/useTheme";
 import { SharePost } from "shared/components";
 import { BaseFeedType } from "shared/types";
 import Post from "shared/components/post/Post";
-import axios from "axios";
+import axios from "shared/utils/axios";
 
 function Feed() {
   const [feed, setFeed] = useState<BaseFeedType[]>([]);
@@ -19,21 +18,35 @@ function Feed() {
     fetchFeed();
   }, []);
 
-  const {
-    themeColor: { color, navButtons, backgroundColor },
-  } = useTheme();
+  async function updateFeed(updatedPost: BaseFeedType) {
+    const updatedFeed = feed.filter((post) => post.id !== updatedPost.id);
+    setFeed([updatedPost, ...updatedFeed]);
+  }
+
+  async function deleteFeed(id: number) {
+    const updatedFeed = feed.filter((post) => post.id !== id);
+    setFeed(updatedFeed);
+  }
+
+  const handleLikeDislike = (id: number, userId: number, isLiked: boolean) => {
+    let postLikes = [...feed[feed.findIndex((p) => p.id === id)].likes];
+    isLiked
+      ? postLikes.push({ id: userId })
+      : (postLikes = postLikes.filter((like) => like.id !== userId));
+    setFeed(feed.map((p) => (p.id === id ? { ...p, likes: postLikes } : p)));
+  };
+
   return (
     <>
-      <Box sx={{ maxWidth: "800px", m: 'auto' }}>
+      <Box sx={{ maxWidth: "700px", m: "auto" }}>
         <SharePost
           profilePic=""
           onPost={(data: any) => setFeed([data, ...feed])}
         />
         <Box className="feed-posts" sx={{ mb: "100px" }}>
           {feed.map((post) => (
-            <Box sx={{ pt: "30px" }}>
+            <Box key={post.id} sx={{ pt: "30px" }}>
               <Post
-                key={post.id}
                 basePostProps={{
                   id: post.id,
                   userId: post.userId,
@@ -45,7 +58,9 @@ function Feed() {
                   comments: post.comments,
                   timestamp: new Date(post.updatedAt),
                 }}
-                onDelete={(id: any) => setFeed(feed.filter((p) => p.id !== id))}
+                onDelete={deleteFeed}
+                onEdit={updateFeed}
+                onLike={handleLikeDislike}
               />
             </Box>
           ))}

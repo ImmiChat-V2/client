@@ -6,7 +6,7 @@ export type BasePostModel = {
   readonly categoryName: string;
 };
 
-export type BaseCreatePostmodel = {
+export type BaseCreatePostModel = {
   readonly media?: string;
   readonly content: string;
   readonly categoryName?: string;
