@@ -41,12 +41,13 @@ const ConnectionList = ({ connectionList }: ConnectionListProps) => {
         }}
       >
         <Box>
-          <Box sx={{ float: "right", width: "100%", mt: '10px' }}>
+          <Box sx={{ float: "right", width: "100%", mt: "10px" }}>
             <Typography variant="h6" fontWeight="600" textAlign="center">
               Connections
             </Typography>
             {connectionList.map((connection) => (
               <Box
+                key={connection.id}
                 sx={{
                   display: "flex",
                   flexDirection: "row",

@@ -6,12 +6,7 @@ import {
   SvgIconProps,
   Box,
 } from "@mui/material";
-import {
-  Feed,
-  Work,
-  MapsHomeWork,
-  Medication,
-} from "@mui/icons-material";
+import { Feed, Work, MapsHomeWork, Medication } from "@mui/icons-material";
 import UserProfileHoverCard from "../UserProfileHoverCard/UserProfileHoverCard";
 import UserProfileWidget from "../UserProfileWidget";
 import { useSelector } from "react-redux";
@@ -29,47 +24,30 @@ const NavSidebar = () => {
     themeColor: { navButtons, backgroundColor, color },
   } = useTheme();
   const user = useSelector(getCurrentUser);
-  
+
   const menuItems: menuItem[] = [
     {
       name: "Feed",
-      icon: (
-        <Feed
-          sx={{ color, fontSize: "30px", m: "0 7px 1px 0" }}
-        />
-      ),
+      icon: <Feed sx={{ color, fontSize: "30px", m: "0 7px 1px 0" }} />,
     },
     {
       name: "Jobs",
-      icon: (
-        <Work
-          sx={{ color, fontSize: "28px", m: "0 7px 1px 0" }}
-        />
-      ),
+      icon: <Work sx={{ color, fontSize: "28px", m: "0 7px 1px 0" }} />,
     },
     {
       name: "Housing",
-      icon: (
-        <MapsHomeWork
-          sx={{ color, fontSize: "27px", m: "0 8px 1px 0" }}
-        />
-      ),
+      icon: <MapsHomeWork sx={{ color, fontSize: "27px", m: "0 8px 1px 0" }} />,
     },
     {
       name: "Health",
       icon: (
-        <Medication
-          sx={{ color, fontSize: "35px", m: "0 4px 1px -3px" }}
-        />
+        <Medication sx={{ color, fontSize: "35px", m: "0 4px 1px -3px" }} />
       ),
     },
   ];
 
   return (
-    <Box
-      component="div"
-      sx={{ display: "flex", width: "100%" }}
-    >
+    <Box component="div" sx={{ display: "flex", width: "100%" }}>
       <Card
         sx={{
           position: "sticky",
@@ -82,10 +60,13 @@ const NavSidebar = () => {
           alignItems: "start",
           borderRadius: "0px",
           pt: "20px",
-          boxShadow: 'none'
+          boxShadow: "none",
         }}
       >
-        <Box component="div" sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
+        <Box
+          component="div"
+          sx={{ display: "flex", flexDirection: "column", width: "100%" }}
+        >
           <UserProfileHoverCard>
             <UserProfileWidget
               firstName={user.firstName}

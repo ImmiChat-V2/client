@@ -25,7 +25,12 @@ const UserProfileWidget = ({
       <Avatar src={profilePicture} sizes="40px" />
       <Box paddingLeft="11px">
         <Box component="div" sx={{ display: "flex" }}>
-          <Typography fontSize="15px" fontWeight="bold" color={color} sx={{mr: '5px'}}>
+          <Typography
+            fontSize="15px"
+            fontWeight="bold"
+            color={color}
+            sx={{ mr: "5px" }}
+          >
             {firstName}
           </Typography>
           <Typography
