@@ -1,28 +1,29 @@
 import { KeyboardArrowDown } from "@mui/icons-material";
+import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
 import Fade from "@mui/material/Fade";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import useTheme from "features/theme/useTheme";
 import { useState } from "react";
 
 type MenuOption = {
   readonly title: string;
-  readonly onClick: () => void;
+  readonly onClick?: () => void;
 };
 
 type FadeDropdownProps = {
   readonly menuItems: MenuOption[];
   readonly buttonName: string;
-  readonly darkMode?: boolean;
 };
 
-const FadeDropdown = ({
-  buttonName,
-  menuItems,
-  darkMode,
-}: FadeDropdownProps) => {
+const FadeDropdown = ({ buttonName, menuItems }: FadeDropdownProps) => {
+  const {
+    themeColor: { navButtons, color },
+  } = useTheme();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const open = !!anchorEl;
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -42,12 +43,12 @@ const FadeDropdown = ({
         onClick={handleClick}
         endIcon={<KeyboardArrowDown />}
         sx={{
-          backgroundColor: darkMode ? "#2d2d2d" : "#ededed",
-          color: darkMode ? "#ededed" : "#2d2d2d",
+          bgcolor: navButtons,
+          color,
           fontWeight: "600",
           textTransform: "none",
           "&.MuiButtonBase-root:hover": {
-            bgcolor: darkMode ? "#2d2d2d" : "#ededed",
+            bgcolor: navButtons,
           },
         }}
       >
@@ -62,12 +63,21 @@ const FadeDropdown = ({
         open={open}
         onClose={handleClose}
         TransitionComponent={Fade}
+        PaperProps={{
+          style: {
+            backgroundColor: navButtons,
+            width: "14ch",
+            color,
+          },
+        }}
       >
-        {menuItems.map(({ onClick, title }) => (
-          <MenuItem onClick={onClick} key={title}>
-            {title}
-          </MenuItem>
-        ))}
+        <Box onClick={handleClose}>
+          {menuItems.map(({ onClick, title }) => (
+            <MenuItem onClick={onClick} key={title}>
+              {title}
+            </MenuItem>
+          ))}
+        </Box>
       </Menu>
     </>
   );

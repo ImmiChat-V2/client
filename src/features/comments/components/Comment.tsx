@@ -53,7 +53,11 @@ const BaseComment = (commentData: CommentProps) => {
               justifyContent: "space-between",
             }}
           >
-            <UserProfileHoverCard>
+            <UserProfileHoverCard
+              firstName={firstName}
+              lastName={lastName}
+              profilePicture={profilePic}
+            >
               <UserProfileWidget
                 firstName={firstName}
                 lastName={lastName}

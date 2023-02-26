@@ -12,6 +12,7 @@ import UserProfileWidget from "../UserProfileWidget";
 import { useSelector } from "react-redux";
 import { getCurrentUser } from "features/auth/authSlice";
 import useTheme from "features/theme/useTheme";
+import { useNavigate } from "react-router-dom";
 
 type menuItem = {
   name: string;
@@ -21,9 +22,11 @@ type menuItem = {
 const NavSidebar = () => {
   const {
     isDarkMode,
-    themeColor: { navButtons, backgroundColor, color },
+    themeColor: { color },
   } = useTheme();
   const user = useSelector(getCurrentUser);
+
+  const navigate = useNavigate();
 
   const menuItems: menuItem[] = [
     {
@@ -67,7 +70,11 @@ const NavSidebar = () => {
           component="div"
           sx={{ display: "flex", flexDirection: "column", width: "100%" }}
         >
-          <UserProfileHoverCard>
+          <UserProfileHoverCard
+            firstName={user.firstName}
+            lastName={user.lastName}
+            profilePicture={user.profilePic}
+          >
             <UserProfileWidget
               firstName={user.firstName}
               lastName={user.lastName}
@@ -97,6 +104,7 @@ const NavSidebar = () => {
                       alignItems: "center",
                       pl: "5px",
                     }}
+                    onClick={() => navigate(`/`)}
                   >
                     <>{icon}</>
                     <Typography

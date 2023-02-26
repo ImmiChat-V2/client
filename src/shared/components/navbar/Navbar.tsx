@@ -145,13 +145,11 @@ function Navbar() {
             <FadeDropdown
               buttonName={user.firstName}
               menuItems={navMenuOptions}
-              darkMode={true}
             />
           ) : (
             <FadeDropdown
               buttonName={user.firstName}
               menuItems={navMenuOptions}
-              darkMode={false}
             />
           )}
         </Box>

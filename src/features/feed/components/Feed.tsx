@@ -50,6 +50,7 @@ function Feed() {
                 basePostProps={{
                   id: post.id,
                   userId: post.userId,
+                  categoryName: post.categoryName,
                   firstName: post.user.firstName,
                   lastName: post.user.lastName,
                   media: post.media,
