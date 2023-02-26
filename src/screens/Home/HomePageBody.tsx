@@ -35,7 +35,8 @@ function HomePageBody() {
   const { isDarkMode } = useTheme();
 
   return (
-    <Box sx={{ bgcolor: isDarkMode ? "#18191a" : "white" }}>
+    <Box sx={{ bgcolor: isDarkMode ? "#18191a" : "white"}}>
+      <Box sx={{mr: '20px', ml: '20px'}}>
       <Grid container columns={24}>
         <Grid
           item
@@ -68,6 +69,7 @@ function HomePageBody() {
           <ConnectionList connectionList={mockFriendList} />
         </Grid>
       </Grid>
+      </Box>
     </Box>
   );
 }

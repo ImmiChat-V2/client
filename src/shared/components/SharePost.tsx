@@ -130,7 +130,7 @@ const SharePost = ({ profilePic, onPost }: SharePostProps) => {
             )}
           </Box>
         </Box>
-        <Divider sx={{ my: 2, mt: "20px", bgcolor: navButtons }}></Divider>
+        <Divider sx={{ my: 2, mt: "20px" }}></Divider>
         <Box
           sx={{
             display: "flex",

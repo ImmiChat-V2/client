@@ -17,12 +17,14 @@ type ConnectionListProps = {
 const ConnectionList = ({ connectionList }: ConnectionListProps) => {
   const {
     isDarkMode,
-    themeColor: { color, backgroundColor, navButtons },
+    themeColor: { color },
   } = useTheme();
   return (
     <Box
       sx={{
         bgcolor: isDarkMode ? "#18191a" : "white",
+        display: "flex",
+        justifyContent: "flex-end",
         width: "100%",
       }}
     >
@@ -36,40 +38,37 @@ const ConnectionList = ({ connectionList }: ConnectionListProps) => {
           bgcolor: isDarkMode ? "#18191a" : "white",
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
         }}
       >
-        <Typography
-          variant="h6"
-          fontWeight="600"
-          fontSize="18px"
-          sx={{
-            textAlign: "center",
-            color,
-            mt: "20px",
-            width: "100%",
-          }}
-        >
-          Connections
-        </Typography>
-        <Box component="div" sx={{ overflow: "auto", mt: "5px" }}>
-          {connectionList.map((connection) => (
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              top="0"
-              sx={{ mx: 3 }}
-            >
-              <UserProfileWidget
-                {...connection}
-                key={connection.id}
-                boxProps={{ my: "10px" }}
-              />
-              <Box alignSelf="center" sx={{ mx: 2 }}>
-                <ChatIcon />
+        <Box>
+          <Box sx={{ float: "right", width: "100%", mt: '10px' }}>
+            <Typography variant="h6" fontWeight="600" textAlign="center">
+              Connections
+            </Typography>
+            {connectionList.map((connection) => (
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  mr: "10px",
+                  width: "100%",
+                }}
+              >
+                <UserProfileWidget
+                  {...connection}
+                  key={connection.id}
+                  boxProps={{ my: "10px" }}
+                />
+                <Box
+                  alignSelf="center"
+                  sx={{ mx: 2, display: { md: "none", lg: "flex" } }}
+                >
+                  <ChatIcon sx={{ mr: "10px" }} />
+                </Box>
               </Box>
-            </Box>
-          ))}
+            ))}
+          </Box>
         </Box>
       </Box>
     </Box>
