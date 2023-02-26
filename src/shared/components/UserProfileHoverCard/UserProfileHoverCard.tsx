@@ -10,15 +10,12 @@ import useAnchor from "shared/hooks/useAnchor";
 
 type UserProfileHoverCardProps = {
   children: JSX.Element;
+  firstName: string;
+  lastName: string;
+  profilePicture: string | undefined;
 };
 
-// We will use static data for now
-// In the future, we can create and call an endpoint
-// to render the data of the user we're viewing
-
-const [profilePicture, firstName, lastName] = ["", "Ray", "Lu"];
-
-const UserProfileHoverCard = ({ children }: UserProfileHoverCardProps) => {
+const UserProfileHoverCard = ({ children, firstName, lastName, profilePicture }: UserProfileHoverCardProps) => {
   const {
     themeColor: { color, navButtons },
   } = useTheme();

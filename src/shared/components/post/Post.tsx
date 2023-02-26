@@ -15,7 +15,7 @@ type PostProps = {
 };
 
 function Post({ basePostProps, onDelete, onEdit, onLike }: PostProps) {
-  const { id, content, media, likes, comments } = basePostProps;
+  const { id, content, media, likes, comments, categoryName } = basePostProps;
 
   const basePostFooterProps = {
     id,
@@ -60,7 +60,7 @@ function Post({ basePostProps, onDelete, onEdit, onLike }: PostProps) {
             onDelete={onDelete}
             onEdit={onEdit}
           />
-          <PostBody content={content} media={media} />
+          <PostBody content={content} media={media} categoryName={categoryName}/>
           <Divider sx={{ mt: "20px" }} />
           <PostFooter
             basePostFooterProps={basePostFooterProps}

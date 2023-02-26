@@ -1,5 +1,11 @@
-import { FormEvent } from "react";
-import { SendOutlined, InsertPhotoOutlined, Label } from "@mui/icons-material";
+import { FormEvent, useState } from "react";
+import {
+  SendOutlined,
+  InsertPhotoOutlined,
+  Label,
+  MoreVert,
+  Category,
+} from "@mui/icons-material";
 import {
   Avatar,
   Box,
@@ -11,6 +17,9 @@ import {
   Input,
   Tooltip,
   Zoom,
+  IconButton,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import { useForm, useImageInput } from "../hooks";
 import { uploadMedia } from "shared/utils/cloudinaryUtil";
@@ -20,6 +29,8 @@ import { useSelector } from "react-redux";
 import { getCurrentUser } from "features/auth/authSlice";
 import { BaseFeedType } from "shared/types";
 import useTheme from "features/theme/useTheme";
+import FadeDropdown from "./FadeDropdown";
+import useAnchor from "shared/hooks/useAnchor";
 
 type SharePostProps = {
   readonly profilePic?: string;
@@ -32,21 +43,36 @@ const SharePost = ({ profilePic, onPost }: SharePostProps) => {
     themeColor: { color, navButtons, backgroundColor },
   } = useTheme();
 
+  const [categorySelection, setCategorySelection] = useState("");
+
+  const categoryOptions = [
+    { title: "All", onClick: () => setCategorySelection("all") },
+    { title: "Jobs", onClick: () => setCategorySelection("jobs") },
+    { title: "Housing", onClick: () => setCategorySelection("housing") },
+    { title: "Health", onClick: () => setCategorySelection("health") },
+  ];
+
   const { form, handleChange, resetForm } = useForm<BaseCreatePostModel>({
     media: "",
     content: "",
-    categoryName: "",
+    categoryName: categorySelection,
   });
 
-  const { content, categoryName } = form;
+  const { content } = form;
+
   const { onSelectFile, preview, onRemove, selectedFile } = useImageInput();
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     const endPoint = process.env.REACT_APP_BASE_URL + "/posts";
-    const media = selectedFile ? await uploadMedia(selectedFile) : null; 
-       
-    const postData = { content, media, categoryName };
+    const media = selectedFile ? await uploadMedia(selectedFile) : null;
+
+    const postData = {
+      content,
+      media,
+      categoryName: categorySelection.length === 0 ? "all" : categorySelection,
+    };
+
     const res = await axios.post(endPoint, postData, {
       withCredentials: true,
     });
@@ -142,7 +168,11 @@ const SharePost = ({ profilePic, onPost }: SharePostProps) => {
         >
           <Box
             display="flex"
-            sx={{ width: "170px", justifyContent: "space-between" }}
+            sx={{
+              width: "170px",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
           >
             <label htmlFor="file-upload-post">
               <Box
@@ -155,7 +185,7 @@ const SharePost = ({ profilePic, onPost }: SharePostProps) => {
                     cursor: "pointer",
                     backgroundColor: navButtons,
                   },
-                  p: "10px",
+                  p: "6.5px",
                 }}
               >
                 <InsertPhotoOutlined sx={{ color }} />
@@ -177,33 +207,35 @@ const SharePost = ({ profilePic, onPost }: SharePostProps) => {
               sx={{ display: "none" }}
               onChange={onSelectFile}
             />
-            <Box>
-              <Box
-                sx={{
-                  color: color,
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  ":hover": {
-                    cursor: "pointer",
-                    backgroundColor: navButtons,
-                  },
-                  p: "10px",
-                }}
+            <Box
+              sx={{
+                color: color,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                ":hover": {
+                  cursor: "pointer",
+                  backgroundColor: navButtons,
+                },
+                ml: "10px",
+              }}
+            >
+              <Tooltip
+                title="Add a category"
+                TransitionComponent={Zoom}
+                arrow
+                sx={{ color, bgcolor: navButtons }}
               >
-                <Label sx={{ color }} />
-                <Tooltip
-                  title="Add a category"
-                  TransitionComponent={Zoom}
-                  arrow
-                  sx={{ color, bgcolor: navButtons }}
-                >
-                  <Typography sx={{ fontSize: "15px", px: "2px", color }}>
-                    Tag
-                  </Typography>
-                </Tooltip>
-              </Box>
+                <FadeDropdown buttonName={"Tag"} menuItems={categoryOptions} />
+              </Tooltip>
             </Box>
+            {categorySelection.length > 0 && (
+              <Box component="div" sx={{ ml: "20px" }}>
+                <Typography color={color}>
+                  {"#" + categorySelection.toUpperCase()}
+                </Typography>
+              </Box>
+            )}
           </Box>
           <Button
             type="submit"

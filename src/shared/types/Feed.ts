@@ -1,6 +1,7 @@
 export type BaseFeedType = {
   readonly id: number;
   readonly userId: number;
+  readonly categoryName: string;
   readonly content: string;
   readonly media?: string;
   readonly user: UserInfoType;

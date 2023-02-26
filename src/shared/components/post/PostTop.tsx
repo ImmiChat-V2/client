@@ -64,7 +64,7 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
     });
 
     onDelete?.(id);
-  };
+  }; 
 
   const confirmDeletePost = () => {
     setOpenEdit(false);
@@ -91,7 +91,11 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
             width: "100%",
           }}
         >
-          <UserProfileHoverCard>
+          <UserProfileHoverCard
+          firstName={firstName}
+          lastName={lastName}
+          profilePicture={profilePic}
+          >
             <UserProfileWidget
               firstName={firstName}
               lastName={lastName}
