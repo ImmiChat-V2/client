@@ -15,7 +15,7 @@ import {
 import { useForm, useImageInput } from "../hooks";
 import { uploadMedia } from "shared/utils/cloudinaryUtil";
 import { BaseCreatePostModel } from "../types/SharePostTypes";
-import axios from "axios";
+import axios from "shared/utils/axios";
 import { useSelector } from "react-redux";
 import { getCurrentUser } from "features/auth/authSlice";
 import { BaseFeedType } from "shared/types";
@@ -44,11 +44,13 @@ const SharePost = ({ profilePic, onPost }: SharePostProps) => {
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     const endPoint = process.env.REACT_APP_BASE_URL + "/posts";
-    const media = selectedFile ? await uploadMedia(selectedFile) : null;
+    const media = selectedFile ? await uploadMedia(selectedFile) : null; 
+       
     const postData = { content, media, categoryName };
     const res = await axios.post(endPoint, postData, {
       withCredentials: true,
     });
+
     const newPostInfo: BaseFeedType = {
       ...res.data.data,
       user: {
