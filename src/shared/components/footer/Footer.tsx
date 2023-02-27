@@ -12,6 +12,7 @@ function Footer() {
       component="footer"
       sx={{
         p: "20px 0px 0 70px",
+        minHeight: '20vh',
         height: "170px",
         width: "auto",
         backgroundColor,
