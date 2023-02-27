@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 type menuItem = {
   name: string;
   icon: SvgIconProps;
+  categoryName?: string;
 };
 
 const NavSidebar = () => {
@@ -36,16 +37,19 @@ const NavSidebar = () => {
     {
       name: "Jobs",
       icon: <Work sx={{ color, fontSize: "28px", m: "0 7px 1px 0" }} />,
+      categoryName: "jobs",
     },
     {
       name: "Housing",
       icon: <MapsHomeWork sx={{ color, fontSize: "27px", m: "0 8px 1px 0" }} />,
+      categoryName: "housing",
     },
     {
       name: "Health",
       icon: (
         <Medication sx={{ color, fontSize: "35px", m: "0 4px 1px -3px" }} />
       ),
+      categoryName: "health",
     },
   ];
 
@@ -87,7 +91,7 @@ const NavSidebar = () => {
               mt: "10px",
             }}
           >
-            {menuItems.map(({ icon, name }, index) => {
+            {menuItems.map(({ icon, name, categoryName }, index) => {
               return (
                 <MenuItem
                   key={index}
@@ -95,6 +99,12 @@ const NavSidebar = () => {
                     bgcolor: isDarkMode ? "#18191a" : "white",
                     width: "100%",
                     minHeight: "30px",
+                  }}
+                  onClick={() => {
+                    const queryParam = categoryName
+                      ? `?categoryName=${categoryName}`
+                      : "";
+                    navigate(`/${queryParam}`);
                   }}
                 >
                   <Box
@@ -104,7 +114,6 @@ const NavSidebar = () => {
                       alignItems: "center",
                       pl: "5px",
                     }}
-                    onClick={() => navigate(`/`)}
                   >
                     <>{icon}</>
                     <Typography
