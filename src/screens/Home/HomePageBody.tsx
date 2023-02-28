@@ -3,32 +3,6 @@ import { Feed } from "features/feed/components";
 import useTheme from "features/theme/useTheme";
 import ConnectionList from "shared/components/ConnectionList";
 import { NavSidebar } from "shared/components/NavSidebar";
-<<<<<<< HEAD
-
-export const mockFriendList = [
-  {
-    id: 1,
-    email: "fdsjsdf@mfds.com",
-    firstName: "Khenen",
-    lastName: "Jacqso",
-    profilePic: "",
-  },
-  {
-    id: 2,
-    email: "fd113df@mfds.com",
-    firstName: "Rob",
-    lastName: "Bob",
-    profilePic: "",
-  },
-  {
-    id: 3,
-    email: "zaswaejsdf@mfd6s.com",
-    firstName: "Al",
-    lastName: "Ringer",
-    profilePic: "",
-  },
-];
-=======
 import { useSelector, useDispatch } from "react-redux";
 import {
   getActiveConnections,
@@ -37,7 +11,6 @@ import {
 import { useGetConnectionsQuery } from "features/connections/services/connectionsApiSlice";
 import { getCurrentUser } from "../../features/auth/authSlice";
 import { useEffect } from "react";
->>>>>>> 6510478b99e9563d98b428491a9872fc904f0bba
 
 function HomePageBody() {
   const { isDarkMode } = useTheme();
