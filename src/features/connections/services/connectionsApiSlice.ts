@@ -6,7 +6,7 @@ import { apiSlice } from "features/api/apiSlice";
 
 export const connectionsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getConnections: builder.query<ConnectionsModel, number>({
+    getConnections: builder.query<{ data: ConnectionsModel }, number>({
       query: (userId) => ({
         url: `/users/${userId}/connections`,
         method: "GET",

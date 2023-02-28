@@ -6,7 +6,7 @@ import useTheme from "features/theme/useTheme";
 type ConnectionProps = {
   firstName: string;
   lastName: string;
-  profilePic: string;
+  profilePic?: string;
   id: number;
 };
 
@@ -40,37 +40,53 @@ const ConnectionList = ({ connectionList }: ConnectionListProps) => {
           flexDirection: "column",
         }}
       >
-        <Box>
-          <Box sx={{ float: "right", width: "100%", mt: "10px" }}>
-            <Typography variant="h6" fontWeight="600" textAlign="center">
-              Connections
-            </Typography>
-            {connectionList.map((connection) => (
-              <Box
+        <Typography
+          variant="h6"
+          fontWeight="600"
+          sx={{
+            textAlign: "center",
+            color: color,
+          }}
+        >
+          Connections
+        </Typography>
+        {connectionList.length > 0 ? (
+          connectionList.map((connection) => (
+            <Box
+              key={connection.id}
+              sx={{
+                mx: 3,
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                mr: "10px",
+                width: "100%",
+              }}
+            >
+              <UserProfileWidget
+                {...connection}
                 key={connection.id}
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  mr: "10px",
-                  width: "100%",
-                }}
+                boxProps={{ my: "10px" }}
+              />
+              <Box
+                alignSelf="center"
+                sx={{ mx: 2, display: { md: "none", lg: "flex" } }}
               >
-                <UserProfileWidget
-                  {...connection}
-                  key={connection.id}
-                  boxProps={{ my: "10px" }}
-                />
-                <Box
-                  alignSelf="center"
-                  sx={{ mx: 2, display: { md: "none", lg: "flex" } }}
-                >
-                  <ChatIcon sx={{ mr: "10px" }} />
-                </Box>
+                <ChatIcon sx={{ mr: "10px" }} />
               </Box>
-            ))}
-          </Box>
-        </Box>
+            </Box>
+          ))
+        ) : (
+          <Typography
+            sx={{
+              pt: "5px",
+              textAlign: "center",
+              color: color,
+            }}
+          >
+            There are currently no connections
+          </Typography>
+        )}
       </Box>
     </Box>
   );

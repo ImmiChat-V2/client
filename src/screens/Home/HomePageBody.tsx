@@ -3,6 +3,7 @@ import { Feed } from "features/feed/components";
 import useTheme from "features/theme/useTheme";
 import ConnectionList from "shared/components/ConnectionList";
 import { NavSidebar } from "shared/components/NavSidebar";
+<<<<<<< HEAD
 
 export const mockFriendList = [
   {
@@ -27,9 +28,28 @@ export const mockFriendList = [
     profilePic: "",
   },
 ];
+=======
+import { useSelector, useDispatch } from "react-redux";
+import {
+  getActiveConnections,
+  handleGetConnections,
+} from "features/connections/connectionsSlice";
+import { useGetConnectionsQuery } from "features/connections/services/connectionsApiSlice";
+import { getCurrentUser } from "../../features/auth/authSlice";
+import { useEffect } from "react";
+>>>>>>> 6510478b99e9563d98b428491a9872fc904f0bba
 
 function HomePageBody() {
   const { isDarkMode } = useTheme();
+  const dispatch = useDispatch();
+  const user = useSelector(getCurrentUser);
+  const { data, isSuccess } = useGetConnectionsQuery(user.id);
+
+  useEffect(() => {
+    if (isSuccess) dispatch(handleGetConnections(data.data));
+  }, [isSuccess]);
+
+  const friendList = useSelector(getActiveConnections);
 
   return (
     <Box sx={{ bgcolor: isDarkMode ? "#18191a" : "white", minHeight: '75vh' }}>
@@ -63,7 +83,7 @@ function HomePageBody() {
             xl={4}
             sx={{ display: { xs: "none", sm: "none", md: "flex" } }}
           >
-            <ConnectionList connectionList={mockFriendList} />
+            <ConnectionList connectionList={friendList} />
           </Grid>
         </Grid>
       </Box>
