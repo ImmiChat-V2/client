@@ -5,34 +5,26 @@ import { useState } from "react";
 import ConfirmationModal from "shared/components/ConfirmationModal";
 import ConnectionList from "shared/components/ConnectionList";
 import { NavSidebar } from "shared/components/NavSidebar";
-import useAnchor from "shared/hooks/useAnchor";
-
-export const mockFriendList = [
-  {
-    id: 1,
-    email: "fdsjsdf@mfds.com",
-    firstName: "Khenen",
-    lastName: "Jacqso",
-    profilePic: "",
-  },
-  {
-    id: 2,
-    email: "fd113df@mfds.com",
-    firstName: "Rob",
-    lastName: "Bob",
-    profilePic: "",
-  },
-  {
-    id: 3,
-    email: "zaswaejsdf@mfd6s.com",
-    firstName: "Al",
-    lastName: "Ringer",
-    profilePic: "",
-  },
-];
+import { useSelector, useDispatch } from "react-redux";
+import {
+  getActiveConnections,
+  handleGetConnections,
+} from "features/connections/connectionsSlice";
+import { useGetConnectionsQuery } from "features/connections/services/connectionsApiSlice";
+import { getCurrentUser } from "../../features/auth/authSlice";
+import { useEffect } from "react";
 
 function HomePageBody() {
   const { isDarkMode } = useTheme();
+  const dispatch = useDispatch();
+  const user = useSelector(getCurrentUser);
+  const { data, isSuccess } = useGetConnectionsQuery(user.id);
+
+  useEffect(() => {
+    if (isSuccess) dispatch(handleGetConnections(data.data));
+  }, [isSuccess]);
+
+  const friendList = useSelector(getActiveConnections);
 
   return (
     <Box sx={{ bgcolor: isDarkMode ? "#18191a" : "white" }}>
@@ -66,7 +58,7 @@ function HomePageBody() {
             xl={4}
             sx={{ display: { xs: "none", sm: "none", md: "flex" } }}
           >
-            <ConnectionList connectionList={mockFriendList} />
+            <ConnectionList connectionList={friendList} />
           </Grid>
         </Grid>
       </Box>
