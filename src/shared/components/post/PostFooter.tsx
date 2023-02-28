@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Box, IconButton, Typography } from "@mui/material";
-import { FavoriteBorder, MoreHoriz, Favorite } from "@mui/icons-material/";
+import { FavoriteBorder, Favorite } from "@mui/icons-material/";
 import useTheme from "features/theme/useTheme";
 import { BasePostFooterType } from "shared/types";
 import CommentSection from "../CommentSection";
@@ -39,10 +39,6 @@ function PostFooter({ basePostFooterProps, onLike }: PostFooterProps) {
     isLiked ? handleDislike() : handleLike();
   };
 
-  const handleCommentClick = () => {
-    setShowComment(!showComment);
-  };
-
   return (
     <>
       <Box
@@ -68,8 +64,8 @@ function PostFooter({ basePostFooterProps, onLike }: PostFooterProps) {
               width: "35px",
               pt: "9px",
               mr: "5px",
-              display: 'flex',
-              justifyContent: 'center'
+              display: "flex",
+              justifyContent: "center",
             }}
           >
             {isLiked ? (
@@ -79,7 +75,7 @@ function PostFooter({ basePostFooterProps, onLike }: PostFooterProps) {
                   cursor: "pointer",
                   width: "30px",
                   color: "#D70040",
-                  ml: '1px'
+                  ml: "1px",
                 }}
               />
             ) : (
@@ -89,7 +85,7 @@ function PostFooter({ basePostFooterProps, onLike }: PostFooterProps) {
                   cursor: "pointer",
                   width: "30px",
                   color: "#D70040",
-                  ml: '1px'
+                  ml: "1px",
                 }}
               />
             )}
@@ -98,32 +94,17 @@ function PostFooter({ basePostFooterProps, onLike }: PostFooterProps) {
             {displayLikeCount} {displayLikeCount === 1 ? "Like" : "Likes"}
           </Typography>
         </Box>
-        <Box component="span" sx={{ display: "flex", alignItems: "center" }}>
-          <Typography sx={{ color }}>
-            {comments.length} {comments.length === 1 ? "Comment" : "Comments"}
-          </Typography>
-          <IconButton
-            aria-label="comment-post"
-            sx={{
-              backgroundColor: navButtons,
-              borderRadius: "50px",
-              height: "35px",
-              width: "35px",
-              pt: "5px",
-              ml: "7px",
-            }}
+        <Box
+          component="span"
+          sx={{ display: "flex", alignItems: "center" }}
+          onClick={() => setShowComment(!showComment)}
+        >
+          <Typography sx={{ color, mr: "3px" }}>{comments.length}</Typography>
+          <Typography
+            sx={{ color, cursor: "pointer", textDecoration: "underline" }}
           >
-            <MoreHoriz
-              className="post-comment-icon"
-              sx={{
-                cursor: "pointer",
-                color,
-                mt: "3px",
-                width: "40px",
-              }}
-              onClick={() => setShowComment(!showComment)}
-            />
-          </IconButton>
+            {comments.length === 1 ? "Comment" : "Comments"}
+          </Typography>
         </Box>
       </Box>
       {showComment && <CommentSection id={id} />}

@@ -39,7 +39,6 @@ function Navbar() {
         pb: "11px",
         backgroundColor,
         zIndex: 1,
-        minHeight: '10vh'
       }}
     >
       <Box className="left-side-nav">

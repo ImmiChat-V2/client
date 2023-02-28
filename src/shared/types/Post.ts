@@ -12,8 +12,11 @@ export type BasePostType = {
   readonly comments: { userId: number }[];
 };
 
-export type BasePostTopType = Omit<BasePostType, "likes" | "comments" | "categoryName">;
-export type BasePostBodyType = Pick<BasePostType, "content" | "media" | "categoryName">;
+export type BasePostTopType = Omit<
+  BasePostType,
+  "likes" | "comments" | "categoryName"
+>;
+export type BasePostBodyType = Pick<BasePostType, "content" | "media">;
 export type BasePostFooterType = Pick<
   BasePostType,
   "id" | "likes" | "comments"
