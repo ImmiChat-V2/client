@@ -34,6 +34,7 @@ const ConnectionList = ({ connectionList }: ConnectionListProps) => {
           top: 72,
           width: "100%",
           height: "250px",
+          mt: '22px',
           color,
           bgcolor: isDarkMode ? "#18191a" : "white",
           display: "flex",
@@ -84,7 +85,7 @@ const ConnectionList = ({ connectionList }: ConnectionListProps) => {
               color: color,
             }}
           >
-            There are currently no connections
+            Currently no connections
           </Typography>
         )}
       </Box>
