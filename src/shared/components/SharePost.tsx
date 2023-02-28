@@ -2,9 +2,6 @@ import { FormEvent, useState } from "react";
 import {
   SendOutlined,
   InsertPhotoOutlined,
-  Label,
-  MoreVert,
-  Category,
 } from "@mui/icons-material";
 import {
   Avatar,
@@ -17,9 +14,6 @@ import {
   Input,
   Tooltip,
   Zoom,
-  IconButton,
-  Menu,
-  MenuItem,
 } from "@mui/material";
 import { useForm, useImageInput } from "../hooks";
 import { uploadMedia } from "shared/utils/cloudinaryUtil";
@@ -30,7 +24,6 @@ import { getCurrentUser } from "features/auth/authSlice";
 import { BaseFeedType } from "shared/types";
 import useTheme from "features/theme/useTheme";
 import FadeDropdown from "./FadeDropdown";
-import useAnchor from "shared/hooks/useAnchor";
 
 type SharePostProps = {
   readonly profilePic?: string;
@@ -70,7 +63,7 @@ const SharePost = ({ profilePic, onPost }: SharePostProps) => {
     const postData = {
       content,
       media,
-      categoryName: categorySelection.length === 0 ? "all" : categorySelection,
+      categoryName: categorySelection,
     };
 
     const res = await axios.post(endPoint, postData, {
@@ -87,6 +80,8 @@ const SharePost = ({ profilePic, onPost }: SharePostProps) => {
       likes: [],
       comments: [],
     };
+
+    setCategorySelection("")
     onRemove();
     resetForm();
     onPost?.(newPostInfo);
@@ -135,12 +130,14 @@ const SharePost = ({ profilePic, onPost }: SharePostProps) => {
             {preview && (
               // eslint-disable-next-line jsx-a11y/img-redundant-alt
               <Box component="div" sx={{ m: "auto", mt: "20px" }}>
+                <Box sx={{m: 'auto', maxHeight: '400px', maxWidth: '500px'}}>
                 <Box
                   component="img"
                   src={preview}
                   alt="Preview of your uploaded image"
-                  sx={{ width: "100%", height: "100%" }}
+                  sx={{ width: "100%", maxHeight: "400px" }}
                 />
+                </Box>
                 <Button
                   color="error"
                   sx={{
@@ -231,7 +228,7 @@ const SharePost = ({ profilePic, onPost }: SharePostProps) => {
             </Box>
             {categorySelection.length > 0 && (
               <Box component="div" sx={{ ml: "20px" }}>
-                <Typography color={color}>
+                <Typography color={color} sx={{fontWeight: 'bold'}}>
                   {"#" + categorySelection.toUpperCase()}
                 </Typography>
               </Box>

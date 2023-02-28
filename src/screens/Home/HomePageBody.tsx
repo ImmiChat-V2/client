@@ -32,7 +32,7 @@ function HomePageBody() {
   const { isDarkMode } = useTheme();
 
   return (
-    <Box sx={{ bgcolor: isDarkMode ? "#18191a" : "white", minHeight: '70vh' }}>
+    <Box sx={{ bgcolor: isDarkMode ? "#18191a" : "white", minHeight: '75vh' }}>
       <Box sx={{ mx: "20px" }}>
         <Grid container columns={24}>
           <Grid
