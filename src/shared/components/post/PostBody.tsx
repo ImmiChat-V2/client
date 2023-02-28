@@ -14,21 +14,27 @@ function PostBody({ content, media }: BasePostBodyType) {
   return (
     <>
       <Box component="section" sx={{ mt: "15px" }}>
-        {content.length > 255 && !readMore ? (
-          <Box sx={{ cursor: "pointer" }} onClick={() => setReadMore(true)}>
-            <Typography sx={{ color }}>
-              {content.substring(0, 255)}...
-            </Typography>
-            <Typography
-              sx={{
-                color: "#2655a4",
-              }}
-            >
-              read more
-            </Typography>
-          </Box>
+        {content.length > 255 ? (
+          <>
+            {readMore ? (
+              <Typography sx={{ color }}>{content}</Typography>
+            ) : (
+              <Box sx={{ cursor: "pointer" }} onClick={() => setReadMore(true)}>
+                <Typography sx={{ color }}>
+                  {content.substring(0, 255)}...
+                </Typography>
+                <Typography
+                  sx={{
+                    color: "#2655a4",
+                  }}
+                >
+                  read more
+                </Typography>
+              </Box>
+            )}
+          </>
         ) : (
-          <>{readMore && <Typography sx={{ color }}>{content}</Typography>}</>
+          <Typography sx={{ color }}>{content}</Typography>
         )}
       </Box>
       {media && (

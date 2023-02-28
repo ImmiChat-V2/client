@@ -105,6 +105,7 @@ const SharePost = ({ profilePic, onPost }: SharePostProps) => {
           sx={{
             display: "flex",
             flexDirection: "row",
+            alignItems: 'center'
           }}
         >
           <Avatar
