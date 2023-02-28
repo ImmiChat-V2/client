@@ -12,18 +12,22 @@ import UserProfileWidget from "../UserProfileWidget";
 import { useSelector } from "react-redux";
 import { getCurrentUser } from "features/auth/authSlice";
 import useTheme from "features/theme/useTheme";
+import { useNavigate } from "react-router-dom";
 
 type menuItem = {
   name: string;
   icon: SvgIconProps;
+  categoryName?: string;
 };
 
 const NavSidebar = () => {
   const {
     isDarkMode,
-    themeColor: { navButtons, backgroundColor, color },
+    themeColor: { color },
   } = useTheme();
   const user = useSelector(getCurrentUser);
+
+  const navigate = useNavigate();
 
   const menuItems: menuItem[] = [
     {
@@ -33,16 +37,19 @@ const NavSidebar = () => {
     {
       name: "Jobs",
       icon: <Work sx={{ color, fontSize: "28px", m: "0 7px 1px 0" }} />,
+      categoryName: "jobs",
     },
     {
       name: "Housing",
       icon: <MapsHomeWork sx={{ color, fontSize: "27px", m: "0 8px 1px 0" }} />,
+      categoryName: "housing",
     },
     {
       name: "Health",
       icon: (
         <Medication sx={{ color, fontSize: "35px", m: "0 4px 1px -3px" }} />
       ),
+      categoryName: "health",
     },
   ];
 
@@ -67,7 +74,11 @@ const NavSidebar = () => {
           component="div"
           sx={{ display: "flex", flexDirection: "column", width: "100%" }}
         >
-          <UserProfileHoverCard>
+          <UserProfileHoverCard
+            firstName={user.firstName}
+            lastName={user.lastName}
+            profilePicture={user.profilePic}
+          >
             <UserProfileWidget
               firstName={user.firstName}
               lastName={user.lastName}
@@ -80,7 +91,7 @@ const NavSidebar = () => {
               mt: "10px",
             }}
           >
-            {menuItems.map(({ icon, name }, index) => {
+            {menuItems.map(({ icon, name, categoryName }, index) => {
               return (
                 <MenuItem
                   key={index}
@@ -88,6 +99,12 @@ const NavSidebar = () => {
                     bgcolor: isDarkMode ? "#18191a" : "white",
                     width: "100%",
                     minHeight: "30px",
+                  }}
+                  onClick={() => {
+                    const queryParam = categoryName
+                      ? `?categoryName=${categoryName}`
+                      : "";
+                    navigate(`/${queryParam}`);
                   }}
                 >
                   <Box

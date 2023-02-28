@@ -4,19 +4,21 @@ import { SharePost } from "shared/components";
 import { BaseFeedType } from "shared/types";
 import Post from "shared/components/post/Post";
 import axios from "shared/utils/axios";
+import useQueryParam from "shared/hooks/useQueryParam";
 
 function Feed() {
   const [feed, setFeed] = useState<BaseFeedType[]>([]);
+  const params = useQueryParam();
 
   useEffect(() => {
     async function fetchFeed() {
-      const res = await axios.get("http://localhost:5000/feed", {
-        withCredentials: true,
-      });
+      const categoryName = params.get("categoryName");
+      const queryParam = categoryName ? `?categoryName=${categoryName}` : "";
+      const res = await axios.get(`http://localhost:5000/feed${queryParam}`);
       setFeed(res.data.data);
     }
     fetchFeed();
-  }, []);
+  }, [params]);
 
   async function updateFeed(updatedPost: BaseFeedType) {
     const updatedFeed = feed.filter((post) => post.id !== updatedPost.id);
@@ -50,6 +52,7 @@ function Feed() {
                 basePostProps={{
                   id: post.id,
                   userId: post.userId,
+                  categoryName: post.categoryName,
                   firstName: post.user.firstName,
                   lastName: post.user.lastName,
                   media: post.media,

@@ -33,8 +33,8 @@ function Navbar() {
         display: "flex",
         justifyContent: "space-between",
         margin: "auto",
-        pr: "70px",
-        pl: "70px",
+        pr: "40px",
+        pl: "40px",
         pt: "11px",
         pb: "11px",
         backgroundColor,
@@ -145,13 +145,11 @@ function Navbar() {
             <FadeDropdown
               buttonName={user.firstName}
               menuItems={navMenuOptions}
-              darkMode={true}
             />
           ) : (
             <FadeDropdown
               buttonName={user.firstName}
               menuItems={navMenuOptions}
-              darkMode={false}
             />
           )}
         </Box>

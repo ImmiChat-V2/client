@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, IconButton, Menu, MenuItem } from "@mui/material";
+import { Box, IconButton, Menu, MenuItem, Typography } from "@mui/material";
 import { MoreVert, Delete, Edit, Share } from "@mui/icons-material/";
 import { UserProfileWidget } from "shared/components";
 import { BasePostType } from "shared/types";
@@ -33,6 +33,7 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
     media,
     likes,
     comments,
+    categoryName,
   } = basePostTopProps;
 
   const user = useSelector(getCurrentUser);
@@ -91,7 +92,11 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
             width: "100%",
           }}
         >
-          <UserProfileHoverCard>
+          <UserProfileHoverCard
+            firstName={firstName}
+            lastName={lastName}
+            profilePicture={profilePic}
+          >
             <UserProfileWidget
               firstName={firstName}
               lastName={lastName}
@@ -102,8 +107,15 @@ function PostTop({ basePostTopProps, onDelete, onEdit }: PostTopProps) {
           </UserProfileHoverCard>
           <Box
             component="span"
-            sx={{ display: "flex", cursor: "pointer", alignItems: "center" }}
+            sx={{ display: "flex", cursor: "pointer", alignItems: "initial" }}
           >
+            <Box sx={{mr: '10px'}}>
+            <Typography
+              sx={{ fontSize: "16px", color, mt: "10px", fontWeight: "600" }}
+            >
+              #{categoryName.length > 0 ? categoryName.toUpperCase() : "ALL"}
+            </Typography>
+            </Box>
             {user.id === userId && (
               <IconButton
                 sx={{ backgroundColor: navButtons, mr: "7px" }}

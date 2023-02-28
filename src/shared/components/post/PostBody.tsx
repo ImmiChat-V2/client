@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import useTheme from "features/theme/useTheme";
+import { useState } from "react";
 import { BasePostBodyType } from "shared/types";
 import { getSecureUrl } from "shared/utils/cloudinaryUtil";
 
@@ -7,16 +8,44 @@ function PostBody({ content, media }: BasePostBodyType) {
   const {
     themeColor: { color },
   } = useTheme();
+
+  const [readMore, setReadMore] = useState(false);
+
   return (
     <>
       <Box component="section" sx={{ mt: "15px" }}>
-        <Typography sx={{ fontSize: "16px", color }}>{content}</Typography>
+        {content.length > 255 ? (
+          <>
+            {readMore ? (
+              <Typography sx={{ color }}>{content}</Typography>
+            ) : (
+              <Box sx={{ cursor: "pointer" }} onClick={() => setReadMore(true)}>
+                <Typography sx={{ color }}>
+                  {content.substring(0, 255)}...
+                </Typography>
+                <Typography
+                  sx={{
+                    color: "#2655a4",
+                  }}
+                >
+                  read more
+                </Typography>
+              </Box>
+            )}
+          </>
+        ) : (
+          <Typography sx={{ color }}>{content}</Typography>
+        )}
       </Box>
-      <Box
-        component="div"
-        sx={{ display: "flex", mt: "20px", justifyContent: "center" }}
-      >
-        {media && (
+      {media && (
+        <Box
+          component="div"
+          sx={{
+            display: "flex",
+            mt: "20px",
+            justifyContent: "center",
+          }}
+        >
           <Box
             component="img"
             sx={{
@@ -27,8 +56,8 @@ function PostBody({ content, media }: BasePostBodyType) {
             }}
             src={getSecureUrl(media)}
           />
-        )}
-      </Box>
+        </Box>
+      )}
     </>
   );
 }

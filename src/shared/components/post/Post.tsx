@@ -60,7 +60,7 @@ function Post({ basePostProps, onDelete, onEdit, onLike }: PostProps) {
             onDelete={onDelete}
             onEdit={onEdit}
           />
-          <PostBody content={content} media={media} />
+          <PostBody content={content} media={media}/>
           <Divider sx={{ mt: "20px" }} />
           <PostFooter
             basePostFooterProps={basePostFooterProps}
