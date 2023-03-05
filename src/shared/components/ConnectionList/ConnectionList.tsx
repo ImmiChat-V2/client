@@ -2,6 +2,14 @@ import { Box, Typography } from "@mui/material";
 import ChatIcon from "@mui/icons-material/Chat";
 import UserProfileWidget from "../UserProfileWidget";
 import useTheme from "features/theme/useTheme";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getActiveConnections,
+  handleGetConnections,
+} from "features/connections/connectionsSlice";
+import { getCurrentUser } from "features/auth/authSlice";
+import { useGetConnectionsQuery } from "features/connections/services/connectionsApiSlice";
+import { useEffect } from "react";
 
 type ConnectionProps = {
   firstName: string;
@@ -10,15 +18,21 @@ type ConnectionProps = {
   id: number;
 };
 
-type ConnectionListProps = {
-  connectionList: ConnectionProps[];
-};
-
-const ConnectionList = ({ connectionList }: ConnectionListProps) => {
+const ConnectionList = () => {
   const {
     isDarkMode,
     themeColor: { color },
   } = useTheme();
+  const dispatch = useDispatch();
+  const user = useSelector(getCurrentUser);
+  const { data, isSuccess } = useGetConnectionsQuery(user.id);
+
+  useEffect(() => {
+    if (isSuccess) dispatch(handleGetConnections(data.data));
+  }, [isSuccess]);
+
+  const friendList = useSelector(getActiveConnections);
+
   return (
     <Box
       sx={{
@@ -50,8 +64,8 @@ const ConnectionList = ({ connectionList }: ConnectionListProps) => {
         >
           Connections
         </Typography>
-        {connectionList.length > 0 ? (
-          connectionList.map((connection) => (
+        {friendList.length > 0 ? (
+          friendList.map((connection: any) => (
             <Box
               key={connection.id}
               sx={{

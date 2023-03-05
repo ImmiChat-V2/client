@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import {
   Avatar,
   Box,
@@ -11,6 +12,7 @@ import {
 import { CameraAlt, Settings } from "@mui/icons-material";
 import { UserProfileInfoType } from "features/userprofile/models/UserProfileModel";
 import { getAvatarProps } from "shared/utils";
+import { getActiveConnections } from "features/connections/connectionsSlice";
 
 type PropType = {
   user: UserProfileInfoType;
@@ -18,10 +20,17 @@ type PropType = {
   theme: any;
 };
 
+type connectionListInfo = {
+  firstName: string;
+  lastName: string;
+  id: number;
+  profilePic?: string;
+};
+
 const ProfileCard = ({ user, theme, isCurrentUser }: PropType) => {
-  const { firstName, lastName, profilePic, coverPic, friends } = user;
+  const { firstName, lastName, profilePic, coverPic } = user;
   const userName = firstName + " " + lastName;
-  const friendCount = friends.length;
+  const friendList = useSelector(getActiveConnections);
 
   const SharedWrapperProps = {
     justifyContent: "center",
@@ -45,6 +54,7 @@ const ProfileCard = ({ user, theme, isCurrentUser }: PropType) => {
     <Box
       sx={{
         ...SharedWrapperProps,
+        mb: 3,
         height: "350px",
         "@media (max-width:650px)": {
           minHeight: "500px",
@@ -205,7 +215,9 @@ const ProfileCard = ({ user, theme, isCurrentUser }: PropType) => {
                 {userName}
               </Typography>
               <Typography sx={{ color: theme.color, my: 1 }} variant="body2">
-                {friendCount} Friends
+                {friendList.length !== 1
+                  ? `${friendList.length} Connections`
+                  : `${friendList.length} Connection`}
               </Typography>
               <AvatarGroup
                 sx={{
@@ -222,13 +234,20 @@ const ProfileCard = ({ user, theme, isCurrentUser }: PropType) => {
                 max={5}
                 spacing={4}
               >
-                {friends.map(({ firstName, lastName, id, profilePic }) => {
-                  const friendName = firstName + " " + lastName;
-                  const friendSxProps = getAvatarProps(friendName);
-                  return (
-                    <Avatar key={id} {...friendSxProps} src={profilePic} />
-                  );
-                })}
+                {friendList.map(
+                  ({
+                    firstName,
+                    lastName,
+                    id,
+                    profilePic,
+                  }: connectionListInfo) => {
+                    const friendName = firstName + " " + lastName;
+                    const friendSxProps = getAvatarProps(friendName);
+                    return (
+                      <Avatar key={id} {...friendSxProps} src={profilePic} />
+                    );
+                  }
+                )}
               </AvatarGroup>
             </Box>
             <Box
