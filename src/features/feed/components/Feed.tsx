@@ -5,12 +5,16 @@ import { BaseFeedType } from "shared/types";
 import Post from "shared/components/post/Post";
 import axios from "shared/utils/axios";
 
-function Feed() {
+type FeedProps = {
+  id?: string;
+};
+
+function Feed({ id }: FeedProps) {
   const [feed, setFeed] = useState<BaseFeedType[]>([]);
 
   useEffect(() => {
     async function fetchFeed() {
-      const res = await axios.get("http://localhost:5000/feed", {
+      const res = await axios.get(`http://localhost:5000/feed/${id}`, {
         withCredentials: true,
       });
       setFeed(res.data.data);

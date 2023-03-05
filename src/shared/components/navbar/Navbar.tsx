@@ -20,7 +20,7 @@ function Navbar() {
   const { backgroundColor, color, navButtons } = themeColor;
 
   const navMenuOptions = [
-    { title: "Profile", onClick: () => navigate(`/`) },
+    { title: "Profile", onClick: () => navigate(`/profile/${user.id}`) },
     { title: "Logout", onClick: () => navigate(`/`) },
   ];
 
@@ -38,7 +38,7 @@ function Navbar() {
         pt: "11px",
         pb: "11px",
         backgroundColor,
-        zIndex: 1,
+        zIndex: 999,
       }}
     >
       <Box className="left-side-nav">

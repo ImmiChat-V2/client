@@ -11,11 +11,13 @@ const useTheme = () => {
       backgroundColor: "#f3f3f3",
       color: "#181818",
       navButtons: "#ededed",
+      pageColor: "white",
     },
     darkMode: {
       backgroundColor: "#242526",
       color: "#f3f3f3",
       navButtons: "#2d2d2d",
+      pageColor: "#18191a",
     },
   };
   const messageStyleObj = {

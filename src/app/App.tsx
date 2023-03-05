@@ -21,9 +21,11 @@ const App = () => {
               <Route path="/" element={<Home />} />
             </Route>
             <Route
-              element={<ProtectedRoute isProtected redirectPath="/profile" />}
+              element={
+                <ProtectedRoute isProtected redirectPath="/profile/:id" />
+              }
             >
-              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/profile/:id" element={<ProfilePage />} />
             </Route>
           </Route>
         </Routes>
